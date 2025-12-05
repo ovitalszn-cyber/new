@@ -908,7 +908,7 @@ function Footer() {
           
           {/* Copyright */}
           <p className="text-sm text-[#635F69]">
-            © 2024 KashRock. All rights reserved.
+            © 2025 KashRock. All rights reserved.
           </p>
         </div>
       </div>
