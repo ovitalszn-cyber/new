@@ -135,22 +135,22 @@ function HeroSection() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] mb-6"
           style={{ fontFamily: 'Nunito, sans-serif' }}
         >
-          <span className="clay-text-gradient">Build with AI.</span>
+          <span className="clay-text-gradient">AI-First Sports Data.</span>
           <br />
-          <span className="text-[#332F3A]">Ship in Minutes.</span>
+          <span className="text-[#332F3A]">Designed for Builders.</span>
           <br />
-          <span className="text-[#7C3AED]">Zero API Knowledge.</span>
+          <span className="text-[#7C3AED]">No Integration Headaches.</span>
         </h1>
         
         {/* Subheading */}
         <p className="text-lg sm:text-xl md:text-2xl text-[#635F69] max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
-          Just describe your sports app idea to AI and start building. Our unified API delivers everything – 29+ books, real-time odds, player props, EV calculations – in one simple call. 
-          <span className="text-[#7C3AED] font-semibold"> No scraping, no rate limits, no integration headaches.</span>
+          Focus on product and prompts, not plumbing. KashRock provides a single, consistent feed across 29+ US and EU books—including Pinnacle, PrizePicks, Underdog, Dabble, Bet365, 1xBet and more—with real-time odds, deep player props, and EV metrics, ready for your models, agents, and dashboards.
+          <span className="text-[#7C3AED] font-semibold"> You ship faster while we handle coverage, latency, and normalization across markets.</span>
         </p>
         
         {/* Waitlist Form */}
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto mb-6">
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 items-stretch">
             <input
               id="waitlist-email"
               type="email"
@@ -158,13 +158,13 @@ function HeroSection() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               disabled={status === 'loading'}
-              className="flex-1 h-16 px-6 rounded-[20px] bg-white shadow-clay-pressed text-[#332F3A] placeholder-[#635F69]/50 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/30 transition-all disabled:opacity-50"
+              className="w-full sm:flex-1 h-16 px-6 rounded-[20px] bg-white shadow-clay-pressed text-[#332F3A] placeholder-[#635F69]/50 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/30 transition-all disabled:opacity-50"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             />
             <button 
               type="submit"
               disabled={status === 'loading'}
-              className="h-16 px-10 rounded-[20px] bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white font-bold text-lg shadow-clay-button hover:shadow-clay-button-hover hover:-translate-y-1 active:scale-[0.92] active:shadow-clay-pressed transition-all duration-200 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-3"
+              className="w-full sm:w-auto h-16 px-10 rounded-[20px] bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white font-bold text-lg shadow-clay-button hover:shadow-clay-button-hover hover:-translate-y-1 active:scale-[0.92] active:shadow-clay-pressed transition-all duration-200 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-3"
               style={{ fontFamily: 'Nunito, sans-serif' }}
             >
               {status === 'loading' ? (
@@ -937,4 +937,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
