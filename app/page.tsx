@@ -321,11 +321,11 @@ function FeaturesSection() {
             className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            <span className="text-[#332F3A]">Every 2025 </span>
-            <span className="clay-text-gradient-accent">Pain Point Solved</span>
+            <span className="text-[#332F3A]">Built for </span>
+            <span className="clay-text-gradient-accent">AI Sports Products</span>
           </h2>
           <p className="text-lg text-[#635F69] max-w-2xl mx-auto">
-            No more scraping, rate limits, missing markets, or slow updates. Just tell AI what to build and ship.
+            No more scraping, rate limits, missing markets, or slow updates. One unified layer for the data and infrastructure your AI-powered apps depend on.
           </p>
         </div>
         
