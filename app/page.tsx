@@ -135,17 +135,17 @@ function HeroSection() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] mb-6"
           style={{ fontFamily: 'Nunito, sans-serif' }}
         >
-          <span className="clay-text-gradient">One API.</span>
+          <span className="clay-text-gradient">Build with AI.</span>
           <br />
-          <span className="text-[#332F3A]">All Odds.</span>
+          <span className="text-[#332F3A]">Ship in Minutes.</span>
           <br />
-          <span className="text-[#7C3AED]">Zero Hassle.</span>
+          <span className="text-[#7C3AED]">Zero API Knowledge.</span>
         </h1>
         
         {/* Subheading */}
         <p className="text-lg sm:text-xl md:text-2xl text-[#635F69] max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
-          Go from idea to odds in minutes – our single endpoint delivers every sportsbook line and DFS slate across all sports. 
-          <span className="text-[#7C3AED] font-semibold"> No keys to juggle, no fragmented pricing, no complex schema.</span>
+          Just describe your sports app idea to AI and start building. Our unified API delivers everything – 29+ books, real-time odds, player props, EV calculations – in one simple call. 
+          <span className="text-[#7C3AED] font-semibold"> No scraping, no rate limits, no integration headaches.</span>
         </p>
         
         {/* Waitlist Form */}
@@ -249,8 +249,8 @@ function StatsSection() {
 function FeaturesSection() {
   const features = [
     {
-      title: 'Unified Event Endpoint',
-      description: 'One call returns ALL sportsbooks, player props, consensus odds, and EV slips for any game. No more stitching 10+ APIs together.',
+      title: 'AI-Ready Sports Data',
+      description: 'Tell AI "build me a betting tracker" and get instant access to 29+ books, player props, alt lines, and EV calculations. No API docs needed.',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -261,8 +261,8 @@ function FeaturesSection() {
       isHero: true,
     },
     {
-      title: 'Canonical Event Matching',
-      description: 'Automatic cross-book event resolution. We match "LAL vs GSW" across 29 sources so you don\'t have to.',
+      title: 'No More Scraping',
+      description: 'Stop reverse-engineering DraftKings endpoints or scraping Props.cash. We deliver all the deep markets developers are hacking together.',
       icon: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -271,8 +271,18 @@ function FeaturesSection() {
       gradient: 'from-blue-400 to-cyan-500',
     },
     {
-      title: 'Consensus Fair Odds',
-      description: 'Vig-removed consensus odds from sharp books (Pinnacle, Novig). Know the true probability instantly.',
+      title: 'Real-Time WebSocket Feeds',
+      description: 'Sub-second updates with diff-only changes and heartbeat pings. No more 5-10 minute REST delays that kill live betting apps.',
+      icon: (
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      gradient: 'from-cyan-400 to-teal-500',
+    },
+    {
+      title: 'Complete Player Props',
+      description: 'Every alt line, player prop, and team total that exists. No more "missing markets" forcing you to juggle multiple APIs.',
       icon: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -281,8 +291,8 @@ function FeaturesSection() {
       gradient: 'from-purple-400 to-violet-500',
     },
     {
-      title: 'Built-in EV Engine',
-      description: 'Automatic +EV slip generation with correlation guards. Get profitable parlays without the math.',
+      title: 'No Rate Limit Headaches',
+      description: 'Unlimited requests for serious builders. No more $20/month for slow NBA data or losing access when Pinnacle changes rules.',
       icon: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -291,24 +301,14 @@ function FeaturesSection() {
       gradient: 'from-emerald-400 to-green-500',
     },
     {
-      title: 'Full Provenance Tracking',
-      description: 'Every data point includes source attribution, timestamps, and confidence scores. Production-ready transparency.',
+      title: 'Built for AI Models',
+      description: 'Consistent IDs, complete timestamps, historical depth, and normalized schemas. Everything AI needs to train winning models.',
       icon: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       ),
       gradient: 'from-pink-400 to-rose-500',
-    },
-    {
-      title: 'Real-Time Updates',
-      description: 'Live odds streaming with sub-second latency. Never miss a line movement or market shift again.',
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      gradient: 'from-cyan-400 to-teal-500',
     },
   ];
 
@@ -321,11 +321,11 @@ function FeaturesSection() {
             className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            <span className="text-[#332F3A]">Why Developers </span>
-            <span className="clay-text-gradient-accent">Love Us</span>
+            <span className="text-[#332F3A]">Every 2025 </span>
+            <span className="clay-text-gradient-accent">Pain Point Solved</span>
           </h2>
           <p className="text-lg text-[#635F69] max-w-2xl mx-auto">
-            Stop wrestling with fragmented APIs. Start building the next big sports app.
+            No more scraping, rate limits, missing markets, or slow updates. Just tell AI what to build and ship.
           </p>
         </div>
         
@@ -360,10 +360,10 @@ function FeaturesSection() {
               {feature.isHero && (
                 <div className="mt-8 p-4 rounded-2xl bg-[#EFEBF5] shadow-clay-pressed">
                   <code className="text-sm text-[#7C3AED] font-mono block">
-                    GET /v5/event/&#123;id&#125;
+                    "Build me a live betting tracker"
                   </code>
                   <div className="text-xs text-[#635F69] mt-2">
-                    Returns all books + props + EV slips
+                    → AI gets everything instantly
                   </div>
                 </div>
               )}
@@ -380,10 +380,10 @@ function FeaturesSection() {
 // ============================================
 function ComparisonSection() {
   const painPoints = [
-    { icon: '🔗', title: 'Fragmented APIs', description: 'Call FanDuel API, then DraftKings, then PrizePicks... 10+ calls per game' },
-    { icon: '🧩', title: 'Manual Matching', description: 'Spend weeks writing code to match "LAL" = "Lakers" = "Los Angeles Lakers"' },
-    { icon: '📊', title: 'No Fair Odds', description: 'Calculate vig removal yourself or trust inflated probabilities' },
-    { icon: '🔧', title: 'DIY EV Math', description: 'Build your own EV engine, correlation detection, and parlay optimizer' },
+    { icon: '🔗', title: 'Scraping Workarounds', description: 'Reverse-engineering DraftKings JSON endpoints and scraping Props.cash because APIs don\'t have the markets' },
+    { icon: '⏰', title: 'Slow Updates', description: '$20/month for NBA data that lags 5-10 minutes behind the books, killing live betting apps' },
+    { icon: '🚫', title: 'Missing Markets', description: 'No player props, alt lines, or team totals forcing you to juggle 10+ incomplete APIs' },
+    { icon: '🔐', title: 'Access Lockouts', description: 'Pinnacle changed rules mid-2025, cutting off developers without affiliate status' },
   ];
 
   return (
@@ -396,12 +396,13 @@ function ComparisonSection() {
               className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-6"
               style={{ fontFamily: 'Nunito, sans-serif' }}
             >
-              <span className="text-[#332F3A]">Tired of </span>
-              <span className="text-[#DB2777]">API Chaos?</span>
+              <span className="text-[#332F3A]">Stop </span>
+              <span className="text-[#DB2777]">Hacking Together</span>
+              <span className="text-[#332F3A]"> Data</span>
             </h2>
             <p className="text-lg text-[#635F69] mb-8 leading-relaxed">
-              Traditional odds APIs force you to call 10+ endpoints, manually match team names across books, 
-              calculate vig removal, and build your own EV engine. <span className="font-semibold text-[#7C3AED]">We do all of that in one call.</span>
+              Developers in 2025 are still scraping sites, reverse-engineering APIs, and dealing with rate limits just to get basic sports data. 
+              <span className="font-semibold text-[#7C3AED]"> We give you everything in one AI-friendly endpoint.</span>
             </p>
             
             <div className="space-y-4">
@@ -437,11 +438,11 @@ function ComparisonSection() {
                 className="text-2xl sm:text-3xl font-black text-[#332F3A] mb-4"
                 style={{ fontFamily: 'Nunito, sans-serif' }}
               >
-                One Request. Everything.
+                Just Tell AI What to Build
               </h3>
               
               <ul className="space-y-3 mb-8">
-                {['29+ books in one response', 'Canonical event matching', 'Consensus fair odds (vig-removed)', 'Built-in EV slip engine', 'Full provenance tracking'].map((item, i) => (
+                {['Real-time WebSocket feeds (no 5-min delays)', 'Every player prop & alt line (no scraping)', 'Unlimited requests (no rate limits)', 'AI-ready schemas (no integration hell)', 'Complete historical data (perfect for models)'].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#635F69]">
                     <span className="w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center flex-shrink-0">
                       <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -454,14 +455,14 @@ function ComparisonSection() {
               </ul>
               
               <div className="p-4 rounded-2xl bg-[#1e1e2e] text-sm font-mono overflow-x-auto">
-                <div className="text-[#635F69]">// One call. All books. EV included.</div>
+                <div className="text-[#635F69]">// Tell AI: "Build a betting tracker"</div>
                 <div>
                   <span className="text-[#7C3AED]">GET</span>
                   <span className="text-white"> /v5/event/</span>
                   <span className="text-[#10B981]">&#123;id&#125;</span>
                 </div>
                 <div className="text-[#635F69] mt-1 text-xs">
-                  → 29 books + props + consensus + EV
+                  → Everything you need. Zero setup.
                 </div>
               </div>
             </div>
@@ -936,3 +937,4 @@ export default function LandingPage() {
     </div>
   );
 }
+
