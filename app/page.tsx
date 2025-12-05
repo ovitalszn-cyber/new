@@ -99,21 +99,27 @@ function HeroSection() {
     }
 
     setStatus('loading');
-    
+    setMessage('');
+
     try {
-      const waitlist = JSON.parse(localStorage.getItem('kashrock_waitlist') || '[]');
-      if (waitlist.includes(email)) {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
         setStatus('error');
-        setMessage('This email is already on the waitlist!');
+        setMessage(data?.error || 'Something went wrong. Please try again.');
         return;
       }
-      waitlist.push(email);
-      localStorage.setItem('kashrock_waitlist', JSON.stringify(waitlist));
-      
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       setStatus('success');
-      setMessage('You\'re on the list! We\'ll be in touch soon.');
+      setMessage(data?.message || "You're on the list! We'll be in touch soon.");
       setEmail('');
     } catch {
       setStatus('error');
@@ -782,21 +788,27 @@ function CTASection() {
     }
 
     setStatus('loading');
-    
+    setMessage('');
+
     try {
-      const waitlist = JSON.parse(localStorage.getItem('kashrock_waitlist') || '[]');
-      if (waitlist.includes(email)) {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
         setStatus('error');
-        setMessage('This email is already on the waitlist!');
+        setMessage(data?.error || 'Something went wrong. Please try again.');
         return;
       }
-      waitlist.push(email);
-      localStorage.setItem('kashrock_waitlist', JSON.stringify(waitlist));
-      
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       setStatus('success');
-      setMessage('You\'re on the list! We\'ll be in touch soon.');
+      setMessage(data?.message || "You're on the list! We'll be in touch soon.");
       setEmail('');
     } catch {
       setStatus('error');
