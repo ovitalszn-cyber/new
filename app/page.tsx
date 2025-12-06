@@ -91,7 +91,7 @@ function HeroSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes('@')) {
       setStatus('error');
       setMessage('Please enter a valid email address');
@@ -112,18 +112,17 @@ function HeroSection() {
 
       const data = await response.json().catch(() => ({}));
 
-      if (!response.ok || !data.success) {
-        setStatus('error');
-        setMessage(data?.error || 'Something went wrong. Please try again.');
-        return;
+      if (!response.ok) {
+        throw new Error(typeof data?.error === 'string' ? data.error : 'Something went wrong. Please try again.');
       }
 
       setStatus('success');
-      setMessage(data?.message || "You're on the list! We'll be in touch soon.");
+      setMessage("You're on the list! We'll be in touch soon.");
       setEmail('');
-    } catch {
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
       setStatus('error');
-      setMessage('Something went wrong. Please try again.');
+      setMessage(errorMessage);
     }
   };
 
@@ -327,8 +326,8 @@ function FeaturesSection() {
             className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            <span className="text-[#332F3A]">Built for </span>
-            <span className="clay-text-gradient-accent">AI Sports Products</span>
+            <span className="text-[#332F3A]">The Data Backbone for </span>
+            <span className="clay-text-gradient-accent">AI Betting Products</span>
           </h2>
           <p className="text-lg text-[#635F69] max-w-2xl mx-auto">
             No more scraping, rate limits, missing markets, or slow updates. One unified layer for the data and infrastructure your AI-powered apps depend on.
@@ -780,7 +779,7 @@ function CTASection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes('@')) {
       setStatus('error');
       setMessage('Please enter a valid email address');
@@ -801,18 +800,17 @@ function CTASection() {
 
       const data = await response.json().catch(() => ({}));
 
-      if (!response.ok || !data.success) {
-        setStatus('error');
-        setMessage(data?.error || 'Something went wrong. Please try again.');
-        return;
+      if (!response.ok) {
+        throw new Error(typeof data?.error === 'string' ? data.error : 'Something went wrong. Please try again.');
       }
 
       setStatus('success');
-      setMessage(data?.message || "You're on the list! We'll be in touch soon.");
+      setMessage("You're on the list! We'll be in touch soon.");
       setEmail('');
-    } catch {
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
       setStatus('error');
-      setMessage('Something went wrong. Please try again.');
+      setMessage(errorMessage);
     }
   };
 
@@ -838,20 +836,20 @@ function CTASection() {
             
             {/* Waitlist Form */}
             <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 items-stretch">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   disabled={status === 'loading'}
-                  className="flex-1 h-16 px-6 rounded-[20px] bg-white shadow-clay-pressed text-[#332F3A] placeholder-[#635F69]/50 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/30 transition-all disabled:opacity-50"
+                  className="w-full sm:flex-1 h-16 px-6 rounded-[20px] bg-white shadow-clay-pressed text-[#332F3A] placeholder-[#635F69]/50 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/30 transition-all disabled:opacity-50"
                   style={{ fontFamily: 'DM Sans, sans-serif' }}
                 />
                 <button 
                   type="submit"
                   disabled={status === 'loading'}
-                  className="h-16 px-10 rounded-[20px] bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white font-bold text-lg shadow-clay-button hover:shadow-clay-button-hover hover:-translate-y-1 active:scale-[0.92] active:shadow-clay-pressed transition-all duration-200 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-3"
+                  className="w-full sm:w-auto h-16 px-10 rounded-[20px] bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white font-bold text-lg shadow-clay-button hover:shadow-clay-button-hover hover:-translate-y-1 active:scale-[0.92] active:shadow-clay-pressed transition-all duration-200 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-3"
                   style={{ fontFamily: 'Nunito, sans-serif' }}
                 >
                   {status === 'loading' ? (
@@ -920,7 +918,7 @@ function Footer() {
           
           {/* Copyright */}
           <p className="text-sm text-[#635F69]">
-            © 2025 KashRock. All rights reserved.
+            © 2024 KashRock. All rights reserved.
           </p>
         </div>
       </div>
