@@ -59,7 +59,9 @@ function Navigation() {
         {/* Nav Links - Hidden on mobile */}
         <div className="hidden md:flex items-center gap-8">
           <a href="#features" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Features</a>
+          <a href="#pricing" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Pricing</a>
           <a href="#faq" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">FAQ</a>
+          <a href="/blog" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Blog</a>
         </div>
         
         {/* CTA Button */}
@@ -561,30 +563,69 @@ function TechnicalFeaturesSection() {
 function PricingSection() {
   const plans = [
     {
-      name: 'Starter',
-      price: 'Free',
-      period: 'forever',
-      description: 'Perfect for testing and small projects',
-      features: ['10,000 API calls/month', 'All sports & markets', 'Standard rate limits', 'Community support'],
+      name: 'Free',
+      price: '$0',
+      period: '/month',
+      description: 'Prototype freely with full market coverage',
+      features: [
+        '1,000 API requests/day',
+        'All integrated books',
+        'All sports & market types (incl. props)',
+        'No EV slips',
+        'No export engine or historical data',
+        'Standard rate limits'
+      ],
       cta: 'Start Free',
       highlighted: false,
     },
     {
-      name: 'Pro',
+      name: 'Starter',
       price: '$49',
       period: '/month',
-      description: 'For growing apps and serious builders',
-      features: ['100,000 API calls/month', 'All sports & markets', 'Priority rate limits', 'Real-time webhooks', 'Email support'],
-      cta: 'Get Started',
+      description: 'For hobbyists ready for actionable EV insights',
+      features: [
+        '25,000 API requests/day',
+        'All integrated books',
+        'All sports & market types',
+        'Basic EV slips (single-leg)',
+        'Historical access',
+        'Standard rate limits'
+      ],
+      cta: 'Upgrade to Starter',
+      highlighted: false,
+    },
+    {
+      name: 'Developer',
+      price: '$99',
+      period: '/month',
+      description: 'Most popular for professional builders',
+      features: [
+        '100,000 API requests/day',
+        'All integrated books (US + EU/Global)',
+        'All sports & market types',
+        'Advanced EV slips (multi-leg + guards)',
+        'Historical access',
+        'Export engine (10k rows/day)',
+        'Faster rate limits'
+      ],
+      cta: 'Choose Developer',
       highlighted: true,
     },
     {
-      name: 'Enterprise',
-      price: 'Custom',
-      period: '',
-      description: 'For high-volume applications',
-      features: ['Unlimited API calls', 'Dedicated infrastructure', 'Custom SLA', 'Direct Slack support', 'White-label options'],
-      cta: 'Contact Sales',
+      name: 'Pro',
+      price: '$249',
+      period: '/month',
+      description: 'For power users scaling across global markets',
+      features: [
+        '500,000 API requests/day',
+        'All integrated books (US + EU/Global)',
+        'All sports & market types',
+        'Full historical archive',
+        'Full export engine (global)',
+        'Expanded EV features (global)',
+        'Priority support & higher concurrency'
+      ],
+      cta: 'Scale Globally',
       highlighted: false,
     },
   ];
@@ -603,19 +644,19 @@ function PricingSection() {
             <span className="text-[#332F3A]"> Pricing</span>
           </h2>
           <p className="text-lg text-[#635F69] max-w-2xl mx-auto">
-            Usage-based pricing with generous free tiers. You only pay for volume, not per sport or feed.
+            Choose the plan that fits your needs. Upgrade or downgrade anytime.
           </p>
         </div>
         
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid gap-6 grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
           {plans.map((plan, index) => (
             <div 
               key={index}
-              className={`clay-card shadow-clay-card p-8 relative transition-all duration-500 hover:-translate-y-2 hover:shadow-clay-card-hover ${
+              className={`clay-card shadow-clay-card p-8 relative transition-all duration-300 hover:-translate-y-2 hover:shadow-clay-card-hover flex flex-col h-full ${
                 plan.highlighted 
-                  ? 'md:scale-110 z-10 bg-gradient-to-br from-white to-[#F4F1FA]' 
-                  : 'hover:scale-105'
+                  ? 'ring-2 ring-[#7C3AED]/60 bg-gradient-to-br from-white to-[#F4F1FA]' 
+                  : ''
               }`}
             >
               {/* Popular badge */}
@@ -644,7 +685,7 @@ function PricingSection() {
                 <p className="text-sm text-[#635F69] mt-2">{plan.description}</p>
               </div>
               
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-1">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#635F69]">
                     <span className="w-5 h-5 rounded-full bg-[#10B981]/10 flex items-center justify-center flex-shrink-0">
@@ -658,7 +699,7 @@ function PricingSection() {
               </ul>
               
               <button 
-                className={`w-full h-14 rounded-[20px] font-bold transition-all duration-200 hover:-translate-y-1 active:scale-[0.92] ${
+                className={`mt-auto w-full h-14 rounded-[20px] font-bold transition-all duration-200 hover:-translate-y-1 active:scale-[0.92] ${
                   plan.highlighted
                     ? 'bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white shadow-clay-button hover:shadow-clay-button-hover active:shadow-clay-pressed'
                     : 'bg-white text-[#7C3AED] shadow-clay-card hover:shadow-clay-card-hover active:shadow-clay-pressed'
@@ -687,24 +728,28 @@ function FAQSection() {
   
   const faqs = [
     {
-      question: 'How does the unified v5 endpoint work?',
-      answer: 'One call to /v5/event/{id} returns all 29+ sportsbooks, player props, consensus fair odds (vig-removed), and EV slip candidates. We handle event matching, vig removal, and EV calculation automatically. No more calling 10+ APIs and stitching data together.',
+      question: 'What sports and markets do you cover?',
+      answer: 'We cover all major US sports (NFL, NBA, MLB, NHL, NCAA) plus soccer, tennis, UFC, and more. Each sport includes moneylines, spreads, totals, and player props. We integrate 29+ sportsbooks including Pinnacle, FanDuel, DraftKings, PrizePicks, Underdog, Bet365, and 1xBet.',
     },
     {
-      question: 'What is "canonical event matching"?',
-      answer: 'We automatically match events across all sources using a 3-stage pipeline: exact match → normalized tokens → fuzzy matching. This means "LAL", "Lakers", and "Los Angeles Lakers" all resolve to the same canonical event. You never have to write matching logic.',
+      question: 'How do I get started?',
+      answer: 'Sign up for the waitlist to get early access. Once approved, you\'ll receive an API key and can start making requests immediately. We provide quick-start examples in Bash, Python, and JavaScript to help you integrate in minutes.',
     },
     {
-      question: 'How do you calculate consensus fair odds?',
-      answer: 'We remove vig from sharp books (Pinnacle, Novig) and compute a weighted consensus. Sharp books get higher weight (1.0), soft books get lower weight (0.3-0.8). The result is true probability, not inflated house odds.',
+      question: 'What\'s included in the free tier?',
+      answer: 'The free tier includes 1,000 API requests per day, access to all integrated sportsbooks, and all sports and market types including player props. It\'s perfect for prototyping and testing your ideas before scaling up.',
     },
     {
-      question: 'What is the EV engine and how does it work?',
-      answer: 'Our built-in EV engine compares soft book odds (FanDuel, DraftKings, PrizePicks) against consensus fair odds to find +EV opportunities. It includes correlation guards to prevent same-game parlays and generates 1-3 leg slip candidates automatically.',
+      question: 'How is the data normalized?',
+      answer: 'We automatically match events across all sportsbooks so you don\'t have to. "LAL", "Lakers", and "Los Angeles Lakers" all resolve to the same event. Player names, team names, and stat types are all normalized to a consistent format.',
     },
     {
-      question: 'How fast is the API with 29 concurrent sources?',
-      answer: 'Sub-2 seconds. We fetch all sources concurrently using async I/O and cache hot data in Redis with TTL invalidation. Even with 29 books, responses are fast enough for real-time applications.',
+      question: 'Can I export historical data?',
+      answer: 'Yes! Starter tier and above includes access to historical odds data. Developer and Pro tiers include our export engine, which lets you download up to 10k-100k rows per day in CSV or JSON format for backtesting and analysis.',
+    },
+    {
+      question: 'What are EV slips?',
+      answer: 'EV (Expected Value) slips are betting opportunities where the odds offered by a sportsbook are better than the true probability suggests. Our API calculates EV automatically by comparing soft book odds against sharp book consensus lines.',
     },
   ];
 
@@ -918,7 +963,7 @@ function Footer() {
           
           {/* Copyright */}
           <p className="text-sm text-[#635F69]">
-            © 2024 KashRock. All rights reserved.
+            © 2025 KashRock. All rights reserved.
           </p>
         </div>
       </div>
@@ -940,6 +985,7 @@ export default function LandingPage() {
         <FeaturesSection />
         <ComparisonSection />
         <TechnicalFeaturesSection />
+        <PricingSection />
         <FAQSection />
         <CTASection />
       </main>

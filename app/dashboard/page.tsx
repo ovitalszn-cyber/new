@@ -1,165 +1,174 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import SlipCard from '@/components/SlipCard';
-import Filters from '@/components/Filters';
-import { fetchSlips } from '@/lib/api';
+import Link from 'next/link';
+import DashboardLayout from '@/components/DashboardLayout';
 
-export interface Slip {
-  sport: string;
-  soft_bookmaker_key: string;
-  num_legs: number;
-  legs: Leg[];
-  total_expected_value_percent: number;
-  payout_multiplier: number;
-  sharp_parlay_probability: number;
-  soft_parlay_payout: number;
-  timestamp: string;
-}
-
-export interface Leg {
-  sport: string;
-  match_id: string;
-  match_title: string;
-  commence_time: string;
-  outcome_description: string;
-  player_info?: {
-    player: string;
-    canonical_player_name: string;
-    stat: string;
-    canonical_stat_key: string;
-    line: number;
-    team: string;
+export default function DashboardPage() {
+  // Mock data for overview
+  const stats = {
+    totalRequests: 12847,
+    activeKeys: 2,
+    tier: 'DEVELOPER',
+    requestsRemaining: 87153,
   };
-  soft_book_odds: number;
-  sharp_no_vig_odds: number;
-  expected_value_percent: number;
-}
 
-export default function Home() {
-  const [slips, setSlips] = useState<Slip[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState({
-    sports: ['basketball_nba', 'americanfootball_nfl', 'icehockey_nhl'],
-    numLegs: 2,
-    minEV: 6.0,
-    minTotalEV: 0.0,
-    mixedSports: true,
-    prematch: true,
-    live: false,
-  });
-
-  useEffect(() => {
-    loadSlips();
-    // Auto-refresh every 30 seconds
-    const interval = setInterval(loadSlips, 30000);
-    return () => clearInterval(interval);
-  }, [filters]);
-
-  const loadSlips = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchSlips(filters);
-      setSlips(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load slips');
-      console.error('Error loading slips:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const quickActions = [
+    {
+      title: 'API Keys',
+      description: 'Generate and manage your API keys',
+      href: '/dashboard/api-keys',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+        </svg>
+      ),
+      color: 'from-[#A78BFA] to-[#7C3AED]',
+    },
+    {
+      title: 'Usage',
+      description: 'Monitor your API usage and metrics',
+      href: '/dashboard/usage',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      ),
+      color: 'from-[#34D399] to-[#10B981]',
+    },
+    {
+      title: 'Documentation',
+      description: 'Learn how to integrate the API',
+      href: '/docs',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      ),
+      color: 'from-[#60A5FA] to-[#0EA5E9]',
+    },
+    {
+      title: 'Support',
+      description: 'Get help from our team',
+      href: '/support',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ),
+      color: 'from-[#F472B6] to-[#DB2777]',
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="border-b border-purple-800/50 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">K</span>
-              </div>
-              <h1 className="text-2xl font-bold text-white">KashRock EV Slips</h1>
-            </div>
-            <button
-              onClick={loadSlips}
-              disabled={loading}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+    <DashboardLayout>
+      {/* Welcome Header */}
+      <div className="mb-8">
+        <h1 
+          className="text-3xl sm:text-4xl font-black text-[#332F3A] mb-2"
+          style={{ fontFamily: 'Nunito, sans-serif' }}
+        >
+          Welcome back!
+        </h1>
+        <p className="text-[#635F69]">
+          Here&apos;s an overview of your KashRock API account.
+        </p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="clay-card shadow-clay-card p-6">
+          <p className="text-sm text-[#635F69] mb-1">Total Requests</p>
+          <p className="text-2xl font-black text-[#332F3A]" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            {stats.totalRequests.toLocaleString()}
+          </p>
+        </div>
+        <div className="clay-card shadow-clay-card p-6">
+          <p className="text-sm text-[#635F69] mb-1">Active Keys</p>
+          <p className="text-2xl font-black text-[#332F3A]" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            {stats.activeKeys}
+          </p>
+        </div>
+        <div className="clay-card shadow-clay-card p-6">
+          <p className="text-sm text-[#635F69] mb-1">Current Tier</p>
+          <p className="text-2xl font-black text-[#7C3AED]" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            {stats.tier}
+          </p>
+        </div>
+        <div className="clay-card shadow-clay-card p-6">
+          <p className="text-sm text-[#635F69] mb-1">Remaining Today</p>
+          <p className="text-2xl font-black text-[#332F3A]" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            {stats.requestsRemaining.toLocaleString()}
+          </p>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="mb-8">
+        <h2 
+          className="text-xl font-bold text-[#332F3A] mb-4"
+          style={{ fontFamily: 'Nunito, sans-serif' }}
+        >
+          Quick Actions
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {quickActions.map((action, index) => (
+            <Link
+              key={index}
+              href={action.href}
+              className="clay-card shadow-clay-card p-6 hover:shadow-clay-card-hover hover:-translate-y-2 transition-all duration-300 group"
             >
-              <svg className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              {loading ? 'Loading...' : 'Refresh'}
-            </button>
+              <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${action.color} shadow-clay-orb flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
+                {action.icon}
+              </div>
+              <h3 className="font-bold text-[#332F3A] mb-1" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                {action.title}
+              </h3>
+              <p className="text-sm text-[#635F69]">
+                {action.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Getting Started */}
+      <div className="clay-card shadow-clay-card p-8">
+        <h2 
+          className="text-xl font-bold text-[#332F3A] mb-4"
+          style={{ fontFamily: 'Nunito, sans-serif' }}
+        >
+          Getting Started
+        </h2>
+        <div className="space-y-4">
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+              1
+            </div>
+            <div>
+              <h4 className="font-bold text-[#332F3A]">Generate an API Key</h4>
+              <p className="text-sm text-[#635F69]">Create your first API key to start making requests.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+              2
+            </div>
+            <div>
+              <h4 className="font-bold text-[#332F3A]">Make Your First Request</h4>
+              <p className="text-sm text-[#635F69]">Use the quick start examples to test the API.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+              3
+            </div>
+            <div>
+              <h4 className="font-bold text-[#332F3A]">Build Something Amazing</h4>
+              <p className="text-sm text-[#635F69]">Explore the docs and start building your application.</p>
+            </div>
           </div>
         </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-8">
-        {/* Filters */}
-        <Filters filters={filters} onFiltersChange={setFilters} />
-
-        {/* Stats Bar */}
-        <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-800/30">
-            <div className="text-purple-300 text-sm font-medium">Total Slips</div>
-            <div className="text-2xl font-bold text-white mt-1">{slips.length}</div>
-          </div>
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-800/30">
-            <div className="text-purple-300 text-sm font-medium">Avg EV</div>
-            <div className="text-2xl font-bold text-white mt-1">
-              {slips.length > 0
-                ? (slips.reduce((sum, s) => sum + s.total_expected_value_percent, 0) / slips.length).toFixed(1)
-                : '0.0'}%
-            </div>
-          </div>
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-800/30">
-            <div className="text-purple-300 text-sm font-medium">Max EV</div>
-            <div className="text-2xl font-bold text-green-400 mt-1">
-              {slips.length > 0
-                ? Math.max(...slips.map(s => s.total_expected_value_percent)).toFixed(1)
-                : '0.0'}%
-            </div>
-          </div>
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-purple-800/30">
-            <div className="text-purple-300 text-sm font-medium">Mixed Sports</div>
-            <div className="text-2xl font-bold text-white mt-1">
-              {slips.filter(s => s.sport.includes(',')).length}
-            </div>
-          </div>
-        </div>
-
-        {/* Error State */}
-        {error && (
-          <div className="mb-6 bg-red-900/50 border border-red-700 rounded-lg p-4 text-red-200">
-            <div className="font-semibold">Error loading slips</div>
-            <div className="text-sm mt-1">{error}</div>
-          </div>
-        )}
-
-        {/* Slips Grid */}
-        {loading && slips.length === 0 ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <div className="text-purple-300">Loading EV slips...</div>
-            </div>
-          </div>
-        ) : slips.length === 0 ? (
-          <div className="text-center py-20">
-            <div className="text-purple-300 text-lg">No slips found</div>
-            <div className="text-purple-400/70 text-sm mt-2">Try adjusting your filters</div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {slips.map((slip, index) => (
-              <SlipCard key={index} slip={slip} />
-            ))}
-          </div>
-        )}
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }
