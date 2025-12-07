@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 // ============================================
@@ -59,7 +60,7 @@ function Navigation() {
         {/* Nav Links - Hidden on mobile */}
         <div className="hidden md:flex items-center gap-8">
           <a href="#features" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Features</a>
-          <a href="#pricing" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Pricing</a>
+          <a href="#blog" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Blog</a>
           <a href="#faq" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">FAQ</a>
         </div>
         
@@ -557,6 +558,96 @@ function TechnicalFeaturesSection() {
 }
 
 // ============================================
+// BLOG SECTION
+// ============================================
+function BlogSection() {
+  const posts = [
+    {
+      slug: 'why-builders-need-faster-sports-data',
+      title: 'Why Builders Need Faster Access to Sports Data (And What We\'re Fixing at KashRock)',
+      excerpt: 'Sports data is messy. We built KashRock because builders deserve clean, fast, normalized data without maintaining 10 scrapers.',
+      date: 'Jan 15, 2025',
+      readTime: '4 min read',
+      category: 'Announcements',
+    },
+    {
+      slug: 'why-your-sports-betting-app-needs-realtime-odds',
+      title: 'Why Your Sports Betting App Needs a Real-Time Odds Backbone',
+      excerpt: 'Your UX dies when your odds are 30 seconds late. Here’s why a real-time backbone matters and how we designed ours.',
+      date: 'Jan 12, 2025',
+      readTime: '3 min read',
+      category: 'Engineering',
+    },
+    {
+      slug: 'how-to-build-sports-data-startup',
+      title: 'How To Build a Sports Data Startup Without Spending Millions',
+      excerpt: 'You don’t need a Fortune 500 budget to launch a sports data product. Start with leverage, not headcount.',
+      date: 'Jan 8, 2025',
+      readTime: '4 min read',
+      category: 'Guides',
+    },
+  ];
+
+  return (
+    <section id="blog" className="py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 text-[#7C3AED] text-sm font-bold mb-4">
+            Latest from the Blog
+          </p>
+          <h2 
+            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4"
+            style={{ fontFamily: 'Nunito, sans-serif' }}
+          >
+            <span className="text-[#332F3A]">Build faster with</span>{' '}
+            <span className="clay-text-gradient-accent">real insights</span>
+          </h2>
+          <p className="text-lg text-[#635F69] max-w-3xl mx-auto">
+            Roadmaps, engineering deep-dives, and playbooks for people building sports betting products with KashRock.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="clay-card shadow-clay-card p-6 flex flex-col hover:-translate-y-2 hover:shadow-clay-card-hover transition-all duration-300"
+            >
+              <span className="text-xs font-bold text-[#7C3AED] bg-[#7C3AED]/10 px-3 py-1 rounded-full w-fit mb-4">
+                {post.category}
+              </span>
+              <h3 
+                className="text-xl font-bold text-[#332F3A] mb-3"
+                style={{ fontFamily: 'Nunito, sans-serif' }}
+              >
+                {post.title}
+              </h3>
+              <p className="text-sm text-[#635F69] leading-relaxed flex-1">
+                {post.excerpt}
+              </p>
+              <div className="text-xs text-[#635F69] mt-6 flex items-center justify-between">
+                <span>{post.date}</span>
+                <span>{post.readTime}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/blog"
+            className="inline-flex h-12 px-6 rounded-[20px] bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white font-bold shadow-clay-button hover:shadow-clay-button-hover hover:-translate-y-1 transition-all"
+          >
+            View all posts
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================
 // PRICING SECTION
 // ============================================
 function PricingSection() {
@@ -627,20 +718,7 @@ function PricingSection() {
       cta: 'Scale Globally',
       highlighted: false,
     },
-    {
-      name: 'Enterprise',
-      price: 'Custom',
-      period: '',
-      description: 'Tailored coverage, compliance, and support',
-      features: [
-        'SLA-backed partnership',
-        'Dedicated infrastructure',
-        'Custom data coverage & exports',
-        'Direct collaboration with our team'
-      ],
-      cta: 'Contact Us',
-      highlighted: false,
-    },
+    
   ];
 
   return (
@@ -712,9 +790,9 @@ function PricingSection() {
               </ul>
               
               <button 
-                className={`mt-auto w-full h-14 rounded-[20px] font-bold transition-all duration-200 hover:-translate-y-1 active:scale-[0.92] ${
+                className={`mt-auto w-full h-14 rounded-[20px] font-bold transition-all duration-200 hover:-translate-y-1 active:scale-[0.92] active:shadow-clay-pressed ${
                   plan.highlighted
-                    ? 'bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white shadow-clay-button hover:shadow-clay-button-hover active:shadow-clay-pressed'
+                    ? 'bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white shadow-clay-button hover:shadow-clay-button-hover'
                     : 'bg-white text-[#7C3AED] shadow-clay-card hover:shadow-clay-card-hover active:shadow-clay-pressed'
                 }`}
                 style={{ fontFamily: 'Nunito, sans-serif' }}
@@ -994,7 +1072,7 @@ export default function LandingPage() {
         <FeaturesSection />
         <ComparisonSection />
         <TechnicalFeaturesSection />
-        <PricingSection />
+        <BlogSection />
         <FAQSection />
         <CTASection />
       </main>
