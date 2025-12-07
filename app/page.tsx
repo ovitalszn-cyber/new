@@ -61,7 +61,6 @@ function Navigation() {
           <a href="#features" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Features</a>
           <a href="#pricing" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Pricing</a>
           <a href="#faq" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">FAQ</a>
-          <a href="/blog" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">Blog</a>
         </div>
         
         {/* CTA Button */}
@@ -628,6 +627,20 @@ function PricingSection() {
       cta: 'Scale Globally',
       highlighted: false,
     },
+    {
+      name: 'Enterprise',
+      price: 'Custom',
+      period: '',
+      description: 'Tailored coverage, compliance, and support',
+      features: [
+        'SLA-backed partnership',
+        'Dedicated infrastructure',
+        'Custom data coverage & exports',
+        'Direct collaboration with our team'
+      ],
+      cta: 'Contact Us',
+      highlighted: false,
+    },
   ];
 
   return (
@@ -649,7 +662,7 @@ function PricingSection() {
         </div>
         
         {/* Pricing Cards */}
-        <div className="grid gap-6 grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {plans.map((plan, index) => (
             <div 
               key={index}
@@ -728,28 +741,24 @@ function FAQSection() {
   
   const faqs = [
     {
-      question: 'What sports and markets do you cover?',
-      answer: 'We cover all major US sports (NFL, NBA, MLB, NHL, NCAA) plus soccer, tennis, UFC, and more. Each sport includes moneylines, spreads, totals, and player props. We integrate 29+ sportsbooks including Pinnacle, FanDuel, DraftKings, PrizePicks, Underdog, Bet365, and 1xBet.',
+      question: 'How does the unified v5 endpoint work?',
+      answer: 'One call to /v5/event/{id} returns all 29+ sportsbooks, player props, consensus fair odds (vig-removed), and EV slip candidates. We handle event matching, vig removal, and EV calculation automatically. No more calling 10+ APIs and stitching data together.',
     },
     {
-      question: 'How do I get started?',
-      answer: 'Sign up for the waitlist to get early access. Once approved, you\'ll receive an API key and can start making requests immediately. We provide quick-start examples in Bash, Python, and JavaScript to help you integrate in minutes.',
+      question: 'What is "canonical event matching"?',
+      answer: 'We automatically match events across all sources using a 3-stage pipeline: exact match → normalized tokens → fuzzy matching. This means "LAL", "Lakers", and "Los Angeles Lakers" all resolve to the same canonical event. You never have to write matching logic.',
     },
     {
-      question: 'What\'s included in the free tier?',
-      answer: 'The free tier includes 1,000 API requests per day, access to all integrated sportsbooks, and all sports and market types including player props. It\'s perfect for prototyping and testing your ideas before scaling up.',
+      question: 'How do you calculate consensus fair odds?',
+      answer: 'We remove vig from sharp books (Pinnacle, Novig) and compute a weighted consensus. Sharp books get higher weight (1.0), soft books get lower weight (0.3-0.8). The result is true probability, not inflated house odds.',
     },
     {
-      question: 'How is the data normalized?',
-      answer: 'We automatically match events across all sportsbooks so you don\'t have to. "LAL", "Lakers", and "Los Angeles Lakers" all resolve to the same event. Player names, team names, and stat types are all normalized to a consistent format.',
+      question: 'What is the EV engine and how does it work?',
+      answer: 'Our built-in EV engine compares soft book odds (FanDuel, DraftKings, PrizePicks) against consensus fair odds to find +EV opportunities. It includes correlation guards to prevent same-game parlays and generates 1-3 leg slip candidates automatically.',
     },
     {
-      question: 'Can I export historical data?',
-      answer: 'Yes! Starter tier and above includes access to historical odds data. Developer and Pro tiers include our export engine, which lets you download up to 10k-100k rows per day in CSV or JSON format for backtesting and analysis.',
-    },
-    {
-      question: 'What are EV slips?',
-      answer: 'EV (Expected Value) slips are betting opportunities where the odds offered by a sportsbook are better than the true probability suggests. Our API calculates EV automatically by comparing soft book odds against sharp book consensus lines.',
+      question: 'How fast is the API with 29 concurrent sources?',
+      answer: 'Sub-2 seconds. We fetch all sources concurrently using async I/O and cache hot data in Redis with TTL invalidation. Even with 29 books, responses are fast enough for real-time applications.',
     },
   ];
 
