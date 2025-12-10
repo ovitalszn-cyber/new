@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     // { name: 'Affiliate', href: '/dashboard/affiliate', icon: LinkIcon },
     // { name: 'Settings', href: '/dashboard/settings', icon: SettingsIcon },
     { name: 'Docs', href: '/docs', icon: BookIcon },
-    // { name: 'Support', href: '/support', icon: SupportIcon },
+ 
   ];
 
   return (
