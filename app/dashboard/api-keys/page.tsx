@@ -276,7 +276,7 @@ console.log(data);`,
         Sign in to manage API keys
       </h2>
       <p className="text-sm text-[#635F69]">
-        Go back to the main dashboard and complete Google Sign-In to access this page.
+        Go back to the main dashboard and complete sign in to access this page.
       </p>
       <a
         href="/dashboard"

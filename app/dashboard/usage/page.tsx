@@ -138,7 +138,7 @@ export default function UsagePage() {
         Sign in to view usage
       </h2>
       <p className="text-sm text-[#635F69]">
-        Go back to the main dashboard and complete Google Sign-In to access usage analytics.
+        Go back to the main dashboard and complete sign in to access usage analytics.
       </p>
       <a
         href="/dashboard"

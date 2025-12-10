@@ -18,7 +18,8 @@ export default function DashboardPage() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
-  const googleButtonRef = useRef<HTMLDivElement | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [stats, setStats] = useState({
     totalRequests: 0,
@@ -136,68 +137,41 @@ export default function DashboardPage() {
     }
   }, []);
 
-  const handleGoogleScriptLoad = () => {
-    if (typeof window === 'undefined') return;
-    const google = (window as any).google;
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-    if (!google || !clientId || !googleButtonRef.current) return;
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError(null);
+    setAuthLoading(true);
+    try {
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const res = await fetch(`${apiBase}/v1/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    google.accounts.id.initialize({
-      client_id: clientId,
-      callback: async (response: any) => {
-        const credential = response?.credential;
-        if (!credential) return;
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.detail || 'Failed to sign in');
+      }
 
-        setAuthError(null);
-        setAuthLoading(true);
-        try {
-          const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
-          const res = await fetch(`${apiBase}/v1/auth/google`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_token: credential }),
-          });
+      setAccessToken(data.access_token as string);
+      setAuthUser(data.user as AuthUser);
 
-          const data = await res.json();
-          if (!res.ok) {
-            throw new Error(data?.detail || 'Failed to authenticate with Google');
-          }
-
-          setAccessToken(data.access_token as string);
-          setAuthUser(data.user as AuthUser);
-
-          if (typeof window !== 'undefined') {
-            window.localStorage.setItem(
-              'kashrock_dashboard_session',
-              JSON.stringify({ access_token: data.access_token, user: data.user }),
-            );
-          }
-        } catch (err: any) {
-          setAuthError(err?.message || 'Failed to sign in with Google');
-        } finally {
-          setAuthLoading(false);
-        }
-      },
-    });
-
-    google.accounts.id.renderButton(googleButtonRef.current, {
-      type: 'standard',
-      theme: 'outline',
-      size: 'large',
-      width: 260,
-    });
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(
+          'kashrock_dashboard_session',
+          JSON.stringify({ access_token: data.access_token, user: data.user }),
+        );
+      }
+    } catch (err: any) {
+      setAuthError(err?.message || 'Failed to sign in');
+    } finally {
+      setAuthLoading(false);
+    }
   };
 
   return (
     <DashboardLayout>
-      <Script
-        src="https://accounts.google.com/gsi/client"
-        async
-        defer
-        strategy="afterInteractive"
-        onLoad={handleGoogleScriptLoad}
-      />
-
       {!accessToken ? (
         <div className="max-w-md mx-auto mt-8 clay-card shadow-clay-card p-8 text-center">
           <h1
@@ -207,19 +181,38 @@ export default function DashboardPage() {
             Sign in to your KashRock dashboard
           </h1>
           <p className="text-sm text-[#635F69] mb-6">
-            Use your Google account to securely access your API keys, usage, and account settings.
+            Enter your email and password to access your API keys, usage, and account settings.
           </p>
           {authError && (
             <div className="mb-4 text-sm text-red-700 bg-red-100 border border-red-300 rounded-lg px-3 py-2">
               {authError}
             </div>
           )}
-          <div className="flex flex-col items-center gap-4">
-            <div ref={googleButtonRef} />
-            {authLoading && (
-              <div className="text-xs text-[#635F69]">Connecting to Google...</div>
-            )}
-          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              className="w-full px-4 py-3 rounded-xl border border-[#E5E1EF] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] bg-white"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+              className="w-full px-4 py-3 rounded-xl border border-[#E5E1EF] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] bg-white"
+            />
+            <button
+              type="submit"
+              disabled={authLoading}
+              className="w-full px-5 h-12 rounded-[20px] bg-gradient-to-br from-[#A78BFA] to-[#7C3AED] text-white font-bold shadow-clay-button hover:shadow-clay-button-hover transition-all disabled:opacity-50"
+            >
+              {authLoading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
         </div>
       ) : (
         <>
