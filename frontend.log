@@ -1,0 +1,126 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/drax/Downloads/kashrock-main/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/drax/Downloads/kashrock-main/new-frontend/package-lock.json
+
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://10.0.0.63:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1478ms
+ ○ Compiling /dashboard/usage ...
+ GET /dashboard/usage 200 in 5.4s (compile: 4.9s, render: 526ms)
+ GET /dashboard/usage 200 in 105ms (compile: 5ms, render: 100ms)
+ GET /dashboard/usage 200 in 145ms (compile: 16ms, render: 129ms)
+ GET /dashboard/api-keys 200 in 892ms (compile: 785ms, render: 107ms)
+ GET /dashboard 200 in 569ms (compile: 496ms, render: 73ms)
+ GET /docs 200 in 543ms (compile: 481ms, render: 62ms)
+ GET /dashboard 200 in 126ms (compile: 7ms, render: 120ms)
+ ✓ Compiled in 348ms
+ ✓ Compiled in 116ms
+ ⨯ Error: Cannot find module 'next/dist/client/components/builtin/global-not-found'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module 'next/dist/client/components/builtin/global-not-found'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/drax/Downloads/kashrock-main/new-frontend/node_modules/next/dist/server/lib/start-server.js
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Turbopack build failed with 1 errors:
+./new-frontend
+Error: Next.js inferred your workspace root, but it may not be correct.
+    We couldn't find the Next.js package (next/package.json) from the project directory: /Users/drax/Downloads/kashrock-main/new-frontend
+     To fix this, set turbopack.root in your Next.js config, or ensure the Next.js package is resolvable from this directory.
+    Note: For security and performance reasons, files outside of the project directory will not be compiled.
+    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+
+    at ignore-listed frames
+[?25h
