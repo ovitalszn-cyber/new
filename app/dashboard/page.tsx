@@ -1,15 +1,18 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
 import AuthGuard from '@/components/AuthGuard';
 
-const mockStats = {
-  totalRequests: 12932,
-  activeKeys: 4,
-  tier: 'FREE',
-  requestsRemaining: 8713,
-};
+const PUBLIC_API_BASE = process.env.NEXT_PUBLIC_PUBLIC_API_BASE || 'https://api.kashrock.com';
+
+interface DashboardStats {
+  totalRequests: number;
+  activeKeys: number;
+  tier: string;
+  requestsRemaining: number;
+}
 
 const quickActions = [
   {
@@ -34,56 +37,128 @@ const quickActions = [
     ),
     color: 'from-[#34D399] to-[#10B981]',
   },
-
-
 ];
 
-const stats = mockStats;
-
 export default function DashboardPage() {
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const token = localStorage.getItem('kashrock_dashboard_session');
+        if (!token) return; // AuthGuard handles redirect
+
+        // Fetch usage stats
+        const usageRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/usage`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Fetch keys count
+        let activeKeysCount = 0;
+        try {
+          const keysRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/api-keys`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (keysRes.ok) {
+            const keysData = await keysRes.json();
+            const keysList = Array.isArray(keysData) ? keysData : (keysData.keys || []);
+            activeKeysCount = keysList.length;
+          }
+        } catch (e) {
+          console.error("Failed to fetch keys count", e);
+        }
+
+        if (usageRes.ok) {
+          const usageData = await usageRes.json();
+          setStats({
+            totalRequests: usageData.total_requests || 0,
+            activeKeys: activeKeysCount,
+            tier: usageData.tier || 'Free',
+            requestsRemaining: usageData.remaining || 0,
+          });
+        } else {
+          // Fallback if usage endpoint is not ready
+          console.warn("Usage fetch failed", usageRes.status);
+          setStats({
+            totalRequests: 0,
+            activeKeys: activeKeysCount,
+            tier: 'Free',
+            requestsRemaining: 0
+          });
+        }
+      } catch (err) {
+        console.error("Error loading dashboard data", err);
+        setError("Failed to load dashboard data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
     <AuthGuard>
       <DashboardLayout>
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900">Welcome to your KashRock dashboard</h1>
           <p className="mt-2 text-lg text-gray-600">Get started with our API and explore its features.</p>
+
           <div className="mt-8">
             <h2 className="text-2xl font-bold text-gray-900">Stats</h2>
-            <div className="mt-4 flex justify-between">
-              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-                <h3 className="text-lg font-bold text-gray-900">Total Requests</h3>
-                <p className="text-lg text-gray-600">{stats.totalRequests}</p>
+            {loading ? (
+              <div className="mt-4 p-8 flex justify-center text-gray-500">
+                <svg className="w-8 h-8 animate-spin text-[#7C3AED]" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
               </div>
-              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-                <h3 className="text-lg font-bold text-gray-900">Active Keys</h3>
-                <p className="text-lg text-gray-600">{stats.activeKeys}</p>
+            ) : error ? (
+              <div className="mt-4 p-4 bg-red-50 text-red-600 rounded-lg">{error}</div>
+            ) : (
+              <div className="mt-4 flex justify-between gap-4 flex-wrap">
+                <div className="bg-white rounded-lg shadow-md p-4 flex-1 min-w-[200px]">
+                  <h3 className="text-lg font-bold text-gray-900">Total Requests</h3>
+                  <p className="text-lg text-gray-600">{stats?.totalRequests.toLocaleString()}</p>
+                </div>
+                <div className="bg-white rounded-lg shadow-md p-4 flex-1 min-w-[200px]">
+                  <h3 className="text-lg font-bold text-gray-900">Active Keys</h3>
+                  <p className="text-lg text-gray-600">{stats?.activeKeys}</p>
+                </div>
+                <div className="bg-white rounded-lg shadow-md p-4 flex-1 min-w-[200px]">
+                  <h3 className="text-lg font-bold text-gray-900">Tier</h3>
+                  <p className="text-lg text-gray-600">{stats?.tier}</p>
+                </div>
+                <div className="bg-white rounded-lg shadow-md p-4 flex-1 min-w-[200px]">
+                  <h3 className="text-lg font-bold text-gray-900">Requests Remaining</h3>
+                  <p className="text-lg text-gray-600">{stats?.requestsRemaining.toLocaleString()}</p>
+                </div>
               </div>
-              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-                <h3 className="text-lg font-bold text-gray-900">Tier</h3>
-                <p className="text-lg text-gray-600">{stats.tier}</p>
-              </div>
-              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-                <h3 className="text-lg font-bold text-gray-900">Requests Remaining</h3>
-                <p className="text-lg text-gray-600">{stats.requestsRemaining}</p>
-              </div>
-            </div>
+            )}
           </div>
+
           <div className="mt-8">
             <h2 className="text-2xl font-bold text-gray-900">Quick Actions</h2>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {quickActions.map((action, index) => (
                 <Link key={index} href={action.href}>
-                  <div className={`bg-gradient-to-r ${action.color} rounded-lg shadow-md p-4`}>
+                  <div className={`bg-gradient-to-r ${action.color} rounded-lg shadow-md p-4 h-full hover:scale-[1.02] transition-transform`}>
                     <div className="flex items-center">
                       {action.icon}
                       <h3 className="text-lg font-bold text-white ml-4">{action.title}</h3>
                     </div>
-                    <p className="text-lg text-white mt-2">{action.description}</p>
+                    <p className="text-lg text-white mt-2 opacity-90">{action.description}</p>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
+
           <div className="mt-8">
             <h2 className="text-2xl font-bold text-gray-900">Getting Started</h2>
             <div className="mt-4">
@@ -92,9 +167,10 @@ export default function DashboardPage() {
               <p className="text-lg text-gray-600">3. Explore our API endpoints to discover its features.</p>
             </div>
           </div>
+
           <div className="mt-8">
             <Link href="/docs">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors">
                 View Documentation
               </button>
             </Link>
