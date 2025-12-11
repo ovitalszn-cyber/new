@@ -29,6 +29,17 @@ class MarketNormalizer:
             "team_total": "team_totals",
             "team_totals": "team_totals",
             
+            # Team totals (must come before player props to prevent misclassification)
+            "total_touchdowns": "team_totals",
+            "total_passing_touchdowns": "team_totals",
+            "total_rushing_touchdowns": "team_totals",
+            "total_receiving_touchdowns": "team_totals",
+            "total_passing_yards": "team_totals",
+            "total_rushing_yards": "team_totals",
+            "total_receiving_yards": "team_totals",
+            "total_goals": "team_totals",
+            "total_points": "team_totals",
+            
             # Player props - basketball
             "player_points": "player_props",
             "player_rebounds": "player_props",

@@ -321,10 +321,11 @@ class V6BackgroundWorker:
         """Process odds and props if changes detected."""
         
         
-    # 1. Check for updates first
-    if not await self._check_for_updates(sport):
-        logger.info("Skipping full refresh (no changes)", sport=sport)
-        return
+        # 1. Check for updates first (TEMPORARILY DISABLED FOR DEBUGGING)
+        # if not await self._check_for_updates(sport):
+        #     logger.info("Skipping full refresh (no changes)", sport=sport)
+        #     return
+        logger.info("FORCING full refresh (check disabled for debugging)", sport=sport)
     
         sport_start = datetime.now(timezone.utc)
         
