@@ -69,6 +69,7 @@ class Settings(BaseSettings):
     
     # Feature flags
     enable_betting_features: bool = Field(default=False, env="ENABLE_BETTING_FEATURES")
+    enable_historical_database: bool = Field(default=False, env="ENABLE_HISTORICAL_DATABASE")
     
     class Config:
         env_file = ".env"
