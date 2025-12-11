@@ -1079,8 +1079,11 @@ async def startup_v6_hybrid_architecture():
         # Start background worker with all lunosoft books
         print("[V6] Starting background worker...")
         from streamers.lunosoft_books import LUNOSOFT_BOOK_STREAMERS
-        active_books = list(LUNOSOFT_BOOK_STREAMERS.keys())
-        print(f"[V6] Found {len(active_books)} books to initialize")
+        from streamers.sharp_odds import SHARP_ODDS_STREAMERS
+        
+        # Combine Lunosoft and Sharp streamers for comprehensive odds coverage
+        active_books = list(LUNOSOFT_BOOK_STREAMERS.keys()) + list(SHARP_ODDS_STREAMERS.keys())
+        print(f"[V6] Found {len(active_books)} books to initialize ({len(LUNOSOFT_BOOK_STREAMERS)} Lunosoft + {len(SHARP_ODDS_STREAMERS)} Sharp)")
         
         worker = await start_background_worker(
             cache_manager=cache_manager,
