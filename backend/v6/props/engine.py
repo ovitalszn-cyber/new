@@ -24,17 +24,30 @@ class PropsEngine:
         self._semaphore: Optional[asyncio.Semaphore] = None
         self.default_books: List[str] = list(LUNOSOFT_BOOK_STREAMERS.keys())
 
-    async def initialize(self) -> None:
-        """Initialize all sportsbook streamers."""
+    async def initialize(self, books: Optional[List[str]] = None) -> None:
+        """Initialize all sportsbook streamers concurrently."""
         if self._semaphore is None:
             self._semaphore = asyncio.Semaphore(self.max_concurrency)
 
-        logger.info("Initializing V6 Props Engine", books=len(LUNOSOFT_BOOK_STREAMERS))
+        target_books = LUNOSOFT_BOOK_STREAMERS
+        if books:
+            # For props, we need to map the "book_key" to the Lunosoft key or handle filtering.
+            # LUNOSOFT_BOOK_STREAMERS keys are the raw book names (e.g. "pinnacle").
+            # The active_books list might contain "sharp_pinnacle" too. We only care about Lunosoft keys here.
+            target_books = {k: v for k, v in LUNOSOFT_BOOK_STREAMERS.items() if k in books}
 
-        for book_key, streamer_cls in LUNOSOFT_BOOK_STREAMERS.items():
+        logger.info("Initializing V6 Props Engine", books=len(target_books))
+
+        async def init_book(book_key: str, streamer_cls: Any) -> None:
             try:
+                # Lunosoft streamers expect "lunosoft_bookname" as the name arg usually
                 streamer = streamer_cls(f"lunosoft_{book_key}", self.config)
-                connected = await streamer.connect()
+                try:
+                    connected = await asyncio.wait_for(streamer.connect(), timeout=10.0)
+                except asyncio.TimeoutError:
+                    logger.warning("Timeout connecting propsbook", book=book_key)
+                    return
+
                 if connected:
                     self.streamers[book_key] = streamer
                     logger.info("Connected sportsbook", book=book_key)
@@ -42,6 +55,10 @@ class PropsEngine:
                     logger.warning("Failed to connect sportsbook", book=book_key)
             except Exception as exc:
                 logger.error("Error initializing sportsbook", book=book_key, error=str(exc))
+
+        tasks = [init_book(k, v) for k, v in target_books.items()]
+        if tasks:
+            await asyncio.gather(*tasks)
 
         logger.info("V6 Props Engine initialized", connected_books=len(self.streamers))
 

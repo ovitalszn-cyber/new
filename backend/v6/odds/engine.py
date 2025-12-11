@@ -26,17 +26,28 @@ class OddsEngine:
         self.max_concurrency = max(1, int(self.config.get("max_concurrency", 4)))
         self._semaphore: Optional[asyncio.Semaphore] = None
 
-    async def initialize(self) -> None:
-        """Initialize all sportsbook streamers."""
+    async def initialize(self, books: Optional[List[str]] = None) -> None:
+        """Initialize all sportsbook streamers concurrently."""
         if self._semaphore is None:
             self._semaphore = asyncio.Semaphore(self.max_concurrency)
 
-        logger.info("Initializing V6 Odds Engine", books=len(ALL_BOOK_STREAMERS))
+        target_books = ALL_BOOK_STREAMERS
+        if books:
+            # Filter to only requested books that exist in our registry
+            target_books = {k: v for k, v in ALL_BOOK_STREAMERS.items() if k in books}
 
-        for book_key, streamer_cls in ALL_BOOK_STREAMERS.items():
+        logger.info("Initializing V6 Odds Engine", books=len(target_books))
+
+        async def init_book(book_key: str, streamer_cls: Any) -> None:
             try:
                 streamer = streamer_cls(book_key, self.config)
-                connected = await streamer.connect()
+                # Use a small timeout for connection to prevent hanging
+                try:
+                    connected = await asyncio.wait_for(streamer.connect(), timeout=10.0)
+                except asyncio.TimeoutError:
+                    logger.warning("Timeout connecting sportsbook", book=book_key)
+                    return
+
                 if connected:
                     self.streamers[book_key] = streamer
                     logger.info("Connected sportsbook", book=book_key)
@@ -44,6 +55,11 @@ class OddsEngine:
                     logger.warning("Failed to connect sportsbook", book=book_key)
             except Exception as exc:
                 logger.error("Error initializing sportsbook", book=book_key, error=str(exc))
+
+        # Initialize all books concurrently
+        tasks = [init_book(k, v) for k, v in target_books.items()]
+        if tasks:
+            await asyncio.gather(*tasks)
 
         logger.info("V6 Odds Engine initialized", connected_books=len(self.streamers))
 
