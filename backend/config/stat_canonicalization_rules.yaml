@@ -444,6 +444,8 @@ NFL:
       patterns:
         - "extra point made"
         - "extra points made"
+        - "extra points"
+        - "extra point"
         - "xp made"
         - "pat made"
     NFL_KICKING_POINTS:

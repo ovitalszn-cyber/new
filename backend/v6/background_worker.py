@@ -321,13 +321,11 @@ class V6BackgroundWorker:
         """Process odds and props if changes detected."""
         
         
-    # 1. Skip optimization check to ensure full refresh with high concurrency
-    # if not await self._check_for_updates(sport):
-    #     logger.info("Skipping full refresh (no changes)", sport=sport)
-    #     return
+    # 1. Check for updates first
+    if not await self._check_for_updates(sport):
+        logger.info("Skipping full refresh (no changes)", sport=sport)
+        return
     
-        logger.info("Forcing full refresh (optimization disabled)", sport=sport)
-
         sport_start = datetime.now(timezone.utc)
         
         logger.info("=== STARTING SPORT PROCESSING (Active Update) ===", sport=sport, worker_running=self._running)
@@ -396,9 +394,10 @@ class V6BackgroundWorker:
         # Using the one from start allows for race conditions if it changed again during fetch.
         # Safer to just get a fresh snapshot hash or trust the trigger?
         # Let's re-fetch the snapshot hash quickly to stamp it current.
-        # final_snapshot = await self.odds_engine.get_signal_snapshot(sport)
-        # if final_snapshot.get("hash"):
-        #      await self.cache_manager.set_hash(sport, final_snapshot.get("hash"))
+        # Let's re-fetch the snapshot hash quickly to stamp it current.
+        final_snapshot = await self.odds_engine.get_signal_snapshot(sport)
+        if final_snapshot.get("hash"):
+             await self.cache_manager.set_hash(sport, final_snapshot.get("hash"))
 
         sport_time = (datetime.now(timezone.utc) - sport_start).total_seconds()
         self.metrics.timing("sport_processing_time", sport_time, tags={"sport": sport})

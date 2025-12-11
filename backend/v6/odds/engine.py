@@ -225,6 +225,21 @@ class OddsEngine:
             })
         return books
 
+    async def get_signal_snapshot(self, sport: str) -> Dict[str, Any]:
+        """
+        Get a lightweight snapshot to check for updates.
+        Currently uses a time-based hash (30s window) as we lack a global ETag from providers.
+        """
+        import time
+        import hashlib
+        
+        # Change hash every 30 seconds to allow updates but prevent excessive polling
+        period = int(time.time() / 30)
+        s = f"{sport}:{period}"
+        h = hashlib.md5(s.encode()).hexdigest()
+        
+        return {"hash": h, "timestamp": time.time()}
+
     async def health_check(self) -> Dict[str, Any]:
         """Check health of all connected sportsbooks."""
         results = {}
