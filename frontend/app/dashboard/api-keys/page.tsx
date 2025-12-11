@@ -17,11 +17,11 @@ const DEMO_KEY = 'kr_YOUR_API_KEY';
 interface ApiKey {
   id: string;
   name: string;
-  keyPreview: string;
-  keyType: string;
+  key_prefix: string;
+  key_type: string;
   status: string;
-  createdAt: string;
-  lastUsedAt: string | null;
+  created_at: string;
+  last_used_at: string | null;
 }
 
 const keyTypeColors: Record<string, string> = {
@@ -113,6 +113,10 @@ export default function ApiKeysPage() {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          name: 'My API Key',
+          key_type: 'live',
+        }),
       });
 
       if (!res.ok) {
@@ -120,9 +124,9 @@ export default function ApiKeysPage() {
       }
 
       const data = await res.json();
-      // Expected response: { key_id, key_secret, ... }
-      if (data.key_secret) {
-        setNewKeySecret(data.key_secret);
+      // Expected response: { plain_key, ... }
+      if (data.plain_key) {
+        setNewKeySecret(data.plain_key);
         fetchKeys(); // Refresh list
       } else {
         throw new Error("Invalid response from server");
@@ -136,7 +140,7 @@ export default function ApiKeysPage() {
   };
 
   // Determine what key to show in code snippets
-  const currentDisplayKey = newKeySecret || (keys.length > 0 ? keys[0].keyPreview : DEMO_KEY);
+  const currentDisplayKey = newKeySecret || (keys.length > 0 ? keys[0].key_prefix : DEMO_KEY);
   const isDemo = !newKeySecret && keys.length === 0;
 
   const codeExamples: Record<LanguageTab, string> = {
@@ -315,20 +319,20 @@ console.log(data);`,
                         {key.status || 'ACTIVE'}
                       </span>
                       <span
-                        className={`text-xs font-bold ${keyTypeColors[key.keyType] || 'text-[#635F69]'
+                        className={`text-xs font-bold ${keyTypeColors[key.key_type] || 'text-[#635F69]'
                           }`}
                       >
-                        {key.keyType}
+                        {key.key_type}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <code className="px-3 py-1.5 rounded-lg bg-[#1e1e2e] text-[#A78BFA] text-sm font-mono">
-                        {key.keyPreview}
+                        {key.key_prefix}
                       </code>
                     </div>
                     <div className="flex flex-wrap gap-4 mt-2 text-xs text-[#635F69]">
-                      <span>Created: {formatDate(key.createdAt)}</span>
-                      {key.lastUsedAt && <span>Last used: {formatDate(key.lastUsedAt)}</span>}
+                      <span>Created: {formatDate(key.created_at)}</span>
+                      {key.last_used_at && <span>Last used: {formatDate(key.last_used_at)}</span>}
                     </div>
                   </div>
                 </div>
