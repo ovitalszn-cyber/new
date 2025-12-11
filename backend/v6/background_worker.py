@@ -574,19 +574,34 @@ class V6BackgroundWorker:
                 ev_props = source_info.get("props", [])
                 if ev_props:
                     for prop in ev_props:
+                        # Skip EV props without valid team data
+                        home_team = prop.get("home_team")
+                        away_team = prop.get("away_team")
+                        
+                        # Only include EV props if they have valid team information
+                        if not home_team or not away_team or home_team == "Unknown" or away_team == "Unknown":
+                            logger.debug(
+                                "Skipping EV prop without valid team data",
+                                source=source_name,
+                                player=prop.get("player_name"),
+                                home_team=home_team,
+                                away_team=away_team
+                            )
+                            continue
+                        
                         # Use event_id as game_id for EV props
                         game_id = prop.get("event_id") or prop.get("game_id")
                         if not game_id:
-                            # Create fallback game ID
-                            game_id = f"ev_{source_name}_{prop.get('player_name', 'unknown')}"
+                            # Create fallback game ID from teams
+                            game_id = f"{home_team}_{away_team}_{prop.get('game_start', '')}"
                         
                         if game_id not in game_groups:
                             # Create game group for EV-only games
                             game_groups[game_id] = {
                                 "game_info": {
                                     "game_id": game_id,
-                                    "home_team": prop.get("home_team", "Unknown"),
-                                    "away_team": prop.get("away_team", "Unknown"),
+                                    "home_team": home_team,
+                                    "away_team": away_team,
                                     "start_time": prop.get("game_start", ""),
                                 },
                                 "odds_by_book": {},
@@ -597,6 +612,7 @@ class V6BackgroundWorker:
                         if source_name not in game_groups[game_id]["props_by_book"]:
                             game_groups[game_id]["props_by_book"][source_name] = []
                         game_groups[game_id]["props_by_book"][source_name].append(prop)
+
         
         logger.info("Grouped data by game", 
                    total_games=len(game_groups),
