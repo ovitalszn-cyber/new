@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
+import AuthGuard from '@/components/AuthGuard';
 
 const mockStats = {
   totalRequests: 12932,
@@ -41,63 +42,65 @@ const stats = mockStats;
 
 export default function DashboardPage() {
   return (
-    <DashboardLayout>
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900">Welcome to your KashRock dashboard</h1>
-        <p className="mt-2 text-lg text-gray-600">Get started with our API and explore its features.</p>
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900">Stats</h2>
-          <div className="mt-4 flex justify-between">
-            <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-              <h3 className="text-lg font-bold text-gray-900">Total Requests</h3>
-              <p className="text-lg text-gray-600">{stats.totalRequests}</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-              <h3 className="text-lg font-bold text-gray-900">Active Keys</h3>
-              <p className="text-lg text-gray-600">{stats.activeKeys}</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-              <h3 className="text-lg font-bold text-gray-900">Tier</h3>
-              <p className="text-lg text-gray-600">{stats.tier}</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
-              <h3 className="text-lg font-bold text-gray-900">Requests Remaining</h3>
-              <p className="text-lg text-gray-600">{stats.requestsRemaining}</p>
+    <AuthGuard>
+      <DashboardLayout>
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-gray-900">Welcome to your KashRock dashboard</h1>
+          <p className="mt-2 text-lg text-gray-600">Get started with our API and explore its features.</p>
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-gray-900">Stats</h2>
+            <div className="mt-4 flex justify-between">
+              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
+                <h3 className="text-lg font-bold text-gray-900">Total Requests</h3>
+                <p className="text-lg text-gray-600">{stats.totalRequests}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
+                <h3 className="text-lg font-bold text-gray-900">Active Keys</h3>
+                <p className="text-lg text-gray-600">{stats.activeKeys}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
+                <h3 className="text-lg font-bold text-gray-900">Tier</h3>
+                <p className="text-lg text-gray-600">{stats.tier}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow-md p-4 w-1/2">
+                <h3 className="text-lg font-bold text-gray-900">Requests Remaining</h3>
+                <p className="text-lg text-gray-600">{stats.requestsRemaining}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900">Quick Actions</h2>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {quickActions.map((action, index) => (
-              <Link key={index} href={action.href}>
-                <div className={`bg-gradient-to-r ${action.color} rounded-lg shadow-md p-4`}>
-                  <div className="flex items-center">
-                    {action.icon}
-                    <h3 className="text-lg font-bold text-white ml-4">{action.title}</h3>
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-gray-900">Quick Actions</h2>
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {quickActions.map((action, index) => (
+                <Link key={index} href={action.href}>
+                  <div className={`bg-gradient-to-r ${action.color} rounded-lg shadow-md p-4`}>
+                    <div className="flex items-center">
+                      {action.icon}
+                      <h3 className="text-lg font-bold text-white ml-4">{action.title}</h3>
+                    </div>
+                    <p className="text-lg text-white mt-2">{action.description}</p>
                   </div>
-                  <p className="text-lg text-white mt-2">{action.description}</p>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-gray-900">Getting Started</h2>
+            <div className="mt-4">
+              <p className="text-lg text-gray-600">1. Read our documentation to learn how to integrate our API.</p>
+              <p className="text-lg text-gray-600">2. Generate an API key to start making requests.</p>
+              <p className="text-lg text-gray-600">3. Explore our API endpoints to discover its features.</p>
+            </div>
+          </div>
+          <div className="mt-8">
+            <Link href="/docs">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                View Documentation
+              </button>
+            </Link>
           </div>
         </div>
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-900">Getting Started</h2>
-          <div className="mt-4">
-            <p className="text-lg text-gray-600">1. Read our documentation to learn how to integrate our API.</p>
-            <p className="text-lg text-gray-600">2. Generate an API key to start making requests.</p>
-            <p className="text-lg text-gray-600">3. Explore our API endpoints to discover its features.</p>
-          </div>
-        </div>
-        <div className="mt-8">
-          <Link href="/docs">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              View Documentation
-            </button>
-          </Link>
-        </div>
-      </div>
-    </DashboardLayout>
+      </DashboardLayout>
+    </AuthGuard>
   );
 }
