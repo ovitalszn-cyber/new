@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "description": "Default canonical mappings for v5 pipeline",
+  "sport_mappings": {
+    "basketball_nba": "basketball_nba",
+    "nba": "basketball_nba",
+    "americanfootball_nfl": "americanfootball_nfl",
+    "nfl": "americanfootball_nfl",
+    "baseball_mlb": "baseball_mlb",
+    "mlb": "baseball_mlb",
+    "icehockey_nhl": "icehockey_nhl",
+    "nhl": "icehockey_nhl",
+    "basketball_wnba": "basketball_wnba",
+    "wnba": "basketball_wnba",
+    "basketball_ncaa": "basketball_ncaa",
+    "ncaab": "basketball_ncaa",
+    "americanfootball_ncaaf": "americanfootball_ncaaf",
+    "cfb": "americanfootball_ncaaf",
+    "ncaaf": "americanfootball_ncaaf"
+  },
+  "market_mappings": {
+    "h2h": "h2h",
+    "moneyline": "h2h",
+    "spreads": "spreads",
+    "spread": "spreads",
+    "totals": "totals",
+    "total": "totals",
+    "over_under": "totals",
+    "player_props": "player_props",
+    "player_points": "player_props",
+    "player_rebounds": "player_props",
+    "player_assists": "player_props",
+    "player_pass_yards": "player_props",
+    "player_rush_yards": "player_props",
+    "player_receiving_yards": "player_props"
+  }
+}
+
+
+
+

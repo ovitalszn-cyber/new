@@ -1,0 +1,36 @@
+LunoSoft (Book Ids)
+2 Bodog
+3 BetCRIS
+5 BookMaker
+7 Bovada
+13 William Hill
+17 bwin
+20 Sportsbet
+28 Caesars
+83 DraftKings
+85 BetRivers
+86 PointsBet
+87 BetMGM
+88 Unibet
+89 FanDuel
+91 888sport
+93 Bally Bet
+94 Hard Rock
+97 Sporttrade
+98 BET99
+101 Betano
+106 BetOpenly
+107 betPARX
+110 Betsafe
+113 Borgata
+118 ESPN BET
+119 Fanatics
+122 Ladbrokes
+125 partypoker
+130 Prophet X
+135 SugarHouse
+139 theScore
+141 TwinSpires
+147 Novig
+
+Walter

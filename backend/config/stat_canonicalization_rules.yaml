@@ -1,0 +1,712 @@
+global_clean_patterns:
+  - "Total Player "
+  - "O/U "
+  - "Number of "
+  - "Player "
+  - "Player Props - "
+  - "Alt "
+  - "Alternate "
+  - "Over/Under "
+  - "Total - "
+  - "Total Points - "
+  - "Total Rebounds - "
+  - "Total Assists - "
+  - "Total Goals - "
+  - "Total Shots - "
+  - "Total Bases - "
+  - "Total Runs - "
+  - "Total Hits - "
+  - "Total RBIs - "
+  - "Total Saves - "
+  - "Total Shots on Goal - "
+  - "Total Shots On Goal - "
+  - "Total Shots On Target - "
+  - "Total Passes - "
+  - "Total Tackles - "
+  - "Total Interceptions - "
+  - "Total Completions - "
+  - "Total Attempts - "
+  - "Total Passing Yards - "
+  - "Total Rushing Yards - "
+  - "Total Receiving Yards - "
+  - "Total Receptions - "
+  - "Total Strikeouts - "
+  - "Total Pitcher Outs - "
+  - "Total Outs Recorded - "
+  - "(inc. OT) "
+  - " (Inc. OT)"
+  - " (incl. OT)"
+  - " (Incl. OT)"
+  - " (Regular Time Only)"
+
+NBA:
+  clean_patterns:
+    - "overall "
+    - "per game "
+    - "(inc. OT) "
+  canonical_stats:
+    NBA_POINTS_REBOUNDS_ASSISTS:
+      patterns:
+        - "pra"
+        - "points+rebounds+assists"
+        - "pts+rebs+asts"
+        - "points rebounds assists"
+        - "points, rebounds & assists"
+    NBA_POINTS_REBOUNDS:
+      patterns:
+        - "points+rebounds"
+        - "pts+rebs"
+        - "points rebounds"
+    NBA_POINTS_ASSISTS:
+      patterns:
+        - "points+assists"
+        - "pts+asts"
+        - "points assists"
+    NBA_REBOUNDS_ASSISTS:
+      patterns:
+        - "rebounds+assists"
+        - "rebs+asts"
+        - "rebounds assists"
+    NBA_REBOUNDS_BLOCKS:
+      patterns:
+        - "rebounds+blocks"
+        - "rebs+blks"
+        - "rebounds & blocks"
+    NBA_REBOUNDS:
+      patterns:
+        - "rebounds"
+        - "rebs"
+        - "total rebounds"
+        - "reb"
+    NBA_ASSISTS:
+      patterns:
+        - "assists"
+        - "asts"
+        - "ast"
+    NBA_STEALS_BLOCKS:
+      patterns:
+        - "steals+blocks"
+        - "stl+blk"
+        - "stocks"
+        - "steals & blocks"
+    NBA_STEALS:
+      patterns:
+        - "steals"
+        - "stl"
+        - "stls"
+    NBA_BLOCKS:
+      patterns:
+        - "blocks"
+        - "blk"
+        - "blks"
+    NBA_BLOCKED_SHOTS:
+      patterns:
+        - "blocked shots"
+        - "blocks"
+        - "blks"
+    NBA_THREE_POINTERS_MADE:
+      patterns:
+        - "3pt made"
+        - "3-pointers made"
+        - "three pointers made"
+        - "three_pointers_made"
+        - "re:3\\s?pm"
+        - "re:3\\s?pt made"
+        - "3ptm"
+        - "3 point field goals"
+        - "3-pt made"
+        - "3pt fg made"
+        - "3 point fg made"
+        - "3 point fg"
+        - "3-point fg"
+        - "3 point made"
+        - r"\w+ \(3 Point FG\)"
+        - "made threes"
+        - "made 3s"
+        - "threes"
+    NBA_FREE_THROWS_MADE:
+      patterns:
+        - "free throws made"
+        - "ft made"
+        - "free throws"
+    NBA_FREE_THROWS_ATTEMPTED:
+      patterns:
+        - "free throws attempted"
+        - "fta"
+        - "ft attempted"
+    NBA_FREE_THROWS:
+      patterns:
+        - "free throws"
+        - "fts"
+    NBA_FREE_THROWS_FIRST_HALF:
+      patterns:
+        - "1st half ft"
+        - "first half ft"
+    NBA_FIELD_GOALS_MADE:
+      patterns:
+        - "field goals made"
+        - "fg made"
+        - "fgm"
+    NBA_FANTASY_SCORE:
+      patterns:
+        - "fantasy score"
+        - "fantasy points"
+        - "fantasy"
+    NBA_THREE_POINTERS_ATTEMPTED:
+      patterns:
+        - "3pt attempted"
+        - "3pt attempts"
+        - "3 pointers attempted"
+        - "3 pointer attempts"
+        - "3-pt attempted"
+        - "3-pt attempts"
+        - "three pointers attempted"
+        - "three pointer attempts"
+        - "3pta"
+        - "3s attempted"
+        - "3s attempts"
+    NBA_FIELD_GOALS_ATTEMPTED:
+      patterns:
+        - "fg attempted"
+        - "fg attempts"
+        - "fg att"
+        - "fgs attempted"
+        - "field goals attempted"
+        - "field goal attempts"
+    NBA_TWO_POINTERS_MADE:
+      patterns:
+        - "two pointers made"
+        - "two pointer made"
+        - "2pt made"
+        - "2pt makes"
+    NBA_TWO_POINTERS_ATTEMPTED:
+      patterns:
+        - "two pointers attempted"
+        - "two pointer attempts"
+        - "2pt attempted"
+        - "2pt attempts"
+    NBA_TURNOVERS:
+      patterns:
+        - "turnovers"
+        - "tos"
+        - "to "
+    NBA_PERSONAL_FOULS:
+      patterns:
+        - "personal fouls"
+        - "fouls"
+        - "pf"
+    NBA_POINTS_FIRST_QUARTER:
+      patterns:
+        - "1q points"
+        - "first quarter points"
+    NBA_POINTS_FIRST_FIVE_MINUTES:
+      patterns:
+        - "points - 1st 5 minutes"
+        - "1st 5 mins points"
+    NBA_POINTS_FIRST_THREE_MINUTES:
+      patterns:
+        - "points - 1st 3 minutes"
+        - "pts - 1st 3 mins"
+        - "1st 3 mins points"
+    NBA_POINTS:
+      patterns:
+        - "re:pts(?!\\+|\\s*-\\s*\\d)"
+        - "re:points(?!\\+)"
+        - "points scored"
+        - "scoring"
+        - "player points"
+    NBA_DOUBLE_DOUBLE:
+      patterns:
+        - "double double"
+        - "double-double"
+        - "double_double"
+        - "double+double"
+    NBA_TRIPLE_DOUBLE:
+      patterns:
+        - "triple double"
+        - "triple-double"
+        - "TRIPLE_DOUBLE"
+        - "triple_double"
+        - "triple+double"
+    NBA_MINUTES_PLAYED:
+      patterns:
+        - "minutes played"
+        - "mins played"
+    NBA_FIRST_BASKET:
+      patterns:
+        - "first basket"
+        - "FIRST_BASKET"
+        - "first_basket"
+        - "to score first basket"
+        - "player to score first"
+    NBA_TRIPLE_DOUBLE_PLAYER:
+      patterns:
+        - r"\w+ \(Triple\+Double\)"  # Player (Triple+Double)
+        - r"\w+ \(Triple Double\)"   # Player (Triple Double)
+    NBA_PRA_FIRST_HALF:
+      patterns:
+        - "1h points+rebounds+assists"
+        - "1st half pra"
+        - "first half pra"
+        - "1st half points+rebounds+assists"
+    NBA_PRA_SECOND_HALF:
+      patterns:
+        - "2h points+rebounds+assists"
+        - "2nd half pra"
+        - "second half pra"
+        - "2nd half points+rebounds+assists"
+    NBA_POINTS_FIRST_HALF:
+      patterns:
+        - "1st half points"
+        - "first half points"
+        - "1h points"
+    NBA_POINTS_SECOND_HALF:
+      patterns:
+        - "2nd half points"
+        - "second half points"
+        - "2h points"
+    NBA_DUNKS:
+      patterns:
+        - "dunks"
+        - "dunk"
+        - "slams"
+
+NFL:
+  clean_patterns:
+    - "player "
+  canonical_stats:
+    NFL_PASSING_YARDS_1ST_QUARTER:
+      patterns:
+        - "re:1st (qtr|quarter).*passing ya?rds?"
+        - "re:passing ya?rds?.*1st (qtr|quarter)"
+    NFL_PASSING_YARDS_2ND_QUARTER:
+      patterns:
+        - "re:2nd (qtr|quarter).*passing ya?rds?"
+        - "re:passing ya?rds?.*2nd (qtr|quarter)"
+    NFL_PASSING_YARDS_3RD_QUARTER:
+      patterns:
+        - "re:3rd (qtr|quarter).*passing ya?rds?"
+        - "re:passing ya?rds?.*3rd (qtr|quarter)"
+    NFL_PASSING_YARDS_4TH_QUARTER:
+      patterns:
+        - "re:4th (qtr|quarter).*passing ya?rds?"
+        - "re:passing ya?rds?.*4th (qtr|quarter)"
+    NFL_PASSING_YARDS_1ST_HALF:
+      patterns:
+        - "re:1st half.*passing ya?rds?"
+        - "re:passing ya?rds?.*1st half"
+
+    NFL_RUSHING_YARDS_1ST_QUARTER:
+      patterns:
+        - "re:1st (qtr|quarter).*rushing ya?rds?"
+        - "re:rushing ya?rds?.*1st (qtr|quarter)"
+    NFL_RUSHING_YARDS_2ND_QUARTER:
+      patterns:
+        - "re:2nd (qtr|quarter).*rushing ya?rds?"
+        - "re:rushing ya?rds?.*2nd (qtr|quarter)"
+    NFL_RUSHING_YARDS_3RD_QUARTER:
+      patterns:
+        - "re:3rd (qtr|quarter).*rushing ya?rds?"
+        - "re:rushing ya?rds?.*3rd (qtr|quarter)"
+    NFL_RUSHING_YARDS_4TH_QUARTER:
+      patterns:
+        - "re:4th (qtr|quarter).*rushing ya?rds?"
+        - "re:rushing ya?rds?.*4th (qtr|quarter)"
+    NFL_RUSHING_YARDS_1ST_HALF:
+      patterns:
+        - "re:1st half.*rushing ya?rds?"
+        - "re:rushing ya?rds?.*1st half"
+
+    NFL_RECEIVING_YARDS_1ST_QUARTER:
+      patterns:
+        - "re:1st (qtr|quarter).*receiving ya?rds?"
+        - "re:receiving ya?rds?.*1st (qtr|quarter)"
+    NFL_RECEIVING_YARDS_2ND_QUARTER:
+      patterns:
+        - "re:2nd (qtr|quarter).*receiving ya?rds?"
+        - "re:receiving ya?rds?.*2nd (qtr|quarter)"
+    NFL_RECEIVING_YARDS_3RD_QUARTER:
+      patterns:
+        - "re:3rd (qtr|quarter).*receiving ya?rds?"
+        - "re:receiving ya?rds?.*3rd (qtr|quarter)"
+    NFL_RECEIVING_YARDS_4TH_QUARTER:
+      patterns:
+        - "re:4th (qtr|quarter).*receiving ya?rds?"
+        - "re:receiving ya?rds?.*4th (qtr|quarter)"
+    NFL_RECEIVING_YARDS_1ST_HALF:
+      patterns:
+        - "re:1st half.*receiving ya?rds?"
+        - "re:receiving ya?rds?.*1st half"
+
+    NFL_PASSING_YARDS:
+      patterns:
+        - "passing yards"
+        - "passing_yards"
+        - "pass yds"
+        - "pass yards"
+        - "passyds"
+        - "re:alt passing ya?rds?"
+    NFL_PASSING_TOUCHDOWNS:
+      patterns:
+        - "passing touchdowns"
+        - "pass tds"
+        - "pass td"
+        - "passing td"
+    NFL_PASSING_COMPLETIONS:
+      patterns:
+        - "pass completions"
+        - "completions"
+    NFL_PASSING_ATTEMPTS:
+      patterns:
+        - "pass attempts"
+        - "attempts"
+        - "pass atts"
+    NFL_INTERCEPTIONS_THROWN:
+      patterns:
+        - "interceptions thrown"
+        - "interceptions"
+        - "ints thrown"
+        - "passing int"
+        - "passing ints"
+    NFL_RUSHING_YARDS:
+      patterns:
+        - "rushing yards"
+        - "rushing_yards"
+        - "rush yds"
+        - "rush yards"
+        - "rushing yds"
+        - "re:alt rushing ya?rds?"
+    NFL_RUSHING_ATTEMPTS:
+      patterns:
+        - "rushing attempts"
+        - "carries"
+        - "rush attempts"
+    NFL_RUSHING_TOUCHDOWNS:
+      patterns:
+        - "rushing touchdowns"
+        - "rush tds"
+        - "rushing td"
+    NFL_RECEIVING_YARDS:
+      patterns:
+        - "receiving yards"
+        - "receiving_yards"
+        - "rec yds"
+        - "rec yards"
+        - "receiving yds"
+        - "reception yds"
+        - "reception yards"
+        - "re:alt receiving ya?rds?"
+    NFL_LONGEST_RECEPTION:
+      patterns:
+        - "longest reception"
+        - "long reception"
+        - "longest rec"
+        - "receiving long"
+        - "rec long"
+        - "reception longest"
+        - "reception long"
+    NFL_RECEPTIONS:
+      patterns:
+        - "receptions"
+        - "reception"
+        - "catches"
+        - "re:alt receptions?"
+        - "re:\\d+\\+ receptions?"
+    NFL_RECEIVING_TOUCHDOWNS:
+      patterns:
+        - "receiving touchdowns"
+        - "rec tds"
+        - "receiving td"
+    NFL_FIELD_GOALS:
+      patterns:
+        - "field goals"
+        - "fgs"
+    NFL_RUSHING_RECEIVING_YARDS:
+      patterns:
+        - "rushing+receiving yards"
+        - "rush+rec yds"
+        - "rushing & receiving yards"
+    NFL_TACKLES_ASSISTS:
+      patterns:
+        - "tackles+assists"
+        - "combined tackles"
+        - "total tackles"
+    NFL_SACKS:
+      patterns:
+        - "sacks"
+        - "qb sacks"
+    NFL_FIELD_GOALS_MADE:
+      patterns:
+        - "field goals made"
+        - "fg made"
+        - "fgs made"
+    NFL_EXTRA_POINTS_MADE:
+      patterns:
+        - "extra point made"
+        - "extra points made"
+        - "xp made"
+        - "pat made"
+    NFL_KICKING_POINTS:
+      patterns:
+        - "kicking points"
+        - "kicker points"
+        - "total kicking points"
+    NFL_PASSING_RUSHING_YARDS:
+      patterns:
+        - "passing+rushing yards"
+        - "pass+rush yds"
+        - "passing & rushing yards"
+
+    NFL_TARGETS:
+      patterns:
+        - "targets"
+        - "1h targets"
+
+    NFL_FUMBLES_LOST:
+      patterns:
+        - "fumbles lost"
+
+    NFL_LONGEST_COMPLETION:
+      patterns:
+        - "longest completion"
+        - "long completion"
+
+    NFL_COMPLETION_PERCENTAGE:
+      patterns:
+        - "completion percentage"
+        - "comp pct"
+    NFL_LONGEST_RECEPTION:
+      patterns:
+        - "longest reception"
+        - "long reception"
+        - "longest rec"
+        - "receiving long"
+        - "rec long"
+        - "reception longest"
+        - "reception long"
+    NFL_LONGEST_RUSH:
+      patterns:
+        - "longest rush"
+        - "longest_rush"
+        - "long rush"
+        - "longest rushing"
+        - "rushing long"
+        - "rush long"
+        - "rush longest"
+    NFL_FIRST_RECEPTION:
+      patterns:
+        - "first reception"
+        - "1st reception"
+        - "to record a reception"
+    NFL_ANYTIME_TOUCHDOWN_SCORER:
+      patterns:
+        - "anytime touchdown scorer"
+        - "anytime td scorer"
+        - "anytime touchdown"
+        - "total touchdowns"
+        - "touchdowns"
+    NFL_FANTASY_SCORE:
+      patterns:
+        - "fantasy score"
+        - "fantasy points"
+        - "fantasy"
+    NFL_SOLO_TACKLES:
+      patterns:
+        - "solo tackles"
+        - "solo tackle"
+    NFL_ASSISTED_TACKLES:
+      patterns:
+        - "assisted tackles"
+        - "assisted tackle"
+    NFL_TOTAL_YARDS:
+      patterns:
+        - "total yards"
+        - "total ya?rds?"
+    NFL_FIRST_TOUCHDOWN_SCORER:
+      patterns:
+        - "first touchdown scorer"
+        - "first_touchdown_scorer"
+        - "1st touchdown scorer"
+    NFL_PASSING_RUSHING_YARDS:
+      patterns:
+        - "passing+rushing yards"
+        - "pass+rush yds"
+        - "passing & rushing yards"
+
+MLB:
+  clean_patterns:
+    - "batter "
+    - "pitcher "
+  canonical_stats:
+    MLB_HITS_RUNS_RBIS:
+      patterns:
+        - "hits+runs+rbis"
+        - "h+r+rbi"
+        - "hits runs rbis"
+    MLB_HITS:
+      patterns:
+        - "re:hits?(?!\\+)"
+        - "total hits"
+        - "hit"
+    MLB_HOME_RUNS:
+      patterns:
+        - "home runs"
+        - "re:^hr$"  # Only match standalone "hr", not as part of other words
+        - "re:^hrs$"
+        - "homers"
+    MLB_RUNS:
+      patterns:
+        - "runs"
+        - "runs scored"
+    MLB_RBIS:
+      patterns:
+        - "rbis"
+        - "rbi"
+        - "runs batted in"
+    MLB_TOTAL_BASES:
+      patterns:
+        - "total bases"
+        - "tb"
+    MLB_STOLEN_BASES:
+      patterns:
+        - "stolen bases"
+        - "sb"
+    MLB_WALKS:
+      patterns:
+        - "walks"
+        - "bb"
+        - "bases on balls"
+    MLB_STRIKEOUTS_PITCHER:
+      patterns:
+        - "pitcher strikeouts"
+        - "pitching strikeouts"
+        - "strikeouts pitched"
+        - "re:^strikeouts$"  # Only standalone "strikeouts"
+        - "k's"
+        - "re:^ks$"  # Only standalone "ks"
+    MLB_STRIKEOUTS_HITTER:
+      patterns:
+        - "batter strikeouts"
+        - "hitter strikeouts"
+        - "strikeouts as batter"
+        - "batter ks"
+    MLB_OUTS_RECORDED_PITCHER:
+      patterns:
+        - "outs recorded"
+        - "pitcher outs"
+    MLB_HITS_ALLOWED_PITCHER:
+      patterns:
+        - "hits allowed"
+        - "hits conceded"
+
+NHL:
+  clean_patterns:
+    - "player "
+  canonical_stats:
+    NHL_GOALS:
+      patterns:
+        - "goals"
+        - "goal scored"
+    NHL_ASSISTS:
+      patterns:
+        - "assists"
+        - "assist"
+    NHL_POINTS:
+      patterns:
+        - "points"
+        - "pts"
+        - "goals+assists"
+        - "g+a"
+    NHL_SHOTS_ON_GOAL:
+      patterns:
+        - "shots on goal"
+        - "sog"
+        - "re:shots?(?!\\s+on (target|goal))"
+    NHL_BLOCKED_SHOTS:
+      patterns:
+        - "blocked shots"
+        - "blocks"
+    NHL_POWER_PLAY_POINTS:
+      patterns:
+        - "power play points"
+        - "pp points"
+        - "ppp"
+    NHL_SAVES_GOALIE:
+      patterns:
+        - "saves"
+        - "goalie saves"
+    NHL_FACEOFFS_WON:
+      patterns:
+        - "faceoffs won"
+        - "faceoff wins"
+
+SOCCER:
+  clean_patterns:
+    - "player "
+    - "to score "
+  canonical_stats:
+    SOCCER_GOALS_ASSISTS:
+      patterns:
+        - "goals+assists"
+        - "g+a"
+        - "goals & assists"
+    SOCCER_GOALS:
+      patterns:
+        - "re:goals?(?!\\+)"
+        - "to score"
+        - "goal scored"
+    SOCCER_ASSISTS:
+      patterns:
+        - "re:assists?(?!\\+)"
+        - "assist"
+    SOCCER_SHOTS_ON_TARGET:
+      patterns:
+        - "shots on target"
+        - "sot"
+        - "shots on goal"
+        - "sogs"
+    SOCCER_SHOTS_ON_GOAL:
+      patterns:
+        - "shots on goal"
+        - "sog"
+    SOCCER_SHOTS:
+      patterns:
+        - "re:shots?(?!\\s+on goal)"
+    SOCCER_PASSES_COMPLETED:
+      patterns:
+        - "passes completed"
+        - "completed passes"
+    SOCCER_PASSES:
+      patterns:
+        - "passes"
+    SOCCER_TACKLES:
+      patterns:
+        - "tackles"
+    SOCCER_INTERCEPTIONS:
+      patterns:
+        - "interceptions"
+    SOCCER_CLEARANCES:
+      patterns:
+        - "clearances"
+    SOCCER_FOULS_COMMITTED:
+      patterns:
+        - "fouls committed"
+        - "fouls"
+    SOCCER_YELLOW_CARDS:
+      patterns:
+        - "yellow cards"
+        - "yellow card"
+        - "booked"
+    SOCCER_RED_CARDS:
+      patterns:
+        - "red cards"
+        - "red card"
+        - "sent off"
+    SOCCER_CARDS:
+      patterns:
+        - "cards"
+        - "bookings"
+    SOCCER_OFFSIDES:
+      patterns:
+        - "offsides"
+        - "offside"

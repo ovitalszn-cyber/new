@@ -1,0 +1,19 @@
+# Nixpacks configuration for Railway
+# Railway can use Nixpacks if Dockerfile isn't detected
+[phases.setup]
+nixPkgs = ["python311", "gcc", "g++", "libpq-dev"]
+
+[phases.install]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[start]
+cmd = "python scripts/run_prod.py"
+
+
+
+
+
+

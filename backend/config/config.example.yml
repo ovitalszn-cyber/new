@@ -1,0 +1,122 @@
+# KashRock Data Stream Configuration Example
+# Copy this file to config.yml and modify as needed
+
+# Service Configuration
+app:
+  name: "KashRock Data Stream"
+  version: "0.1.0"
+  debug: false
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1
+
+# Database Configuration
+database:
+  url: "postgresql+asyncpg://user:password@localhost/kashrock_stream"
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+
+# Redis Configuration
+redis:
+  url: "redis://localhost:6379/0"
+  pool_size: 10
+  decode_responses: true
+
+# External API Keys
+api_keys:
+  odds_api: "your-odds-api-key-here"
+  espn_api: "your-espn-api-key-here"
+  thesportsdb_api: "your-thesportsdb-api-key-here"
+
+# Streaming Configuration
+streaming:
+  batch_size: 100
+  interval: 1.0  # seconds
+  max_connections: 1000
+  retry_attempts: 3
+  retry_delay: 5  # seconds
+
+# Data Sources
+sources:
+  odds_api:
+    enabled: true
+    base_url: "https://api.the-odds-api.com/v4"
+    api_key: "${api_keys.odds_api}"
+    sports: ["americanfootball_nfl", "basketball_nba", "baseball_mlb"]
+    markets: ["h2h", "spreads", "totals"]
+    interval: 30  # seconds
+  
+  espn:
+    enabled: true
+    base_url: "https://site.api.espn.com/apis/site/v2"
+    sports: ["football", "basketball", "baseball"]
+    interval: 15  # seconds
+  
+  thesportsdb:
+    enabled: true
+    base_url: "https://www.thesportsdb.com/api/v1/json"
+    api_key: "${api_keys.thesportsdb_api}"
+    sports: ["American_Football", "Basketball", "Baseball"]
+    interval: 60  # seconds
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "json"  # json, text
+  file: "logs/kashrock-data-stream.log"
+  max_size: "100MB"
+  backup_count: 5
+
+# Security Configuration
+security:
+  secret_key: "your-secret-key-here-change-in-production"
+  access_token_expire_minutes: 30
+  cors_origins: ["*"]  # Configure appropriately for production
+  trusted_hosts: ["*"]  # Configure appropriately for production
+
+# Monitoring Configuration
+monitoring:
+  enable_metrics: true
+  metrics_port: 9090
+  health_check_interval: 30  # seconds
+  alert_thresholds:
+    error_rate: 0.1  # 10% error rate threshold
+    response_time: 5.0  # 5 second response time threshold
+
+# WebSocket Configuration
+websocket:
+  max_connections: 1000
+  ping_interval: 30  # seconds
+  pong_timeout: 10  # seconds
+  close_timeout: 10  # seconds
+
+# Data Processing
+processing:
+  enable_cache: true
+  cache_ttl: 300  # seconds
+  batch_processing: true
+  batch_size: 100
+  parallel_workers: 4
+
+# Notification Configuration
+notifications:
+  discord:
+    enabled: true
+    webhook_url: "your-discord-webhook-url-here"
+    channel: "kashrock-alerts"
+  
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: "your-email@gmail.com"
+    password: "your-app-password"
+    recipients: ["admin@kashrock.com"]
+
+# Development Configuration
+development:
+  auto_reload: false
+  debug_toolbar: false
+  profile_queries: false
+  log_sql: false

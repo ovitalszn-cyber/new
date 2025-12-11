@@ -1,0 +1,1 @@
+curl -H 'accept: application/json' -H 'content-type: application/json' -H 'user-agent: Action-AppStore/57060 CFNetwork/901.1 Darwin/17.6.0' -H 'priority: u=3, i' -H 'accept-language: en-US,en;q=0.9' --compressed 'https://api.actionnetwork.com/mobile/v2/games/256747/markets?bookIds=15,79&propTypeIds=2'

@@ -1,0 +1,1 @@
+curl -H 'accept: */*' -H 'user-agent: FlapScore/3 CFNetwork/3860.300.21 Darwin/25.2.0' -H 'priority: u=3, i' -H 'accept-language: en-US,en;q=0.9' --compressed 'https://api-app.flapscore.com/api/dota2/matches/c?date=2025-12-03&tier=all&timezoneOffset=-05%3A00'

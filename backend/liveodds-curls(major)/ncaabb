@@ -1,0 +1,1 @@
+curl -H 'accept: */*' -H 'user-agent: Live%20Scores%20&%20Odds/204 CFNetwork/3860.300.21 Darwin/25.2.0' -H 'priority: u=3' -H 'accept-language: en-US,en;q=0.9' --compressed 'https://www.lunosoftware.com/sportsData/SportsDataService.svc/gamesOddsForDateWeek/5?date=12/4/2025&conferenceID=-1&sportsbookIDList=1,2,5,7,8,13,21,28,83,87,89,94'

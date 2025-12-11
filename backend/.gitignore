@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+data/*.db
+kashrock_historical.db
+*.log
+.DS_Store
+new-frontend/node_modules/
+new-frontend/.next/
+frontend/node_modules/
+frontend/.next/
+.vscode/
