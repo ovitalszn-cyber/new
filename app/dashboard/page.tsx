@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import DashboardLayout from '@/components/DashboardLayout';
 import AuthGuard from '@/components/AuthGuard';
 
@@ -40,6 +41,7 @@ const quickActions = [
 ];
 
 export default function DashboardPage() {
+  const { data: session } = useSession();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -47,23 +49,23 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = localStorage.getItem('kashrock_dashboard_session');
-        if (!token) return; // AuthGuard handles redirect
+        if (!session) return; // AuthGuard handles redirect
+
+        // @ts-ignore
+        const token = session.id_token || session.accessToken;
 
         // Fetch usage stats
-        const usageRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/usage`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        const headers = token ? {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        } : { 'Content-Type': 'application/json' };
+
+        const usageRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/usage`, { headers });
 
         // Fetch keys count
         let activeKeysCount = 0;
         try {
-          const keysRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/api-keys`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-          });
+          const keysRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/api-keys`, { headers });
           if (keysRes.ok) {
             const keysData = await keysRes.json();
             const keysList = Array.isArray(keysData) ? keysData : (keysData.keys || []);
@@ -82,7 +84,6 @@ export default function DashboardPage() {
             requestsRemaining: usageData.remaining || 0,
           });
         } else {
-          // Fallback if usage endpoint is not ready
           console.warn("Usage fetch failed", usageRes.status);
           setStats({
             totalRequests: 0,
@@ -99,8 +100,10 @@ export default function DashboardPage() {
       }
     };
 
-    fetchStats();
-  }, []);
+    if (session) {
+      fetchStats();
+    }
+  }, [session]);
 
   return (
     <AuthGuard>

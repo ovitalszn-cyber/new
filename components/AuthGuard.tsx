@@ -1,36 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface AuthGuardProps {
     children: React.ReactNode;
 }
 
 export default function AuthGuard({ children }: AuthGuardProps) {
+    const { data: session, status } = useSession();
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const checkAuth = () => {
-            if (typeof window !== 'undefined') {
-                const session = localStorage.getItem('kashrock_dashboard_session');
+        if (status === 'loading') return;
 
-                if (!session) {
-                    router.push('/login');
-                    return;
-                }
+        if (!session) {
+            router.push('/login');
+        }
+    }, [session, status, router]);
 
-                setIsAuthenticated(true);
-                setIsLoading(false);
-            }
-        };
-
-        checkAuth();
-    }, [router]);
-
-    if (isLoading) {
+    if (status === 'loading') {
         return (
             <div className="min-h-screen bg-[#F4F1FA] flex items-center justify-center">
                 <div className="text-center">
@@ -46,7 +36,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
         );
     }
 
-    if (!isAuthenticated) {
+    if (!session) {
         return null;
     }
 

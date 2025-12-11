@@ -3,31 +3,27 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
-const API_BASE = process.env.NEXT_PUBLIC_PUBLIC_API_BASE || 'https://kashrock-production.up.railway.app';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function LoginPage() {
     const router = useRouter();
+    const { data: session } = useSession();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Check if already logged in
-        if (typeof window !== 'undefined') {
-            const session = localStorage.getItem('kashrock_dashboard_session');
-            if (session) {
-                router.push('/dashboard');
-            }
+        // Check if already logged in via NextAuth
+        if (session) {
+            router.push('/dashboard');
         }
-    }, [router]);
+    }, [session, router]);
 
     const handleGoogleLogin = async () => {
         setIsLoading(true);
         setError(null);
 
         try {
-            // Redirect to backend Google OAuth endpoint
-            window.location.href = `${API_BASE}/auth/google`;
+            await signIn('google', { callbackUrl: '/dashboard' });
         } catch (err) {
             console.error('Login error:', err);
             setError('Failed to initiate Google login. Please try again.');

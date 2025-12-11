@@ -4,6 +4,7 @@ import { useMemo, useState, useEffect } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
 import AuthGuard from '@/components/AuthGuard';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 type LanguageTab = 'bash' | 'python' | 'javascript';
 
@@ -37,6 +38,7 @@ const formatDate = (value?: string | null) => {
 
 export default function ApiKeysPage() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState<LanguageTab>('bash');
   const [copiedKey, setCopiedKey] = useState(false);
   const [copiedSnippet, setCopiedSnippet] = useState(false);
@@ -48,25 +50,17 @@ export default function ApiKeysPage() {
   const [newKeySecret, setNewKeySecret] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Load keys on mount
+  // Load keys on session change
   useEffect(() => {
-    fetchKeys();
-  }, []);
+    if (session) {
+      fetchKeys();
+    }
+  }, [session]);
 
   const getAuthToken = () => {
-    if (typeof window !== 'undefined') {
-      const session = window.localStorage.getItem('kashrock_dashboard_session');
-      try {
-        if (session && session.startsWith('{')) {
-          const parsed = JSON.parse(session);
-          return parsed.token || session;
-        }
-        return session;
-      } catch (e) {
-        return session;
-      }
-    }
-    return null;
+    if (!session) return null;
+    // @ts-ignore
+    return session.id_token || session.accessToken;
   };
 
   const fetchKeys = async () => {
@@ -76,11 +70,13 @@ export default function ApiKeysPage() {
       const token = getAuthToken();
       // Even if no token, try fetching. The backend will handle 401.
 
+      const headers = token ? {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      } : { 'Content-Type': 'application/json' };
+
       const res = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/api-keys`, {
-        headers: {
-          'Authorization': token ? `Bearer ${token}` : '',
-          'Content-Type': 'application/json',
-        },
+        headers,
       });
 
       if (!res.ok) {
@@ -264,8 +260,8 @@ console.log(data);`,
             <button
               onClick={handleCopyKey}
               className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${copiedKey
-                  ? 'bg-[#10B981] text-white'
-                  : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9]'
+                ? 'bg-[#10B981] text-white'
+                : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9]'
                 }`}
             >
               {copiedKey ? 'Copied!' : 'Copy key'}
@@ -357,8 +353,8 @@ console.log(data);`,
                   setCopiedSnippet(false);
                 }}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeTab === tab
-                    ? 'bg-[#7C3AED] text-white'
-                    : 'bg-[#EFEBF5] text-[#635F69] hover:text-[#7C3AED]'
+                  ? 'bg-[#7C3AED] text-white'
+                  : 'bg-[#EFEBF5] text-[#635F69] hover:text-[#7C3AED]'
                   }`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -373,8 +369,8 @@ console.log(data);`,
             <button
               onClick={handleCopySnippet}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${copiedSnippet
-                  ? 'bg-[#10B981] text-white'
-                  : 'bg-[#7C3AED]/20 text-[#A78BFA] hover:bg-[#7C3AED]/30'
+                ? 'bg-[#10B981] text-white'
+                : 'bg-[#7C3AED]/20 text-[#A78BFA] hover:bg-[#7C3AED]/30'
                 }`}
             >
               {copiedSnippet ? 'Snippet copied!' : 'Copy snippet'}
