@@ -139,14 +139,32 @@ class MarketNormalizer:
         if normalized in market_map:
             return market_map[normalized]
         
+        # Try converting spaces to underscores for lookup
+        normalized_snake = normalized.replace(" ", "_")
+        if normalized_snake in market_map:
+            return market_map[normalized_snake]
+
+        # Check for player props AFTER checking for known team markets
+        # This prevents "Total Touchdowns" (team) from being caught by "touchdowns" (player)
+        if "player" in normalized or normalized in self.player_prop_types:
+            return "player_props"
+        
         # Fallback to market_key
         if market_key:
             normalized_key = market_key.lower().strip()
-            if "player" in normalized_key or normalized_key in self.player_prop_types:
-                return "player_props"
             
+            # Try exact match first
             if normalized_key in market_map:
                 return market_map[normalized_key]
+                
+            # Try snake case
+            norm_key_snake = normalized_key.replace(" ", "_")
+            if norm_key_snake in market_map:
+                return market_map[norm_key_snake]
+                
+            # Check player props last
+            if "player" in normalized_key or normalized_key in self.player_prop_types:
+                return "player_props"
             
             # Take first part of underscore-separated keys
             first_part = normalized_key.split("_")[0]
