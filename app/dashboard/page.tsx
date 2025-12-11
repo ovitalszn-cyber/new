@@ -55,10 +55,12 @@ export default function DashboardPage() {
         const token = session.id_token || session.accessToken;
 
         // Fetch usage stats
-        const headers = token ? {
-          'Authorization': `Bearer ${token}`,
+        const headers: Record<string, string> = {
           'Content-Type': 'application/json',
-        } : { 'Content-Type': 'application/json' };
+        };
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
 
         const usageRes = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/usage`, { headers });
 

@@ -70,10 +70,12 @@ export default function ApiKeysPage() {
       const token = getAuthToken();
       // Even if no token, try fetching. The backend will handle 401.
 
-      const headers = token ? {
-        'Authorization': `Bearer ${token}`,
+      const headers: Record<string, string> = {
         'Content-Type': 'application/json',
-      } : { 'Content-Type': 'application/json' };
+      };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
 
       const res = await fetch(`${PUBLIC_API_BASE}/v1/dashboard/api-keys`, {
         headers,
