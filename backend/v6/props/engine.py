@@ -20,7 +20,7 @@ class PropsEngine:
     def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
         self.config = config or {}
         self.streamers: Dict[str, Any] = {}
-        self.max_concurrency = max(1, int(self.config.get("max_concurrency", 4)))
+        self.max_concurrency = max(1, int(self.config.get("max_concurrency", 32)))
         self._semaphore: Optional[asyncio.Semaphore] = None
         self.default_books: List[str] = list(LUNOSOFT_BOOK_STREAMERS.keys())
 

@@ -23,7 +23,7 @@ class OddsEngine:
     def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
         self.config = config or {}
         self.streamers: Dict[str, Any] = {}
-        self.max_concurrency = max(1, int(self.config.get("max_concurrency", 4)))
+        self.max_concurrency = max(1, int(self.config.get("max_concurrency", 32)))
         self._semaphore: Optional[asyncio.Semaphore] = None
 
     async def initialize(self, books: Optional[List[str]] = None) -> None:
