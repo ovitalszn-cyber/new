@@ -204,13 +204,27 @@ async def get_all_odds(
         description="Data source preference: cache (default) or live (fallback)",
     ),
 ):
+    """
+    Get main market odds only (no props).
+    This endpoint returns traditional odds from SharpAPI and Lunosoft books.
+    For player props, use the /v6/props endpoint instead.
+    """
     sport_key = _ensure_sport(sport)
     cache_manager = await _get_cache_manager()
 
     # 1) Always try the freshest final snapshot first
     snapshot = await cache_manager.get_sport_snapshot(sport_key)
     if snapshot:
+        # Filter out props from the snapshot - only return main markets
         books = snapshot.get("books") or {}
+        for book_key, book_data in books.items():
+            games = book_data.get("games", [])
+            for game in games:
+                # Remove props fields, keep only main markets
+                game.pop("props", None)
+                game.pop("book_props", None)
+                game.pop("book_has_props", None)
+        
         snapshot.setdefault("sport", sport_key)
         snapshot.setdefault("total_books", len(books))
         successful = snapshot.get("successful_books")
@@ -223,6 +237,11 @@ async def get_all_odds(
     # 2) Fallback to normalized stage (canonical events, markets merged)
     normalized_stage = await cache_manager.get_feed_stage(sport_key, "normalized")
     if normalized_stage:
+        # Filter out props from normalized stage too
+        events = normalized_stage.get("events", [])
+        for event in events:
+            event.pop("props", None)
+        
         normalized_stage["source"] = "normalized"
         normalized_stage.setdefault("fetched_at", datetime.now(timezone.utc).isoformat())
         return normalized_stage
@@ -230,6 +249,10 @@ async def get_all_odds(
     # 3) Fallback to raw scrape payload for instant access
     raw_stage = await cache_manager.get_feed_stage(sport_key, "raw")
     if raw_stage:
+        # Filter out props from raw stage
+        if "props" in raw_stage:
+            raw_stage.pop("props")
+        
         raw_stage["source"] = "raw"
         raw_stage.setdefault("fetched_at", datetime.now(timezone.utc).isoformat())
         return raw_stage
@@ -241,6 +264,7 @@ async def get_all_odds(
     result = await odds_engine.get_all_odds(sport_key)
     result["source"] = "live"
     return result
+
 
 
 @router.get("/props/{book_key}")
