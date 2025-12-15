@@ -77,6 +77,9 @@ export default function LandingPage() {
               <a href="https://kashrock-production.up.railway.app/docs#/" target="_blank" rel="noopener noreferrer" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
             </div>
             <div className="flex items-center gap-4">
+              <a href="/login" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">
+                Log in
+              </a>
               <a href="#pricing" className="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors">
                 Get API Key
               </a>
