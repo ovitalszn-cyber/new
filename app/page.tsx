@@ -32,22 +32,13 @@ export default function LandingPage() {
           .grid-bg { background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 40px 40px; }
           
           @keyframes marquee {
-              0% { transform: translateX(0%); }
-              100% { transform: translateX(-100%); }
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
           }
           .animate-marquee {
             display: flex;
-            animation: marquee 30s linear infinite;
-          }
-          @media (min-width: 1280px) {
-            .animate-marquee {
-              animation: marquee 40s linear infinite;
-            }
-          }
-          @media (min-width: 1536px) {
-            .animate-marquee {
-              animation: marquee 50s linear infinite;
-            }
+            width: max-content;
+            animation: marquee 25s linear infinite;
           }
           .animate-marquee:hover {
             animation-play-state: paused;
@@ -136,7 +127,7 @@ export default function LandingPage() {
         {/* Logo Marquee */}
         <section className="border-y border-white/5 bg-[#0A0B0C] py-10 relative overflow-hidden">
           <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(90deg, #0A0B0C 0%, transparent 10%, transparent 90%, #0A0B0C 100%)' }}></div>
-          <div className="animate-marquee">
+          <div className="animate-marquee" style={{ willChange: 'transform' }}>
             <div className="flex items-center gap-16 px-8 shrink-0 min-w-max">
               <img src="/logos/bet365.png" alt="bet365" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
               <img src="/logos/draftkings.png" alt="DraftKings" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
