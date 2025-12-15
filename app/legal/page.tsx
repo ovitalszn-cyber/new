@@ -2,10 +2,10 @@
 
 import Script from 'next/script';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function LegalPage() {
+function LegalContent() {
   const searchParams = useSearchParams();
   const [activePage, setActivePage] = useState<'privacy' | 'terms' | 'refunds'>('privacy');
 
@@ -306,5 +306,17 @@ export default function LegalPage() {
         </main>
       </div>
     </>
+  );
+}
+
+export default function LegalPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#08090A' }}>
+        <div className="text-zinc-500">Loading...</div>
+      </div>
+    }>
+      <LegalContent />
+    </Suspense>
   );
 }
