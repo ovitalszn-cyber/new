@@ -1,5 +1,112 @@
+import { supabase } from './supabase'
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY || '';
+const DEV_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.kashrock.com';
+
+// Authenticated API client for developer dashboard
+export async function apiClient<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  const { data: { session } } = await supabase.auth.getSession()
+  
+  if (!session?.access_token) {
+    throw new Error('Not authenticated')
+  }
+  
+  const response = await fetch(`${DEV_API_BASE}${endpoint}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.access_token}`,
+      ...options.headers,
+    },
+  })
+  
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: 'API request failed' }))
+    throw new Error(error.detail || 'API request failed')
+  }
+  
+  return response.json()
+}
+
+// API Key Management
+export async function createApiKey(name: string) {
+  return apiClient<{ key: string; id: string; name: string }>('/v1/dev/api-keys', {
+    method: 'POST',
+    body: JSON.stringify({ name })
+  })
+}
+
+export async function listApiKeys() {
+  return apiClient<{ keys: Array<{ id: string; name: string; prefix: string; created_at: string; last_used_at: string | null; is_active: boolean }> }>('/v1/dev/api-keys')
+}
+
+export async function revokeApiKey(keyId: string) {
+  return apiClient(`/v1/dev/api-keys/${keyId}/revoke`, { method: 'POST' })
+}
+
+// Usage & Analytics
+export async function getUsageSummary(range: '24h' | '7d' | '30d' = '7d') {
+  return apiClient<{
+    total_requests: number;
+    successful_requests: number;
+    failed_requests: number;
+    avg_latency_ms: number;
+    requests_by_endpoint: Record<string, number>;
+    requests_by_day: Array<{ date: string; count: number }>;
+  }>(`/v1/dev/usage/summary?range=${range}`)
+}
+
+// Billing
+export async function getBillingInfo() {
+  return apiClient<{
+    plan: string;
+    monthly_limit: number;
+    current_usage: number;
+    billing_cycle_end: string;
+    payment_method?: { last4: string; brand: string; exp_month: number; exp_year: number };
+  }>('/v1/dev/billing')
+}
+
+export async function getBillingHistory() {
+  return apiClient<{
+    invoices: Array<{ id: string; date: string; amount: number; status: string; pdf_url: string }>;
+  }>('/v1/dev/billing/history')
+}
+
+// Team Management
+export async function getTeamMembers() {
+  return apiClient<{
+    members: Array<{ id: string; email: string; name: string; role: string; avatar_url?: string; joined_at: string }>;
+  }>('/v1/dev/team')
+}
+
+export async function inviteTeamMember(email: string, role: 'admin' | 'viewer') {
+  return apiClient('/v1/dev/team/invite', {
+    method: 'POST',
+    body: JSON.stringify({ email, role })
+  })
+}
+
+// Request Logs
+export async function getRequestLogs(params: { limit?: number; offset?: number; status?: 'success' | 'error' } = {}) {
+  const searchParams = new URLSearchParams()
+  if (params.limit) searchParams.set('limit', params.limit.toString())
+  if (params.offset) searchParams.set('offset', params.offset.toString())
+  if (params.status) searchParams.set('status', params.status)
+  
+  return apiClient<{
+    logs: Array<{
+      id: string;
+      method: string;
+      endpoint: string;
+      status_code: number;
+      latency_ms: number;
+      timestamp: string;
+    }>;
+    total: number;
+  }>(`/v1/dev/logs?${searchParams.toString()}`)
+}
 
 export interface Filters {
   sports: string[];

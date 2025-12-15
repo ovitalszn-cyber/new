@@ -3,19 +3,51 @@
 import Script from 'next/script';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useSession, signOut } from 'next-auth/react';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
+import type { User } from '@supabase/supabase-js';
 import { usePathname } from 'next/navigation';
 
 export default function ConsoleLayout({ children }: { children: React.ReactNode }) {
-  const { data: session } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const userInitials = session?.user?.name
-    ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        setUser(session.user);
+      } else {
+        router.push('/login');
+      }
+      setLoading(false);
+    };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (!session?.user) {
+        router.push('/login');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router]);
+
+  const userInitials = user?.user_metadata?.full_name
+    ? user.user_metadata.full_name.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2)
     : 'U';
-  const userName = session?.user?.name || 'User';
-  const userEmail = session?.user?.email || '';
+  const userName = user?.user_metadata?.full_name || 'User';
+  const userEmail = user?.email || '';
+  const userImage = user?.user_metadata?.avatar_url;
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/');
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {
@@ -128,8 +160,8 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
               onClick={() => setProfileMenuOpen(!profileMenuOpen)}
               className="flex items-center gap-3 w-full p-2 hover:bg-white/[0.03] rounded-sm transition-colors text-left group"
             >
-              {session?.user?.image ? (
-                <img src={session.user.image} alt="" className="w-8 h-8 rounded-full border border-white/10" />
+              {userImage ? (
+                <img src={userImage} alt="" className="w-8 h-8 rounded-full border border-white/10" />
               ) : (
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-600 border border-white/10 flex items-center justify-center">
                   <span className="text-xs font-medium text-white">{userInitials}</span>
@@ -149,7 +181,7 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
                   <div className="text-xs text-zinc-500 truncate">{userEmail}</div>
                 </div>
                 <button
-                  onClick={() => signOut({ callbackUrl: '/' })}
+                  onClick={handleSignOut}
                   className="flex items-center gap-2 w-full px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
                 >
                   <i data-lucide="log-out" className="w-4 h-4"></i>
