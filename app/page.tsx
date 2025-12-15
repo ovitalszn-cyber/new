@@ -317,7 +317,7 @@ export default function LandingPage() {
                   <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Discord Support
                 </li>
               </ul>
-              <a href="#" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Start Free</a>
+              <a href="https://buy.stripe.com/aFaeVdeiq3UT6Yf57Jdby00" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Start Free</a>
             </div>
 
             <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/10 bg-white/[0.02] relative flex flex-col">
@@ -344,7 +344,7 @@ export default function LandingPage() {
                   <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> Priority email/Discord support
                 </li>
               </ul>
-              <a href="#" className="w-full py-3 bg-white text-black font-medium text-sm text-center hover:bg-zinc-200 transition-colors rounded-none">Get Started</a>
+              <a href="https://buy.stripe.com/aFa3cv4HQdvt2HZcAbdby01" className="w-full py-3 bg-white text-black font-medium text-sm text-center hover:bg-zinc-200 transition-colors rounded-none">Get Started</a>
             </div>
 
             <div className="p-8 md:p-10 hover:bg-white/[0.02] transition-colors flex flex-col">
@@ -370,7 +370,7 @@ export default function LandingPage() {
                   <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Highest priority support
                 </li>
               </ul>
-              <a href="#" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Get Started</a>
+              <a href="https://buy.stripe.com/9B6eVdeiq0IHfuL2ZBdby02" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Get Started</a>
             </div>
 
           </div>
