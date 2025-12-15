@@ -105,7 +105,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <footer className="py-6 px-6 border-t border-[#E5E1EF]">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-sm text-[#635F69]">
           <span>© 2024 KashRock. All rights reserved.</span>
-          <span>v1.0.0</span>
+          <div className="flex items-center gap-4">
+            <a href="/legal" className="hover:text-[#7C3AED] transition-colors">Privacy Policy</a>
+            <a href="/legal?tab=terms" className="hover:text-[#7C3AED] transition-colors">Terms of Service</a>
+            <span>v1.0.0</span>
+          </div>
         </div>
       </footer>
     </div>

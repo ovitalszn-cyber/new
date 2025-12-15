@@ -53,8 +53,19 @@ export default function LandingPage() {
           ::-webkit-scrollbar-thumb:hover { background: #555; }
         `}</style>
 
+        {/* Public Beta Banner */}
+        <div className="fixed top-0 w-full z-50 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-violet-600/10 border-b border-purple-500/20">
+          <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-purple-500/20 border border-purple-500/30 rounded-full">
+              <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse"></span>
+              <span className="text-[10px] font-medium text-purple-300 uppercase tracking-wider">Public Beta</span>
+            </span>
+            <span className="text-xs text-zinc-400">We&apos;re in public beta — expect rapid improvements and new features weekly.</span>
+          </div>
+        </div>
+
         {/* Navbar */}
-        <nav className="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <nav className="fixed top-[36px] w-full z-50 glass-nav transition-all duration-300">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <div className="flex items-center">
               <img src="/kashrock-logo.svg" alt="KashRock" className="h-10 w-auto" />
@@ -66,8 +77,7 @@ export default function LandingPage() {
               <a href="https://kashrock-production.up.railway.app/docs#/" target="_blank" rel="noopener noreferrer" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
             </div>
             <div className="flex items-center gap-4">
-              <a href="#" className="hidden md:block text-sm font-normal text-white hover:text-zinc-300">Log in</a>
-              <a href="#" className="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors">
+              <a href="#pricing" className="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors">
                 Get API Key
               </a>
             </div>
@@ -75,7 +85,7 @@ export default function LandingPage() {
         </nav>
 
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <section className="relative pt-40 pb-20 md:pt-56 md:pb-32 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -431,7 +441,9 @@ export default function LandingPage() {
           </div>
           <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-zinc-600">© 2025 KashRock Inc. All rights reserved.</p>
-            <div className="flex gap-6">
+            <div className="flex items-center gap-6">
+              <a href="/legal" className="text-sm text-zinc-600 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/legal?tab=terms" className="text-sm text-zinc-600 hover:text-white transition-colors">Terms of Service</a>
               <a href="https://x.com/kashrockapi" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="twitter" className="w-5 h-5"></i></a>
               <a href="https://www.instagram.com/kashrockapi/" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
             </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -39,6 +40,7 @@ export default function RootLayout({
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
