@@ -1,0 +1,475 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KashRock | The Unified Sports Data API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #08090A; color: #E3E5E7; }
+        .glass-nav { background: rgba(8, 9, 10, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .gradient-text { background: linear-gradient(to right, #ffffff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .grid-bg { background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 40px 40px; }
+        
+        /* Marquee Animation */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-container { overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-content { display: inline-block; animation: scroll 30s linear infinite; }
+        .marquee-fade { background: linear-gradient(90deg, #08090A, transparent 20%, transparent 80%, #08090A); }
+        
+        /* Code Block Syntax Highlighting Sim */
+        .token-key { color: #A5B4FC; }
+        .token-string { color: #86EFAC; }
+        .token-number { color: #FCA5A5; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #08090A; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white/20 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
+                    <div class="w-2.5 h-2.5 bg-black rotate-45"></div>
+                </div>
+                <span class="text-lg font-medium tracking-tight text-white">KashRock</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Features</a>
+                <a href="#how-it-works" class="text-sm font-normal text-zinc-400 hover:text-white transition-colors">How it works</a>
+                <a href="#pricing" class="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Pricing</a>
+                <a href="#" class="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block text-sm font-normal text-white hover:text-zinc-300">Log in</a>
+                <a href="#" class="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors">
+                    Get API Key
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-sm font-normal text-zinc-300">v2.0 Now Live: Enhanced Esports Projections</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
+                The infrastructure for <br>
+                <span class="gradient-text">sports betting products.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Aggregated odds, normalized markets, and actionable EV data. <br class="hidden md:block">
+                Build bots, dashboards, and betting apps without the data wrangling.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#" class="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2">
+                    Start Building <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4"></i> Read Documentation
+                </a>
+            </div>
+
+            <div class="mt-16 text-sm text-zinc-500 font-normal">
+                Trusted by developers shipping tools for
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Marquee -->
+    <section class="border-y border-white/5 bg-[#0A0B0C] py-8 relative">
+        <div class="absolute inset-0 z-10 marquee-fade pointer-events-none"></div>
+        <div class="marquee-container">
+            <div class="marquee-content flex gap-16 items-center opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Logos (Represented by text/typography for accuracy without images) -->
+                <span class="text-2xl font-bold tracking-tighter text-white">bet365</span>
+                <span class="text-2xl font-bold tracking-wide italic text-white">PINNACLE</span>
+                <span class="text-xl font-bold text-white flex gap-1 items-center"><i data-lucide="trophy" class="w-5 h-5 text-purple-400"></i> PrizePicks</span>
+                <span class="text-2xl font-black text-white tracking-tight">DRAFTKINGS</span>
+                <span class="text-2xl font-bold text-white tracking-tighter italic">FANDUEL</span>
+                <span class="text-2xl font-bold text-white">Hard Rock</span>
+                <span class="text-xl font-bold tracking-widest text-white">BETMGM</span>
+                <span class="text-2xl font-semibold text-white">Caesars</span>
+                <!-- Duplicate for loop -->
+                <span class="text-2xl font-bold tracking-tighter text-white ml-16">bet365</span>
+                <span class="text-2xl font-bold tracking-wide italic text-white">PINNACLE</span>
+                <span class="text-xl font-bold text-white flex gap-1 items-center"><i data-lucide="trophy" class="w-5 h-5 text-purple-400"></i> PrizePicks</span>
+                <span class="text-2xl font-black text-white tracking-tight">DRAFTKINGS</span>
+                <span class="text-2xl font-bold text-white tracking-tighter italic">FANDUEL</span>
+                <span class="text-2xl font-bold text-white">Hard Rock</span>
+                <span class="text-xl font-bold tracking-widest text-white">BETMGM</span>
+                <span class="text-2xl font-semibold text-white">Caesars</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid (Bento Box) -->
+    <section id="features" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Everything normalized. <br><span class="text-zinc-500">One schema to rule them all.</span></h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="col-span-1 md:col-span-2 bg-[#0C0D0F] border border-white/10 rounded-sm p-8 group hover:border-white/20 transition-colors relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity">
+                    <i data-lucide="network" class="w-48 h-48 text-white"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-10 h-10 bg-white/5 rounded-sm flex items-center justify-center mb-6 border border-white/10">
+                        <i data-lucide="globe" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Universal Aggregation</h3>
+                    <p class="text-base text-zinc-400 max-w-md leading-relaxed">
+                        We ingest odds and player props from over 40+ books including offshore and US regulated markets. Access every line through a single endpoint.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-span-1 bg-[#0C0D0F] border border-white/10 rounded-sm p-8 group hover:border-white/20 transition-colors">
+                <div class="w-10 h-10 bg-white/5 rounded-sm flex items-center justify-center mb-6 border border-white/10">
+                    <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                </div>
+                <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Sub-second Latency</h3>
+                <p class="text-base text-zinc-400 leading-relaxed">
+                    Built on edge networks with aggressive caching. Get updates as fast as the books publish them.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-span-1 bg-[#0C0D0F] border border-white/10 rounded-sm p-8 group hover:border-white/20 transition-colors">
+                <div class="w-10 h-10 bg-white/5 rounded-sm flex items-center justify-center mb-6 border border-white/10">
+                    <i data-lucide="fingerprint" class="w-5 h-5 text-white"></i>
+                </div>
+                <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Canonical Identity</h3>
+                <p class="text-base text-zinc-400 leading-relaxed">
+                    "LeBron James" on one book and "L. James" on another are automatically mapped to a single generic ID.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-span-1 md:col-span-2 bg-[#0C0D0F] border border-white/10 rounded-sm p-8 group hover:border-white/20 transition-colors flex flex-col md:flex-row gap-8 items-start md:items-center">
+                <div class="flex-1">
+                    <div class="w-10 h-10 bg-white/5 rounded-sm flex items-center justify-center mb-6 border border-white/10">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Decision Layers &amp; EV</h3>
+                    <p class="text-base text-zinc-400 leading-relaxed">
+                        Don't just get the odds. Get the edge. We pre-calculate Expected Value (EV) against sharp books like Pinnacle, so you can filter for profitable opportunities instantly.
+                    </p>
+                </div>
+                <!-- Visual Representation of EV -->
+                <div class="w-full md:w-64 bg-[#08090A] border border-white/10 rounded-sm p-4 font-mono text-xs">
+                    <div class="flex justify-between mb-2 pb-2 border-b border-white/5">
+                        <span class="text-zinc-500">Market</span>
+                        <span class="text-zinc-500">EV%</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-zinc-300">Curry o24.5 Pts</span>
+                        <span class="text-emerald-400">+4.2%</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-zinc-300">Mahomes u2.5 TD</span>
+                        <span class="text-emerald-400">+2.8%</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-zinc-300">Jokic Triple Dbl</span>
+                        <span class="text-emerald-400">+1.5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical/Code Section -->
+    <section class="py-24 bg-[#050505] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="flex-1">
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-6">Built for shipping, <br>not parsing strings.</h2>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0 mt-1">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-white">Standardized JSON</h4>
+                                <p class="text-base text-zinc-500 mt-1">Consistent response shape regardless of the source book or sport.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0 mt-1">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-white">Smart Caching</h4>
+                                <p class="text-base text-zinc-500 mt-1">Intelligent cache-control headers let you optimize your own polling logic.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0 mt-1">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-white">Cross-Book Mapping</h4>
+                                <p class="text-base text-zinc-500 mt-1">Player IDs link across books instantly for arbitrage finding.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex-1 w-full max-w-2xl">
+                    <div class="bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden shadow-2xl">
+                        <div class="flex items-center px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+                            <div class="flex gap-1.5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                            </div>
+                            <div class="ml-4 text-xs font-mono text-zinc-500">GET /v1/markets/nba/player_props</div>
+                        </div>
+                        <div class="p-6 overflow-x-auto">
+                            <pre class="font-mono text-sm leading-relaxed"><code><span class="token-key">"event_id"</span>: <span class="token-string">"nba_gs_lal_2023"</span>,
+<span class="token-key">"player"</span>: {
+  <span class="token-key">"id"</span>: <span class="token-string">"p_29384"</span>,
+  <span class="token-key">"name"</span>: <span class="token-string">"LeBron James"</span>,
+  <span class="token-key">"team"</span>: <span class="token-string">"LAL"</span>
+},
+<span class="token-key">"markets"</span>: [
+  {
+    <span class="token-key">"book"</span>: <span class="token-string">"fanduel"</span>,
+    <span class="token-key">"stat"</span>: <span class="token-string">"points"</span>,
+    <span class="token-key">"line"</span>: <span class="token-number">24.5</span>,
+    <span class="token-key">"odds_over"</span>: <span class="token-number">-110</span>,
+    <span class="token-key">"ev"</span>: <span class="token-number">0.02</span>
+  },
+  {
+    <span class="token-key">"book"</span>: <span class="token-string">"draftkings"</span>,
+    <span class="token-key">"stat"</span>: <span class="token-string">"points"</span>,
+    <span class="token-key">"line"</span>: <span class="token-number">25.5</span>,
+    <span class="token-key">"odds_over"</span>: <span class="token-number">+105</span>,
+    <span class="token-key">"ev"</span>: <span class="token-number">-0.05</span>
+  }
+]</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Simple, transparent pricing</h2>
+            <p class="text-lg text-zinc-500">Start for free, scale as your traffic grows.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/10 bg-[#0C0D0F]">
+            
+            <!-- Hacker Plan -->
+            <div class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
+                <div class="mb-4">
+                    <h3 class="text-base font-medium text-white uppercase tracking-wider mb-2">Hacker</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-normal text-white">$0</span>
+                        <span class="text-zinc-500 text-base">/mo</span>
+                    </div>
+                </div>
+                <p class="text-base text-zinc-400 mb-8 h-12">Perfect for prototyping and hobby projects.</p>
+                <ul class="space-y-4 mb-8 flex-1">
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> 1,000 requests/mo
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> 3 Sports (NBA, NFL, MLB)
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> 15 min delay
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> Community Support
+                    </li>
+                </ul>
+                <a href="#" class="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Start Free</a>
+            </div>
+
+            <!-- Builder Plan -->
+            <div class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/10 bg-white/[0.02] relative flex flex-col">
+                <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                <div class="mb-4">
+                    <h3 class="text-base font-medium text-white uppercase tracking-wider mb-2">Pro Builder</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-normal text-white">$99</span>
+                        <span class="text-zinc-500 text-base">/mo</span>
+                    </div>
+                </div>
+                <p class="text-base text-zinc-400 mb-8 h-12">For live apps and betting tools.</p>
+                <ul class="space-y-4 mb-8 flex-1">
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-white"></i> 100,000 requests/mo
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-white"></i> All Sports + Esports
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-white"></i> Real-time Odds
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-white"></i> EV &amp; Arb Endpoints
+                    </li>
+                </ul>
+                <a href="#" class="w-full py-3 bg-white text-black font-medium text-sm text-center hover:bg-zinc-200 transition-colors rounded-none">Get Started</a>
+            </div>
+
+            <!-- Scale Plan -->
+            <div class="p-8 md:p-10 hover:bg-white/[0.02] transition-colors flex flex-col">
+                <div class="mb-4">
+                    <h3 class="text-base font-medium text-white uppercase tracking-wider mb-2">Scale</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-normal text-white">$499</span>
+                        <span class="text-zinc-500 text-base">/mo</span>
+                    </div>
+                </div>
+                <p class="text-base text-zinc-400 mb-8 h-12">High volume and historical data.</p>
+                <ul class="space-y-4 mb-8 flex-1">
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> Unlimited requests
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> Dedicated Slack channel
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> Historical Odds Database
+                    </li>
+                    <li class="flex items-center gap-3 text-base text-zinc-300">
+                        <i data-lucide="check" class="w-4 h-4 text-zinc-500"></i> Custom Socket connections
+                    </li>
+                </ul>
+                <a href="#" class="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Contact Sales</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 max-w-3xl mx-auto px-6">
+        <h2 class="text-3xl font-medium tracking-tight text-white mb-10">Common Questions</h2>
+        <div class="space-y-4">
+            <!-- Q1 -->
+            <details class="group bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden">
+                <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                    <span class="text-lg font-medium text-zinc-200">How fast are the odds updated?</span>
+                    <span class="transition group-open:rotate-180">
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-zinc-500"></i>
+                    </span>
+                </summary>
+                <div class="text-zinc-400 px-6 pb-6 pt-0 text-base leading-relaxed">
+                    We poll major books every 1-3 seconds. For our Pro and Scale plans, we utilize push-based updates where available to ensure near real-time latency.
+                </div>
+            </details>
+            <!-- Q2 -->
+            <details class="group bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden">
+                <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                    <span class="text-lg font-medium text-zinc-200">Do you offer player prop mapping?</span>
+                    <span class="transition group-open:rotate-180">
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-zinc-500"></i>
+                    </span>
+                </summary>
+                <div class="text-zinc-400 px-6 pb-6 pt-0 text-base leading-relaxed">
+                    Yes. This is our core value proposition. We map "Points + Rebounds" across 15+ books to a single ID, handling naming discrepancies (e.g., "Giannis Antetokounmpo" vs "G. Antetokounmpo") automatically.
+                </div>
+            </details>
+            <!-- Q3 -->
+            <details class="group bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden">
+                <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                    <span class="text-lg font-medium text-zinc-200">Can I access historical data?</span>
+                    <span class="transition group-open:rotate-180">
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-zinc-500"></i>
+                    </span>
+                </summary>
+                <div class="text-zinc-400 px-6 pb-6 pt-0 text-base leading-relaxed">
+                    Historical odds data is available on the Scale plan. We maintain closing lines and line movement history for backtesting your models.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-[#050505] pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
+            <div class="col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-4 h-4 bg-white rounded-sm flex items-center justify-center">
+                        <div class="w-2 h-2 bg-black rotate-45"></div>
+                    </div>
+                    <span class="text-base font-medium text-white">KashRock</span>
+                </div>
+                <p class="text-base text-zinc-500 max-w-sm">
+                    The betting infrastructure layer for the internet. Building the tools for the next generation of sports analytics.
+                </p>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                <h4 class="text-sm font-medium text-white">Product</h4>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Odds API</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">EV Engine</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Esports</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Status</a>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <h4 class="text-sm font-medium text-white">Company</h4>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">About</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Blog</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Customers</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <h4 class="text-sm font-medium text-white">Legal</h4>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Terms</a>
+                <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">Data Policy</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-zinc-600">© 2024 KashRock Inc. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-zinc-600 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" class="text-zinc-600 hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <a href="#" class="text-zinc-600 hover:text-white transition-colors"><i data-lucide="discord" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons({
+            attrs: {
+                'stroke-width': 1.5
+            }
+        });
+    </script>
+
+</body></html>

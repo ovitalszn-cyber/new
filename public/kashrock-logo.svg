@@ -1,0 +1,23 @@
+<svg width="140" height="50" viewBox="0 0 140 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left bracket -->
+  <rect x="0" y="5" width="5" height="5" fill="white"/>
+  <rect x="5" y="10" width="5" height="5" fill="white"/>
+  <rect x="10" y="15" width="5" height="5" fill="white"/>
+  <rect x="10" y="25" width="5" height="5" fill="white"/>
+  <rect x="5" y="30" width="5" height="5" fill="white"/>
+  <rect x="0" y="35" width="5" height="5" fill="white"/>
+  
+  <!-- Right bracket -->
+  <rect x="95" y="5" width="5" height="5" fill="white"/>
+  <rect x="90" y="10" width="5" height="5" fill="white"/>
+  <rect x="85" y="15" width="5" height="5" fill="white"/>
+  <rect x="85" y="25" width="5" height="5" fill="white"/>
+  <rect x="90" y="30" width="5" height="5" fill="white"/>
+  <rect x="95" y="35" width="5" height="5" fill="white"/>
+  
+  <!-- KASH text -->
+  <text x="22" y="22" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="18" fill="white">KASH</text>
+  
+  <!-- ROCK text -->
+  <text x="22" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="18" fill="white">ROCK</text>
+</svg>
