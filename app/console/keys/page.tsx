@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
 import { listApiKeys, createApiKey, revokeApiKey } from '@/lib/api';
 
 interface ApiKey {
@@ -28,6 +27,8 @@ export default function APIKeysPage() {
 
   useEffect(() => {
     const getUser = async () => {
+      const { supabase } = await import('@/lib/supabase');
+      if (!supabase) return;
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user?.user_metadata?.full_name) {
         setUserName(session.user.user_metadata.full_name);

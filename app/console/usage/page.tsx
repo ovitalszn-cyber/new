@@ -1,12 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 export default function UsagePage() {
-  const { data: session } = useSession();
-  const userName = session?.user?.name || 'User';
+  const [userName, setUserName] = useState('User');
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { supabase } = await import('@/lib/supabase');
+      if (!supabase) return;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.user_metadata?.full_name) {
+        setUserName(session.user.user_metadata.full_name);
+      }
+    };
+    getUser();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {

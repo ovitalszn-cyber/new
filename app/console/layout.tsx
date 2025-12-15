@@ -3,7 +3,6 @@
 import Script from 'next/script';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
 import { usePathname } from 'next/navigation';
@@ -16,7 +15,13 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getUser = async () => {
+    const initAuth = async () => {
+      const { supabase } = await import('@/lib/supabase');
+      if (!supabase) {
+        setLoading(false);
+        return;
+      }
+      
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
         setUser(session.user);
@@ -24,17 +29,17 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
         router.push('/login');
       }
       setLoading(false);
+
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUser(session?.user ?? null);
+        if (!session?.user) {
+          router.push('/login');
+        }
+      });
+
+      return () => subscription.unsubscribe();
     };
-    getUser();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      if (!session?.user) {
-        router.push('/login');
-      }
-    });
-
-    return () => subscription.unsubscribe();
+    initAuth();
   }, [router]);
 
   const userInitials = user?.user_metadata?.full_name
@@ -45,7 +50,10 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
   const userImage = user?.user_metadata?.avatar_url;
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    const { supabase } = await import('@/lib/supabase');
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
     router.push('/');
   };
 

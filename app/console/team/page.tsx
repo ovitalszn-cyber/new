@@ -1,14 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 export default function TeamPage() {
-  const { data: session } = useSession();
-  const userName = session?.user?.name || 'User';
-  const userEmail = session?.user?.email || '';
-  const userImage = session?.user?.image;
+  const [userName, setUserName] = useState('User');
+  const [userEmail, setUserEmail] = useState('');
+  const [userImage, setUserImage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { supabase } = await import('@/lib/supabase');
+      if (!supabase) return;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        setUserName(session.user.user_metadata?.full_name || 'User');
+        setUserEmail(session.user.email || '');
+        setUserImage(session.user.user_metadata?.avatar_url);
+      }
+    };
+    getUser();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {

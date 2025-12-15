@@ -1,10 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
 
 export default function LoginPage() {
   const handleGoogleLogin = async () => {
+    const { supabase } = await import('@/lib/supabase');
+    if (!supabase) {
+      console.error('Supabase not configured');
+      return;
+    }
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
