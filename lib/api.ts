@@ -1,11 +1,13 @@
-import { supabase } from './supabase'
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY || '';
 const DEV_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.kashrock.com';
 
 // Authenticated API client for developer dashboard
 export async function apiClient<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  const { supabase } = await import('./supabase')
+  if (!supabase) {
+    throw new Error('Supabase not configured')
+  }
   const { data: { session } } = await supabase.auth.getSession()
   
   if (!session?.access_token) {
