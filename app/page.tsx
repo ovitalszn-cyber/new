@@ -37,7 +37,17 @@ export default function LandingPage() {
           }
           .animate-marquee {
             display: flex;
-            animation: marquee 20s linear infinite;
+            animation: marquee 30s linear infinite;
+          }
+          @media (min-width: 1280px) {
+            .animate-marquee {
+              animation: marquee 40s linear infinite;
+            }
+          }
+          @media (min-width: 1536px) {
+            .animate-marquee {
+              animation: marquee 50s linear infinite;
+            }
           }
           .animate-marquee:hover {
             animation-play-state: paused;
