@@ -1,14 +1,22 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleAuthCallback = async () => {
+      // Dynamic import to avoid build-time issues
+      const { supabase } = await import('@/lib/supabase');
       const { data: { session }, error } = await supabase.auth.getSession();
       
       if (error) {
@@ -25,7 +33,7 @@ export default function AuthCallbackPage() {
     };
 
     handleAuthCallback();
-  }, [router]);
+  }, [router, mounted]);
 
   return (
     <div className="min-h-screen bg-[#08090A] flex items-center justify-center">
