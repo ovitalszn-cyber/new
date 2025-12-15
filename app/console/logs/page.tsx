@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+
 export default function LogsPage() {
   const [userName, setUserName] = useState('User');
   const [filter, setFilter] = useState('all');
