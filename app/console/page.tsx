@@ -3,10 +3,19 @@
 import Script from 'next/script';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function ConsolePage() {
+  const { data: session } = useSession();
   const [apiKeyVisible, setApiKeyVisible] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+
+  const userInitials = session?.user?.name
+    ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+    : 'U';
+  const userName = session?.user?.name || 'User';
+  const userEmail = session?.user?.email || '';
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {
@@ -108,17 +117,40 @@ export default function ConsolePage() {
           </div>
 
           {/* User Profile */}
-          <div className="border-t border-white/5 p-3">
-            <button className="flex items-center gap-3 w-full p-2 hover:bg-white/[0.03] rounded-sm transition-colors text-left group">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-600 border border-white/10 flex items-center justify-center">
-                <span className="text-xs font-medium text-white">JD</span>
-              </div>
+          <div className="border-t border-white/5 p-3 relative">
+            <button 
+              onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+              className="flex items-center gap-3 w-full p-2 hover:bg-white/[0.03] rounded-sm transition-colors text-left group"
+            >
+              {session?.user?.image ? (
+                <img src={session.user.image} alt="" className="w-8 h-8 rounded-full border border-white/10" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-600 border border-white/10 flex items-center justify-center">
+                  <span className="text-xs font-medium text-white">{userInitials}</span>
+                </div>
+              )}
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-white truncate">John Doe</div>
+                <div className="text-sm font-medium text-white truncate">{userName}</div>
                 <div className="text-xs text-zinc-500 truncate group-hover:text-zinc-400">Starter Plan</div>
               </div>
               <i data-lucide="chevrons-up-down" className="w-4 h-4 text-zinc-600"></i>
             </button>
+            
+            {/* Profile Dropdown Menu */}
+            {profileMenuOpen && (
+              <div className="absolute bottom-full left-3 right-3 mb-2 bg-[#0C0D0F] border border-white/10 rounded-md shadow-xl overflow-hidden">
+                <div className="px-3 py-2 border-b border-white/5">
+                  <div className="text-xs text-zinc-500 truncate">{userEmail}</div>
+                </div>
+                <button
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
+                >
+                  <i data-lucide="log-out" className="w-4 h-4"></i>
+                  Sign out
+                </button>
+              </div>
+            )}
           </div>
         </aside>
 
