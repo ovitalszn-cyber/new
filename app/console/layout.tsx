@@ -148,7 +148,7 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
                 <i data-lucide="users" className={iconClass('/console/team')}></i>
                 Team
               </Link>
-              <a href="https://kashrock-production.up.railway.app/docs#/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-3 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.02] text-sm font-medium rounded-sm transition-all group">
+              <a href="https://api.kashrock.com/docs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-3 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.02] text-sm font-medium rounded-sm transition-all group">
                 <i data-lucide="book" className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 transition-colors"></i>
                 Documentation <i data-lucide="external-link" className="w-3 h-3 ml-auto opacity-50"></i>
               </a>

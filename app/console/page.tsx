@@ -288,7 +288,7 @@ export default function ConsolePage() {
                 <h3 className="text-sm font-medium text-white">Integration Guide</h3>
               </div>
               <p className="text-sm text-zinc-500 mb-4">Learn how to calculate Expected Value (EV) using our pre-computed edge endpoints.</p>
-              <a href="https://kashrock-production.up.railway.app/docs#/" target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">
+              <a href="https://api.kashrock.com/docs" target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">
                 Read Documentation <i data-lucide="arrow-right" className="w-3 h-3"></i>
               </a>
             </div>
