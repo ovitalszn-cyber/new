@@ -2,11 +2,16 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { getUsageSummary, getRequestLogs } from '@/lib/api';
 
 export default function ConsolePage() {
   const [apiKeyVisible, setApiKeyVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   const [userName, setUserName] = useState('User');
+  const [usage, setUsage] = useState<any>(null);
+  const [recentLogs, setRecentLogs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -21,6 +26,27 @@ export default function ConsolePage() {
   }, []);
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const [usageData, logsData] = await Promise.all([
+        getUsageSummary('30d'),
+        getRequestLogs({ limit: 3, offset: 0 })
+      ]);
+      setUsage(usageData);
+      setRecentLogs(logsData.logs);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {
       (window as any).lucide.createIcons({
         attrs: {
@@ -28,7 +54,7 @@ export default function ConsolePage() {
         }
       });
     }
-  }, []);
+  }, [usage, recentLogs]);
 
   const handleCopyKey = () => {
     navigator.clipboard.writeText('pk_live_8392xk29d8f7g3h2j4k5l6m7n8p9q0r1s2t3u4v5w6x7y8z9d2a');
@@ -117,12 +143,16 @@ export default function ConsolePage() {
                 <div>
                   <h3 className="text-sm font-medium text-zinc-400">API Usage (This Month)</h3>
                   <div className="mt-2 flex items-baseline gap-2">
-                    <span className="text-3xl font-semibold tracking-tight text-white">42,593</span>
-                    <span className="text-sm text-zinc-500">/ 100,000</span>
+                    <span className="text-3xl font-semibold tracking-tight text-white">
+                      {loading ? '...' : usage ? usage.total_requests.toLocaleString() : '0'}
+                    </span>
+                    <span className="text-sm text-zinc-500">
+                      {loading ? '...' : usage ? `/ ${usage.monthly_limit || '100,000'}` : '/ 0'}
+                    </span>
                   </div>
                 </div>
                 <div className="px-2 py-1 bg-white/5 border border-white/5 rounded-sm text-xs text-zinc-400">
-                  Starter
+                  {loading ? '...' : usage ? (usage.plan || 'Starter') : 'Unknown'}
                 </div>
               </div>
 
@@ -174,7 +204,11 @@ export default function ConsolePage() {
                 </div>
                 <h3 className="text-sm font-medium text-zinc-400 mb-2">Success Rate</h3>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold tracking-tight text-white">99.98%</span>
+                  <span className="text-3xl font-semibold tracking-tight text-white">
+                    {loading ? '...' : usage ? 
+                      (usage.total_requests > 0 ? ((usage.successful_requests / usage.total_requests) * 100).toFixed(2) : '100') + '%' 
+                      : '0%'}
+                  </span>
                   <span className="text-xs text-emerald-400 mb-1.5 flex items-center">
                     <i data-lucide="arrow-up-right" className="w-3 h-3 mr-0.5"></i> 0.01%
                   </span>
@@ -188,7 +222,12 @@ export default function ConsolePage() {
               <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6 relative overflow-hidden">
                 <h3 className="text-sm font-medium text-zinc-400 mb-2">Avg. Latency</h3>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold tracking-tight text-white">48<span className="text-lg text-zinc-500 ml-1">ms</span></span>
+                  <div className="flex items-end gap-2">
+                    <span className="text-3xl font-semibold tracking-tight text-white">
+                      {loading ? '...' : usage ? (usage.avg_latency_ms || '0') : '0'}
+                    </span>
+                    <span className="text-lg text-zinc-500 mb-1">ms</span>
+                  </div>
                 </div>
                 <p className="text-xs text-zinc-500 mt-2">Global edge average</p>
               </div>
@@ -222,54 +261,55 @@ export default function ConsolePage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  <tr className="group hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">GET</span>
-                    </td>
-                    <td className="px-6 py-3 font-mono text-xs text-zinc-300">
-                      /v6/props?sport=basketball_nba&player=curry
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                        <span className="text-xs text-zinc-400">200 OK</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-400 font-mono">42ms</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-500">Just now</td>
-                  </tr>
-                  <tr className="group hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">GET</span>
-                    </td>
-                    <td className="px-6 py-3 font-mono text-xs text-zinc-300">
-                      /v6/odds?sport=americanfootball_nfl&market=futures
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                        <span className="text-xs text-zinc-400">200 OK</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-400 font-mono">156ms</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-500">1 min ago</td>
-                  </tr>
-                  <tr className="group hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">GET</span>
-                    </td>
-                    <td className="px-6 py-3 font-mono text-xs text-zinc-300">
-                      /v6/props?sport=esports_lol&market=projections
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                        <span className="text-xs text-zinc-400">200 OK</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-400 font-mono">89ms</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-500">2 mins ago</td>
-                  </tr>
+                  {loading ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-12 text-center text-zinc-500 text-sm">
+                        Loading...
+                      </td>
+                    </tr>
+                  ) : error ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-12 text-center text-red-400 text-sm">
+                        {error}
+                      </td>
+                    </tr>
+                  ) : recentLogs.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-12 text-center text-zinc-500 text-sm">
+                        No recent requests
+                      </td>
+                    </tr>
+                  ) : (
+                    recentLogs.map((log, i) => (
+                      <tr key={log.id} className="group hover:bg-white/[0.02] transition-colors">
+                        <td className="px-6 py-3 whitespace-nowrap">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                            {log.method || 'GET'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-3 font-mono text-xs text-zinc-300">
+                          {log.endpoint || '/v1/unknown'}
+                        </td>
+                        <td className="px-6 py-3 whitespace-nowrap">
+                          <div className="flex items-center gap-1.5">
+                            <div className={`w-1.5 h-1.5 rounded-full ${
+                              log.status_code >= 200 && log.status_code < 300 ? 'bg-emerald-500' : 
+                              log.status_code === 429 ? 'bg-orange-500' : 'bg-red-500'
+                            }`}></div>
+                            <span className="text-xs text-zinc-400">
+                              {log.status_code || '200'}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-400 font-mono">
+                          {log.latency_ms || '0'}ms
+                        </td>
+                        <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-500">
+                          {i === 0 ? 'Just now' : i === 1 ? '1 min ago' : '2 mins ago'}
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
               <div className="px-6 py-3 border-t border-white/5 bg-white/[0.01] flex justify-center">
