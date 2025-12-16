@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { listApiKeys, createApiKey, revokeApiKey } from '@/lib/api';
+import { useEffect, useState, useTransition } from 'react';
+import { listApiKeysServer, createApiKeyServer, revokeApiKeyServer } from '@/lib/server-api';
 
 interface ApiKey {
   id: string;
@@ -54,7 +54,7 @@ export default function APIKeysPage() {
   const fetchKeys = async () => {
     try {
       setLoading(true);
-      const data = await listApiKeys();
+      const data = await listApiKeysServer();
       setKeys(data.keys);
       setError(null);
     } catch (err) {
@@ -68,7 +68,7 @@ export default function APIKeysPage() {
     if (!newKeyName.trim()) return;
     try {
       setCreating(true);
-      const result = await createApiKey(newKeyName);
+      const result = await createApiKeyServer(newKeyName);
       setNewlyCreatedKey(result.key);
       setNewKeyName('');
       setShowCreateModal(false);
@@ -83,7 +83,7 @@ export default function APIKeysPage() {
   const handleRevokeKey = async (keyId: string) => {
     if (!confirm('Are you sure you want to revoke this key? This action cannot be undone.')) return;
     try {
-      await revokeApiKey(keyId);
+      await revokeApiKeyServer(keyId);
       await fetchKeys();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to revoke key');

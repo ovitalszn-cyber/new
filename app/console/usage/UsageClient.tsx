@@ -1,0 +1,243 @@
+'use client';
+
+import Link from 'next/link';
+import { useEffect, useState, useTransition } from 'react';
+import { getUsageSummaryServer } from '@/lib/server-api';
+
+interface UsageData {
+  total_requests: number;
+  successful_requests: number;
+  failed_requests: number;
+  avg_latency_ms: number;
+  requests_by_endpoint: Record<string, number>;
+  requests_by_day: Array<{ date: string; count: number }>;
+}
+
+interface UsageClientProps {
+  initialData: UsageData | null;
+  initialError: string | null;
+  userName: string;
+}
+
+export default function UsageClient({ initialData, initialError, userName }: UsageClientProps) {
+  const [usage, setUsage] = useState<UsageData | null>(initialData);
+  const [error, setError] = useState<string | null>(initialError);
+  const [range, setRange] = useState<'24h' | '7d' | '30d'>('7d');
+  const [isPending, startTransition] = useTransition();
+
+  const handleRangeChange = (newRange: '24h' | '7d' | '30d') => {
+    setRange(newRange);
+    startTransition(async () => {
+      try {
+        const data = await getUsageSummaryServer(newRange);
+        setUsage(data);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load usage data');
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).lucide) {
+      (window as any).lucide.createIcons({
+        attrs: {
+          'stroke-width': 1.5
+        }
+      });
+    }
+  }, [usage, isPending]);
+
+  return (
+    <>
+      {/* Header */}
+      <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-[#08090A]/80 backdrop-blur-sm sticky top-0 z-20">
+        <div className="flex items-center gap-4">
+          <nav className="flex items-center text-sm font-medium text-zinc-500">
+            <span className="hover:text-zinc-300 transition-colors cursor-pointer">{userName}</span>
+            <span className="mx-2 text-zinc-700">/</span>
+            <span className="text-white">Usage & Limits</span>
+          </nav>
+        </div>
+        <div className="flex items-center gap-4">
+          <button className="text-zinc-400 hover:text-white transition-colors">
+            <i data-lucide="help-circle" className="w-5 h-5"></i>
+          </button>
+        </div>
+      </header>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto p-8">
+        <div className="max-w-5xl mx-auto space-y-8">
+          
+          {/* Page Header */}
+          <div className="flex items-end justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-white mb-1">Usage & Limits</h1>
+              <p className="text-sm text-zinc-500">Monitor your API usage and rate limits across all endpoints.</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <select 
+                value={range}
+                onChange={(e) => handleRangeChange(e.target.value as '24h' | '7d' | '30d')}
+                disabled={isPending}
+                className="bg-[#0C0D0F] border border-white/5 rounded-sm px-3 py-1.5 text-xs text-white focus:outline-none focus:border-zinc-500 disabled:opacity-50"
+              >
+                <option value="30d">Last 30 days</option>
+                <option value="7d">Last 7 days</option>
+                <option value="24h">Last 24 hours</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Error State */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 rounded-sm p-4 text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Loading State */}
+          {isPending && (
+            <div className="flex items-center justify-center py-12">
+              <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+            </div>
+          )}
+
+          {/* Usage Overview */}
+          {!isPending && usage && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
+              <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Total Requests</h3>
+              <div className="text-2xl font-semibold text-white">{usage.total_requests.toLocaleString()}</div>
+              <div className="text-xs text-zinc-500 mt-1">{range === '24h' ? 'Last 24 hours' : range === '7d' ? 'Last 7 days' : 'Last 30 days'}</div>
+            </div>
+            <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
+              <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Success Rate</h3>
+              <div className="text-2xl font-semibold text-white">
+                {usage.total_requests > 0 ? ((usage.successful_requests / usage.total_requests) * 100).toFixed(2) : '0'}%
+              </div>
+              <div className="text-xs text-zinc-500 mt-1">{usage.failed_requests} failed requests</div>
+            </div>
+            <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
+              <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Avg Latency</h3>
+              <div className="text-2xl font-semibold text-white">{usage.avg_latency_ms}ms</div>
+              <div className="text-xs text-zinc-500 mt-1">Average response time</div>
+            </div>
+            <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
+              <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Rate Limit</h3>
+              <div className="text-2xl font-semibold text-white">100/min</div>
+              <div className="text-xs text-zinc-500 mt-1">Starter plan limit</div>
+            </div>
+          </div>
+          )}
+
+          {/* Usage Chart */}
+          {!isPending && usage && usage.requests_by_day && usage.requests_by_day.length > 0 && (
+          <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-sm font-medium text-white">Daily Request Volume</h3>
+              <div className="flex items-center gap-4 text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-white rounded-sm"></div>
+                  <span className="text-zinc-400">Requests</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex items-end gap-1 h-40 w-full mb-4">
+              {usage.requests_by_day.map((day, i) => {
+                const maxCount = Math.max(...usage.requests_by_day.map(d => d.count));
+                const height = maxCount > 0 ? (day.count / maxCount) * 100 : 0;
+                return (
+                  <div key={i} className="flex-1 flex flex-col gap-0.5">
+                    <div 
+                      className="bg-zinc-800/50 hover:bg-zinc-600 rounded-sm transition-colors cursor-pointer" 
+                      style={{ height: `${height}%` }}
+                      title={`${day.date}: ${day.count} requests`}
+                    ></div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="flex justify-between text-[10px] text-zinc-600 font-mono uppercase">
+              <span>{usage.requests_by_day[0]?.date}</span>
+              <span>{usage.requests_by_day[Math.floor(usage.requests_by_day.length / 2)]?.date}</span>
+              <span>{usage.requests_by_day[usage.requests_by_day.length - 1]?.date}</span>
+            </div>
+          </div>
+          )}
+
+          {/* Endpoint Breakdown */}
+          {!isPending && usage && usage.requests_by_endpoint && Object.keys(usage.requests_by_endpoint).length > 0 && (
+          <div className="bg-[#0C0D0F] border border-white/5 rounded-sm overflow-hidden">
+            <div className="p-6 border-b border-white/5">
+              <h3 className="text-sm font-medium text-white">Usage by Endpoint</h3>
+            </div>
+            
+            <table className="w-full text-left text-sm">
+              <thead className="bg-white/[0.02] border-b border-white/5">
+                <tr>
+                  <th className="px-6 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Endpoint</th>
+                  <th className="px-6 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Requests</th>
+                  <th className="px-6 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider w-48">Distribution</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {Object.entries(usage.requests_by_endpoint)
+                  .sort(([, a], [, b]) => b - a)
+                  .map(([endpoint, count]) => {
+                    const percentage = usage.total_requests > 0 ? (count / usage.total_requests) * 100 : 0;
+                    return (
+                      <tr key={endpoint} className="hover:bg-white/[0.02] transition-colors">
+                        <td className="px-6 py-4 font-mono text-xs text-zinc-300">{endpoint}</td>
+                        <td className="px-6 py-4 text-white">{count.toLocaleString()}</td>
+                        <td className="px-6 py-4">
+                          <div className="w-full bg-zinc-800 rounded-full h-2">
+                            <div className="bg-white h-2 rounded-full" style={{ width: `${percentage}%` }}></div>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+          )}
+
+          {/* Rate Limits */}
+          <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
+            <h3 className="text-sm font-medium text-white mb-4">Rate Limits</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-black/30 border border-white/5 rounded-sm">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-zinc-400">Requests per minute</span>
+                  <span className="text-sm text-white">100 / min</span>
+                </div>
+                <div className="w-full bg-zinc-800 rounded-full h-2">
+                  <div className="bg-emerald-500 h-2 rounded-full" style={{ width: '45%' }}></div>
+                </div>
+                <div className="text-xs text-zinc-500 mt-2">Current: ~45 req/min</div>
+              </div>
+              <div className="p-4 bg-black/30 border border-white/5 rounded-sm">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-zinc-400">Monthly quota</span>
+                  <span className="text-sm text-white">100,000 / mo</span>
+                </div>
+                <div className="w-full bg-zinc-800 rounded-full h-2">
+                  <div className="bg-white h-2 rounded-full" style={{ width: '42.5%' }}></div>
+                </div>
+                <div className="text-xs text-zinc-500 mt-2">42,593 used • 57,407 remaining</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center text-xs text-zinc-600 pb-8">
+            © 2025 KashRock Inc. • <Link href="/legal" className="hover:text-zinc-400">Privacy</Link> • <Link href="/legal?tab=terms" className="hover:text-zinc-400">Terms</Link>
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
+}
