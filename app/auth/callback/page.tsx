@@ -17,17 +17,34 @@ export default function AuthCallbackPage() {
     const handleAuthCallback = async () => {
       // Dynamic import to avoid build-time issues
       const { supabase } = await import('@/lib/supabase');
-      const { data: { session }, error } = await supabase.auth.getSession();
       
-      if (error) {
-        console.error('Auth callback error:', error);
+      // First, try to exchange the code for a session
+      const { data, error } = await supabase.auth.getSession();
+      
+      // If no session, check if we have auth code in URL to exchange
+      if (!data.session && !error) {
+        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(window.location.href);
+        if (exchangeError) {
+          console.error('Code exchange error:', exchangeError);
+          router.push('/login?error=code_exchange_failed');
+          return;
+        }
+      }
+      
+      // Now get the session after exchange
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError) {
+        console.error('Auth callback error:', sessionError);
         router.push('/login?error=auth_failed');
         return;
       }
 
       if (session) {
+        console.log('Auth successful, session:', session.user.email);
         router.push('/console');
       } else {
+        console.log('No session found, redirecting to login');
         router.push('/login');
       }
     };

@@ -2,15 +2,48 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY || '';
 const DEV_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.kashrock.com';
 
+// Helper to get current session with logging
+export async function getCurrentSession() {
+  const { supabase } = await import('./supabase')
+  if (!supabase) {
+    console.error('[API] Supabase not configured')
+    return null
+  }
+  
+  const { data: { session }, error } = await supabase.auth.getSession()
+  
+  if (error) {
+    console.error('[API] Session error:', error)
+    return null
+  }
+  
+  if (!session) {
+    console.log('[API] No active session found')
+    return null
+  }
+  
+  console.log('[API] Session found for:', session.user.email)
+  return session
+}
+
 // Authenticated API client for developer dashboard
 export async function apiClient<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  console.log('[API] Starting request to:', endpoint)
   const { supabase } = await import('./supabase')
   if (!supabase) {
     throw new Error('Supabase not configured')
   }
-  const { data: { session } } = await supabase.auth.getSession()
+  const { data: { session }, error } = await supabase.auth.getSession()
+  
+  console.log('[API] Session check:', {
+    hasSession: !!session,
+    hasAccessToken: !!session?.access_token,
+    userEmail: session?.user?.email,
+    error: error?.message
+  })
   
   if (!session?.access_token) {
+    console.error('[API] No access token found')
     throw new Error('Not authenticated')
   }
   
