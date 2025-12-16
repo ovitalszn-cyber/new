@@ -215,33 +215,7 @@ export default function UsagePage() {
           </div>
           )}
 
-          {/* Rate Limits */}
-          <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
-            <h3 className="text-sm font-medium text-white mb-4">Rate Limits</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-black/30 border border-white/5 rounded-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-zinc-400">Requests per minute</span>
-                  <span className="text-sm text-white">100 / min</span>
-                </div>
-                <div className="w-full bg-zinc-800 rounded-full h-2">
-                  <div className="bg-emerald-500 h-2 rounded-full" style={{ width: '45%' }}></div>
-                </div>
-                <div className="text-xs text-zinc-500 mt-2">Current: ~45 req/min</div>
-              </div>
-              <div className="p-4 bg-black/30 border border-white/5 rounded-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-zinc-400">Monthly quota</span>
-                  <span className="text-sm text-white">100,000 / mo</span>
-                </div>
-                <div className="w-full bg-zinc-800 rounded-full h-2">
-                  <div className="bg-white h-2 rounded-full" style={{ width: '42.5%' }}></div>
-                </div>
-                <div className="text-xs text-zinc-500 mt-2">42,593 used • 57,407 remaining</div>
-              </div>
-            </div>
-          </div>
-
+          
           <div className="text-center text-xs text-zinc-600 pb-8">
             © 2025 KashRock Inc. • <Link href="/legal" className="hover:text-zinc-400">Privacy</Link> • <Link href="/legal?tab=terms" className="hover:text-zinc-400">Terms</Link>
           </div>
