@@ -14,8 +14,12 @@ export async function apiClient<T>(endpoint: string, options: RequestInit = {}):
     throw new Error('Not authenticated')
   }
   
-  const response = await fetch(`${DEV_API_BASE}${endpoint}`, {
+  const url = `${DEV_API_BASE}${endpoint}`
+  console.log('[API] FETCHING FROM:', url)
+  
+  const response = await fetch(url, {
     ...options,
+    cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${session.access_token}`,
@@ -23,9 +27,19 @@ export async function apiClient<T>(endpoint: string, options: RequestInit = {}):
     },
   })
   
+  console.log('[API] Response status:', response.status, response.statusText)
+  
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ detail: 'API request failed' }))
-    throw new Error(error.detail || 'API request failed')
+    const errorText = await response.text()
+    console.error('[API] Error response:', errorText)
+    let errorDetail = 'API request failed'
+    try {
+      const errorJson = JSON.parse(errorText)
+      errorDetail = errorJson.detail || errorJson.message || errorDetail
+    } catch {
+      errorDetail = errorText || errorDetail
+    }
+    throw new Error(errorDetail)
   }
   
   return response.json()

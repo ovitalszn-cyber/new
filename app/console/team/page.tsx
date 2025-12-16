@@ -2,11 +2,24 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { getTeamMembers } from '@/lib/api';
+
+interface TeamMember {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  avatar_url?: string;
+  joined_at: string;
+}
 
 export default function TeamPage() {
   const [userName, setUserName] = useState('User');
   const [userEmail, setUserEmail] = useState('');
   const [userImage, setUserImage] = useState<string | undefined>(undefined);
+  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -23,6 +36,23 @@ export default function TeamPage() {
   }, []);
 
   useEffect(() => {
+    fetchTeam();
+  }, []);
+
+  const fetchTeam = async () => {
+    try {
+      setLoading(true);
+      const data = await getTeamMembers();
+      setMembers(data.members);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load team');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {
       (window as any).lucide.createIcons({
         attrs: {
@@ -30,7 +60,7 @@ export default function TeamPage() {
         }
       });
     }
-  }, []);
+  }, [members, loading]);
 
   return (
     <>
@@ -66,12 +96,24 @@ export default function TeamPage() {
             </button>
           </div>
 
+          {/* Error State */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 rounded-sm p-4 text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
           {/* Team Members */}
           <div className="bg-[#0C0D0F] border border-white/5 rounded-sm overflow-hidden">
             <div className="p-6 border-b border-white/5">
               <h3 className="text-sm font-medium text-white">Team Members</h3>
             </div>
             
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+              </div>
+            ) : (
             <div className="divide-y divide-white/5">
               {/* Owner (Current User) */}
               <div className="p-6 flex items-center justify-between">
@@ -97,7 +139,38 @@ export default function TeamPage() {
                   <span className="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-xs font-medium text-purple-400">Owner</span>
                 </div>
               </div>
+              
+              {/* Other Team Members from API */}
+              {members.map((member) => (
+                <div key={member.id} className="p-6 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    {member.avatar_url ? (
+                      <img src={member.avatar_url} alt="" className="w-10 h-10 rounded-full border border-white/10" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-600 border border-white/10 flex items-center justify-center">
+                        <span className="text-sm font-medium text-white">
+                          {member.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                        </span>
+                      </div>
+                    )}
+                    <div>
+                      <div className="text-sm font-medium text-white">{member.name}</div>
+                      <div className="text-xs text-zinc-500">{member.email}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className={`px-2 py-1 rounded text-xs font-medium ${
+                      member.role === 'admin' 
+                        ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400'
+                        : 'bg-zinc-500/10 border border-zinc-500/20 text-zinc-400'
+                    }`}>
+                      {member.role.charAt(0).toUpperCase() + member.role.slice(1)}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
+            )}
           </div>
 
           {/* Pending Invites */}
