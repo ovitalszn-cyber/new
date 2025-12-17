@@ -1,10 +1,18 @@
 'use client';
 
-import { Filters as FiltersType } from '@/lib/api';
+export interface Filters {
+  sports: string[];
+  numLegs: number;
+  minEV: number;
+  minTotalEV: number;
+  mixedSports: boolean;
+  prematch: boolean;
+  live: boolean;
+}
 
 interface FiltersProps {
-  filters: FiltersType;
-  onFiltersChange: (filters: FiltersType) => void;
+  filters: Filters;
+  onFiltersChange: (filters: Filters) => void;
 }
 
 const SPORTS = [
@@ -17,7 +25,7 @@ const SPORTS = [
 ];
 
 export default function Filters({ filters, onFiltersChange }: FiltersProps) {
-  const updateFilter = (key: keyof FiltersType, value: any) => {
+  const updateFilter = (key: keyof Filters, value: any) => {
     onFiltersChange({ ...filters, [key]: value });
   };
 

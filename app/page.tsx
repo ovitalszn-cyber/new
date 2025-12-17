@@ -55,7 +55,7 @@ export default function LandingPage() {
         `}</style>
 
         {/* Public Beta Banner */}
-        <div className="fixed top-0 w-full z-50 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-violet-600/10 border-b border-purple-500/20">
+        <div className="sticky top-0 w-full z-50 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-violet-600/10 border-b border-purple-500/20">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-purple-500/20 border border-purple-500/30 rounded-full">
               <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse"></span>
@@ -306,7 +306,7 @@ export default function LandingPage() {
             <p className="text-lg text-zinc-500">Start for free, scale as your traffic grows.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/10 bg-[#0C0D0F]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/10 bg-[#0C0D0F]">
             
             <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
               <div className="mb-4">
@@ -334,10 +334,36 @@ export default function LandingPage() {
               <a href="https://buy.stripe.com/aFaeVdeiq3UT6Yf57Jdby00" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Start Free</a>
             </div>
 
-            <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/10 bg-white/[0.02] relative flex flex-col">
+            <div className="p-8 md:p-10 border-b border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
               <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
               <div className="mb-4">
                 <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Starter</h3>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-normal text-white">$29</span>
+                  <span className="text-zinc-500 text-base">/month</span>
+                </div>
+              </div>
+              <p className="text-base text-zinc-400 mb-8">Perfect for individual developers.</p>
+              <ul className="space-y-4 mb-8 flex-1">
+                <li className="flex items-start gap-3 text-base text-zinc-300">
+                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> 50 requests/min
+                </li>
+                <li className="flex items-start gap-3 text-base text-zinc-300">
+                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> All books (except Bet365, Pinnacle)
+                </li>
+                <li className="flex items-start gap-3 text-base text-zinc-300">
+                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> EV props
+                </li>
+                <li className="flex items-start gap-3 text-base text-zinc-300">
+                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> Email support
+                </li>
+              </ul>
+              <a href="https://buy.stripe.com/6oUeVd3DMcrp5Ub8jVdby03" className="w-full py-3 bg-white text-black font-medium text-sm text-center hover:bg-zinc-200 transition-colors rounded-none">Get Started</a>
+            </div>
+
+            <div className="p-8 md:p-10 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Pro</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-normal text-white">$99</span>
                   <span className="text-zinc-500 text-base">/month</span>
@@ -346,24 +372,24 @@ export default function LandingPage() {
               <p className="text-base text-zinc-400 mb-8">Full access for serious builders.</p>
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> 100 requests/min
+                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> 100 requests/min
                 </li>
                 <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> Everything (all books incl. Bet365, all leagues, all markets, alt lines, combos)
+                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Everything (all books incl. Bet365, all leagues, all markets, alt lines, combos)
                 </li>
                 <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> EV props + Projections
+                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> EV props + Projections
                 </li>
                 <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> Priority email/Discord support
+                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Priority email/Discord support
                 </li>
               </ul>
-              <a href="https://buy.stripe.com/aFa3cv4HQdvt2HZcAbdby01" className="w-full py-3 bg-white text-black font-medium text-sm text-center hover:bg-zinc-200 transition-colors rounded-none">Get Started</a>
+              <a href="https://buy.stripe.com/aFa3cv4HQdvt2HZcAbdby01" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Get Started</a>
             </div>
 
             <div className="p-8 md:p-10 hover:bg-white/[0.02] transition-colors flex flex-col">
               <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Pro</h3>
+                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Enterprise</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-normal text-white">$249</span>
                   <span className="text-zinc-500 text-base">/month</span>
@@ -375,13 +401,13 @@ export default function LandingPage() {
                   <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> 250 requests/min
                 </li>
                 <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Everything (same as Starter)
+                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Everything (same as Pro)
                 </li>
                 <li className="flex items-start gap-3 text-base text-zinc-300">
                   <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> EV props + Projections
                 </li>
                 <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Highest priority support
+                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Highest priority support + SLA
                 </li>
               </ul>
               <a href="https://buy.stripe.com/9B6eVdeiq0IHfuL2ZBdby02" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Get Started</a>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import SessionProvider from "@/components/SessionProvider";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -40,9 +39,7 @@ export default function RootLayout({
         className={`${nunito.variable} ${dmSans.variable} font-sans antialiased bg-[#F4F1FA] text-[#332F3A]`}
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        <SessionProvider>
-          {children}
-        </SessionProvider>
+        {children}
         <Analytics />
       </body>
     </html>

@@ -2,16 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getTeamMembers } from '@/lib/api';
+import { api, TeamMember } from '@/lib/api-client';
 
-interface TeamMember {
-  id: string;
-  email: string;
-  name: string;
-  role: string;
-  avatar_url?: string;
-  joined_at: string;
-}
 
 export default function TeamPage() {
   const [userName, setUserName] = useState('User');
@@ -43,7 +35,7 @@ export default function TeamPage() {
     try {
       setLoading(true);
       setError(null);
-      const data = await getTeamMembers();
+      const data = await api.getTeam();
       setMembers(data.members);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load team');
@@ -140,8 +132,8 @@ export default function TeamPage() {
                 </div>
               </div>
               
-              {/* Other Team Members from API */}
-              {members.map((member) => (
+              {/* Other Team Members from API (filter out current user to avoid duplication) */}
+              {members.filter(member => member.email !== userEmail).map((member) => (
                 <div key={member.id} className="p-6 flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {member.avatar_url ? (

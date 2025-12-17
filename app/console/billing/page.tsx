@@ -2,28 +2,13 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getBillingInfo, getBillingHistory } from '@/lib/api';
+import { api, BillingInfo } from '@/lib/api-client';
 
-interface BillingData {
-  plan: string;
-  monthly_limit: number;
-  current_usage: number;
-  billing_cycle_end: string;
-  payment_method?: { last4: string; brand: string; exp_month: number; exp_year: number };
-}
-
-interface Invoice {
-  id: string;
-  date: string;
-  amount: number;
-  status: string;
-  pdf_url: string;
-}
 
 export default function BillingPage() {
   const [userName, setUserName] = useState('User');
-  const [billing, setBilling] = useState<BillingData | null>(null);
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [billing, setBilling] = useState<BillingInfo | null>(null);
+  const [invoices, setInvoices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,8 +33,8 @@ export default function BillingPage() {
       setLoading(true);
       setError(null);
       const [billingData, historyData] = await Promise.all([
-        getBillingInfo(),
-        getBillingHistory()
+        api.getBilling(),
+        api.getBillingHistory()
       ]);
       setBilling(billingData);
       setInvoices(historyData.invoices);
@@ -132,11 +117,9 @@ export default function BillingPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-semibold text-white">
-                    {billing.plan === 'starter' ? '$49' : billing.plan === 'growth' ? '$149' : '$499'}
-                    <span className="text-sm text-zinc-500 font-normal">/mo</span>
+                  <div className="px-3 py-1 bg-white/5 border border-white/10 rounded text-sm text-zinc-300 capitalize">
+                    {billing.plan}
                   </div>
-                  <div className="text-xs text-zinc-500">Billed monthly</div>
                 </div>
               </div>
             </div>
@@ -170,7 +153,7 @@ export default function BillingPage() {
                   </div>
                   <div>
                     <div className="text-sm text-white">•••• •••• •••• {billing.payment_method.last4}</div>
-                    <div className="text-xs text-zinc-500 capitalize">{billing.payment_method.brand} - Expires {billing.payment_method.exp_month}/{billing.payment_method.exp_year}</div>
+                    <div className="text-xs text-zinc-500 capitalize">{billing.payment_method.type}</div>
                   </div>
                 </div>
                 <button className="text-xs text-zinc-400 hover:text-white transition-colors">

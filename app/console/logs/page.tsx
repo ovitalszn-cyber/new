@@ -2,16 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getRequestLogs } from '@/lib/api';
+import { api, LogEntry } from '@/lib/api-client';
 
-interface LogEntry {
-  id: string;
-  method: string;
-  endpoint: string;
-  status_code: number;
-  latency_ms: number;
-  timestamp: string;
-}
 
 export default function LogsPage() {
   const [userName, setUserName] = useState('User');
@@ -43,8 +35,8 @@ export default function LogsPage() {
     try {
       setLoading(true);
       setError(null);
-      const status = filter === 'all' ? undefined : filter;
-      const data = await getRequestLogs({ limit, offset, status });
+      const status = filter === 'all' ? undefined : filter as 'success' | 'error';
+      const data = await api.getLogs({ limit, offset, status });
       setLogs(data.logs);
       setTotal(data.total);
     } catch (err) {

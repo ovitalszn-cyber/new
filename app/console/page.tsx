@@ -2,16 +2,34 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getUsageSummary, getRequestLogs } from '@/lib/api';
+import { useRouter } from 'next/navigation';
+import { api, UsageSummary, Usage, LogEntry, ApiKey } from '@/lib/api-client';
 
 export default function ConsolePage() {
+  const router = useRouter();
   const [apiKeyVisible, setApiKeyVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   const [userName, setUserName] = useState('User');
-  const [usage, setUsage] = useState<any>(null);
-  const [recentLogs, setRecentLogs] = useState<any[]>([]);
+  const [usageSummary, setUsageSummary] = useState<UsageSummary | null>(null);
+  const [usage, setUsage] = useState<Usage | null>(null);
+  const [recentLogs, setRecentLogs] = useState<LogEntry[]>([]);
+  const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { supabase } = await import('@/lib/supabase');
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('[Console Page] Session check:', session?.user?.email || 'NO SESSION');
+      console.log('[Console Page] Access token exists:', !!session?.access_token);
+      if (!session) {
+        console.warn('[Console Page] No session found, redirecting to login');
+        router.push('/login');
+      }
+    };
+    checkAuth();
+  }, [router]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -33,12 +51,45 @@ export default function ConsolePage() {
     try {
       setLoading(true);
       setError(null);
-      const [usageData, logsData] = await Promise.all([
-        getUsageSummary('30d'),
-        getRequestLogs({ limit: 3, offset: 0 })
+      
+      // Use Promise.allSettled so partial failures don't break everything
+      const [summaryResult, usageResult, logsResult, keysResult] = await Promise.allSettled([
+        api.getUsageSummary('30d'),
+        api.getUsage(),
+        api.getLogs({ limit: 3 }),
+        api.listApiKeys()
       ]);
-      setUsage(usageData);
-      setRecentLogs(logsData.logs);
+      
+      // Handle usage summary (may fail with 500)
+      if (summaryResult.status === 'fulfilled') {
+        setUsageSummary(summaryResult.value);
+      } else {
+        console.warn('[Console] Usage summary failed:', summaryResult.reason);
+      }
+      
+      // Handle basic usage (usually works)
+      if (usageResult.status === 'fulfilled') {
+        setUsage(usageResult.value);
+      } else {
+        console.warn('[Console] Usage failed:', usageResult.reason);
+      }
+      
+      // Handle logs
+      if (logsResult.status === 'fulfilled') {
+        setRecentLogs(logsResult.value.logs || []);
+      } else {
+        console.warn('[Console] Logs failed:', logsResult.reason);
+        setRecentLogs([]);
+      }
+      
+      // Handle API keys
+      if (keysResult.status === 'fulfilled') {
+        console.log('[Console] API Keys:', keysResult.value.keys);
+        setApiKeys(keysResult.value.keys || []);
+      } else {
+        console.warn('[Console] API Keys failed:', keysResult.reason);
+        setApiKeys([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load data');
     } finally {
@@ -57,7 +108,10 @@ export default function ConsolePage() {
   }, [usage, recentLogs]);
 
   const handleCopyKey = () => {
-    navigator.clipboard.writeText('pk_live_8392xk29d8f7g3h2j4k5l6m7n8p9q0r1s2t3u4v5w6x7y8z9d2a');
+    const firstKey = apiKeys.find(k => k.status === 'active');
+    if (firstKey) {
+      navigator.clipboard.writeText(firstKey.key_prefix + '...');
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -99,7 +153,6 @@ export default function ConsolePage() {
               <p className="text-sm text-zinc-500">Manage your API keys, monitor usage, and track data consumption.</p>
             </div>
             <div className="flex gap-3">
-              <span className="text-xs text-zinc-500 self-center mr-2">Cycle resets in 16 days</span>
               <a href="/#pricing" className="px-3 py-1.5 bg-white text-black text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors">
                 Upgrade Plan
               </a>
@@ -115,7 +168,7 @@ export default function ConsolePage() {
             </div>
             <div className="flex items-center gap-2 pr-4 w-full sm:w-auto">
               <div className="bg-black/50 border border-white/5 rounded-sm px-3 py-2 font-mono text-sm text-zinc-300 w-full sm:w-64 flex justify-between items-center">
-                <span>{apiKeyVisible ? 'pk_live_8392xk29d8f7...9d2a' : 'pk_live_8392...9d2a'}</span>
+                <span>{apiKeys.length > 0 ? (apiKeyVisible ? apiKeys[0].key_prefix : `${apiKeys[0].key_prefix.substring(0, 12)}...`) : 'No API key yet'}</span>
                 <span className="text-xs text-zinc-600">{apiKeyVisible ? 'VISIBLE' : 'HIDDEN'}</span>
               </div>
               <button 
@@ -144,15 +197,15 @@ export default function ConsolePage() {
                   <h3 className="text-sm font-medium text-zinc-400">API Usage (This Month)</h3>
                   <div className="mt-2 flex items-baseline gap-2">
                     <span className="text-3xl font-semibold tracking-tight text-white">
-                      {loading ? '...' : usage ? usage.total_requests.toLocaleString() : '0'}
+                      {loading ? '...' : usage?.requests_this_month != null ? usage.requests_this_month.toLocaleString() : '0'}
                     </span>
                     <span className="text-sm text-zinc-500">
-                      {loading ? '...' : usage ? `/ ${usage.monthly_limit || '100,000'}` : '/ 0'}
+                      {loading ? '...' : usage?.limit_month != null ? `/ ${usage.limit_month.toLocaleString()}` : '/ 0'}
                     </span>
                   </div>
                 </div>
                 <div className="px-2 py-1 bg-white/5 border border-white/5 rounded-sm text-xs text-zinc-400">
-                  {loading ? '...' : usage ? (usage.plan || 'Starter') : 'Unknown'}
+                  {loading ? '...' : usage ? (usage.plan || 'Free') : 'Unknown'}
                 </div>
               </div>
 
@@ -205,28 +258,25 @@ export default function ConsolePage() {
                 <h3 className="text-sm font-medium text-zinc-400 mb-2">Success Rate</h3>
                 <div className="flex items-end gap-2">
                   <span className="text-3xl font-semibold tracking-tight text-white">
-                    {loading ? '...' : usage ? 
-                      (usage.total_requests > 0 ? ((usage.successful_requests / usage.total_requests) * 100).toFixed(2) : '100') + '%' 
+                    {loading ? '...' : usageSummary && usageSummary.total_requests > 0
+                      ? `${(((usageSummary.total_requests - usageSummary.error_count) / usageSummary.total_requests) * 100).toFixed(2)}%`
                       : '0%'}
-                  </span>
-                  <span className="text-xs text-emerald-400 mb-1.5 flex items-center">
-                    <i data-lucide="arrow-up-right" className="w-3 h-3 mr-0.5"></i> 0.01%
                   </span>
                 </div>
                 <div className="mt-4 w-full bg-zinc-800 rounded-full h-1">
-                  <div className="bg-emerald-500 h-1 rounded-full w-[99%]"></div>
+                  <div className="bg-emerald-500 h-1 rounded-full" style={{ width: `${usageSummary && usageSummary.total_requests > 0 ? ((usageSummary.total_requests - usageSummary.error_count) / usageSummary.total_requests) * 100 : 0}%` }}></div>
                 </div>
               </div>
 
               {/* Latency */}
               <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6 relative overflow-hidden">
-                <h3 className="text-sm font-medium text-zinc-400 mb-2">Avg. Latency</h3>
+                <h3 className="text-sm font-medium text-zinc-400 mb-2">Requests Today</h3>
                 <div className="flex items-end gap-2">
                   <div className="flex items-end gap-2">
                     <span className="text-3xl font-semibold tracking-tight text-white">
-                      {loading ? '...' : usage ? (usage.avg_latency_ms || '0') : '0'}
+                      {loading ? '...' : usage?.requests_today != null ? usage.requests_today.toLocaleString() : '0'}
                     </span>
-                    <span className="text-lg text-zinc-500 mb-1">ms</span>
+                    <span className="text-lg text-zinc-500 mb-1"></span>
                   </div>
                 </div>
                 <p className="text-xs text-zinc-500 mt-2">Global edge average</p>
@@ -273,7 +323,7 @@ export default function ConsolePage() {
                         {error}
                       </td>
                     </tr>
-                  ) : recentLogs.length === 0 ? (
+                  ) : !Array.isArray(recentLogs) || recentLogs.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="px-6 py-12 text-center text-zinc-500 text-sm">
                         No recent requests

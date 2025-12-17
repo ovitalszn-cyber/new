@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getUsageSummary } from '@/lib/api';
+import { api, UsageSummary } from '@/lib/api-client';
 
 interface UsageData {
   total_requests: number;
@@ -15,7 +15,7 @@ interface UsageData {
 
 export default function UsagePage() {
   const [userName, setUserName] = useState('User');
-  const [usage, setUsage] = useState<UsageData | null>(null);
+  const [usage, setUsage] = useState<UsageSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [range, setRange] = useState<'24h' | '7d' | '30d'>('7d');
@@ -40,10 +40,30 @@ export default function UsagePage() {
     try {
       setLoading(true);
       setError(null);
-      const data = await getUsageSummary(range);
+      console.log('[Usage Page] Fetching usage summary for range:', range);
+      const data = await api.getUsageSummary(range);
+      console.log('[Usage Page] Received data:', data);
       setUsage(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load usage data');
+      console.error('[Usage Page] Error fetching usage summary:', err);
+      // Try to get basic usage data as fallback
+      try {
+        console.log('[Usage Page] Trying fallback to basic usage endpoint');
+        const basicUsage = await api.getUsage();
+        console.log('[Usage Page] Basic usage data:', basicUsage);
+        // Convert basic usage to summary format
+        setUsage({
+          total_requests: basicUsage.requests_this_month || 0,
+          error_count: 0,
+          error_rate: 0,
+          top_endpoints: [],
+          requests_per_day: [],
+          range: range
+        });
+      } catch (fallbackErr) {
+        console.error('[Usage Page] Fallback also failed:', fallbackErr);
+        setError(err instanceof Error ? err.message : 'Failed to load usage data');
+      }
     } finally {
       setLoading(false);
     }
@@ -119,20 +139,24 @@ export default function UsagePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
               <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Total Requests</h3>
-              <div className="text-2xl font-semibold text-white">{usage.total_requests.toLocaleString()}</div>
+              <div className="text-2xl font-semibold text-white">
+                {usage.total_requests != null ? usage.total_requests.toLocaleString() : '0'}
+              </div>
               <div className="text-xs text-zinc-500 mt-1">{range === '24h' ? 'Last 24 hours' : range === '7d' ? 'Last 7 days' : 'Last 30 days'}</div>
             </div>
             <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
               <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Success Rate</h3>
               <div className="text-2xl font-semibold text-white">
-                {usage.total_requests > 0 ? ((usage.successful_requests / usage.total_requests) * 100).toFixed(2) : '0'}%
+                {usage.total_requests && usage.total_requests > 0
+                  ? (((usage.total_requests - usage.error_count) / usage.total_requests) * 100).toFixed(2)
+                  : '0'}%
               </div>
-              <div className="text-xs text-zinc-500 mt-1">{usage.failed_requests} failed requests</div>
+              <div className="text-xs text-zinc-500 mt-1">{usage.error_count} failed requests</div>
             </div>
             <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
-              <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Avg Latency</h3>
-              <div className="text-2xl font-semibold text-white">{usage.avg_latency_ms}ms</div>
-              <div className="text-xs text-zinc-500 mt-1">Average response time</div>
+              <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Error Rate</h3>
+              <div className="text-2xl font-semibold text-white">{usage.error_rate.toFixed(2)}%</div>
+              <div className="text-xs text-zinc-500 mt-1">Failed request rate</div>
             </div>
             <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
               <h3 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Rate Limit</h3>
@@ -143,7 +167,7 @@ export default function UsagePage() {
           )}
 
           {/* Usage Chart */}
-          {!loading && usage && usage.requests_by_day && usage.requests_by_day.length > 0 && (
+          {!loading && usage && usage.requests_per_day && usage.requests_per_day.length > 0 && (
           <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-sm font-medium text-white">Daily Request Volume</h3>
@@ -156,30 +180,30 @@ export default function UsagePage() {
             </div>
             
             <div className="flex items-end gap-1 h-40 w-full mb-4">
-              {usage.requests_by_day.map((day, i) => {
-                const maxCount = Math.max(...usage.requests_by_day.map(d => d.count));
-                const height = maxCount > 0 ? (day.count / maxCount) * 100 : 0;
+              {usage.requests_per_day.map((day: any, i: number) => {
+                const maxCount = Math.max(...usage.requests_per_day.map((d: any) => d.requests));
+                const height = maxCount > 0 ? (day.requests / maxCount) * 100 : 0;
                 return (
                   <div key={i} className="flex-1 flex flex-col gap-0.5">
                     <div 
                       className="bg-zinc-800/50 hover:bg-zinc-600 rounded-sm transition-colors cursor-pointer" 
                       style={{ height: `${height}%` }}
-                      title={`${day.date}: ${day.count} requests`}
+                      title={`${day.date}: ${day.requests} requests`}
                     ></div>
                   </div>
                 );
               })}
             </div>
             <div className="flex justify-between text-[10px] text-zinc-600 font-mono uppercase">
-              <span>{usage.requests_by_day[0]?.date}</span>
-              <span>{usage.requests_by_day[Math.floor(usage.requests_by_day.length / 2)]?.date}</span>
-              <span>{usage.requests_by_day[usage.requests_by_day.length - 1]?.date}</span>
+              <span>{usage.requests_per_day[0]?.date}</span>
+              <span>{usage.requests_per_day[Math.floor(usage.requests_per_day.length / 2)]?.date}</span>
+              <span>{usage.requests_per_day[usage.requests_per_day.length - 1]?.date}</span>
             </div>
           </div>
           )}
 
           {/* Endpoint Breakdown */}
-          {!loading && usage && usage.requests_by_endpoint && Object.keys(usage.requests_by_endpoint).length > 0 && (
+          {!loading && usage && usage.top_endpoints && usage.top_endpoints.length > 0 && (
           <div className="bg-[#0C0D0F] border border-white/5 rounded-sm overflow-hidden">
             <div className="p-6 border-b border-white/5">
               <h3 className="text-sm font-medium text-white">Usage by Endpoint</h3>
@@ -194,22 +218,20 @@ export default function UsagePage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {Object.entries(usage.requests_by_endpoint)
-                  .sort(([, a], [, b]) => b - a)
-                  .map(([endpoint, count]) => {
-                    const percentage = usage.total_requests > 0 ? (count / usage.total_requests) * 100 : 0;
-                    return (
-                      <tr key={endpoint} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="px-6 py-4 font-mono text-xs text-zinc-300">{endpoint}</td>
-                        <td className="px-6 py-4 text-white">{count.toLocaleString()}</td>
-                        <td className="px-6 py-4">
-                          <div className="w-full bg-zinc-800 rounded-full h-2">
-                            <div className="bg-white h-2 rounded-full" style={{ width: `${percentage}%` }}></div>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                {usage.top_endpoints.slice(0, 5).map((item: any) => {
+                  const percentage = usage.total_requests > 0 ? (item.count / usage.total_requests) * 100 : 0;
+                  return (
+                    <tr key={item.endpoint} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="px-6 py-4 font-mono text-xs text-zinc-300">{item.endpoint}</td>
+                      <td className="px-6 py-4 text-white">{item.count.toLocaleString()}</td>
+                      <td className="px-6 py-4">
+                        <div className="w-full bg-zinc-800 rounded-full h-2">
+                          <div className="bg-white h-2 rounded-full" style={{ width: `${percentage}%` }}></div>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

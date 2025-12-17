@@ -2,19 +2,10 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { listApiKeys, createApiKey, revokeApiKey } from '@/lib/api';
-
-interface ApiKey {
-  id: string;
-  name: string;
-  prefix: string;
-  created_at: string;
-  last_used_at: string | null;
-  is_active: boolean;
-}
+import { api, ApiKey as ApiKeyType } from '@/lib/api-client';
 
 export default function APIKeysPage() {
-  const [keys, setKeys] = useState<ApiKey[]>([]);
+  const [keys, setKeys] = useState<ApiKeyType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [visibleKeys, setVisibleKeys] = useState<Set<string>>(new Set());
@@ -54,10 +45,14 @@ export default function APIKeysPage() {
   const fetchKeys = async () => {
     try {
       setLoading(true);
-      const data = await listApiKeys();
-      setKeys(data.keys);
+      console.log('[Keys Page] Fetching API keys...');
+      const data = await api.listApiKeys();
+      console.log('[Keys Page] Response:', data);
+      console.log('[Keys Page] Keys count:', data.keys?.length || 0);
+      setKeys(data.keys || []);
       setError(null);
     } catch (err) {
+      console.error('[Keys Page] Error:', err);
       setError(err instanceof Error ? err.message : 'Failed to load API keys');
     } finally {
       setLoading(false);
@@ -68,8 +63,8 @@ export default function APIKeysPage() {
     if (!newKeyName.trim()) return;
     try {
       setCreating(true);
-      const result = await createApiKey(newKeyName);
-      setNewlyCreatedKey(result.key);
+      const result = await api.createApiKey(newKeyName);
+      setNewlyCreatedKey(result.api_key);
       setNewKeyName('');
       setShowCreateModal(false);
       await fetchKeys();
@@ -83,7 +78,7 @@ export default function APIKeysPage() {
   const handleRevokeKey = async (keyId: string) => {
     if (!confirm('Are you sure you want to revoke this key? This action cannot be undone.')) return;
     try {
-      await revokeApiKey(keyId);
+      await api.revokeApiKey(keyId);
       await fetchKeys();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to revoke key');
@@ -208,8 +203,8 @@ export default function APIKeysPage() {
               <div className="p-6 border-b border-white/5">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-sm border ${key.is_active ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-zinc-500/10 border-zinc-500/20'}`}>
-                      <i data-lucide="key" className={`w-4 h-4 ${key.is_active ? 'text-emerald-400' : 'text-zinc-400'}`}></i>
+                    <div className={`p-2 rounded-sm border ${key.status === 'active' ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-zinc-500/10 border-zinc-500/20'}`}>
+                      <i data-lucide="key" className={`w-4 h-4 ${key.status === 'active' ? 'text-emerald-400' : 'text-zinc-400'}`}></i>
                     </div>
                     <div>
                       <h3 className="text-sm font-medium text-white">{key.name}</h3>
@@ -218,21 +213,21 @@ export default function APIKeysPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-1 rounded-full text-[10px] font-medium ${
-                      key.is_active 
+                      key.status === 'active' 
                         ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' 
                         : 'bg-zinc-500/10 border border-zinc-500/20 text-zinc-400'
                     }`}>
-                      {key.is_active ? 'ACTIVE' : 'REVOKED'}
+                      {key.status === 'active' ? 'ACTIVE' : 'REVOKED'}
                     </span>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-2">
                   <div className="flex-1 bg-black/50 border border-white/5 rounded-sm px-4 py-3 font-mono text-sm text-zinc-300">
-                    {key.prefix}••••••••••••••••••••••••
+                    {key.key_prefix}••••••••••••••••••••••••
                   </div>
                   <button 
-                    onClick={() => handleCopy(key.prefix, key.id)}
+                    onClick={() => handleCopy(key.key_prefix, key.id)}
                     className="p-3 hover:bg-white/10 rounded-sm text-zinc-400 hover:text-white transition-colors border border-white/5" 
                     title="Copy Prefix"
                   >
@@ -245,7 +240,7 @@ export default function APIKeysPage() {
                 <div className="text-xs text-zinc-500">
                   Last used: {key.last_used_at ? formatDate(key.last_used_at) : 'Never'}
                 </div>
-                {key.is_active && (
+                {key.status === 'active' && (
                   <button 
                     onClick={() => handleRevokeKey(key.id)}
                     className="text-xs text-red-400 hover:text-red-300 transition-colors"

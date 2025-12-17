@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auth Test</title>
+</head>
+<body>
+  <h1>Supabase Auth Test</h1>
+  <button onclick="testSupabase()">Test Supabase Connection</button>
+  <button onclick="testAuth()">Test Auth</button>
+  <div id="result"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabaseUrl = 'https://wleoennwnjvhvtbquimh.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsZW9lbm53bmp2aHZ0YnF1aW1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0Njg1MzEsImV4cCI6MjA4MTA0NDUzMX0.nnn7gSYklXX1rE8eWQ-THrw3V75pGkF33IkZYe8sjgM';
+    
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        flowType: 'pkce'
+      }
+    });
+
+    async function testSupabase() {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        document.getElementById('result').innerHTML = 
+          '<h3>Supabase Connection:</h3>' +
+          '<pre>' + JSON.stringify({ hasSession: !!data.session, error }, null, 2) + '</pre>';
+      } catch (e) {
+        document.getElementById('result').innerHTML = '<h3>Error: ' + e.message + '</h3>';
+      }
+    }
+
+    async function testAuth() {
+      try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: 'http://localhost:3000/auth/callback'
+          }
+        });
+        
+        if (error) {
+          document.getElementById('result').innerHTML = '<h3>Auth Error: ' + error.message + '</h3>';
+        } else {
+          document.getElementById('result').innerHTML = '<h3>Redirecting to Google...</h3>';
+        }
+      } catch (e) {
+        document.getElementById('result').innerHTML = '<h3>Error: ' + e.message + '</h3>';
+      }
+    }
+  </script>
+</body>
+</html>
