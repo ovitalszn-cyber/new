@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const BACKEND_URL = 'https://api.kashrock.com'
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.kashrock.com'
 
 export async function GET(
   request: NextRequest,
@@ -72,7 +72,19 @@ async function handleProxy(
     
     console.log(`[Proxy] Response: ${response.status} ${response.statusText}`)
 
-    const data = await response.json().catch(() => ({}))
+    const contentType = response.headers.get('content-type') || ''
+    let data: any = null
+
+    if (contentType.includes('application/json')) {
+      data = await response.json().catch(() => null)
+    } else {
+      const text = await response.text().catch(() => '')
+      data = text ? { detail: text } : { detail: response.statusText }
+    }
+
+    if (data == null) {
+      data = { detail: response.statusText }
+    }
 
     return NextResponse.json(data, { status: response.status })
   } catch (error) {

@@ -18,6 +18,7 @@ export default function UsagePage() {
   const [usage, setUsage] = useState<UsageSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [range, setRange] = useState<'24h' | '7d' | '30d'>('7d');
 
   useEffect(() => {
@@ -25,16 +26,25 @@ export default function UsagePage() {
       const { supabase } = await import('@/lib/supabase');
       if (!supabase) return;
       const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user?.user_metadata?.full_name) {
-        setUserName(session.user.user_metadata.full_name);
+      if (session) {
+        setIsAuthenticated(true);
+        if (session.user?.user_metadata?.full_name) {
+          setUserName(session.user.user_metadata.full_name);
+        }
+      } else {
+        setIsAuthenticated(false);
+        setError('Please log in to view usage data');
+        setLoading(false);
       }
     };
     getUser();
   }, []);
 
   useEffect(() => {
-    fetchUsage();
-  }, [range]);
+    if (isAuthenticated) {
+      fetchUsage();
+    }
+  }, [range, isAuthenticated]);
 
   const fetchUsage = async () => {
     try {
@@ -109,7 +119,7 @@ export default function UsagePage() {
             </div>
             <div className="flex items-center gap-2">
               <select 
-                value={range}
+       value={range}
                 onChange={(e) => setRange(e.target.value as '24h' | '7d' | '30d')}
                 className="bg-[#0C0D0F] border border-white/5 rounded-sm px-3 py-1.5 text-xs text-white focus:outline-none focus:border-zinc-500"
               >
@@ -123,7 +133,17 @@ export default function UsagePage() {
           {/* Error State */}
           {error && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-sm p-4 text-red-400 text-sm">
-              {error}
+              <div>{error}</div>
+              {error.toLowerCase().includes('log in') && (
+                <div className="mt-3">
+                  <Link
+                    href="/login"
+                    className="inline-flex items-center gap-2 bg-white text-black px-3 py-2 rounded-sm text-xs font-medium hover:bg-zinc-200 transition-colors"
+                  >
+                    Sign in
+                  </Link>
+                </div>
+              )}
             </div>
           )}
 

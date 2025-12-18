@@ -37,7 +37,7 @@ async function apiRequest<T>(
     if (typeof window !== 'undefined') {
       window.location.href = '/login'
     }
-    throw new Error('Not authenticated')
+    throw new Error('Please log in to access this feature')
   }
 
   const url = `${API_BASE_URL}${endpoint}`

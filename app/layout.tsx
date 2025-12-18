@@ -18,12 +18,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "KashRock API - One API. All Odds. Zero Hassle.",
-  description: "The unified sports odds API built for AI-native developers. One endpoint delivers every sportsbook line and DFS slate across all sports. No keys to juggle, no fragmented pricing, no complex schema.",
-  keywords: ["sports odds API", "betting API", "DFS API", "sportsbook data", "AI sports data", "unified odds API"],
+  title: "Esports DFS API | KashRock",
+  description: "Normalized esports DFS API with slates, props, player game logs, results grading and media. Build bots, dashboards, and models without scraping.",
+  keywords: ["esports DFS API", "esports props", "player game logs", "results grading", "CS2 API", "LoL API", "Dota 2 API"],
   openGraph: {
-    title: "KashRock API - One API. All Odds. Zero Hassle.",
-    description: "Go from idea to odds in minutes. One endpoint, all sports, AI-ready data.",
+    title: "Esports DFS API | KashRock",
+    description: "Esports-first infrastructure: slates, props, results + grading. Build bots and dashboards without scraping.",
     type: "website",
   },
 };
