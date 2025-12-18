@@ -129,7 +129,7 @@ export default function DFSEsportsAPIPage() {
             </div>
             <div className="bg-[#0C0D0F] border border-white/10 rounded-lg p-6">
               <h3 className="text-lg font-medium text-white mb-2">How do I get an API key?</h3>
-              <p className="text-zinc-400">Sign up for a KashRock account to get your API key. We offer free tier access for developers and scalable pricing for production use.</p>
+              <p className="text-zinc-400">Request access to KashRock via the console to get your API key. All plans are paid with published RPM limits so you can go live immediately.</p>
             </div>
           </div>
         </section>
