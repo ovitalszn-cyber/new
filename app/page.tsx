@@ -294,82 +294,158 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Pricing Section - Hidden during beta */}
-        {/* <section id="pricing" className="py-24 max-w-7xl mx-auto px-6">
+        {/* Pricing Section */}
+        <section id="pricing" className="py-24 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">KashRock Pricing</h2>
-            <p className="text-lg text-zinc-500">Start for free, scale as your traffic grows.</p>
+            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Pricing</h2>
+            <p className="text-lg text-zinc-500">No free plans. No trials. KashRock is for builders who are ready to ship.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/10 bg-[#0C0D0F]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/10 bg-[#0C0D0F]">
             
-            <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
+            {/* Hobby */}
+            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
               <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Free</h3>
+                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Hobby</h3>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium text-white">$0</span>
-                  <span className="text-zinc-500">/month</span>
+                  <span className="text-3xl font-medium text-white">$29</span>
+                  <span className="text-zinc-500">/mo</span>
                 </div>
+                <p className="text-sm font-bold text-zinc-300 mt-2">50 requests / minute</p>
               </div>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">1,000 API calls/month</span>
+                  <span className="text-zinc-300">Esports DFS: slates + props</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Basic esports data</span>
+                  <span className="text-zinc-300">Player images + team logos included</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Community support</span>
+                  <span className="text-zinc-300">Live + historical match access</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Email support</span>
                 </li>
               </ul>
               <div className="mt-auto">
-                <button className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors">
-                  Get Started
-                </button>
+                <a href="https://buy.stripe.com/aFaeVdeiq3UT6Yf57Jdby00" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
+                  Subscribe
+                </a>
               </div>
             </div>
             
-            <div className="p-8 md:p-10 hover:bg-white/[0.02] transition-colors flex flex-col">
-              <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Pro</h3>
+            {/* Builder - Most Popular */}
+            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-full">
+                Most Popular
+              </div>
+              <div className="mb-4 mt-2">
+                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Builder</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-3xl font-medium text-white">$99</span>
-                  <span className="text-zinc-500">/month</span>
+                  <span className="text-zinc-500">/mo</span>
                 </div>
+                <p className="text-sm font-bold text-zinc-300 mt-2">100 requests / minute</p>
               </div>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Unlimited API calls</span>
+                  <span className="text-zinc-300">Everything in Hobby</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Full esports data suite</span>
+                  <span className="text-zinc-300">Player game logs + box scores</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Real-time updates</span>
+                  <span className="text-zinc-300">Results grading (hit/miss/push)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
                   <span className="text-zinc-300">Priority support</span>
                 </li>
+              </ul>
+              <div className="mt-auto">
+                <a href="https://buy.stripe.com/6oEaVdeiq3UT6Yf57Jdby00" className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors text-center block">
+                  Subscribe
+                </a>
+              </div>
+            </div>
+
+            {/* Pro */}
+            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Pro</h3>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl font-medium text-white">$249</span>
+                  <span className="text-zinc-500">/mo</span>
+                </div>
+                <p className="text-sm font-bold text-zinc-300 mt-2">250 requests / minute</p>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Custom integrations</span>
+                  <span className="text-zinc-300">Everything in Builder</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Highest throughput for production apps</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Early access to new esports expansions</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Faster support response</span>
                 </li>
               </ul>
               <div className="mt-auto">
-                <button className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors">
-                  Start Free Trial
-                </button>
+                <a href="https://buy.stripe.com/9B6eVdeiq0IHfuL2ZBdby02" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
+                  Subscribe
+                </a>
+              </div>
+            </div>
+
+            {/* Enterprise */}
+            <div className="p-8 md:p-6 hover:bg-white/[0.02] transition-colors flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Enterprise</h3>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl font-medium text-white">Contact us</span>
+                </div>
+                <p className="text-sm text-zinc-300 mt-2">Custom limits + SLA</p>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Custom RPM + burst strategy</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Dedicated support + onboarding</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Contract + invoicing</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Data/licensing requests</span>
+                </li>
+              </ul>
+              <div className="mt-auto">
+                <a href="mailto:support@kashrock.com" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
+                  Contact
+                </a>
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* Esports Social Proof */}
         <EsportsSocialProof />
