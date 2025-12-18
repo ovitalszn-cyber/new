@@ -147,6 +147,9 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Esports Social Proof */}
+        <EsportsSocialProof />
+
         {/* Features Grid */}
         <section id="features" className="py-24 max-w-7xl mx-auto px-6">
           <div className="mb-16">
@@ -332,7 +335,7 @@ export default function LandingPage() {
                 </li>
               </ul>
               <div className="mt-auto">
-                <a href="https://buy.stripe.com/aFaeVdeiq3UT6Yf57Jdby00" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
+                <a href="https://buy.stripe.com/6oUeVd3DMcrp5Ub8jVdby03" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
                   Subscribe
                 </a>
               </div>
@@ -370,7 +373,7 @@ export default function LandingPage() {
                 </li>
               </ul>
               <div className="mt-auto">
-                <a href="https://buy.stripe.com/6oEaVdeiq3UT6Yf57Jdby00" className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors text-center block">
+                <a href="https://buy.stripe.com/aFa3cv4HQdvt2HZcAbdby01" className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors text-center block">
                   Subscribe
                 </a>
               </div>
