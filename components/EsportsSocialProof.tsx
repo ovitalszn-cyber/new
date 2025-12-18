@@ -419,7 +419,7 @@ export default function EsportsSocialProof() {
           Real esports objects — normalized, ready to ship
         </h2>
         <p className="text-lg text-zinc-500">
-          Examples from KashRock Esports responses. External links redacted.
+          Examples from KashRock Esports responses.
         </p>
       </div>
       
