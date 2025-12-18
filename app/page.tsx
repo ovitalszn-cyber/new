@@ -294,9 +294,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Esports Social Proof */}
-        <EsportsSocialProof />
-
         {/* Pricing Section - Hidden during beta */}
         {/* <section id="pricing" className="py-24 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -310,142 +307,72 @@ export default function LandingPage() {
               <div className="mb-4">
                 <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Free</h3>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-normal text-white">$0</span>
-                  <span className="text-zinc-500 text-base">/month</span>
+                  <span className="text-3xl font-medium text-white">$0</span>
+                  <span className="text-zinc-500">/month</span>
                 </div>
               </div>
-              <p className="text-base text-zinc-400 mb-8">Built for testing and early integration.</p>
-              <ul className="space-y-4 mb-8 flex-1">
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Basic rate limits
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">1,000 API calls/month</span>
                 </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Esports slates + props (limited)
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Basic esports data</span>
                 </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="x" className="w-4 h-4 text-zinc-600 mt-1 shrink-0"></i> <span className="text-zinc-500">Does NOT include: grading / projections / premium coverage</span>
-                </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Discord Support
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Community support</span>
                 </li>
               </ul>
-              <a href="https://buy.stripe.com/aFaeVdeiq3UT6Yf57Jdby00" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Start Free</a>
-            </div>
-
-            <div className="p-8 md:p-10 border-b border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
-              <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-              <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Starter</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-normal text-white">$29</span>
-                  <span className="text-zinc-500 text-base">/month</span>
-                </div>
+              <div className="mt-auto">
+                <button className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors">
+                  Get Started
+                </button>
               </div>
-              <p className="text-base text-zinc-400 mb-8">Best for indie builders.</p>
-              <ul className="space-y-4 mb-8 flex-1">
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> More requests/min
-                </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> Esports props + player logs
-                </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-white mt-1 shrink-0"></i> Email support
-                </li>
-              </ul>
-              <a href="https://buy.stripe.com/6oUeVd3DMcrp5Ub8jVdby03" className="w-full py-3 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2">
-                Get Started
-              </a>
             </div>
-
-            <div className="p-8 md:p-10 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
+            
+            <div className="p-8 md:p-10 hover:bg-white/[0.02] transition-colors flex flex-col">
               <div className="mb-4">
                 <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Pro</h3>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-normal text-white">$99</span>
-                  <span className="text-zinc-500 text-base">/month</span>
+                  <span className="text-3xl font-medium text-white">$99</span>
+                  <span className="text-zinc-500">/month</span>
                 </div>
               </div>
-              <p className="text-base text-zinc-400 mb-8">Full esports access.</p>
-              <ul className="space-y-4 mb-8 flex-1">
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> 100 requests/min
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Unlimited API calls</span>
                 </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Results grading + projections
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Full esports data suite</span>
                 </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Priority support
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Real-time updates</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Priority support</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Custom integrations</span>
                 </li>
               </ul>
-              <a href="https://buy.stripe.com/aFa3cv4HQdvt2HZcAbdby01" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Get Started</a>
-            </div>
-
-            <div className="p-8 md:p-10 hover:bg-white/[0.02] transition-colors flex flex-col">
-              <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Enterprise</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-normal text-white">$249</span>
-                  <span className="text-zinc-500 text-base">/month</span>
-                </div>
+              <div className="mt-auto">
+                <button className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors">
+                  Start Free Trial
+                </button>
               </div>
-              <p className="text-base text-zinc-400 mb-8">High volume + SLA.</p>
-              <ul className="space-y-4 mb-8 flex-1">
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> 250 requests/min
-                </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Everything (same as Pro)
-                </li>
-                <li className="flex items-start gap-3 text-base text-zinc-300">
-                  <i data-lucide="check" className="w-4 h-4 text-zinc-500 mt-1 shrink-0"></i> Highest priority support + SLA
-                </li>
-              </ul>
-              <a href="https://buy.stripe.com/9B6eVdeiq0IHfuL2ZBdby02" className="w-full py-3 border border-white/20 text-white font-medium text-sm text-center hover:bg-white hover:text-black transition-colors rounded-none">Get Started</a>
             </div>
-
           </div>
         </section> */}
 
-        {/* FAQ Section */}
-        <section className="py-24 max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl font-medium tracking-tight text-white mb-10">Common Questions</h2>
-          <div className="space-y-4">
-            <details className="group bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden">
-              <summary className="flex justify-between items-center cursor-pointer p-6 list-none">
-                <span className="text-lg font-medium text-zinc-200">Which esports do you support?</span>
-                <span className="transition group-open:rotate-180">
-                  <i data-lucide="chevron-down" className="w-5 h-5 text-zinc-500"></i>
-                </span>
-              </summary>
-              <div className="text-zinc-400 px-6 pb-6 pt-0 text-base leading-relaxed">
-                We support CS2, League of Legends, Dota 2, and other major esports titles with full DFS coverage including slates, props, and player game logs.
-              </div>
-            </details>
-            <details className="group bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden">
-              <summary className="flex justify-between items-center cursor-pointer p-6 list-none">
-                <span className="text-lg font-medium text-zinc-200">Do you provide live + historical match data?</span>
-                <span className="transition group-open:rotate-180">
-                  <i data-lucide="chevron-down" className="w-5 h-5 text-zinc-500"></i>
-                </span>
-              </summary>
-              <div className="text-zinc-400 px-6 pb-6 pt-0 text-base leading-relaxed">
-                Yes. Access upcoming slates, live match data, and completed matches with full box scores and player game logs for any date range.
-              </div>
-            </details>
-            <details className="group bg-[#0C0D0F] border border-white/10 rounded-sm overflow-hidden">
-              <summary className="flex justify-between items-center cursor-pointer p-6 list-none">
-                <span className="text-lg font-medium text-zinc-200">Do you grade props (hit/miss) from results?</span>
-                <span className="transition group-open:rotate-180">
-                  <i data-lucide="chevron-down" className="w-5 h-5 text-zinc-500"></i>
-                </span>
-              </summary>
-              <div className="text-zinc-400 px-6 pb-6 pt-0 text-base leading-relaxed">
-                Yes. We automatically grade all esports props (hit/miss/push) from final match statistics, perfect for dashboard validation and model backtesting.
-              </div>
-            </details>
-          </div>
-        </section>
+        {/* Esports Social Proof */}
+        <EsportsSocialProof />
 
         {/* Footer */}
         <footer className="border-t border-white/5 bg-[#050505] pt-16 pb-12">
@@ -458,15 +385,13 @@ export default function LandingPage() {
                 The esports DFS infrastructure layer. Built for the next generation of betting tools.
               </p>
             </div>
-            
           </div>
           <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-zinc-600"> 2025 KashRock Inc. All rights reserved.</p>
+            <p className="text-sm text-zinc-600">© 2025 KashRock Inc. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <a href="/dfs-esports-api" className="text-sm text-zinc-600 hover:text-white transition-colors">DFS Esports API</a>
               <a href="/legal" className="text-sm text-zinc-600 hover:text-white transition-colors">Privacy Policy</a>
               <a href="/legal?tab=terms" className="text-sm text-zinc-600 hover:text-white transition-colors">Terms of Service</a>
-              <a href="https://x.com/kashrockapi" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="twitter" className="w-5 h-5"></i></a>
               <a href="https://www.instagram.com/kashrockapi/" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
             </div>
           </div>
