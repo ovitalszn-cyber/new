@@ -18,13 +18,26 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.kashrock.com"),
   title: "Esports DFS API | KashRock",
-  description: "Normalized esports DFS API with slates, props, player game logs, results grading and media. Build bots, dashboards, and models without scraping.",
-  keywords: ["esports DFS API", "esports props", "player game logs", "results grading", "CS2 API", "LoL API", "Dota 2 API"],
+  description:
+    "KashRock is a DFS esports API for builders — slates, props, player game logs, results grading, and media with stable IDs.",
+  alternates: {
+    canonical: "https://www.kashrock.com/",
+  },
   openGraph: {
     title: "Esports DFS API | KashRock",
-    description: "Esports-first infrastructure: slates, props, results + grading. Build bots and dashboards without scraping.",
+    description:
+      "Slates, props, player game logs, results grading, and media. Normalized esports DFS data with stable IDs.",
+    url: "https://www.kashrock.com/",
+    siteName: "KashRock",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Esports DFS API | KashRock",
+    description:
+      "Normalized esports DFS data: slates, props, player logs, results grading, and media.",
   },
 };
 
