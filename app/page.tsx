@@ -450,9 +450,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Esports Social Proof */}
-        <EsportsSocialProof />
-
         {/* Footer */}
         <footer className="border-t border-white/5 bg-[#050505] pt-16 pb-12">
           <div className="max-w-7xl mx-auto px-6 mb-16">
