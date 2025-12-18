@@ -244,7 +244,7 @@ export default function LandingPage() {
                     </div>
                     <div>
                       <h4 className="text-lg font-medium text-white">Cross-Book Mapping</h4>
-                      <p className="text-base text-zinc-500 mt-1">Player IDs link across books instantly for arbitrage finding.</p>
+                      <p className="text-base text-zinc-500 mt-1">Canonical IDs across players/teams/matches for stable esports data.</p>
                     </div>
                   </li>
                 </ul>
@@ -276,7 +276,7 @@ export default function LandingPage() {
 `}      <span className="token-key">"event_time"</span>: <span className="token-string">"2025-11-30T09:00:00Z"</span>,{`
 `}      <span className="token-key">"status"</span>: <span className="token-string">"pre_game"</span>,{`
 `}      <span className="token-key">"links"</span>: <span className="text-white">{`{`}</span>{`
-`}        <span className="token-key">"bet"</span>: <span className="token-string">"https://app.prizepicks.com/board?league_id=265&stat_type_name=MAPS 1-2 Kills&projection_id=8204498"</span>{`
+`}        <span className="token-key">"bet"</span>: <span className="token-string">"[redacted]"</span>{`
 `}      <span className="text-white">{`}`}</span>{`
 `}    <span className="text-white">{`}`}</span>{`
 `}  <span className="text-white">]</span>{`
