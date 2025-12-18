@@ -106,7 +106,7 @@ export default function LandingPage() {
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-              Normalized esports data with stable IDs and media included. Build bots, dashboards, and models without scraping.
+              Normalized esports data with stable IDs and media included. Build bots, dashboards, and models without scraping. Our DFS esports API provides everything you need.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -127,6 +127,12 @@ export default function LandingPage() {
 
             <div className="mt-16 text-sm text-zinc-500 font-normal">
               DFS platforms + books supported
+            </div>
+
+            <div className="mt-8 text-center">
+              <a href="/dfs-esports-api" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
+                Looking for a DFS esports API? →
+              </a>
             </div>
           </div>
         </section>
@@ -457,6 +463,7 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-zinc-600"> 2025 KashRock Inc. All rights reserved.</p>
             <div className="flex items-center gap-6">
+              <a href="/dfs-esports-api" className="text-sm text-zinc-600 hover:text-white transition-colors">DFS Esports API</a>
               <a href="/legal" className="text-sm text-zinc-600 hover:text-white transition-colors">Privacy Policy</a>
               <a href="/legal?tab=terms" className="text-sm text-zinc-600 hover:text-white transition-colors">Terms of Service</a>
               <a href="https://x.com/kashrockapi" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="twitter" className="w-5 h-5"></i></a>
