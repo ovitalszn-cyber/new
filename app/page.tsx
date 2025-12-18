@@ -131,20 +131,13 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Logo Marquee */}
-        <section className="border-y border-white/5 bg-[#0A0B0C] py-10 relative overflow-hidden">
-          <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(90deg, #0A0B0C 0%, transparent 10%, transparent 90%, #0A0B0C 100%)' }}></div>
-          <div className="animate-marquee" style={{ willChange: 'transform' }}>
-            <div className="flex items-center gap-16 px-8 shrink-0 min-w-max">
-              <img src="/logos/prizepicks.png" alt="PrizePicks" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/underdog.png" alt="Underdog" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/parlayplay.png" alt="ParlayPlay" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/dabble.png" alt="Dabble" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/prizepicks.png" alt="PrizePicks" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/underdog.png" alt="Underdog" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/parlayplay.png" alt="ParlayPlay" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-              <img src="/logos/dabble.png" alt="Dabble" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-            </div>
+        {/* Logo Section */}
+        <section className="border-y border-white/5 bg-[#0A0B0C] py-10">
+          <div className="flex items-center justify-center gap-16 px-8">
+            <img src="/logos/prizepicks.png" alt="PrizePicks" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
+            <img src="/logos/underdog.png" alt="Underdog" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
+            <img src="/logos/parlayplay.png" alt="ParlayPlay" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
+            <img src="/logos/dabble.png" alt="Dabble" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
           </div>
         </section>
 
