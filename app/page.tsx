@@ -55,19 +55,9 @@ export default function LandingPage() {
           ::-webkit-scrollbar-thumb:hover { background: #555; }
         `}</style>
 
-        {/* Public Beta Banner */}
-        <div className="sticky top-0 w-full z-50 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-violet-600/10 border-b border-purple-500/20">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-purple-500/20 border border-purple-500/30 rounded-full">
-              <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse"></span>
-              <span className="text-[10px] font-medium text-purple-300 uppercase tracking-wider">Public Beta</span>
-            </span>
-            <span className="text-xs text-zinc-400 text-center">Public Beta (Esports-first) — rapid updates weekly.</span>
-          </div>
-        </div>
-
+        
         {/* Navbar */}
-        <nav className="fixed top-[36px] w-full z-50 glass-nav transition-all duration-300">
+        <nav className="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <div className="flex items-center">
               <img src="/kashrock-logo.svg" alt="KashRock" className="h-10 w-auto" />
@@ -90,7 +80,7 @@ export default function LandingPage() {
         </nav>
 
         {/* Hero Section */}
-        <section className="relative pt-40 pb-20 md:pt-56 md:pb-32 overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-40 md:pb-32 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -139,7 +129,7 @@ export default function LandingPage() {
 
         {/* Logo Section */}
         <section className="border-y border-white/5 bg-[#0A0B0C] py-10">
-          <div className="flex items-center justify-center gap-16 px-8">
+          <div className="flex items-center justify-center gap-16 px-8 flex-wrap">
             <img src="/logos/prizepicks.png" alt="PrizePicks" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
             <img src="/logos/underdog.png" alt="Underdog" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
             <img src="/logos/parlayplay.png" alt="ParlayPlay" className="h-10 w-10 object-contain opacity-60 hover:opacity-100 transition-opacity" />
