@@ -116,43 +116,15 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
 
             {/* Navigation */}
             <div className="p-3 space-y-1">
-              <div className="px-3 py-2 text-xs font-medium text-zinc-500 uppercase tracking-wider">Platform</div>
-              
               <Link href="/console" className={navLinkClass('/console')}>
                 <i data-lucide="layout-grid" className={iconClass('/console')}></i>
                 Overview
-              </Link>
-              <Link href="/console/keys" className={navLinkClass('/console/keys')}>
-                <i data-lucide="key" className={iconClass('/console/keys')}></i>
-                API Keys
-              </Link>
-              <Link href="/console/usage" className={navLinkClass('/console/usage')}>
-                <i data-lucide="bar-chart-2" className={iconClass('/console/usage')}></i>
-                Usage &amp; Limits
-              </Link>
-              <Link href="/console/logs" className={navLinkClass('/console/logs')}>
-                <i data-lucide="file-json" className={iconClass('/console/logs')}></i>
-                Logs
-              </Link>
-
-              <div className="h-px bg-white/5 my-2 mx-3"></div>
-              
-              <div className="px-3 py-2 text-xs font-medium text-zinc-500 uppercase tracking-wider">Settings</div>
-              <Link href="/console/billing" className={navLinkClass('/console/billing')}>
-                <i data-lucide="credit-card" className={iconClass('/console/billing')}></i>
-                Billing
-              </Link>
-              <Link href="/console/team" className={navLinkClass('/console/team')}>
-                <i data-lucide="users" className={iconClass('/console/team')}></i>
-                Team
               </Link>
               <Link href="https://backend.kashrock.com/docs" className="flex items-center gap-3 px-3 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.02] text-sm font-medium rounded-sm transition-all group">
                 <i data-lucide="book" className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 transition-colors"></i>
                 Documentation
               </Link>
-              
               <div className="h-px bg-white/5 my-2 mx-3"></div>
-              
               <Link href="/legal" className="flex items-center gap-3 px-3 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.02] text-sm font-medium rounded-sm transition-all group">
                 <i data-lucide="shield" className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 transition-colors"></i>
                 Legal
