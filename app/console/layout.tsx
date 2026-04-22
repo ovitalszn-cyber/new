@@ -4,56 +4,54 @@ import Script from 'next/script';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { User } from '@supabase/supabase-js';
 import { usePathname } from 'next/navigation';
+
+interface GoogleUser {
+  email: string;
+  name: string;
+  picture?: string;
+}
 
 export default function ConsoleLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<GoogleUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const initAuth = async () => {
-      const { supabase } = await import('@/lib/supabase');
-      if (!supabase) {
-        setLoading(false);
-        return;
-      }
-      
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        setUser(session.user);
+    const initAuth = () => {
+      const token = localStorage.getItem('google_id_token');
+      if (token) {
+        // Decode the JWT to get user info (simple decode without verification for UI)
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          setUser({
+            email: payload.email,
+            name: payload.name,
+            picture: payload.picture
+          });
+        } catch (e) {
+          console.error('Failed to decode token:', e);
+          router.push('/login');
+        }
       } else {
         router.push('/login');
       }
       setLoading(false);
-
-      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        setUser(session?.user ?? null);
-        if (!session?.user) {
-          router.push('/login');
-        }
-      });
-
-      return () => subscription.unsubscribe();
     };
     initAuth();
   }, [router]);
 
-  const userInitials = user?.user_metadata?.full_name
-    ? user.user_metadata.full_name.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2)
+  const userInitials = user?.name
+    ? user.name.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2)
     : 'U';
-  const userName = user?.user_metadata?.full_name || 'User';
+  const userName = user?.name || 'User';
   const userEmail = user?.email || '';
-  const userImage = user?.user_metadata?.avatar_url;
+  const userImage = user?.picture;
 
-  const handleSignOut = async () => {
-    const { supabase } = await import('@/lib/supabase');
-    if (supabase) {
-      await supabase.auth.signOut();
-    }
+  const handleSignOut = () => {
+    localStorage.removeItem('google_id_token');
     router.push('/');
   };
 
