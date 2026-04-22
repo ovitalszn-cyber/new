@@ -387,7 +387,7 @@ export default function BlogPostPage() {
             <Link href="/blog" className="text-[#7C3AED] font-medium">
               Blog
             </Link>
-            <Link href="/docs" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">
+            <Link href="https://backend.kashrock.com/docs" className="text-[#635F69] hover:text-[#7C3AED] font-medium transition-colors">
               Docs
             </Link>
           </nav>
@@ -488,7 +488,7 @@ export default function BlogPostPage() {
           </div>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-[#7C3AED] transition-colors">Home</Link>
-            <Link href="/docs" className="hover:text-[#7C3AED] transition-colors">Docs</Link>
+            <Link href="https://backend.kashrock.com/docs" className="hover:text-[#7C3AED] transition-colors">Docs</Link>
             <Link href="/dashboard" className="hover:text-[#7C3AED] transition-colors">Dashboard</Link>
           </div>
         </div>

@@ -109,7 +109,7 @@ function LegalContent() {
                 }`}
               >
                 <i data-lucide="credit-card" className={`w-4 h-4 ${activePage === 'refunds' ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300'} transition-colors`}></i>
-                No Refunds Policy
+                Refund Policy
               </button>
             </div>
           </div>
@@ -293,11 +293,16 @@ function LegalContent() {
               )}
 
               {/* Footer area inside content */}
-              <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-600">
-                <div>© 2025 KashRock Inc. All rights reserved.</div>
+              <div className="mt-16 pt-8 border-t border-white/5">
+                <p className="text-xs text-zinc-600 leading-relaxed mb-6">
+                  KashRock is a Data-as-a-Service (DaaS) provider. We provide research tools and data analytics for informational purposes. We are not a gambling operator and do not facilitate wagering.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-600">
+                  <div>© 2025 KashRock Inc. All rights reserved.</div>
                 <div className="flex gap-4 mt-2 sm:mt-0">
                   <Link href="/support" className="hover:text-zinc-400 transition-colors">Support</Link>
                   <Link href="/" className="hover:text-zinc-400 transition-colors">Home</Link>
+                </div>
                 </div>
               </div>
 

@@ -280,3 +280,10 @@ body {
   outline: none;
   box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
 }
+
+/* JSON syntax highlight tokens */
+.token-key     { color: #79b8ff; }
+.token-string  { color: #85e89d; }
+.token-number  { color: #ffab70; }
+.token-boolean { color: #b392f0; }
+.token-null    { color: #6a737d; }

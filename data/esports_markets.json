@@ -1,0 +1,457 @@
+{
+    "markets": [
+        {
+            "id": "cs2-kills-maps-1-2",
+            "canonical_name": "CS2_KILLS_MAPS_1_2",
+            "name": "Kills Maps 1-2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAPS 1-2 Kills",
+                "Kills (Maps 1-2)",
+                "Kills in Game 1+2",
+                "kills on maps 1+2",
+                "1st 2 Maps KILLS",
+                "CS2_KILLS_MAPS_1_2",
+                "ESPORTS_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "cs2-headshots-maps-1-2",
+            "canonical_name": "CS2_HEADSHOTS_MAPS_1_2",
+            "name": "Headshots Maps 1-2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAPS 1-2 Headshots",
+                "maps 1+2 headshots",
+                "Headshots Map 1+2",
+                "1st 2 Maps HEADSHOTS",
+                "CS2_HEADSHOTS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "cs2-awp-kills-maps-1-2",
+            "canonical_name": "CS2_AWP_KILLS_MAPS_1_2",
+            "name": "AWP Kills Maps 1-2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAPS 1-2 AWP Kills",
+                "CS2_AWP_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "cs2-deaths-maps-1-2",
+            "canonical_name": "CS2_DEATHS_MAPS_1_2",
+            "name": "Deaths Maps 1-2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAPS 1-2 Deaths",
+                "CS2_DEATHS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "cs2-assists-maps-1-2",
+            "canonical_name": "CS2_ASSISTS_MAPS_1_2",
+            "name": "Assists Maps 1-2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAPS 1-2 Assists",
+                "CS2_ASSISTS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "cs2-kills-maps-1-2-3",
+            "canonical_name": "CS2_KILLS_MAPS_1_2_3",
+            "name": "Kills Maps 1-2-3",
+            "game": "CS2",
+            "sportsbooks": [
+                "1st 3 Maps KILLS",
+                "CS2_KILLS_MAPS_1_2_3"
+            ]
+        },
+        {
+            "id": "cs2-headshots-maps-1-2-3",
+            "canonical_name": "CS2_HEADSHOTS_MAPS_1_2_3",
+            "name": "Headshots Maps 1-2-3",
+            "game": "CS2",
+            "sportsbooks": [
+                "HEADSHOTS_MAPS_1_2_3",
+                "CS2_HEADSHOTS_MAPS_1_2_3"
+            ]
+        },
+        {
+            "id": "cs2-kills-map-1",
+            "canonical_name": "CS2_KILLS_MAP_1",
+            "name": "Kills Map 1",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAP 1 Kills",
+                "map 1 kills",
+                "kills_on_map_1",
+                "Game 1 Kills",
+                "pandascore_game_1_player_kill_over_under",
+                "CS2_KILLS_MAP_1"
+            ]
+        },
+        {
+            "id": "cs2-kills-map-2",
+            "canonical_name": "CS2_KILLS_MAP_2",
+            "name": "Kills Map 2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAP 2 Kills",
+                "map 2 kills",
+                "kills on map 2",
+                "Game 2 Kills",
+                "pandascore_game_2_player_kill_over_under",
+                "CS2_KILLS_MAP_2"
+            ]
+        },
+        {
+            "id": "cs2-kills-map-3",
+            "canonical_name": "CS2_KILLS_MAP_3",
+            "name": "Kills Map 3",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAP 3 Kills",
+                "map 3 kills",
+                "kills_on_map_3",
+                "Game 3 Kills",
+                "CS2_KILLS_MAP_3"
+            ]
+        },
+        {
+            "id": "cs2-headshots-map-1",
+            "canonical_name": "CS2_HEADSHOTS_MAP_1",
+            "name": "Headshots Map 1",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAP 1 Headshots",
+                "Headshots Map 1",
+                "MAP 1 Headshots (Combo)",
+                "CS2_HEADSHOTS_MAP_1"
+            ]
+        },
+        {
+            "id": "cs2-headshots-map-2",
+            "canonical_name": "CS2_HEADSHOTS_MAP_2",
+            "name": "Headshots Map 2",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAP 2 Headshots",
+                "map 2 headshots",
+                "CS2_HEADSHOTS_MAP_2"
+            ]
+        },
+        {
+            "id": "cs2-headshots-map-3",
+            "canonical_name": "CS2_HEADSHOTS_MAP_3",
+            "name": "Headshots Map 3",
+            "game": "CS2",
+            "sportsbooks": [
+                "MAP 3 Headshots",
+                "map 3 headshots",
+                "CS2_HEADSHOTS_MAP_3"
+            ]
+        },
+        {
+            "id": "cs2-kills",
+            "canonical_name": "CS2_KILLS",
+            "name": "Kills",
+            "game": "CS2",
+            "sportsbooks": [
+                "kills (full game)",
+                "kills (combo)",
+                "CS2_KILLS"
+            ]
+        },
+        {
+            "id": "cs2-headshots",
+            "canonical_name": "CS2_HEADSHOTS",
+            "name": "Headshots",
+            "game": "CS2",
+            "sportsbooks": [
+                "Headshots",
+                "headshots",
+                "CS2_HEADSHOTS"
+            ]
+        },
+        {
+            "id": "cs2-deaths",
+            "canonical_name": "CS2_DEATHS",
+            "name": "Deaths",
+            "game": "CS2",
+            "sportsbooks": [
+                "Deaths",
+                "deaths",
+                "CS2_DEATHS"
+            ]
+        },
+        {
+            "id": "cs2-assists",
+            "canonical_name": "CS2_ASSISTS",
+            "name": "Assists",
+            "game": "CS2",
+            "sportsbooks": [
+                "Assists",
+                "assists",
+                "CS2_ASSISTS"
+            ]
+        },
+        {
+            "id": "cs2-fantasy-score",
+            "canonical_name": "CS2_FANTASY_SCORE",
+            "name": "Fantasy Score",
+            "game": "CS2",
+            "sportsbooks": [
+                "fantasy score",
+                "fantasy points",
+                "CS2_FANTASY_SCORE"
+            ]
+        },
+        {
+            "id": "lol-kills-map-1",
+            "canonical_name": "LOL_KILLS_MAP_1",
+            "name": "Kills Map 1",
+            "game": "LOL",
+            "sportsbooks": [
+                "Game 1 Kills",
+                "pandascore_game_1_player_kill_over_under",
+                "LOL_KILLS_MAP_1"
+            ]
+        },
+        {
+            "id": "lol-kills-map-2",
+            "canonical_name": "LOL_KILLS_MAP_2",
+            "name": "Kills Map 2",
+            "game": "LOL",
+            "sportsbooks": [
+                "Game 2 Kills",
+                "pandascore_game_2_player_kill_over_under",
+                "LOL_KILLS_MAP_2"
+            ]
+        },
+        {
+            "id": "lol-kills-maps-1-2",
+            "canonical_name": "LOL_KILLS_MAPS_1_2",
+            "name": "Kills Maps 1-2",
+            "game": "LOL",
+            "sportsbooks": [
+                "MAPS 1-2 Kills",
+                "MAPS 1-2 Kills (Combo)",
+                "LOL_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "lol-kills",
+            "canonical_name": "LOL_KILLS",
+            "name": "Kills",
+            "game": "LOL",
+            "sportsbooks": [
+                "lol_kills",
+                "league_of_legends_kills",
+                "LOL_KILLS"
+            ]
+        },
+        {
+            "id": "lol-assists",
+            "canonical_name": "LOL_ASSISTS",
+            "name": "Assists",
+            "game": "LOL",
+            "sportsbooks": [
+                "lol_assists",
+                "LOL_ASSISTS"
+            ]
+        },
+        {
+            "id": "lol-deaths",
+            "canonical_name": "LOL_DEATHS",
+            "name": "Deaths",
+            "game": "LOL",
+            "sportsbooks": [
+                "lol_deaths",
+                "LOL_DEATHS"
+            ]
+        },
+        {
+            "id": "lol-cs",
+            "canonical_name": "LOL_CS",
+            "name": "Creep Score",
+            "game": "LOL",
+            "sportsbooks": [
+                "creep score",
+                "lol_cs",
+                "LOL_CS"
+            ]
+        },
+        {
+            "id": "valorant-kills-map-1",
+            "canonical_name": "VALORANT_KILLS_MAP_1",
+            "name": "Kills Map 1",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "Game 1 Kills",
+                "pandascore_game_1_player_kill_over_under",
+                "val_kills_map_1",
+                "VALORANT_KILLS_MAP_1"
+            ]
+        },
+        {
+            "id": "valorant-kills-map-2",
+            "canonical_name": "VALORANT_KILLS_MAP_2",
+            "name": "Kills Map 2",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "Game 2 Kills",
+                "pandascore_game_2_player_kill_over_under",
+                "val_kills_map_2",
+                "VALORANT_KILLS_MAP_2"
+            ]
+        },
+        {
+            "id": "valorant-kills-maps-1-2",
+            "canonical_name": "VALORANT_KILLS_MAPS_1_2",
+            "name": "Kills Maps 1-2",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "MAPS 1-2 Kills",
+                "val_kills_maps_1_2",
+                "valorant_kills_maps_1_2",
+                "VALORANT_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "valorant-kills-maps-1-3",
+            "canonical_name": "VALORANT_KILLS_MAPS_1_3",
+            "name": "Kills Maps 1-3",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "MAPS 1-3 Kills",
+                "VALORANT_KILLS_MAPS_1_3"
+            ]
+        },
+        {
+            "id": "valorant-kills",
+            "canonical_name": "VALORANT_KILLS",
+            "name": "Kills",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "val_kills",
+                "valorant_kills",
+                "VALORANT_KILLS"
+            ]
+        },
+        {
+            "id": "valorant-assists",
+            "canonical_name": "VALORANT_ASSISTS",
+            "name": "Assists",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "valorant_assists",
+                "VALORANT_ASSISTS"
+            ]
+        },
+        {
+            "id": "valorant-deaths",
+            "canonical_name": "VALORANT_DEATHS",
+            "name": "Deaths",
+            "game": "VALORANT",
+            "sportsbooks": [
+                "valorant_deaths",
+                "VALORANT_DEATHS"
+            ]
+        },
+        {
+            "id": "dota2-kills-map-1",
+            "canonical_name": "DOTA2_KILLS_MAP_1",
+            "name": "Kills Map 1",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "Game 1 Kills",
+                "pandascore_game_1_player_kill_over_under",
+                "DOTA2_KILLS_MAP_1"
+            ]
+        },
+        {
+            "id": "dota2-kills-map-2",
+            "canonical_name": "DOTA2_KILLS_MAP_2",
+            "name": "Kills Map 2",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "Game 2 Kills",
+                "pandascore_game_2_player_kill_over_under",
+                "DOTA2_KILLS_MAP_2"
+            ]
+        },
+        {
+            "id": "dota2-kills-map-3",
+            "canonical_name": "DOTA2_KILLS_MAP_3",
+            "name": "Kills Map 3",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "MAP 3 Kills",
+                "DOTA2_KILLS_MAP_3"
+            ]
+        },
+        {
+            "id": "dota2-kills-maps-1-2",
+            "canonical_name": "DOTA2_KILLS_MAPS_1_2",
+            "name": "Kills Maps 1-2",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "MAPS 1-2 Kills",
+                "DOTA2_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "dota2-kills",
+            "canonical_name": "DOTA2_KILLS",
+            "name": "Kills",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "dota_2_kills",
+                "dota2_kills",
+                "DOTA2_KILLS"
+            ]
+        },
+        {
+            "id": "dota2-assists",
+            "canonical_name": "DOTA2_ASSISTS",
+            "name": "Assists",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "dota2_assists",
+                "DOTA2_ASSISTS"
+            ]
+        },
+        {
+            "id": "dota2-deaths",
+            "canonical_name": "DOTA2_DEATHS",
+            "name": "Deaths",
+            "game": "DOTA2",
+            "sportsbooks": [
+                "dota2_deaths",
+                "DOTA2_DEATHS"
+            ]
+        },
+        {
+            "id": "r6-kills-maps-1-2",
+            "canonical_name": "R6_KILLS_MAPS_1_2",
+            "name": "Kills Maps 1-2",
+            "game": "R6",
+            "sportsbooks": [
+                "MAPS 1-2 Kills",
+                "R6_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "r6-kills",
+            "canonical_name": "R6_KILLS",
+            "name": "Kills",
+            "game": "R6",
+            "sportsbooks": [
+                "r6_kills",
+                "R6_KILLS"
+            ]
+        }
+    ]
+}

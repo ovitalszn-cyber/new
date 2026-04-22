@@ -378,16 +378,16 @@ export default function ConsolePage() {
                 <h3 className="text-sm font-medium text-white">Integration Guide</h3>
               </div>
               <p className="text-sm text-zinc-500 mb-4">Learn how to calculate Expected Value (EV) using our pre-computed edge endpoints.</p>
-              <a href="https://api.kashrock.com/docs" target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">
+              <Link href="https://backend.kashrock.com/docs" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">
                 Read Documentation <i data-lucide="arrow-right" className="w-3 h-3"></i>
-              </a>
+              </Link>
             </div>
             <div className="bg-gradient-to-br from-[#0C0D0F] to-[#08090A] border border-white/5 rounded-sm p-6">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-blue-500/10 rounded-sm border border-blue-500/20">
                   <i data-lucide="gamepad-2" className="w-4 h-4 text-blue-400"></i>
                 </div>
-                <h3 className="text-sm font-medium text-white">New: Enhanced Esports Projections</h3>
+                <h3 className="text-sm font-medium text-white">New: Enhanced Esports Props</h3>
               </div>
               <p className="text-sm text-zinc-500 mb-4">v6.0 brings CS:GO and LoL player props normalized across 12 major books.</p>
               <a href="/#features" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">

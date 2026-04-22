@@ -1,0 +1,522 @@
+[
+  {
+    "fixture_id": "fix_1447265",
+    "match_id": 1447265,
+    "sport": "esports_cs2",
+    "discipline": "cs2",
+    "slug": "vasco-esports-2026-04-19",
+    "status": "finished",
+    "raw_status": "finished",
+    "event_time": "2026-04-19T21:03:37Z",
+    "start_date": "2026-04-19T21:03:37Z",
+    "end_date": "2026-04-19T22:51:33Z",
+    "competition": "CCT South America",
+    "league_id": 4842,
+    "tournament_id": 20754,
+    "team1": "Vasco Esports",
+    "team1_name": "Vasco Esports",
+    "team1_id": 137320,
+    "team1_logo": "https://cdn-api.pandascore.co/images/team/image/137320/608px_vasco_e_sports_allmode.png",
+    "team2": "UNO MILLE",
+    "team2_name": "UNO MILLE",
+    "team2_id": 130605,
+    "team2_logo": null,
+    "score1": 0,
+    "team1_score": 0,
+    "score2": 2,
+    "team2_score": 2,
+    "winner_id": 130605,
+    "bo": 3,
+    "best_of": 3,
+    "streams": [
+      {
+        "main": true,
+        "language": "en",
+        "embed_url": "https://player.kick.com/cct_cs6",
+        "official": true,
+        "raw_url": "https://kick.com/cct_cs6"
+      },
+      {
+        "main": false,
+        "language": "en",
+        "embed_url": "https://player.kick.com/cct_cs7",
+        "official": false,
+        "raw_url": "https://kick.com/cct_cs7"
+      }
+    ],
+    "has_streams": true,
+    "links": {
+      "team1_logo": "https://cdn-api.pandascore.co/images/team/image/137320/608px_vasco_e_sports_allmode.png",
+      "league_logo": "https://cdn-api.pandascore.co/images/league/image/4842/600px-cct_south_america_icon_allmode-png"
+    },
+    "metadata": {
+      "provider": "pandascore",
+      "source": "kashrock",
+      "external_id": 1447265,
+      "source_match_id": 1447265,
+      "slug": "vasco-esports-2026-04-19",
+      "format": "best_of",
+      "team1_id": 137320,
+      "team2_id": 130605,
+      "tournament_id": 20754,
+      "tournament_name": "Playoffs",
+      "league_id": 4842,
+      "league_name": "CCT South America",
+      "scheduled_at": "2026-04-19T21:00:00Z",
+      "begin_at": "2026-04-19T21:03:37Z",
+      "end_at": "2026-04-19T22:51:33Z",
+      "number_of_games": 3
+    },
+    "rich_data": {
+      "slug": "vasco-esports-2026-04-19",
+      "live": {
+        "supported": false,
+        "url": null,
+        "opens_at": null
+      },
+      "results": [
+        {
+          "team_id": 137320,
+          "score": 0
+        },
+        {
+          "team_id": 130605,
+          "score": 2
+        }
+      ],
+      "videogame": {
+        "id": 3,
+        "name": "Counter-Strike",
+        "slug": "cs-go"
+      },
+      "winner": {
+        "id": 130605,
+        "name": "UNO MILLE",
+        "location": "BR",
+        "slug": "uno-mille",
+        "modified_at": "2026-04-17T01:12:37Z",
+        "acronym": "UNO",
+        "image_url": null,
+        "dark_mode_image_url": null
+      },
+      "tournament_id": 20754,
+      "games": [
+        {
+          "complete": true,
+          "id": 213566,
+          "position": 1,
+          "status": "finished",
+          "length": 2525,
+          "finished": true,
+          "begin_at": "2026-04-19T21:03:37Z",
+          "detailed_stats": true,
+          "end_at": "2026-04-19T21:45:43Z",
+          "forfeit": false,
+          "match_id": 1447265,
+          "winner_type": "Team",
+          "winner": {
+            "id": 130605,
+            "type": "Team"
+          }
+        },
+        {
+          "complete": true,
+          "id": 213567,
+          "position": 2,
+          "status": "finished",
+          "length": 2943,
+          "finished": true,
+          "begin_at": "2026-04-19T22:02:30Z",
+          "detailed_stats": true,
+          "end_at": "2026-04-19T22:51:33Z",
+          "forfeit": true,
+          "match_id": 1447265,
+          "winner_type": "Team",
+          "winner": {
+            "id": 130605,
+            "type": "Team"
+          }
+        }
+      ],
+      "streams_list": [
+        {
+          "main": true,
+          "language": "en",
+          "embed_url": "https://player.kick.com/cct_cs6",
+          "official": true,
+          "raw_url": "https://kick.com/cct_cs6"
+        },
+        {
+          "main": false,
+          "language": "en",
+          "embed_url": "https://player.kick.com/cct_cs7",
+          "official": false,
+          "raw_url": "https://kick.com/cct_cs7"
+        }
+      ],
+      "league_id": 4842,
+      "opponents": [
+        {
+          "type": "Team",
+          "opponent": {
+            "id": 137320,
+            "name": "Vasco Esports",
+            "location": "BR",
+            "slug": "vasco-esports-cs-go",
+            "modified_at": "2026-04-11T16:53:21Z",
+            "acronym": "VSC",
+            "image_url": "https://cdn-api.pandascore.co/images/team/image/137320/608px_vasco_e_sports_allmode.png",
+            "dark_mode_image_url": "https://cdn-api.pandascore.co/dark_images/team/dark_image/137320/608px_vasco_e_sports_allmode.png"
+          }
+        },
+        {
+          "type": "Team",
+          "opponent": {
+            "id": 130605,
+            "name": "UNO MILLE",
+            "location": "BR",
+            "slug": "uno-mille",
+            "modified_at": "2026-04-17T01:12:37Z",
+            "acronym": "UNO",
+            "image_url": null,
+            "dark_mode_image_url": null
+          }
+        }
+      ],
+      "winner_type": "Team",
+      "number_of_games": 3,
+      "end_at": "2026-04-19T22:51:33Z",
+      "serie_id": 10512,
+      "detailed_stats": true,
+      "begin_at": "2026-04-19T21:03:37Z",
+      "status": "finished",
+      "league": {
+        "id": 4842,
+        "name": "CCT South America",
+        "url": "https://cctour.gg/",
+        "slug": "cs-go-champion-of-champions-tour",
+        "modified_at": "2022-08-09T10:12:50Z",
+        "image_url": "https://cdn-api.pandascore.co/images/league/image/4842/600px-cct_south_america_icon_allmode-png"
+      },
+      "rescheduled": false,
+      "winner_id": 130605,
+      "match_type": "best_of",
+      "original_scheduled_at": "2026-04-19T21:00:00Z",
+      "tournament": {
+        "id": 20754,
+        "name": "Playoffs",
+        "type": "online",
+        "country": null,
+        "begin_at": "2026-04-11T21:00:00Z",
+        "detailed_stats": false,
+        "end_at": "2026-04-20T01:22:00Z",
+        "winner_id": 130605,
+        "winner_type": "Team",
+        "slug": "cs-go-champion-of-champions-tour-challengers-1-2026-playoffs",
+        "serie_id": 10512,
+        "modified_at": "2026-04-20T20:38:41Z",
+        "league_id": 4842,
+        "prizepool": "2500 United States Dollar",
+        "tier": "d",
+        "has_bracket": true,
+        "region": "SA",
+        "live_supported": false
+      },
+      "id": 1447265,
+      "name": "Lower bracket final: VSC vs UNO",
+      "scheduled_at": "2026-04-19T21:00:00Z",
+      "serie": {
+        "id": 10512,
+        "name": "Challengers #1",
+        "year": 2026,
+        "begin_at": "2026-04-11T21:00:00Z",
+        "end_at": "2026-04-20T01:22:00Z",
+        "winner_id": 130605,
+        "winner_type": "Team",
+        "slug": "cs-go-champion-of-champions-tour-challengers-1-2026",
+        "modified_at": "2026-04-20T20:38:41Z",
+        "league_id": 4842,
+        "season": null,
+        "full_name": "Challengers #1 2026"
+      },
+      "game_advantage": null,
+      "draw": false,
+      "forfeit": false,
+      "videogame_title": {
+        "id": 13,
+        "name": "Counter-Strike 2",
+        "slug": "cs-2",
+        "videogame_id": 3
+      },
+      "videogame_version": null,
+      "modified_at": "2026-04-19T22:51:34Z"
+    }
+  },
+  {
+    "fixture_id": "fix_1447268",
+    "match_id": 1447268,
+    "sport": "esports_cs2",
+    "discipline": "cs2",
+    "slug": "mibr-academy-vs-uno-mille-2026-04-20",
+    "status": "finished",
+    "raw_status": "finished",
+    "event_time": "2026-04-19T23:48:34Z",
+    "start_date": "2026-04-19T23:48:34Z",
+    "end_date": "2026-04-20T01:22:31Z",
+    "competition": "CCT South America",
+    "league_id": 4842,
+    "tournament_id": 20754,
+    "team1": "MIBR Academy",
+    "team1_name": "MIBR Academy",
+    "team1_id": 129800,
+    "team1_logo": "https://cdn-api.pandascore.co/images/team/image/129800/600px_mibr_academy_lightmode.png",
+    "team2": "UNO MILLE",
+    "team2_name": "UNO MILLE",
+    "team2_id": 130605,
+    "team2_logo": null,
+    "score1": 0,
+    "team1_score": 0,
+    "score2": 2,
+    "team2_score": 2,
+    "winner_id": 130605,
+    "bo": 3,
+    "best_of": 3,
+    "streams": [
+      {
+        "main": false,
+        "language": "pt",
+        "embed_url": "https://player.kick.com/lorranbs",
+        "official": false,
+        "raw_url": "https://kick.com/lorranbs"
+      },
+      {
+        "main": true,
+        "language": "en",
+        "embed_url": "https://player.kick.com/cct_cs6",
+        "official": true,
+        "raw_url": "https://kick.com/cct_cs6"
+      },
+      {
+        "main": false,
+        "language": "en",
+        "embed_url": "https://player.kick.com/cct_cs7",
+        "official": false,
+        "raw_url": "https://kick.com/cct_cs7"
+      }
+    ],
+    "has_streams": true,
+    "links": {
+      "team1_logo": "https://cdn-api.pandascore.co/images/team/image/129800/600px_mibr_academy_lightmode.png",
+      "league_logo": "https://cdn-api.pandascore.co/images/league/image/4842/600px-cct_south_america_icon_allmode-png"
+    },
+    "metadata": {
+      "provider": "pandascore",
+      "source": "kashrock",
+      "external_id": 1447268,
+      "source_match_id": 1447268,
+      "slug": "mibr-academy-vs-uno-mille-2026-04-20",
+      "format": "best_of",
+      "team1_id": 129800,
+      "team2_id": 130605,
+      "tournament_id": 20754,
+      "tournament_name": "Playoffs",
+      "league_id": 4842,
+      "league_name": "CCT South America",
+      "scheduled_at": "2026-04-19T23:45:00Z",
+      "begin_at": "2026-04-19T23:48:34Z",
+      "end_at": "2026-04-20T01:22:31Z",
+      "number_of_games": 3
+    },
+    "rich_data": {
+      "slug": "mibr-academy-vs-uno-mille-2026-04-20",
+      "live": {
+        "supported": false,
+        "url": null,
+        "opens_at": null
+      },
+      "results": [
+        {
+          "team_id": 129800,
+          "score": 0
+        },
+        {
+          "team_id": 130605,
+          "score": 2
+        }
+      ],
+      "videogame": {
+        "id": 3,
+        "name": "Counter-Strike",
+        "slug": "cs-go"
+      },
+      "winner": {
+        "id": 130605,
+        "name": "UNO MILLE",
+        "location": "BR",
+        "slug": "uno-mille",
+        "modified_at": "2026-04-17T01:12:37Z",
+        "acronym": "UNO",
+        "image_url": null,
+        "dark_mode_image_url": null
+      },
+      "tournament_id": 20754,
+      "games": [
+        {
+          "complete": true,
+          "id": 213575,
+          "position": 1,
+          "status": "finished",
+          "length": 2769,
+          "finished": true,
+          "begin_at": "2026-04-19T23:48:34Z",
+          "detailed_stats": true,
+          "end_at": "2026-04-20T00:34:44Z",
+          "forfeit": false,
+          "match_id": 1447268,
+          "winner_type": "Team",
+          "winner": {
+            "id": 130605,
+            "type": "Team"
+          }
+        },
+        {
+          "complete": true,
+          "id": 213576,
+          "position": 2,
+          "status": "finished",
+          "length": 2211,
+          "finished": true,
+          "begin_at": "2026-04-20T00:45:40Z",
+          "detailed_stats": true,
+          "end_at": "2026-04-20T01:22:31Z",
+          "forfeit": false,
+          "match_id": 1447268,
+          "winner_type": "Team",
+          "winner": {
+            "id": 130605,
+            "type": "Team"
+          }
+        }
+      ],
+      "streams_list": [
+        {
+          "main": false,
+          "language": "pt",
+          "embed_url": "https://player.kick.com/lorranbs",
+          "official": false,
+          "raw_url": "https://kick.com/lorranbs"
+        },
+        {
+          "main": true,
+          "language": "en",
+          "embed_url": "https://player.kick.com/cct_cs6",
+          "official": true,
+          "raw_url": "https://kick.com/cct_cs6"
+        },
+        {
+          "main": false,
+          "language": "en",
+          "embed_url": "https://player.kick.com/cct_cs7",
+          "official": false,
+          "raw_url": "https://kick.com/cct_cs7"
+        }
+      ],
+      "league_id": 4842,
+      "opponents": [
+        {
+          "type": "Team",
+          "opponent": {
+            "id": 129800,
+            "name": "MIBR Academy",
+            "location": "BR",
+            "slug": "mibr-academy",
+            "modified_at": "2026-04-16T06:54:13Z",
+            "acronym": "MIBR.A",
+            "image_url": "https://cdn-api.pandascore.co/images/team/image/129800/600px_mibr_academy_lightmode.png",
+            "dark_mode_image_url": "https://cdn-api.pandascore.co/dark_images/team/dark_image/129800/1200px_mibr_academy_darkmode.png"
+          }
+        },
+        {
+          "type": "Team",
+          "opponent": {
+            "id": 130605,
+            "name": "UNO MILLE",
+            "location": "BR",
+            "slug": "uno-mille",
+            "modified_at": "2026-04-17T01:12:37Z",
+            "acronym": "UNO",
+            "image_url": null,
+            "dark_mode_image_url": null
+          }
+        }
+      ],
+      "winner_type": "Team",
+      "number_of_games": 3,
+      "end_at": "2026-04-20T01:22:31Z",
+      "serie_id": 10512,
+      "detailed_stats": true,
+      "begin_at": "2026-04-19T23:48:34Z",
+      "status": "finished",
+      "league": {
+        "id": 4842,
+        "name": "CCT South America",
+        "url": "https://cctour.gg/",
+        "slug": "cs-go-champion-of-champions-tour",
+        "modified_at": "2022-08-09T10:12:50Z",
+        "image_url": "https://cdn-api.pandascore.co/images/league/image/4842/600px-cct_south_america_icon_allmode-png"
+      },
+      "rescheduled": false,
+      "winner_id": 130605,
+      "match_type": "best_of",
+      "original_scheduled_at": "2026-04-19T23:45:00Z",
+      "tournament": {
+        "id": 20754,
+        "name": "Playoffs",
+        "type": "online",
+        "country": null,
+        "begin_at": "2026-04-11T21:00:00Z",
+        "detailed_stats": false,
+        "end_at": "2026-04-20T01:22:00Z",
+        "winner_id": 130605,
+        "winner_type": "Team",
+        "slug": "cs-go-champion-of-champions-tour-challengers-1-2026-playoffs",
+        "serie_id": 10512,
+        "modified_at": "2026-04-20T20:38:41Z",
+        "league_id": 4842,
+        "prizepool": "2500 United States Dollar",
+        "tier": "d",
+        "has_bracket": true,
+        "region": "SA",
+        "live_supported": false
+      },
+      "id": 1447268,
+      "name": "Grand final: MIBR.A vs UNO",
+      "scheduled_at": "2026-04-19T23:45:00Z",
+      "serie": {
+        "id": 10512,
+        "name": "Challengers #1",
+        "year": 2026,
+        "begin_at": "2026-04-11T21:00:00Z",
+        "end_at": "2026-04-20T01:22:00Z",
+        "winner_id": 130605,
+        "winner_type": "Team",
+        "slug": "cs-go-champion-of-champions-tour-challengers-1-2026",
+        "modified_at": "2026-04-20T20:38:41Z",
+        "league_id": 4842,
+        "season": null,
+        "full_name": "Challengers #1 2026"
+      },
+      "game_advantage": null,
+      "draw": false,
+      "forfeit": false,
+      "videogame_title": {
+        "id": 13,
+        "name": "Counter-Strike 2",
+        "slug": "cs-2",
+        "videogame_id": 3
+      },
+      "videogame_version": null,
+      "modified_at": "2026-04-20T01:23:58Z"
+    }
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "book_id": 306,
+    "book_name": "Sleeper",
+    "source": "kashrock",
+    "eventId": "kr_event_2a9211b264bb",
+    "propId": "kr_prop_2f62e3d0f40c4445",
+    "offerId": "kr_prop_2f62e3d0f40c4445_306_over",
+    "source_event_id": null,
+    "source_prop_id": null,
+    "player_name": "Freddy Johansson",
+    "stat_type": "ESPORTS_HEADSHOTS_MAPS_1_2",
+    "line": 12.5,
+    "odds": -128,
+    "direction": "over",
+    "sport": "esports_cs",
+    "team": "Fnatic",
+    "opponent": null,
+    "event_time": "2026-04-20T20:41:02Z",
+    "links": {
+      "bet": "https://sleeper.app/picks/cs/match-2711328"
+    }
+  },
+  {
+    "book_id": 306,
+    "book_name": "Sleeper",
+    "source": "kashrock",
+    "eventId": "kr_event_2a9211b264bb",
+    "propId": "kr_prop_431856b7c8a007ac",
+    "offerId": "kr_prop_431856b7c8a007ac_306_over",
+    "source_event_id": null,
+    "source_prop_id": null,
+    "player_name": "Freddy Johansson",
+    "stat_type": "ESPORTS_KILLS_MAPS_1_2",
+    "line": 28.5,
+    "odds": -128,
+    "direction": "over",
+    "sport": "esports_cs",
+    "team": "Fnatic",
+    "opponent": null,
+    "event_time": "2026-04-20T20:41:02Z",
+    "links": {
+      "bet": "https://sleeper.app/picks/cs/match-2711328"
+    }
+  },
+  {
+    "book_id": 306,
+    "book_name": "Sleeper",
+    "source": "kashrock",
+    "eventId": "kr_event_2a9211b264bb",
+    "propId": "kr_prop_88b762a10f92cc9b",
+    "offerId": "kr_prop_88b762a10f92cc9b_306_over",
+    "source_event_id": null,
+    "source_prop_id": null,
+    "player_name": "Rodion Smyk",
+    "stat_type": "ESPORTS_HEADSHOTS_MAPS_1_2",
+    "line": 12.5,
+    "odds": -109,
+    "direction": "over",
+    "sport": "esports_cs",
+    "team": "Fnatic",
+    "opponent": null,
+    "event_time": "2026-04-20T20:41:02Z",
+    "links": {
+      "bet": "https://sleeper.app/picks/cs/match-2711328"
+    }
+  }
+]
