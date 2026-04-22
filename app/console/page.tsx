@@ -18,26 +18,30 @@ export default function ConsolePage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const { supabase } = await import('@/lib/supabase');
-      const { data: { session } } = await supabase.auth.getSession();
-      console.log('[Console Page] Session check:', session?.user?.email || 'NO SESSION');
-      console.log('[Console Page] Access token exists:', !!session?.access_token);
-      if (!session) {
-        console.warn('[Console Page] No session found, redirecting to login');
+    const checkAuth = () => {
+      const token = localStorage.getItem('google_id_token');
+      if (!token) {
+        console.warn('[Console Page] No Google ID token found, redirecting to login');
         router.push('/login');
+      } else {
+        console.log('[Console Page] Google ID token found');
       }
     };
     checkAuth();
   }, [router]);
 
   useEffect(() => {
-    const getUser = async () => {
-      const { supabase } = await import('@/lib/supabase');
-      if (!supabase) return;
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user?.user_metadata?.full_name) {
-        setUserName(session.user.user_metadata.full_name);
+    const getUser = () => {
+      const token = localStorage.getItem('google_id_token');
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          if (payload.name) {
+            setUserName(payload.name);
+          }
+        } catch (e) {
+          console.error('Failed to decode token:', e);
+        }
       }
     };
     getUser();
