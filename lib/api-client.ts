@@ -1,29 +1,20 @@
-import { getSupabase } from './supabase'
-
 // Use local proxy to avoid CORS issues
 const API_BASE_URL = '/api/proxy'
 
 async function getAuthToken(): Promise<string | null> {
-  const supabase = getSupabase()
-  if (!supabase) {
-    console.error('[API Client] Supabase client not available')
+  if (typeof window === 'undefined') {
+    return null
+  }
+
+  const token = localStorage.getItem('google_id_token')
+  
+  if (!token) {
+    console.warn('[API Client] No Google ID token found in localStorage')
     return null
   }
   
-  const { data: { session }, error } = await supabase.auth.getSession()
-  
-  if (error) {
-    console.error('[API Client] Error getting session:', error)
-    return null
-  }
-  
-  if (!session) {
-    console.warn('[API Client] No active session found')
-    return null
-  }
-  
-  console.log('[API Client] Got access token for:', session.user?.email)
-  return session.access_token
+  console.log('[API Client] Got Google ID token from localStorage')
+  return token
 }
 
 async function apiRequest<T>(
