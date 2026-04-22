@@ -366,9 +366,6 @@ export default function ConsolePage() {
                   )}
                 </tbody>
               </table>
-              <div className="px-6 py-3 border-t border-white/5 bg-white/[0.01] flex justify-center">
-                <Link href="/console/logs" className="text-xs text-zinc-500 hover:text-white transition-colors">View all logs</Link>
-              </div>
             </div>
           </div>
 
