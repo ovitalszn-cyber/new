@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@next/swc-darwin-x64": "^16.2.6",
     "@vercel/analytics": "^1.6.1",
     "lightningcss": "^1.32.0",
     "next": "^16.0.7",
