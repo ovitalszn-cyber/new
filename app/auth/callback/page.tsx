@@ -16,7 +16,7 @@ export default function AuthCallbackPage() {
 
     const handleAuthCallback = async () => {
       const hashParams = new URLSearchParams(window.location.hash.replace('#', ''));
-      const accessToken = hashParams.get('access_token');
+      const idToken = hashParams.get('id_token') || hashParams.get('access_token');
       const queryParams = new URLSearchParams(window.location.search);
       const errorDescription = queryParams.get('error_description');
 
@@ -26,9 +26,9 @@ export default function AuthCallbackPage() {
       }
 
       try {
-        if (accessToken) {
+        if (idToken) {
           // Store the Google ID token in localStorage
-          localStorage.setItem('google_id_token', accessToken);
+          localStorage.setItem('google_id_token', idToken);
           
           // Redirect to console
           window.history.replaceState({}, document.title, window.location.pathname);

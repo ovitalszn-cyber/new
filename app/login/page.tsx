@@ -17,8 +17,9 @@ export default function LoginPage() {
     const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
     authUrl.searchParams.set('client_id', GOOGLE_CLIENT_ID);
     authUrl.searchParams.set('redirect_uri', REDIRECT_URI);
-    authUrl.searchParams.set('response_type', 'token');
+    authUrl.searchParams.set('response_type', 'id_token');
     authUrl.searchParams.set('scope', 'openid email profile');
+    authUrl.searchParams.set('nonce', Math.random().toString(36).substring(2));
     
     window.location.href = authUrl.toString();
   };

@@ -14,6 +14,8 @@ export default function ConsolePage() {
   const [usage, setUsage] = useState<Usage | null>(null);
   const [recentLogs, setRecentLogs] = useState<LogEntry[]>([]);
   const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
+  const [newlyCreatedPlainKey, setNewlyCreatedPlainKey] = useState<string | null>(null);
+  const [keyGenerationLoading, setKeyGenerationLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -109,7 +111,7 @@ export default function ConsolePage() {
         }
       });
     }
-  }, [usage, recentLogs]);
+  }, [usage, recentLogs, newlyCreatedPlainKey, apiKeys, keyGenerationLoading]);
 
   const handleCopyKey = () => {
     const firstKey = apiKeys.find(k => k.status === 'active');
@@ -118,6 +120,37 @@ export default function ConsolePage() {
     }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleGenerateKey = async () => {
+    const confirmMsg = apiKeys.length > 0
+      ? "Are you sure you want to rotate your API key? Your current key will be revoked immediately."
+      : "Are you sure you want to generate a new API key?";
+    
+    if (!window.confirm(confirmMsg)) return;
+
+    try {
+      setKeyGenerationLoading(true);
+      setError(null);
+      
+      // Revoke any existing active keys first (normal key rotation behavior)
+      const activeKeys = apiKeys.filter(k => k.status === 'active');
+      for (const key of activeKeys) {
+        await api.revokeApiKey(key.id);
+      }
+      
+      // Create new key
+      const result = await api.createApiKey('Default Key');
+      setNewlyCreatedPlainKey(result.api_key);
+      
+      // Refresh key list
+      const keysResult = await api.listApiKeys();
+      setApiKeys(keysResult.keys || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate key');
+    } finally {
+      setKeyGenerationLoading(false);
+    }
   };
 
   return (
@@ -163,6 +196,44 @@ export default function ConsolePage() {
             </div>
           </div>
 
+          {/* Newly Generated API Key Alert */}
+          {newlyCreatedPlainKey && (
+            <div className="bg-[#0f1d19] border border-emerald-500/30 rounded-sm p-5 relative overflow-hidden shadow-lg animate-in fade-in slide-in-from-top-4 duration-300">
+              <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+              <div className="flex items-start justify-between">
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <i data-lucide="shield-check" className="w-5 h-5 text-emerald-400"></i>
+                    <h4 className="text-sm font-semibold text-emerald-400">API Key Successfully Generated!</h4>
+                  </div>
+                  <p className="text-xs text-zinc-400">
+                    Copy this key and save it in a secure place. For security reasons, <span className="text-emerald-400 font-medium">you will not be able to see it again</span>.
+                  </p>
+                  <div className="bg-black/60 border border-white/10 rounded-sm px-3 py-2 font-mono text-sm text-zinc-300 w-full max-w-xl flex justify-between items-center mt-2 group/key">
+                    <span className="break-all select-all font-medium text-emerald-300">{newlyCreatedPlainKey}</span>
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText(newlyCreatedPlainKey);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      className="p-1.5 ml-2 hover:bg-white/10 rounded-sm text-zinc-400 hover:text-white transition-colors border border-transparent hover:border-white/10 flex items-center justify-center"
+                      title="Copy Key to Clipboard"
+                    >
+                      {copied ? <i data-lucide="check" className="w-4 h-4 text-emerald-400"></i> : <i data-lucide="copy" className="w-4 h-4"></i>}
+                    </button>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setNewlyCreatedPlainKey(null)}
+                  className="text-zinc-500 hover:text-white p-1 hover:bg-white/5 rounded transition-colors"
+                >
+                  <i data-lucide="x" className="w-4.5 h-4.5"></i>
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* API Key Section */}
           <div className="bg-[#0C0D0F] border border-white/5 rounded-sm p-1 flex flex-col sm:flex-row items-center gap-4 relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-1 h-full bg-white"></div>
@@ -170,25 +241,38 @@ export default function ConsolePage() {
               <h3 className="text-sm font-medium text-white mb-1">Live API Key</h3>
               <p className="text-xs text-zinc-500">Used for production requests. Keep this secret.</p>
             </div>
-            <div className="flex items-center gap-2 pr-4 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-2.5 pr-4 w-full sm:w-auto">
               <div className="bg-black/50 border border-white/5 rounded-sm px-3 py-2 font-mono text-sm text-zinc-300 w-full sm:w-64 flex justify-between items-center">
                 <span>{apiKeys.length > 0 ? (apiKeyVisible ? apiKeys[0].key_prefix : `${apiKeys[0].key_prefix.substring(0, 12)}...`) : 'No API key yet'}</span>
                 <span className="text-xs text-zinc-600">{apiKeyVisible ? 'VISIBLE' : 'HIDDEN'}</span>
               </div>
-              <button 
-                onClick={handleCopyKey}
-                className="p-2 hover:bg-white/10 rounded-sm text-zinc-400 hover:text-white transition-colors border border-transparent hover:border-white/10" 
-                title="Copy Key"
-              >
-                {copied ? <i data-lucide="check" className="w-4 h-4 text-emerald-400"></i> : <i data-lucide="copy" className="w-4 h-4"></i>}
-              </button>
-              <button 
-                onClick={() => setApiKeyVisible(!apiKeyVisible)}
-                className="p-2 hover:bg-white/10 rounded-sm text-zinc-400 hover:text-white transition-colors border border-transparent hover:border-white/10" 
-                title={apiKeyVisible ? 'Hide Key' : 'Show Key'}
-              >
-                <i data-lucide={apiKeyVisible ? 'eye-off' : 'eye'} className="w-4 h-4"></i>
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button 
+                  onClick={handleCopyKey}
+                  disabled={apiKeys.length === 0}
+                  className="p-2 hover:bg-white/10 rounded-sm text-zinc-400 hover:text-white transition-colors border border-transparent hover:border-white/10 disabled:opacity-30 disabled:cursor-not-allowed" 
+                  title="Copy Key Prefix"
+                >
+                  {copied ? <i data-lucide="check" className="w-4 h-4 text-emerald-400"></i> : <i data-lucide="copy" className="w-4 h-4"></i>}
+                </button>
+                <button 
+                  onClick={() => setApiKeyVisible(!apiKeyVisible)}
+                  disabled={apiKeys.length === 0}
+                  className="p-2 hover:bg-white/10 rounded-sm text-zinc-400 hover:text-white transition-colors border border-transparent hover:border-white/10 disabled:opacity-30 disabled:cursor-not-allowed" 
+                  title={apiKeyVisible ? 'Hide Key' : 'Show Key'}
+                >
+                  <i data-lucide={apiKeyVisible ? 'eye-off' : 'eye'} className="w-4 h-4"></i>
+                </button>
+                <button 
+                  onClick={handleGenerateKey}
+                  disabled={keyGenerationLoading}
+                  className="ml-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white rounded-sm text-xs font-medium border border-white/10 hover:border-white/20 transition-all flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  title={apiKeys.length > 0 ? "Rotate API Key" : "Generate API Key"}
+                >
+                  <i data-lucide="refresh-cw" className={`w-3.5 h-3.5 ${keyGenerationLoading ? 'animate-spin' : ''}`}></i>
+                  {keyGenerationLoading ? 'Processing...' : (apiKeys.length > 0 ? 'Rotate Key' : 'Generate Key')}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -216,38 +300,34 @@ export default function ConsolePage() {
               {/* Chart */}
               <div className="flex-1 flex flex-col justify-end">
                 <div className="flex items-end gap-1 h-24 w-full mb-2 border-b border-white/5 pb-1">
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[40%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">2.4k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[30%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">1.8k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[55%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">3.2k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[45%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">2.9k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[75%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">4.1k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[60%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">3.5k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[85%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">5.2k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm h-[65%] chart-bar group relative">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">3.8k</div>
-                  </div>
-                  <div className="flex-1 bg-white hover:bg-white rounded-sm h-[90%] chart-bar group relative shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">5.8k</div>
-                  </div>
-                  <div className="flex-1 bg-zinc-800/50 border border-dashed border-zinc-700/50 rounded-sm h-[50%] opacity-50"></div>
+                  {usageSummary && usageSummary.requests_per_day && usageSummary.requests_per_day.length > 0 ? (
+                    usageSummary.requests_per_day.map((day, idx) => {
+                      const maxRequests = Math.max(...usageSummary.requests_per_day.map(d => d.requests), 10);
+                      const heightPercent = Math.max(5, (day.requests / maxRequests) * 100);
+                      const isLast = idx === usageSummary.requests_per_day.length - 1;
+                      const barClass = isLast
+                        ? "flex-1 bg-white hover:bg-white rounded-sm chart-bar group relative shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        : "flex-1 bg-zinc-800/50 hover:bg-zinc-600 rounded-sm chart-bar group relative";
+                      
+                      return (
+                        <div 
+                          key={day.date} 
+                          className={barClass} 
+                          style={{ height: `${heightPercent}%` }}
+                        >
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-30">
+                            {day.requests.toLocaleString()} ({new Date(day.date + 'T00:00:00Z').toLocaleDateString([], { month: 'short', day: '2-digit' })})
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-zinc-500 text-xs w-full text-center pb-4">No usage data in this range</div>
+                  )}
                 </div>
                 <div className="flex justify-between text-[10px] text-zinc-600 font-mono uppercase">
-                  <span>Dec 01</span>
-                  <span>Dec 15</span>
+                  <span>{usageSummary?.requests_per_day?.[0] ? new Date(usageSummary.requests_per_day[0].date + 'T00:00:00Z').toLocaleDateString([], { month: 'short', day: '2-digit' }) : 'Start'}</span>
+                  <span>{usageSummary?.requests_per_day?.[usageSummary.requests_per_day.length - 1] ? new Date(usageSummary.requests_per_day[usageSummary.requests_per_day.length - 1].date + 'T00:00:00Z').toLocaleDateString([], { month: 'short', day: '2-digit' }) : 'End'}</span>
                 </div>
               </div>
             </div>
@@ -359,7 +439,7 @@ export default function ConsolePage() {
                           {log.latency_ms || '0'}ms
                         </td>
                         <td className="px-6 py-3 whitespace-nowrap text-right text-xs text-zinc-500">
-                          {i === 0 ? 'Just now' : i === 1 ? '1 min ago' : '2 mins ago'}
+                          {log.timestamp ? new Date(log.timestamp).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'Just now'}
                         </td>
                       </tr>
                     ))
