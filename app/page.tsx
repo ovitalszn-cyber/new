@@ -388,7 +388,7 @@ export default function LandingPage() {
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Esports analytics: event schedules + market props</span>
+                  <span className="text-zinc-300">Esports analytics: multi-sport player props</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>

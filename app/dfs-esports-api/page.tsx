@@ -222,7 +222,7 @@ export default function DFSEsportsAPIPage() {
           <h2 className="text-2xl font-semibold text-white mb-8">Frequently asked questions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              { q: "Which esports games are supported?", a: "All major Tier-1 titles including CS2, League of Legends, Dota 2, and Valorant, along with emerging titles like Rainbow Six and Apex Legends." },
+              { q: "Which esports games are supported?", a: "All major Tier-1 titles including CS2, League of Legends, Dota 2, and Valorant." },
               { q: "How fast is the verification?", a: "Verification finalizes within 60–120 seconds of match completion, as soon as official scores are confirmed by our primary providers." },
               { q: "Can I filter by sportsbook source?", a: "Yes. Every projection includes provider metadata, so you can filter by PrizePicks, Underdog, Sleeper, and 10+ other sources." },
               { q: "Do you provide player headshots and team logos?", a: "Yes. Every player and team in our database has media assets served from our CDN — no scraping or third-party image hosting required." }
