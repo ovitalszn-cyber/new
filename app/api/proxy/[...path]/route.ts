@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.kashrock.com'
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.kashrock.com'
 
 export async function GET(
   request: NextRequest,

@@ -65,7 +65,7 @@ export default function LandingPage() {
               <a href="#features" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Features</a>
               <a href="#how-it-works" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">How it works</a>
               <a href="#pricing" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Pricing</a>
-              <a href="https://www.kashrock.com/esports-data-api" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
+              <a href="https://www.kashrock.com/docs" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
             </div>
             <div className="flex items-center gap-4">
               <a href="/login" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">
@@ -102,7 +102,7 @@ export default function LandingPage() {
               <a href="#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2">
                 Get API Key <i data-lucide="arrow-right" className="w-4 h-4"></i>
               </a>
-              <a href="https://www.kashrock.com/esports-data-api" className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900 transition-all flex items-center justify-center gap-2">
+              <a href="https://www.kashrock.com/docs" className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900 transition-all flex items-center justify-center gap-2">
                 <i data-lucide="file-text" className="w-4 h-4"></i> Read Documentation
               </a>
             </div>
