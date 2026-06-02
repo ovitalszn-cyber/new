@@ -165,10 +165,6 @@ export default function ConsolePage() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-            <span className="text-xs font-medium text-emerald-400">All Systems Operational</span>
-          </div>
           <button className="text-zinc-400 hover:text-white transition-colors relative">
             <i data-lucide="bell" className="w-5 h-5"></i>
             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-[#08090A]"></span>
@@ -450,34 +446,7 @@ export default function ConsolePage() {
           </div>
 
           {/* Footer Area */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 pt-8 border-t border-white/5">
-            <div className="bg-gradient-to-br from-[#0C0D0F] to-[#08090A] border border-white/5 rounded-sm p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-purple-500/10 rounded-sm border border-purple-500/20">
-                  <i data-lucide="zap" className="w-4 h-4 text-purple-400"></i>
-                </div>
-                <h3 className="text-sm font-medium text-white">Integration Guide</h3>
-              </div>
-              <p className="text-sm text-zinc-500 mb-4">Learn how to calculate Expected Value (EV) using our pre-computed edge endpoints.</p>
-              <Link href="https://backend.kashrock.com/docs" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">
-                Read Documentation <i data-lucide="arrow-right" className="w-3 h-3"></i>
-              </Link>
-            </div>
-            <div className="bg-gradient-to-br from-[#0C0D0F] to-[#08090A] border border-white/5 rounded-sm p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-blue-500/10 rounded-sm border border-blue-500/20">
-                  <i data-lucide="gamepad-2" className="w-4 h-4 text-blue-400"></i>
-                </div>
-                <h3 className="text-sm font-medium text-white">New: Enhanced Esports Props</h3>
-              </div>
-              <p className="text-sm text-zinc-500 mb-4">v6.0 brings CS:GO and LoL player props normalized across 12 major books.</p>
-              <a href="/#features" className="text-xs font-medium text-white hover:text-zinc-300 transition-colors flex items-center gap-1">
-                View Features <i data-lucide="arrow-right" className="w-3 h-3"></i>
-              </a>
-            </div>
-          </div>
-          
-          <div className="text-center text-xs text-zinc-600 pb-8">
+          <div className="text-center text-xs text-zinc-600 mt-12 pt-8 border-t border-white/5 pb-8">
             © 2025 KashRock Inc. • <Link href="/legal" className="hover:text-zinc-400">Privacy</Link> • <Link href="/legal?tab=terms" className="hover:text-zinc-400">Terms</Link> • <a href="/support" className="hover:text-zinc-400">Support</a>
           </div>
 

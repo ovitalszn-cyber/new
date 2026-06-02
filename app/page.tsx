@@ -359,7 +359,7 @@ export default function LandingPage() {
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">CS2 data only</span>
+                  <span className="text-zinc-300">CS2 player props only (no matches)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
@@ -396,10 +396,6 @@ export default function LandingPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Live + historical match access</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
                   <span className="text-zinc-300">Email support</span>
                 </li>
               </ul>
@@ -427,6 +423,10 @@ export default function LandingPage() {
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
                   <span className="text-zinc-300">Everything in Hobby</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
+                  <span className="text-zinc-300">Live + historical match access</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
