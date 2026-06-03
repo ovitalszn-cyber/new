@@ -21,7 +21,7 @@ export default function MarketsPage() {
             <img src="/kashrock-logo.svg" alt="KashRock" className="h-5 w-auto" />
           </Link>
           <nav className="hidden md:flex gap-6">
-            <Link href="https://backend.kashrock.com/docs" className="text-sm font-medium text-white transition-colors">Documentation</Link>
+            <Link href="/docs" className="text-sm font-medium text-white transition-colors">Documentation</Link>
             <Link href="/console" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Console</Link>
             <span className="text-sm font-medium text-zinc-600 cursor-default">Products</span>
           </nav>
@@ -37,7 +37,7 @@ export default function MarketsPage() {
         <main className="flex-1">
           <div className="mb-10">
             <div className="flex items-center gap-4 mb-2">
-              <Link href="https://backend.kashrock.com/docs" className="text-sm text-zinc-500 hover:text-white">&larr; Back to Docs</Link>
+              <Link href="/docs" className="text-sm text-zinc-500 hover:text-white">&larr; Back to Docs</Link>
             </div>
             <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Active Markets Dictionary</h1>
             <p className="text-lg text-zinc-400 leading-relaxed max-w-2xl">

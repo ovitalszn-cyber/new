@@ -9,14 +9,14 @@ export default function MatchesEndpointPage() {
             <img src="/kashrock-logo.svg" alt="KashRock" className="h-5 w-auto" />
           </Link>
           <nav className="hidden md:flex gap-6">
-            <Link href="https://backend.kashrock.com/docs" className="text-sm font-medium text-white">Documentation</Link>
+            <Link href="/docs" className="text-sm font-medium text-white">Documentation</Link>
           </nav>
         </div>
       </header>
 
       <div className="max-w-4xl mx-auto py-12 px-6">
         <div className="mb-4">
-          <Link href="https://backend.kashrock.com/docs" className="text-sm text-zinc-500 hover:text-white">&larr; Back to Docs</Link>
+          <Link href="/docs" className="text-sm text-zinc-500 hover:text-white">&larr; Back to Docs</Link>
         </div>
 
         <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Matches</h1>

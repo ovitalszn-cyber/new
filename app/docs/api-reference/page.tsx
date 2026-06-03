@@ -12,7 +12,7 @@ export default function ApiReferencePage() {
       {/* Navigation */}
       <nav className="h-14 border-b border-white/5 bg-[#050505] flex items-center px-6 justify-between sticky top-0 z-50">
         <div className="flex items-center gap-6">
-          <Link href="https://backend.kashrock.com/docs" className="text-zinc-500 hover:text-white transition-colors">
+          <Link href="/docs" className="text-zinc-500 hover:text-white transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
