@@ -1,26 +1,35 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '444339881214-2mt71vvshnb4dkhhp51dbcfolcnk600k.apps.googleusercontent.com';
 const REDIRECT_URI = typeof window !== 'undefined' ? `${window.location.origin}/auth/callback` : '';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleLogin = () => {
     setIsLoading(true);
-    
-    // Google OAuth 2.0 authorization URL
+
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect');
+      const plan = params.get('plan');
+      if (redirect === 'checkout' && plan) {
+        sessionStorage.setItem('auth_redirect', 'checkout');
+        sessionStorage.setItem('auth_plan', plan);
+      } else if (redirect === 'console') {
+        sessionStorage.setItem('auth_redirect', 'console');
+      }
+    }
+
     const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
     authUrl.searchParams.set('client_id', GOOGLE_CLIENT_ID);
     authUrl.searchParams.set('redirect_uri', REDIRECT_URI);
     authUrl.searchParams.set('response_type', 'id_token');
     authUrl.searchParams.set('scope', 'openid email profile');
     authUrl.searchParams.set('nonce', Math.random().toString(36).substring(2));
-    
+
     window.location.href = authUrl.toString();
   };
 
@@ -31,7 +40,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-medium text-white mb-2">Sign in to KashRock</h1>
           <p className="text-zinc-400">Access your esports data analytics dashboard</p>
         </div>
-        
+
         <div className="bg-white/5 border border-white/10 rounded-lg p-6">
           <button
             onClick={handleGoogleLogin}
@@ -68,7 +77,7 @@ export default function LoginPage() {
             )}
           </button>
         </div>
-        
+
         <p className="text-center text-zinc-500 text-sm mt-6">
           By signing in, you agree to our{' '}
           <a href="/legal" className="text-zinc-400 hover:text-white transition-colors">

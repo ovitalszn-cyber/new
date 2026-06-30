@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { exchangeGoogleIdToken, api } from '@/lib/api-client';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
@@ -26,19 +27,30 @@ export default function AuthCallbackPage() {
       }
 
       try {
-        if (idToken) {
-          // Store the Google ID token in localStorage
-          localStorage.setItem('google_id_token', idToken);
-          
-          // Redirect to console
-          window.history.replaceState({}, document.title, window.location.pathname);
-          router.push('/console');
+        if (!idToken) {
+          router.push('/login?error=no_token');
           return;
         }
 
-        // No token found
-        console.warn('No access token found in callback');
-        router.push('/login?error=no_token');
+        const session = await exchangeGoogleIdToken(idToken);
+        window.history.replaceState({}, document.title, window.location.pathname);
+
+        const redirect = sessionStorage.getItem('auth_redirect');
+        const plan = sessionStorage.getItem('auth_plan');
+        sessionStorage.removeItem('auth_redirect');
+        sessionStorage.removeItem('auth_plan');
+
+        if (redirect === 'checkout' && plan) {
+          const checkout = await api.createCheckoutSession(plan);
+          window.location.href = checkout.url;
+          return;
+        }
+
+        if (session.initial_api_key) {
+          sessionStorage.setItem('initial_api_key', session.initial_api_key);
+        }
+
+        router.push('/console');
       } catch (err) {
         console.error('Unexpected auth callback error:', err);
         router.push('/login?error=unexpected');

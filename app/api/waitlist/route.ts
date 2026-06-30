@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 
-interface BrevoResponse {
-  message?: string;
-  code?: string;
-}
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.kashrock.com';
 
 export async function POST(request: Request) {
   try {
@@ -13,40 +10,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please provide a valid email address.' }, { status: 400 });
     }
 
-    const apiKey = process.env.BREVO_API_KEY;
-    const listId = process.env.BREVO_LIST_ID;
-
-    if (!apiKey || !listId) {
-      console.error('Missing Brevo configuration.');
-      return NextResponse.json(
-        { error: 'Waitlist configuration is incomplete. Please contact support.' },
-        { status: 500 },
-      );
-    }
-
-    const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
+    const backendResponse = await fetch(`${BACKEND_URL}/v1/dev/waitlist`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': apiKey,
-      },
-      body: JSON.stringify({
-        email,
-        listIds: [Number(listId)],
-        updateEnabled: true,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.trim(), source: 'maintenance' }),
     });
 
-    const data = (await brevoResponse.json().catch(() => ({}))) as BrevoResponse;
+    const data = (await backendResponse.json().catch(() => ({}))) as { detail?: string; error?: string };
 
-    if (!brevoResponse.ok) {
-      const message = data?.message || 'Failed to subscribe email.';
-      return NextResponse.json({ error: message }, { status: brevoResponse.status });
+    if (!backendResponse.ok) {
+      const message = data.detail || data.error || 'Failed to save email.';
+      return NextResponse.json({ error: message }, { status: backendResponse.status });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Brevo waitlist error', error);
+    console.error('Waitlist signup error', error);
     return NextResponse.json({ error: 'Unexpected server error. Please try again later.' }, { status: 500 });
   }
 }

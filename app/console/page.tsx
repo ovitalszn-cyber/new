@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { api, UsageSummary, Usage, LogEntry, ApiKey } from '@/lib/api-client';
+import { loadSessionTokens } from '@/lib/auth-storage';
 
 export default function ConsolePage() {
   const router = useRouter();
@@ -19,14 +20,56 @@ export default function ConsolePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const [summaryResult, usageResult, logsResult, keysResult] = await Promise.allSettled([
+        api.getUsageSummary('30d'),
+        api.getUsage(),
+        api.getLogs({ limit: 3 }),
+        api.listApiKeys()
+      ]);
+
+      if (summaryResult.status === 'fulfilled') {
+        setUsageSummary(summaryResult.value);
+      } else {
+        console.warn('[Console] Usage summary failed:', summaryResult.reason);
+      }
+
+      if (usageResult.status === 'fulfilled') {
+        setUsage(usageResult.value);
+      } else {
+        console.warn('[Console] Usage failed:', usageResult.reason);
+      }
+
+      if (logsResult.status === 'fulfilled') {
+        setRecentLogs(logsResult.value.logs || []);
+      } else {
+        console.warn('[Console] Logs failed:', logsResult.reason);
+        setRecentLogs([]);
+      }
+
+      if (keysResult.status === 'fulfilled') {
+        setApiKeys(keysResult.value.keys || []);
+      } else {
+        console.warn('[Console] API Keys failed:', keysResult.reason);
+        setApiKeys([]);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const checkAuth = () => {
-      const token = localStorage.getItem('google_id_token');
-      if (!token) {
-        console.warn('[Console Page] No Google ID token found, redirecting to login');
+      const session = loadSessionTokens();
+      const legacyToken = localStorage.getItem('google_id_token');
+      if (!session?.accessToken && !legacyToken) {
         router.push('/login');
-      } else {
-        console.log('[Console Page] Google ID token found');
       }
     };
     checkAuth();
@@ -34,12 +77,15 @@ export default function ConsolePage() {
 
   useEffect(() => {
     const getUser = () => {
-      const token = localStorage.getItem('google_id_token');
+      const session = loadSessionTokens();
+      const token = session?.accessToken || localStorage.getItem('google_id_token');
       if (token) {
         try {
           const payload = JSON.parse(atob(token.split('.')[1]));
           if (payload.name) {
             setUserName(payload.name);
+          } else if (payload.email) {
+            setUserName(payload.email.split('@')[0]);
           }
         } catch (e) {
           console.error('Failed to decode token:', e);
@@ -53,55 +99,49 @@ export default function ConsolePage() {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      // Use Promise.allSettled so partial failures don't break everything
-      const [summaryResult, usageResult, logsResult, keysResult] = await Promise.allSettled([
-        api.getUsageSummary('30d'),
-        api.getUsage(),
-        api.getLogs({ limit: 3 }),
-        api.listApiKeys()
-      ]);
-      
-      // Handle usage summary (may fail with 500)
-      if (summaryResult.status === 'fulfilled') {
-        setUsageSummary(summaryResult.value);
-      } else {
-        console.warn('[Console] Usage summary failed:', summaryResult.reason);
-      }
-      
-      // Handle basic usage (usually works)
-      if (usageResult.status === 'fulfilled') {
-        setUsage(usageResult.value);
-      } else {
-        console.warn('[Console] Usage failed:', usageResult.reason);
-      }
-      
-      // Handle logs
-      if (logsResult.status === 'fulfilled') {
-        setRecentLogs(logsResult.value.logs || []);
-      } else {
-        console.warn('[Console] Logs failed:', logsResult.reason);
-        setRecentLogs([]);
-      }
-      
-      // Handle API keys
-      if (keysResult.status === 'fulfilled') {
-        console.log('[Console] API Keys:', keysResult.value.keys);
-        setApiKeys(keysResult.value.keys || []);
-      } else {
-        console.warn('[Console] API Keys failed:', keysResult.reason);
-        setApiKeys([]);
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load data');
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    const initialKey = sessionStorage.getItem('initial_api_key');
+    if (initialKey) {
+      setNewlyCreatedPlainKey(initialKey);
+      sessionStorage.removeItem('initial_api_key');
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const params = new URLSearchParams(window.location.search);
+    const checkout = params.get('checkout');
+    const sessionId = params.get('session_id');
+    if (checkout !== 'success' || !sessionId) return;
+
+    window.history.replaceState({}, document.title, '/console');
+
+    let attempts = 0;
+    const poll = async () => {
+      try {
+        const status = await api.getCheckoutSessionStatus(sessionId);
+        if (status.api_key) {
+          setNewlyCreatedPlainKey(status.api_key);
+          await fetchData();
+          return;
+        }
+        if (status.payment_status === 'paid' || status.status === 'complete') {
+          await fetchData();
+          return;
+        }
+      } catch (err) {
+        console.warn('[Console] Checkout status poll failed:', err);
+      }
+
+      attempts += 1;
+      if (attempts < 10) {
+        setTimeout(poll, 2000);
+      }
+    };
+
+    poll();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {

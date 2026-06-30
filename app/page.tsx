@@ -2,6 +2,7 @@
 
 import Script from 'next/script';
 import { useEffect } from 'react';
+import SubscribeButton from '@/components/SubscribeButton';
 
 export default function LandingPage() {
   useEffect(() => {
@@ -371,9 +372,11 @@ export default function LandingPage() {
                 </li>
               </ul>
               <div className="mt-auto">
-                <a href="https://buy.stripe.com/00w9AT0rA8b982jas3dby04" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
-                  Get Sandbox Key
-                </a>
+                <SubscribeButton
+                  plan="sandbox"
+                  label="Get Sandbox Key"
+                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block disabled:opacity-50"
+                />
               </div>
             </div>
             <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
@@ -400,9 +403,11 @@ export default function LandingPage() {
                 </li>
               </ul>
               <div className="mt-auto">
-                <a href="https://buy.stripe.com/6oUeVd3DMcrp5Ub8jVdby03" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
-                  Subscribe
-                </a>
+                <SubscribeButton
+                  plan="hobby"
+                  label="Subscribe"
+                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block disabled:opacity-50"
+                />
               </div>
             </div>
             
@@ -438,9 +443,11 @@ export default function LandingPage() {
                 </li>
               </ul>
               <div className="mt-auto">
-                <a href="https://buy.stripe.com/aFa3cv4HQdvt2HZcAbdby01" className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors text-center block">
-                  Subscribe
-                </a>
+                <SubscribeButton
+                  plan="builder"
+                  label="Subscribe"
+                  className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors text-center block disabled:opacity-50"
+                />
               </div>
             </div>
 
@@ -469,9 +476,11 @@ export default function LandingPage() {
                 </li>
               </ul>
               <div className="mt-auto">
-                <a href="https://buy.stripe.com/9B6eVdeiq0IHfuL2ZBdby02" className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block">
-                  Subscribe
-                </a>
+                <SubscribeButton
+                  plan="pro"
+                  label="Subscribe"
+                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block disabled:opacity-50"
+                />
               </div>
             </div>
 

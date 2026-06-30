@@ -23,6 +23,7 @@ export const saveSessionTokens = (session: {
     userEmail: session.user?.email ?? null,
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
+  localStorage.removeItem('google_id_token')
 }
 
 export const loadSessionTokens = (): StoredSessionTokens | null => {
@@ -40,4 +41,10 @@ export const loadSessionTokens = (): StoredSessionTokens | null => {
 export const clearSessionTokens = () => {
   if (!isBrowser()) return
   localStorage.removeItem(STORAGE_KEY)
+  localStorage.removeItem('google_id_token')
+}
+
+export const isSessionExpired = (session: StoredSessionTokens): boolean => {
+  if (!session.expiresAt) return false
+  return Date.now() >= session.expiresAt * 1000 - 60_000
 }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import { clearSessionTokens, loadSessionTokens } from '@/lib/auth-storage';
 
 interface GoogleUser {
   email: string;
@@ -21,15 +22,17 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     const initAuth = () => {
-      const token = localStorage.getItem('google_id_token');
+      const session = loadSessionTokens();
+      const legacyToken = localStorage.getItem('google_id_token');
+      const token = session?.accessToken || legacyToken;
+
       if (token) {
-        // Decode the JWT to get user info (simple decode without verification for UI)
         try {
           const payload = JSON.parse(atob(token.split('.')[1]));
           setUser({
-            email: payload.email,
-            name: payload.name,
-            picture: payload.picture
+            email: payload.email || session?.userEmail || '',
+            name: payload.name || payload.email?.split('@')[0] || 'User',
+            picture: payload.picture,
           });
         } catch (e) {
           console.error('Failed to decode token:', e);
@@ -51,7 +54,7 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
   const userImage = user?.picture;
 
   const handleSignOut = () => {
-    localStorage.removeItem('google_id_token');
+    clearSessionTokens();
     router.push('/');
   };
 

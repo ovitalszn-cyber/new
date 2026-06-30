@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import MaintenanceOverlay from "@/components/MaintenanceOverlay";
+import { MAINTENANCE_MODE } from "@/lib/maintenance";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -52,8 +54,14 @@ export default function RootLayout({
         className={`${nunito.variable} ${dmSans.variable} font-sans antialiased bg-[#F4F1FA] text-[#332F3A]`}
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        {children}
-        <Analytics />
+        {MAINTENANCE_MODE ? (
+          <MaintenanceOverlay />
+        ) : (
+          <>
+            {children}
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );

@@ -1,20 +1,64 @@
-// Use local proxy to avoid CORS issues
+import { clearSessionTokens, isSessionExpired, loadSessionTokens, saveSessionTokens } from './auth-storage'
+
 const API_BASE_URL = '/api/proxy'
+
+let refreshPromise: Promise<string | null> | null = null
+
+async function refreshAccessToken(): Promise<string | null> {
+  const session = loadSessionTokens()
+  if (!session?.refreshToken) {
+    return null
+  }
+
+  if (!refreshPromise) {
+    refreshPromise = (async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ refresh_token: session.refreshToken }),
+        })
+
+        if (!response.ok) {
+          clearSessionTokens()
+          return null
+        }
+
+        const data = await response.json()
+        saveSessionTokens({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+          expires_at: data.expires_at,
+          user: data.user,
+        })
+        return data.access_token as string
+      } catch {
+        clearSessionTokens()
+        return null
+      } finally {
+        refreshPromise = null
+      }
+    })()
+  }
+
+  return refreshPromise
+}
 
 async function getAuthToken(): Promise<string | null> {
   if (typeof window === 'undefined') {
     return null
   }
 
-  const token = localStorage.getItem('google_id_token')
-  
-  if (!token) {
-    console.warn('[API Client] No Google ID token found in localStorage')
-    return null
+  const session = loadSessionTokens()
+  if (session?.accessToken) {
+    if (isSessionExpired(session)) {
+      return refreshAccessToken()
+    }
+    return session.accessToken
   }
-  
-  console.log('[API Client] Got Google ID token from localStorage')
-  return token
+
+  const legacyToken = localStorage.getItem('google_id_token')
+  return legacyToken
 }
 
 async function apiRequest<T>(
@@ -22,9 +66,8 @@ async function apiRequest<T>(
   options: RequestInit = {}
 ): Promise<T> {
   const token = await getAuthToken()
-  
+
   if (!token) {
-    console.error('[API Client] No auth token - redirecting to login')
     if (typeof window !== 'undefined') {
       window.location.href = '/login'
     }
@@ -32,7 +75,6 @@ async function apiRequest<T>(
   }
 
   const url = `${API_BASE_URL}${endpoint}`
-  console.log('[API Client] Request:', options.method || 'GET', url)
 
   const response = await fetch(url, {
     ...options,
@@ -44,10 +86,23 @@ async function apiRequest<T>(
     credentials: 'include',
   })
 
-  console.log('[API Client] Response:', response.status, response.statusText)
-
   if (response.status === 401) {
-    console.error('[API Client] 401 Unauthorized - redirecting to login')
+    const refreshed = await refreshAccessToken()
+    if (refreshed) {
+      const retry = await fetch(url, {
+        ...options,
+        headers: {
+          'Authorization': `Bearer ${refreshed}`,
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+        credentials: 'include',
+      })
+      if (retry.ok) {
+        return retry.json()
+      }
+    }
+    clearSessionTokens()
     if (typeof window !== 'undefined') {
       window.location.href = '/login'
     }
@@ -56,35 +111,52 @@ async function apiRequest<T>(
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ detail: 'API request failed' }))
-    console.error('[API Client] Error response:', error)
     throw new Error(error.detail || `Request failed: ${response.status}`)
   }
 
   return response.json()
 }
 
+export async function exchangeGoogleIdToken(idToken: string) {
+  const response = await fetch(`${API_BASE_URL}/auth/session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id_token: idToken }),
+  })
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: 'Auth exchange failed' }))
+    throw new Error(error.detail || 'Auth exchange failed')
+  }
+
+  const data = await response.json()
+  saveSessionTokens({
+    access_token: data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at: data.expires_at,
+    user: data.user,
+  })
+  return data
+}
+
 export const api = {
-  // Profile
   getProfile: () => apiRequest<Profile>('/profile'),
-  
-  // Usage
+
   getUsage: () => apiRequest<Usage>('/usage'),
-  getUsageSummary: (range: '24h' | '7d' | '30d' = '7d') => 
+  getUsageSummary: (range: '24h' | '7d' | '30d' = '7d') =>
     apiRequest<UsageSummary>(`/usage/summary?range=${range}`),
-  
-  // API Keys
+
   listApiKeys: () => apiRequest<{ keys: ApiKey[] }>('/api-keys'),
-  createApiKey: (name?: string) => 
+  createApiKey: (name?: string) =>
     apiRequest<ApiKeyCreate>('/api-keys', {
       method: 'POST',
       body: JSON.stringify({ name }),
     }),
-  revokeApiKey: (keyId: string) => 
+  revokeApiKey: (keyId: string) =>
     apiRequest<{ id: string; status: string; message: string }>(`/api-keys/${keyId}/revoke`, {
       method: 'POST',
     }),
-  
-  // Logs
+
   getLogs: (params?: { limit?: number; offset?: number; status?: string }) => {
     const cleanParams: Record<string, string> = {}
     if (params?.limit !== undefined) cleanParams.limit = String(params.limit)
@@ -93,21 +165,27 @@ export const api = {
     const query = new URLSearchParams(cleanParams).toString()
     return apiRequest<LogsResponse>(`/logs${query ? `?${query}` : ''}`)
   },
-  
-  // Billing
+
   getBilling: () => apiRequest<BillingInfo>('/billing'),
   getBillingHistory: () => apiRequest<{ invoices: any[] }>('/billing/history'),
-  
-  // Team
+
+  createCheckoutSession: (plan: string) =>
+    apiRequest<{ url: string; session_id: string }>('/billing/create-checkout-session', {
+      method: 'POST',
+      body: JSON.stringify({ plan }),
+    }),
+
+  getCheckoutSessionStatus: (sessionId: string) =>
+    apiRequest<CheckoutSessionStatus>(`/billing/session-status?session_id=${encodeURIComponent(sessionId)}`),
+
   getTeam: () => apiRequest<{ members: TeamMember[] }>('/team'),
-  inviteTeamMember: (email: string, role: string = 'member') => 
+  inviteTeamMember: (email: string, role: string = 'member') =>
     apiRequest<{ success: boolean; invite_id: string }>('/team/invite', {
       method: 'POST',
       body: JSON.stringify({ email, role }),
     }),
 }
 
-// Type definitions
 export interface Profile {
   id: string
   email: string
@@ -181,6 +259,13 @@ export interface BillingInfo {
   current_usage: number
   billing_cycle_end: string
   payment_method?: { type: string; last4: string }
+}
+
+export interface CheckoutSessionStatus {
+  status: string
+  plan: string
+  payment_status?: string
+  api_key?: string | null
 }
 
 export interface TeamMember {
