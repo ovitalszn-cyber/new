@@ -1,0 +1,14 @@
+/node_modules
+/.next
+/out
+/app
+/components
+/lib
+/public
+/data
+/middleware.ts
+/next.config.ts
+/tsconfig.json
+/postcss.config.mjs
+/eslint.config.mjs
+next-env.d.ts
