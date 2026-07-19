@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 export default function ApiReferencePage() {
   return (
     <div className="min-h-screen bg-[#08090A] text-[#E3E5E7] font-sans">
-      {/* Navigation */}
       <nav className="h-14 border-b border-white/5 bg-[#050505] flex items-center px-6 justify-between sticky top-0 z-50">
         <div className="flex items-center gap-6">
           <Link href="/docs" className="text-zinc-500 hover:text-white transition-colors">
@@ -20,12 +19,11 @@ export default function ApiReferencePage() {
           <span className="text-sm font-medium">API Reference</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">v6.0.4 Stable</span>
+          <span className="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">v6 Stable</span>
         </div>
       </nav>
 
       <div className="max-w-7xl mx-auto flex">
-        {/* API Sidebar */}
         <aside className="w-72 hidden lg:block border-r border-white/5 h-[calc(100vh-56px)] sticky top-14 bg-[#050505]/50 overflow-y-auto custom-scrollbar">
           <div className="p-6">
             <div className="mb-8">
@@ -49,22 +47,11 @@ export default function ApiReferencePage() {
                 </a>
               </div>
             </div>
-
-            <div className="mb-8">
-              <h3 className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-4">Models</h3>
-              <div className="space-y-1">
-                <a href="#model-player" className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-sm transition-all">Player</a>
-                <a href="#model-match" className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-sm transition-all">Match</a>
-                <a href="#model-prop" className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-sm transition-all">Prop</a>
-              </div>
-            </div>
           </div>
         </aside>
 
-        {/* API Docs Content */}
         <main className="flex-1 min-w-0">
           <div className="grid grid-cols-1 xl:grid-cols-2 divide-x divide-white/5">
-            {/* Left Column: Documentation */}
             <div className="p-8 lg:p-12 space-y-24 pb-32">
               <section id="get-matches" className="scroll-mt-24">
                 <div className="flex items-center gap-3 mb-4">
@@ -72,7 +59,7 @@ export default function ApiReferencePage() {
                   <h2 className="text-2xl font-semibold text-white tracking-tight">/v6/esports/matches</h2>
                 </div>
                 <p className="text-zinc-400 leading-relaxed mb-6">
-                  Returns a list of matches for a specific discipline. Results include team names, scores, live status, and stream links.
+                  Returns matches for a discipline via query param, or use <code className="text-white">/v6/esports/{'{sport}'}/matches</code>.
                 </p>
                 
                 <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">Query Parameters</h4>
@@ -85,7 +72,7 @@ export default function ApiReferencePage() {
                     <div>
                       <div className="text-sm text-zinc-300">Target game title.</div>
                       <div className="mt-2 flex flex-wrap gap-2 text-[10px] font-mono">
-                        {['cs2', 'valorant', 'lol', 'dota2'].map(d => (
+                        {['cs2', 'valorant', 'lol', 'dota2', 'cod', 'r6'].map(d => (
                           <span key={d} className="px-1.5 py-0.5 bg-white/5 text-zinc-400 border border-white/5 rounded-sm">{d}</span>
                         ))}
                       </div>
@@ -97,7 +84,7 @@ export default function ApiReferencePage() {
                       <div className="text-[10px] text-zinc-600 uppercase mt-1">Optional</div>
                     </div>
                     <div className="text-sm text-zinc-300">
-                      UTC date in <code className="text-white">YYYY-MM-DD</code> format. Defaults to current day.
+                      UTC date in <code className="text-white">YYYY-MM-DD</code> format.
                     </div>
                   </div>
                 </div>
@@ -106,25 +93,34 @@ export default function ApiReferencePage() {
               <section id="get-rankings" className="scroll-mt-24">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-xs font-bold bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-sm border border-emerald-500/20">GET</span>
-                  <h2 className="text-2xl font-semibold text-white tracking-tight">/v6/esports/&#123;discipline&#125;/rankings</h2>
+                  <h2 className="text-2xl font-semibold text-white tracking-tight">/v6/esports/{'{sport}'}/rankings</h2>
                 </div>
                 <p className="text-zinc-400 leading-relaxed mb-6">
-                  Global player leaderboards powered by the KashRock Rating system.
+                  Player leaderboards. Query <code className="text-white">filter=lifetime</code> or <code className="text-white">last_3_months</code>.
+                </p>
+              </section>
+
+              <section id="get-players" className="scroll-mt-24">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-bold bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-sm border border-emerald-500/20">GET</span>
+                  <h2 className="text-2xl font-semibold text-white tracking-tight">/v6/esports/{'{sport}'}/players/{'{player_id}'}</h2>
+                </div>
+                <p className="text-zinc-400 leading-relaxed mb-6">
+                  Player profile + stats. Search via <code className="text-white">/players/search?q=</code> or <code className="text-white">/bo3gg/players?search=</code>.
                 </p>
               </section>
 
               <section id="get-props" className="scroll-mt-24">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-xs font-bold bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-sm border border-emerald-500/20">GET</span>
-                  <h2 className="text-2xl font-semibold text-white tracking-tight">/v6/props</h2>
+                  <h2 className="text-2xl font-semibold text-white tracking-tight">/v6/esports/props</h2>
                 </div>
                 <p className="text-zinc-400 leading-relaxed mb-6">
-                  The primary endpoint for retrieving real-time betting props. Features unified statutory naming.
+                  Real-time betting props. Params: <code className="text-white">game</code>, <code className="text-white">book</code>, optional <code className="text-white">market_contains</code> / <code className="text-white">player_id</code>.
                 </p>
               </section>
             </div>
 
-            {/* Right Column: Code Samples (Sticky) */}
             <div className="bg-[#050505] p-8 lg:p-12 relative hidden xl:block">
               <div className="sticky top-28 space-y-12">
                 <div>
@@ -137,18 +133,13 @@ export default function ApiReferencePage() {
       "id": "kr_cs2_9941",
       "kr_match_id": "kr_cs2_9941",
       "discipline": "cs2",
-      "team1": {
-        "name": "Team Spirit",
-        "acronym": "SPIRIT"
-      },
-      "team2": {
-        "name": "FaZe Clan",
-        "acronym": "FAZE"
-      },
-      "status": "upcoming",
-      "start_time": "2026-04-21T18:00:00Z"
+      "team1_name": "Team Spirit",
+      "team2_name": "FaZe Clan",
+      "status": "not_started",
+      "start_date": "2026-07-10T18:00:00Z"
     }
-  ]
+  ],
+  "total": 1
 }`}
                     </pre>
                   </div>
@@ -159,16 +150,16 @@ export default function ApiReferencePage() {
                   <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-6 font-mono text-[11px] leading-relaxed">
                     <pre className="text-zinc-400">
 {`const response = await fetch(
-  'backend.kashrock.com/v6/props?sport=cs2', 
+  'http://localhost:8000/v6/esports/props?game=cs2',
   {
     headers: {
-      'Authorization': 'Bearer ' + API_KEY
+      'X-API-Key': API_KEY
     }
   }
 );
 
 const data = await response.json();
-console.log(data.props[0].kr_stat_type);
+console.log(data.props[0].stat_type);
 // Output: "CS2_KILLS_MAPS_1_2"`}
                     </pre>
                   </div>

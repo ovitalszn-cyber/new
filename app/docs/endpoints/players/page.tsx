@@ -21,7 +21,7 @@ export default function PlayersEndpointPage() {
 
         <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Players</h1>
         <p className="text-lg text-zinc-400 mb-8">
-          Retrieve detailed player profiles with career stats, team history, and recent match performance.
+          Retrieve detailed player profiles with career stats, team info, and recent match performance.
         </p>
 
         <h2 className="text-xl font-semibold text-white mb-4">API Endpoints</h2>
@@ -29,13 +29,23 @@ export default function PlayersEndpointPage() {
         <div className="space-y-4 mb-8">
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
             <span className="text-emerald-400">GET</span>
-            <span className="text-zinc-300 ml-3">/v6/esports/{'{discipline}'}/players/{'{player_id}'}</span>
+            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/players/{'{player_id}'}</span>
             <p className="text-zinc-500 text-xs mt-2 font-sans">Get single player by ID</p>
           </div>
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
             <span className="text-emerald-400">GET</span>
-            <span className="text-zinc-300 ml-3">/v6/esports/{'{discipline}'}/players/search</span>
-            <p className="text-zinc-500 text-xs mt-2 font-sans">Search players by name</p>
+            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/players/search?q=</span>
+            <p className="text-zinc-500 text-xs mt-2 font-sans">Search players by nickname</p>
+          </div>
+          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
+            <span className="text-emerald-400">GET</span>
+            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/players/{'{player_slug}'}/gamelogs</span>
+            <p className="text-zinc-500 text-xs mt-2 font-sans">Recent map-by-map stats</p>
+          </div>
+          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
+            <span className="text-emerald-400">GET</span>
+            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/bo3gg/players</span>
+            <p className="text-zinc-500 text-xs mt-2 font-sans">Full player directory (optional <code className="text-zinc-400">search</code> query)</p>
           </div>
         </div>
 
@@ -52,10 +62,10 @@ export default function PlayersEndpointPage() {
             </thead>
             <tbody className="text-sm divide-y divide-white/5">
               <tr>
-                <td className="py-4 px-6 font-mono text-white">discipline</td>
+                <td className="py-4 px-6 font-mono text-white">sport</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Game slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota-2</code></td>
+                <td className="py-4 px-6 text-zinc-400">Path slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code></td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">player_id</td>
@@ -67,13 +77,7 @@ export default function PlayersEndpointPage() {
                 <td className="py-4 px-6 font-mono text-white">q</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Search query for player name (search endpoint)</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">include_gamelogs</td>
-                <td className="py-4 px-6 text-zinc-400">boolean</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Include recent match-by-match stats (default: false)</td>
+                <td className="py-4 px-6 text-zinc-400">Search query for player nickname (search endpoint). Alias: <code className="text-white">search</code></td>
               </tr>
             </tbody>
           </table>
@@ -94,9 +98,9 @@ export default function PlayersEndpointPage() {
             </code>
           </div>
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Get player with recent gamelogs:</p>
+            <p className="text-zinc-500 text-xs mb-2">Recent gamelogs by slug:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/cs2/players/18452?include_gamelogs=true
+              /v6/esports/cs2/players/zywoo/gamelogs
             </code>
           </div>
         </div>
@@ -108,20 +112,20 @@ export default function PlayersEndpointPage() {
           </div>
           <pre className="p-4 overflow-x-auto text-zinc-300">
 {`{
+  "source": "kashrock",
+  "provider": "bo3.gg",
   "player": {
-    "id": 12345,
-    "slug": "fear",
-    "name": "fear",
-    "first_name": "Fear",
-    "last_name": "Fear",
-    "role": "player",
-    "image_url": "https://example.com/player.png",
-    "current_team": {
-        "id": 678,
-        "name": "Example Team",
-        "slug": "example-team"
+    "id": 18452,
+    "nickname": "ZywOo",
+    "slug": "zywoo",
+    "team": "Vitality",
+    "image": "https://img.bo3.gg/...",
+    "links": {
+      "player_image": "https://img.bo3.gg/...",
+      "team_logo": "https://img.bo3.gg/..."
     }
-  }
+  },
+  "stats": { "rank": 1, "avg_player_rating": 6.96 }
 }`}
 </pre>
         </div>

@@ -25,10 +25,16 @@ export default function MatchesEndpointPage() {
         </p>
 
         <h2 className="text-xl font-semibold text-white mb-4">API Endpoint</h2>
-        <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm mb-8">
+        <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm mb-4">
           <span className="text-emerald-400">GET</span>
-          <span className="text-zinc-300 ml-3">/v6/esports/{'{discipline}'}/matches</span>
+          <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/matches</span>
         </div>
+        <p className="text-sm text-zinc-500 mb-8">
+          Also available: <code className="text-zinc-300">/{'{sport}'}/upcoming/matches</code>,{' '}
+          <code className="text-zinc-300">/{'{sport}'}/completed/matches</code>,{' '}
+          <code className="text-zinc-300">/{'{sport}'}/matches/live</code>, and{' '}
+          <code className="text-zinc-300">/v6/esports/matches?discipline=cs2</code>.
+        </p>
 
         <h2 className="text-xl font-semibold text-white mb-4">Parameters</h2>
         <div className="overflow-x-auto border border-white/5 rounded-lg bg-[#0C0D0F] mb-8">
@@ -43,16 +49,16 @@ export default function MatchesEndpointPage() {
             </thead>
             <tbody className="text-sm divide-y divide-white/5">
               <tr>
-                <td className="py-4 px-6 font-mono text-white">discipline</td>
+                <td className="py-4 px-6 font-mono text-white">sport</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Game slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota-2</code></td>
+                <td className="py-4 px-6 text-zinc-400">Path slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code></td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">status</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter by status: <code className="text-white">live</code>, <code className="text-white">upcoming</code>, <code className="text-white">finished</code></td>
+                <td className="py-4 px-6 text-zinc-400">Filter: <code className="text-white">live</code>, <code className="text-white">upcoming</code> (default), <code className="text-white">finished</code></td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">start_date</td>
@@ -65,12 +71,6 @@ export default function MatchesEndpointPage() {
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
                 <td className="py-4 px-6 text-zinc-400">Filter by end date (YYYY-MM-DD)</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">league_id</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter by league/tournament ID</td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">limit</td>
@@ -91,9 +91,9 @@ export default function MatchesEndpointPage() {
             </code>
           </div>
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Valorant upcoming matches for specific date:</p>
+            <p className="text-zinc-500 text-xs mb-2">Valorant upcoming matches:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/valorant/matches?status=upcoming&start_date=2026-04-20
+              /v6/esports/valorant/matches?status=upcoming
             </code>
           </div>
         </div>
@@ -106,58 +106,23 @@ export default function MatchesEndpointPage() {
           <pre className="p-4 overflow-x-auto text-zinc-300">
 {`{
   "source": "kashrock",
-  "discipline": "valorant",
-  "updated": "2026-04-20T16:21:00.000Z",
+  "success": true,
+  "sport": "valorant",
+  "status": "upcoming",
   "matches": [
     {
-      "slug": "twisted-minds-orchid-vs-fokus-sakura-2026-05-14",
-      "status": "upcoming",
-      "videogame": {
-        "id": 26,
-        "name": "Valorant",
-        "slug": "valorant"
-      },
-      "opponents": [
-        {
-          "type": "Team",
-          "opponent": {
-            "id": 136929,
-            "name": "Twisted Minds Orchid",
-            "slug": "twisted-minds-orchid",
-            "acronym": "TMO",
-            "image_url": "https://cdn-api.pandascore.co/images/team/image/136929/600px_twisted_minds_2023_full_lightmode.png"
-          }
-        },
-        {
-          "type": "Team",
-          "opponent": {
-            "id": 133128,
-            "name": "FOKUS Sakura",
-            "slug": "fokus-sakura",
-            "acronym": "FKS",
-            "image_url": "https://cdn-api.pandascore.co/images/team/image/133128/600px_fokus_2022_allmode.png"
-          }
-        }
-      ],
-      "streams_list": [
-        {
-          "main": true,
-          "language": "en",
-          "embed_url": "https://player.twitch.tv/?channel=valorant_emea2",
-          "official": true,
-          "raw_url": "https://www.twitch.tv/valorant_emea2"
-        }
-      ],
-      "games": [
-        {
-          "id": 48516,
-          "position": 1,
-          "status": "not_started",
-          "finished": false
-        }
-      ]
+      "match_id": "fix_1447265",
+      "sport": "esports_valorant",
+      "status": "not_started",
+      "event_time": "2026-07-10T18:00:00Z",
+      "team1": "Twisted Minds Orchid",
+      "team2": "FOKUS Sakura",
+      "team1_logo": "https://...",
+      "team2_logo": "https://...",
+      "competition": "VCT Challengers"
     }
-  ]
+  ],
+  "total": 22
 }`}
 </pre>
         </div>

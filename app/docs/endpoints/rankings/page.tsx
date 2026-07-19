@@ -21,13 +21,13 @@ export default function RankingsEndpointPage() {
 
         <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Rankings</h1>
         <p className="text-lg text-zinc-400 mb-8">
-          Retrieve player performance rankings with advanced stats sourced from Bo3.gg and PandaScore.
+          Retrieve player performance rankings with advanced stats sourced from Bo3.gg.
         </p>
 
         <h2 className="text-xl font-semibold text-white mb-4">API Endpoint</h2>
         <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm mb-8">
           <span className="text-emerald-400">GET</span>
-          <span className="text-zinc-300 ml-3">/v6/esports/{'{discipline}'}/rankings</span>
+          <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/rankings</span>
         </div>
 
         <h2 className="text-xl font-semibold text-white mb-4">Parameters</h2>
@@ -43,28 +43,16 @@ export default function RankingsEndpointPage() {
             </thead>
             <tbody className="text-sm divide-y divide-white/5">
               <tr>
-                <td className="py-4 px-6 font-mono text-white">discipline</td>
+                <td className="py-4 px-6 font-mono text-white">sport</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Game slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota-2</code></td>
+                <td className="py-4 px-6 text-zinc-400">Path slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code>, <code className="text-white">cod</code>, <code className="text-white">r6</code></td>
               </tr>
               <tr>
-                <td className="py-4 px-6 font-mono text-white">sort_by</td>
+                <td className="py-4 px-6 font-mono text-white">filter</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Sort field: <code className="text-white">rating</code>, <code className="text-white">kills</code>, <code className="text-white">kd_ratio</code></td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">timeframe</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Time range: <code className="text-white">30d</code>, <code className="text-white">90d</code>, <code className="text-white">year</code></td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">limit</td>
-                <td className="py-4 px-6 text-zinc-400">integer</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Max results (default: 50, max: 200)</td>
+                <td className="py-4 px-6 text-zinc-400">Stats window: <code className="text-white">lifetime</code> (default), <code className="text-white">last_3_months</code></td>
               </tr>
             </tbody>
           </table>
@@ -73,15 +61,15 @@ export default function RankingsEndpointPage() {
         <h2 className="text-xl font-semibold text-white mb-4">Example URLs</h2>
         <div className="space-y-4 mb-8">
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">CS2 top players by rating:</p>
+            <p className="text-zinc-500 text-xs mb-2">CS2 lifetime rankings:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/cs2/rankings?sort_by=rating&limit=20
+              /v6/esports/cs2/rankings?filter=lifetime
             </code>
           </div>
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Valorant rankings last 30 days:</p>
+            <p className="text-zinc-500 text-xs mb-2">Valorant last 3 months:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/valorant/rankings?timeframe=30d
+              /v6/esports/valorant/rankings?filter=last_3_months
             </code>
           </div>
         </div>
@@ -92,20 +80,31 @@ export default function RankingsEndpointPage() {
             Response
           </div>
           <pre className="p-4 overflow-x-auto text-zinc-300">
-{`[
-  {
-    "rank": 1,
-    "team": "FaZe Clan",
-    "points": 1000,
-    "change": 0
-  },
-  {
-    "rank": 2,
-    "team": "G2 Esports",
-    "points": 950,
-    "change": 1
-  }
-]`}
+{`{
+  "source": "kashrock",
+  "sport": "cs2",
+  "rankings": [
+    {
+      "rank": 1,
+      "id": 18452,
+      "player": {
+        "id": 18452,
+        "slug": "zywoo",
+        "nickname": "ZywOo"
+      },
+      "team": {
+        "id": 667,
+        "name": "Vitality",
+        "slug": "vitality"
+      },
+      "avg_player_rating": 6.96,
+      "avg_kd_rate": 1.42,
+      "games_count": 84,
+      "avg_headshot_kills_accuracy": 0.51
+    }
+  ],
+  "total": 500
+}`}
 </pre>
         </div>
 
@@ -123,7 +122,7 @@ export default function RankingsEndpointPage() {
               <tr>
                 <td className="py-4 px-6 font-mono text-white">avg_player_rating</td>
                 <td className="py-4 px-6 text-zinc-400">float</td>
-                <td className="py-4 px-6 text-zinc-400"> HLTV-style rating (6.5+ is elite)</td>
+                <td className="py-4 px-6 text-zinc-400">HLTV-style rating (6.5+ is elite)</td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">avg_kd_rate</td>

@@ -23,6 +23,13 @@ const sportsbooks = [
     description: 'Social betting and DFS platform.',
   },
   {
+    id: 'sleeper',
+    name: 'Sleeper',
+    type: 'DFS',
+    props: true,
+    description: 'Fantasy platform with esports player props.',
+  },
+  {
     id: 'betr',
     name: 'Betr',
     type: 'DFS',
@@ -59,7 +66,7 @@ export default function SportsbooksPage() {
 
         <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Sportsbooks</h1>
         <p className="text-lg text-zinc-400 mb-2">
-          KashRock aggregates esports props from the following platforms. Use the <code className="bg-zinc-800 text-emerald-400 px-1.5 py-0.5 rounded font-mono text-sm">sportsbook</code> parameter to filter by source.
+          KashRock aggregates esports props from the following platforms. Use the <code className="bg-zinc-800 text-emerald-400 px-1.5 py-0.5 rounded font-mono text-sm">book</code> parameter (alias <code className="bg-zinc-800 text-emerald-400 px-1.5 py-0.5 rounded font-mono text-sm">sportsbook</code>) to filter by source.
         </p>
 
         <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-md p-4 flex gap-4 mb-12">
@@ -121,7 +128,7 @@ export default function SportsbooksPage() {
           </div>
           <div className="p-4 overflow-x-auto">
             <code className="text-zinc-300">
-              curl "https://backend.kashrock.com/v6/props?sportsbook=<span className="text-emerald-400">prizepicks</span>&discipline=cs2"
+              curl "http://localhost:8000/v6/esports/props?book=<span className="text-emerald-400">prizepicks</span>&game=cs2"
             </code>
           </div>
         </div>

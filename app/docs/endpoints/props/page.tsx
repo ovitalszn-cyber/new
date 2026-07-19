@@ -31,7 +31,7 @@ export default function PropsEndpointPage() {
               <strong>Canonical Mapping:</strong> All prop labels are normalized across platforms.
             </p>
             <p className="text-sm text-emerald-200/60">
-              "Kills Map 1+2" (PrizePicks) = "1st 2 Maps KILLS" (Underdog) = <code className="text-emerald-400">ESPORTS_KILLS_MAPS_1_2</code>
+              &quot;Kills Map 1+2&quot; (PrizePicks) = &quot;1st 2 Maps KILLS&quot; (Underdog) = <code className="text-emerald-400">CS2_KILLS_MAPS_1_2</code>
             </p>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function PropsEndpointPage() {
         <h2 className="text-xl font-semibold text-white mb-4">API Endpoint</h2>
         <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm mb-8">
           <span className="text-emerald-400">GET</span>
-          <span className="text-zinc-300 ml-3">/v6/props</span>
+          <span className="text-zinc-300 ml-3">/v6/esports/props</span>
         </div>
 
         <h2 className="text-xl font-semibold text-white mb-4">Parameters</h2>
@@ -55,40 +55,34 @@ export default function PropsEndpointPage() {
             </thead>
             <tbody className="text-sm divide-y divide-white/5">
               <tr>
-                <td className="py-4 px-6 font-mono text-white">discipline</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Game slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota-2</code></td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">sportsbook</td>
+                <td className="py-4 px-6 font-mono text-white">game</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter by source: <code className="text-white">prizepicks</code>, <code className="text-white">underdog</code>, <code className="text-white">dabble</code></td>
+                <td className="py-4 px-6 text-zinc-400">Game slug (default <code className="text-white">cs2</code>): <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code>. Alias: <code className="text-white">discipline</code></td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 font-mono text-white">book</td>
+                <td className="py-4 px-6 text-zinc-400">string</td>
+                <td className="py-4 px-6 text-zinc-600">—</td>
+                <td className="py-4 px-6 text-zinc-400">Filter by source: <code className="text-white">prizepicks</code>, <code className="text-white">underdog</code>, <code className="text-white">dabble</code>, <code className="text-white">sleeper</code>. Alias: <code className="text-white">sportsbook</code></td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">market</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter by canonical market: <code className="text-white">ESPORTS_KILLS_MAPS_1_2</code></td>
+                <td className="py-4 px-6 text-zinc-400">Exact match on <code className="text-white">stat_type</code>: <code className="text-white">CS2_KILLS_MAPS_1_2</code></td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">market_contains</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Partial match on market: <code className="text-white">KILLS</code>, <code className="text-white">HEADSHOTS</code></td>
+                <td className="py-4 px-6 text-zinc-400">Substring match on <code className="text-white">stat_type</code>: <code className="text-white">KILLS</code>, <code className="text-white">HEADSHOTS</code></td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">player_id</td>
                 <td className="py-4 px-6 text-zinc-400">integer</td>
                 <td className="py-4 px-6 text-zinc-600">—</td>
                 <td className="py-4 px-6 text-zinc-400">Filter props for a specific player</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">match_id</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter props for a specific match</td>
               </tr>
             </tbody>
           </table>
@@ -99,19 +93,19 @@ export default function PropsEndpointPage() {
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
             <p className="text-zinc-500 text-xs mb-2">All CS2 props from PrizePicks:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/props?discipline=cs2&sportsbook=prizepicks
+              /v6/esports/props?game=cs2&book=prizepicks
             </code>
           </div>
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
             <p className="text-zinc-500 text-xs mb-2">Kills props across all platforms:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/props?discipline=cs2&market_contains=KILLS
+              /v6/esports/props?game=cs2&market_contains=KILLS
             </code>
           </div>
           <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
             <p className="text-zinc-500 text-xs mb-2">Props for a specific player:</p>
             <code className="text-zinc-300 text-sm font-mono">
-              /v6/props?discipline=cs2&player_id=18452
+              /v6/esports/props?game=cs2&player_id=18452
             </code>
           </div>
         </div>
@@ -123,14 +117,28 @@ export default function PropsEndpointPage() {
           </div>
           <pre className="p-4 overflow-x-auto text-zinc-300">
 {`{
-  "source": "PrizePicks",
-  "player": "fear",
-  "stat": "Headshots",
-  "line": 15.5,
-  "market": "Map 1-2 Headshots",
-  "event": "CS2 Masters",
-  "propId": "kr_prop_12345",
-  "eventId": "kr_event_67890"
+  "sport": "esports_cs2",
+  "props": [
+    {
+      "propId": "kr_prop_f4972484fc50d1c5",
+      "book_name": "PrizePicks",
+      "player_name": "fear",
+      "player_id": 12345,
+      "stat_type": "CS2_KILLS_MAPS_1_2",
+      "line": 25.5,
+      "direction": "over",
+      "odds": -110,
+      "team": "Fnatic",
+      "opponent": "G2",
+      "event_time": "2026-07-10T13:30:00Z",
+      "links": {
+        "player_image": "https://...",
+        "team_logo": "https://..."
+      }
+    }
+  ],
+  "total_props": 952,
+  "books": ["dabble", "prizepicks", "sleeper", "underdog"]
 }`}
 </pre>
         </div>
@@ -147,14 +155,14 @@ export default function PropsEndpointPage() {
             </thead>
             <tbody className="text-sm divide-y divide-white/5">
               <tr>
-                <td className="py-4 px-6 font-mono text-white">sportsbook_label</td>
+                <td className="py-4 px-6 font-mono text-white">propId</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-400">Original label from the sportsbook</td>
+                <td className="py-4 px-6 text-zinc-400">Canonical KashRock prop id</td>
               </tr>
               <tr>
-                <td className="py-4 px-6 font-mono text-white">canonical_market</td>
+                <td className="py-4 px-6 font-mono text-white">stat_type</td>
                 <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-400">KashRock normalized market identifier</td>
+                <td className="py-4 px-6 text-zinc-400">Normalized market identifier</td>
               </tr>
               <tr>
                 <td className="py-4 px-6 font-mono text-white">line</td>
@@ -162,11 +170,15 @@ export default function PropsEndpointPage() {
                 <td className="py-4 px-6 text-zinc-400">The prop line (e.g., 24.5 kills)</td>
               </tr>
               <tr>
-                <td className="py-4 px-6 font-mono text-white">over_multiplier</td>
-                <td className="py-4 px-6 text-zinc-400">float</td>
-                <td className="py-4 px-6 text-zinc-400">Payout multiplier for over (DFS style)</td>
+                <td className="py-4 px-6 font-mono text-white">book_name</td>
+                <td className="py-4 px-6 text-zinc-400">string</td>
+                <td className="py-4 px-6 text-zinc-400">Source platform display name</td>
               </tr>
-
+              <tr>
+                <td className="py-4 px-6 font-mono text-white">direction</td>
+                <td className="py-4 px-6 text-zinc-400">string</td>
+                <td className="py-4 px-6 text-zinc-400"><code className="text-white">over</code> or <code className="text-white">under</code></td>
+              </tr>
             </tbody>
           </table>
         </div>

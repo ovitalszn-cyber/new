@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import MaintenanceOverlay from "@/components/MaintenanceOverlay";
+import { SessionProvider } from "@/components/auth/SessionProvider";
 import { MAINTENANCE_MODE } from "@/lib/maintenance";
 import "./globals.css";
 
@@ -57,10 +58,10 @@ export default function RootLayout({
         {MAINTENANCE_MODE ? (
           <MaintenanceOverlay />
         ) : (
-          <>
+          <SessionProvider>
             {children}
             <Analytics />
-          </>
+          </SessionProvider>
         )}
       </body>
     </html>

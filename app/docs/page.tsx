@@ -113,7 +113,7 @@ export default function DocsPage() {
               <div className="p-4 overflow-x-auto">
                 <code className="text-zinc-300">
                   curl -H "Authorization: Bearer <span className="text-white">YOUR_API_KEY</span>" \<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"https://backend.kashrock.com/v6/esports/matches?discipline=cs2"
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://localhost:8000/v6/esports/matches?discipline=cs2"
                 </code>
               </div>
             </div>
@@ -156,12 +156,12 @@ export default function DocsPage() {
                   <tr>
                     <td className="px-4 py-3 font-mono text-white">sport</td>
                     <td className="px-4 py-3 italic">string</td>
-                    <td className="px-4 py-3">One of: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code></td>
+                    <td className="px-4 py-3">Path slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code>, <code className="text-white">cod</code>, <code className="text-white">r6</code></td>
                   </tr>
                   <tr>
                     <td className="px-4 py-3 font-mono text-white">status</td>
                     <td className="px-4 py-3 italic">string</td>
-                    <td className="px-4 py-3">Filter by status: <code className="text-white">upcoming</code>, <code className="text-white">live</code>, <code className="text-white">finished</code></td>
+                    <td className="px-4 py-3">Optional. Values include <code className="text-white">not_started</code>, <code className="text-white">running</code>, <code className="text-white">finished</code> (also accepts upcoming/live/ended aliases)</td>
                   </tr>
                 </tbody>
               </table>
@@ -221,12 +221,12 @@ export default function DocsPage() {
                   <tr>
                     <td className="px-4 py-3 font-mono text-white">sport</td>
                     <td className="px-4 py-3 italic">string</td>
-                    <td className="px-4 py-3">Required. e.g. <code className="text-white">cs2</code>, <code className="text-white">valorant</code></td>
+                    <td className="px-4 py-3">Path slug. e.g. <code className="text-white">cs2</code>, <code className="text-white">valorant</code></td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-mono text-white">limit</td>
-                    <td className="px-4 py-3 italic">integer</td>
-                    <td className="px-4 py-3">Max results to return (default 50)</td>
+                    <td className="px-4 py-3 font-mono text-white">filter</td>
+                    <td className="px-4 py-3 italic">string</td>
+                    <td className="px-4 py-3"><code className="text-white">lifetime</code> (default) or <code className="text-white">last_3_months</code></td>
                   </tr>
                 </tbody>
               </table>
@@ -234,7 +234,7 @@ export default function DocsPage() {
 
             <div className="bg-[#0C0D0F] border border-white/10 rounded-md overflow-hidden">
               <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-zinc-500 flex justify-between items-center text-xs">
-                <span>GET /v6/esports/cs2/rankings</span>
+                <span>GET /v6/esports/cs2/rankings?filter=lifetime</span>
                 <span className="text-[10px] uppercase">200 OK</span>
               </div>
               <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto">
@@ -244,16 +244,14 @@ export default function DocsPage() {
 `}  <span className="token-key">"rankings"</span>: <span className="text-white">[</span>{`
 `}    <span className="text-white">{"{"}</span>{`
 `}      <span className="token-key">"rank"</span>: <span className="token-number">1</span>,{`
-`}      <span className="token-key">"player_id"</span>: <span className="token-number">3</span>,{`
-`}      <span className="token-key">"nickname"</span>: <span className="token-string">"s1mple"</span>,{`
-`}      <span className="token-key">"team"</span>: <span className="token-string">"NAVI"</span>,{`
-`}      <span className="token-key">"rating"</span>: <span className="token-number">1.31</span>,{`
-`}      <span className="token-key">"maps_played"</span>: <span className="token-number">84</span>,{`
-`}      <span className="token-key">"country"</span>: <span className="token-string">"UA"</span>{`
+`}      <span className="token-key">"id"</span>: <span className="token-number">18452</span>,{`
+`}      <span className="token-key">"player"</span>: <span className="text-white">{"{"}</span> <span className="token-key">"nickname"</span>: <span className="token-string">"ZywOo"</span>, <span className="token-key">"slug"</span>: <span className="token-string">"zywoo"</span> <span className="text-white">{"}"}</span>,{`
+`}      <span className="token-key">"team"</span>: <span className="text-white">{"{"}</span> <span className="token-key">"name"</span>: <span className="token-string">"Vitality"</span> <span className="text-white">{"}"}</span>,{`
+`}      <span className="token-key">"avg_player_rating"</span>: <span className="token-number">6.96</span>,{`
+`}      <span className="token-key">"games_count"</span>: <span className="token-number">84</span>{`
 `}    <span className="text-white">{"}"}</span>{`
 `}  <span className="text-white">]</span>,{`
-`}  <span className="token-key">"total"</span>: <span className="token-number">50</span>,{`
-`}  <span className="token-key">"generated_at"</span>: <span className="token-string">"2026-04-20T19:00:52Z"</span>{`
+`}  <span className="token-key">"total"</span>: <span className="token-number">500</span>{`
 `}<span className="text-white">{"}"}</span></code>
               </div>
             </div>
@@ -277,12 +275,12 @@ export default function DocsPage() {
                   <tr>
                     <td className="px-4 py-3 font-mono text-white">sport</td>
                     <td className="px-4 py-3 italic">string</td>
-                    <td className="px-4 py-3">Required. e.g. <code className="text-white">cs2</code></td>
+                    <td className="px-4 py-3">Path slug. e.g. <code className="text-white">cs2</code></td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-mono text-white">limit</td>
-                    <td className="px-4 py-3 italic">integer</td>
-                    <td className="px-4 py-3">Max results to return</td>
+                    <td className="px-4 py-3 font-mono text-white">search</td>
+                    <td className="px-4 py-3 italic">string</td>
+                    <td className="px-4 py-3">Optional nickname filter (case-insensitive)</td>
                   </tr>
                 </tbody>
               </table>
@@ -290,7 +288,7 @@ export default function DocsPage() {
 
             <div className="bg-[#0C0D0F] border border-white/10 rounded-md overflow-hidden">
               <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-zinc-500 flex justify-between items-center text-xs">
-                <span>GET /v6/esports/cs2/bo3gg/players</span>
+                <span>GET /v6/esports/cs2/bo3gg/players?search=fallen</span>
                 <span className="text-[10px] uppercase">200 OK</span>
               </div>
               <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto">
@@ -304,8 +302,6 @@ export default function DocsPage() {
 `}      <span className="token-key">"last_name"</span>: <span className="token-string">"Toledo"</span>,{`
 `}      <span className="token-key">"slug"</span>: <span className="token-string">"fallen"</span>,{`
 `}      <span className="token-key">"team_id"</span>: <span className="token-number">648</span>,{`
-`}      <span className="token-key">"rank"</span>: <span className="token-number">86</span>,{`
-`}      <span className="token-key">"six_month_avg_rating"</span>: <span className="token-number">5.51</span>,{`
 `}      <span className="token-key">"country_id"</span>: <span className="token-number">14</span>,{`
 `}      <span className="token-key">"social"</span>: <span className="text-white">{"{"}</span>{`
 `}        <span className="token-key">"twitter"</span>: <span className="token-string">"@FalleNCS"</span>,{`
@@ -335,14 +331,14 @@ export default function DocsPage() {
                 </thead>
                 <tbody className="text-zinc-400 divide-y divide-white/5">
                   <tr>
-                    <td className="px-4 py-3 font-mono text-white">sport</td>
+                    <td className="px-4 py-3 font-mono text-white">game</td>
                     <td className="px-4 py-3 italic">string</td>
-                    <td className="px-4 py-3">Required. e.g. <code className="text-white">cs2</code>, <code className="text-white">valorant</code></td>
+                    <td className="px-4 py-3">Default <code className="text-white">cs2</code>. Also: <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code>, <code className="text-white">cod</code>, <code className="text-white">r6</code></td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-mono text-white">limit</td>
-                    <td className="px-4 py-3 italic">integer</td>
-                    <td className="px-4 py-3">Max props to return</td>
+                    <td className="px-4 py-3 font-mono text-white">book</td>
+                    <td className="px-4 py-3 italic">string</td>
+                    <td className="px-4 py-3">Optional filter: <code className="text-white">prizepicks</code>, <code className="text-white">underdog</code>, <code className="text-white">dabble</code>, <code className="text-white">sleeper</code></td>
                   </tr>
                 </tbody>
               </table>
@@ -350,30 +346,26 @@ export default function DocsPage() {
 
             <div className="bg-[#0C0D0F] border border-white/10 rounded-md overflow-hidden mb-8">
               <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-zinc-500 flex justify-between items-center text-xs">
-                <span>GET /v6/esports/props?game=cs2&date=today</span>
+                <span>GET /v6/esports/props?game=cs2</span>
                 <span className="text-[10px] uppercase">200 OK</span>
               </div>
               <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto">
                 <code><span className="text-white">{"{"}</span>{`
-`}  <span className="token-key">"source"</span>: <span className="token-string">"kashrock"</span>,{`
-`}  <span className="token-key">"sport"</span>: <span className="token-string">"cs2"</span>,{`
+`}  <span className="token-key">"sport"</span>: <span className="token-string">"esports_cs2"</span>,{`
 `}  <span className="token-key">"props"</span>: <span className="text-white">[</span>{`
 `}    <span className="text-white">{"{"}</span>{`
-`}      <span className="token-key">"prop_id"</span>: <span className="token-string">"kr_prop_5992b0df9d7afc33"</span>,{`
+`}      <span className="token-key">"propId"</span>: <span className="token-string">"kr_prop_5992b0df9d7afc33"</span>,{`
+`}      <span className="token-key">"book_name"</span>: <span className="token-string">"PrizePicks"</span>,{`
 `}      <span className="token-key">"player_name"</span>: <span className="token-string">"fear"</span>,{`
-`}      <span className="token-key">"stat_type"</span>: <span className="token-string">"ESPORTS_KILLS_MAPS_1_2"</span>,{`
-`}      <span className="token-key">"prop_value"</span>: <span className="token-number">25.5</span>,{`
+`}      <span className="token-key">"stat_type"</span>: <span className="token-string">"CS2_KILLS_MAPS_1_2"</span>,{`
+`}      <span className="token-key">"line"</span>: <span className="token-number">25.5</span>,{`
 `}      <span className="token-key">"direction"</span>: <span className="token-string">"over"</span>,{`
-`}      <span className="token-key">"actual_value"</span>: <span className="token-number">28</span>,{`
-`}      <span className="token-key">"status"</span>: <span className="token-string">"hit"</span>,{`
 `}      <span className="token-key">"team"</span>: <span className="token-string">"Fnatic"</span>,{`
 `}      <span className="token-key">"opponent"</span>: <span className="token-string">"G2"</span>,{`
-`}      <span className="token-key">"event_time"</span>: <span className="token-string">"2026-04-21T13:30:00Z"</span>,{`
-`}      <span className="token-key">"links"</span>: <span className="text-white">{"{"}</span>{`
-`}        <span className="token-key">"bet"</span>: <span className="token-string">"https://app.prizepicks.com/"</span>{`
-`}      <span className="text-white">{"}"}</span>{`
+`}      <span className="token-key">"event_time"</span>: <span className="token-string">"2026-07-10T13:30:00Z"</span>{`
 `}    <span className="text-white">{"}"}</span>{`
-`}  <span className="text-white">]</span>{`
+`}  <span className="text-white">]</span>,{`
+`}  <span className="token-key">"total_props"</span>: <span className="token-number">952</span>{`
 `}<span className="text-white">{"}"}</span></code>
               </div>
             </div>

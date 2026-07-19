@@ -25,6 +25,27 @@
                 "maps 1+2 headshots",
                 "Headshots Map 1+2",
                 "1st 2 Maps HEADSHOTS",
+                "CS2_HEADSHOTS_MAPS_1_2",
+                "ESPORTS_HEADSHOTS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "esports-kills-maps-1-2",
+            "canonical_name": "ESPORTS_KILLS_MAPS_1_2",
+            "name": "Kills Maps 1-2 (legacy ESPORTS_ prefix)",
+            "game": "CS2",
+            "sportsbooks": [
+                "ESPORTS_KILLS_MAPS_1_2",
+                "CS2_KILLS_MAPS_1_2"
+            ]
+        },
+        {
+            "id": "esports-headshots-maps-1-2",
+            "canonical_name": "ESPORTS_HEADSHOTS_MAPS_1_2",
+            "name": "Headshots Maps 1-2 (legacy ESPORTS_ prefix)",
+            "game": "CS2",
+            "sportsbooks": [
+                "ESPORTS_HEADSHOTS_MAPS_1_2",
                 "CS2_HEADSHOTS_MAPS_1_2"
             ]
         },

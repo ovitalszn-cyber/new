@@ -11,12 +11,14 @@ const COPY_PATHS = [
   'lib',
   'public',
   'data',
-  'middleware.ts',
+  'proxy.ts',
   'next.config.ts',
   'tsconfig.json',
   'postcss.config.mjs',
   'eslint.config.mjs',
 ];
+
+rmSync(join(frontendDir, 'middleware.ts'), { force: true });
 
 for (const relativePath of COPY_PATHS) {
   const source = join(rootDir, relativePath);

@@ -26,12 +26,28 @@ const disciplines = [
     stats: ['kills', 'deaths', 'assists', 'cs', 'gold', 'damage'],
   },
   {
-    id: 'dota-2',
+    id: 'dota2',
     name: 'Dota 2',
-    slug: 'dota-2',
+    slug: 'dota2',
     icon: '',
     description: 'MOBA with deep hero mechanics.',
     stats: ['kills', 'deaths', 'assists', 'last_hits', 'denies', 'gpm'],
+  },
+  {
+    id: 'cod',
+    name: 'Call of Duty',
+    slug: 'cod',
+    icon: '',
+    description: 'Fast-paced FPS. Search & Destroy / Hardpoint.',
+    stats: ['kills', 'deaths', 'assists', 'damage', 'hill_time', 'plants'],
+  },
+  {
+    id: 'r6',
+    name: 'Rainbow Six Siege',
+    slug: 'r6',
+    icon: '',
+    description: 'Tactical FPS. Attack / defend round structure.',
+    stats: ['kills', 'deaths', 'assists', 'entry_kills', 'plants', 'defuses'],
   },
 ];
 
@@ -104,7 +120,7 @@ export default function DisciplinesPage() {
           </div>
           <div className="p-4 overflow-x-auto">
             <code className="text-zinc-300">
-              curl "https://backend.kashrock.com/v6/esports/<span className="text-emerald-400">cs2</span>/matches"
+              curl "http://localhost:8000/v6/esports/<span className="text-emerald-400">cs2</span>/matches"
             </code>
           </div>
         </div>

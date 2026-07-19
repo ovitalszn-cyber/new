@@ -3,4 +3,4 @@ export const MAINTENANCE_MODE =
 
 export const MAINTENANCE_MESSAGE =
   process.env.NEXT_PUBLIC_MAINTENANCE_MESSAGE ??
-  "We're making a few upgrades. The site will be back shortly.";
+  "Expanding coverage — Call of Duty and Rainbow Six Siege are coming online. We'll be back shortly.";

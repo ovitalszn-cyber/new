@@ -6,7 +6,7 @@
 /lib
 /public
 /data
-/middleware.ts
+/proxy.ts
 /next.config.ts
 /tsconfig.json
 /postcss.config.mjs

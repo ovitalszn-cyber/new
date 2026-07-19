@@ -59,14 +59,14 @@ export default function MaintenanceOverlay() {
         />
 
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500">
-          Maintenance
+          New edition
         </p>
 
         <h1
           id="maintenance-title"
           className="mb-4 text-2xl font-semibold tracking-tight text-white"
         >
-          We&apos;ll be right back
+          Expanding the catalog
         </h1>
 
         <p className="mb-8 text-sm leading-relaxed text-zinc-400">
