@@ -1,144 +1,46 @@
-import Link from 'next/link';
+import { DocsShell } from '@/components/docs/DocsShell'
+import { Curl, JsonBlock, Params, Route } from '@/components/docs/Code'
 
-export default function PlayersEndpointPage() {
+const SEARCH = {
+  player_id: 18452,
+  nickname: 'ZywOo',
+  slug: 'zywoo',
+  first_name: 'Mathieu',
+  last_name: 'Herbaut',
+  team_id: 667,
+}
+
+export default function PlayersPage() {
   return (
-    <div className="min-h-screen bg-[#08090A] text-[#E3E5E7] font-sans">
-      <header className="h-16 border-b border-white/5 bg-[#050505]/80 backdrop-blur-md sticky top-0 z-50 flex items-center px-6 justify-between">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2.5">
-            <img src="/kashrock-logo.svg" alt="KashRock" className="h-5 w-auto" />
-          </Link>
-          <nav className="hidden md:flex gap-6">
-            <Link href="/docs" className="text-sm font-medium text-white">Documentation</Link>
-          </nav>
-        </div>
-      </header>
+    <DocsShell active="players">
+      <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Players</h1>
+      <p className="text-lg text-zinc-400 mb-8">
+        Search by nickname, load a profile by id or slug, then pull recent map logs.
+      </p>
 
-      <div className="max-w-4xl mx-auto py-12 px-6">
-        <div className="mb-4">
-          <Link href="/docs" className="text-sm text-zinc-500 hover:text-white">&larr; Back to Docs</Link>
-        </div>
+      <h2 className="text-xl font-semibold text-white mb-4">Search</h2>
+      <Route path="/v6/esports/{sport}/players/search" />
+      <Params rows={[
+        { name: 'sport', type: 'path', required: true, note: 'Sport slug.' },
+        { name: 'q', type: 'string', required: true, note: 'Nickname. Alias: search' },
+      ]} />
+      <Curl path="/v6/esports/cs2/players/search?q=zywoo" />
+      <JsonBlock title="200 · live" data={SEARCH} />
 
-        <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Players</h1>
-        <p className="text-lg text-zinc-400 mb-8">
-          Retrieve detailed player profiles with career stats, team info, and recent match performance.
-        </p>
+      <h2 className="text-xl font-semibold text-white mb-4">Profile</h2>
+      <Route path="/v6/esports/{sport}/players/{player_id}" />
+      <p className="text-sm text-zinc-500 mb-8">
+        <code className="text-zinc-300">player_id</code> can be numeric (<code className="text-zinc-300">18452</code>) or slug (<code className="text-zinc-300">zywoo</code>).
+      </p>
+      <Curl path="/v6/esports/cs2/players/zywoo" />
 
-        <h2 className="text-xl font-semibold text-white mb-4">API Endpoints</h2>
-        
-        <div className="space-y-4 mb-8">
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
-            <span className="text-emerald-400">GET</span>
-            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/players/{'{player_id}'}</span>
-            <p className="text-zinc-500 text-xs mt-2 font-sans">Get single player by ID</p>
-          </div>
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
-            <span className="text-emerald-400">GET</span>
-            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/players/search?q=</span>
-            <p className="text-zinc-500 text-xs mt-2 font-sans">Search players by nickname</p>
-          </div>
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
-            <span className="text-emerald-400">GET</span>
-            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/players/{'{player_slug}'}/gamelogs</span>
-            <p className="text-zinc-500 text-xs mt-2 font-sans">Recent map-by-map stats</p>
-          </div>
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm">
-            <span className="text-emerald-400">GET</span>
-            <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/bo3gg/players</span>
-            <p className="text-zinc-500 text-xs mt-2 font-sans">Full player directory (optional <code className="text-zinc-400">search</code> query)</p>
-          </div>
-        </div>
-
-        <h2 className="text-xl font-semibold text-white mb-4">Parameters</h2>
-        <div className="overflow-x-auto border border-white/5 rounded-lg bg-[#0C0D0F] mb-8">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-white/5 text-xs font-semibold uppercase tracking-wider text-zinc-500 border-b border-white/5">
-                <th className="py-4 px-6">Parameter</th>
-                <th className="py-4 px-6">Type</th>
-                <th className="py-4 px-6">Required</th>
-                <th className="py-4 px-6">Description</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm divide-y divide-white/5">
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">sport</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Path slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code></td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">player_id</td>
-                <td className="py-4 px-6 text-zinc-400">integer</td>
-                <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Player ID from rankings or search</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">q</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Search query for player nickname (search endpoint). Alias: <code className="text-white">search</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2 className="text-xl font-semibold text-white mb-4">Example URLs</h2>
-        <div className="space-y-4 mb-8">
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Get player by ID:</p>
-            <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/cs2/players/18452
-            </code>
-          </div>
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Search for player:</p>
-            <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/cs2/players/search?q=zywoo
-            </code>
-          </div>
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Recent gamelogs by slug:</p>
-            <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/cs2/players/zywoo/gamelogs
-            </code>
-          </div>
-        </div>
-
-        <h2 className="text-xl font-semibold text-white mb-4">Example Response</h2>
-        <div className="bg-[#0C0D0F] border border-white/10 rounded-md overflow-hidden font-mono text-xs mb-8">
-          <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-zinc-500">
-            Response
-          </div>
-          <pre className="p-4 overflow-x-auto text-zinc-300">
-{`{
-  "source": "kashrock",
-  "provider": "bo3.gg",
-  "player": {
-    "id": 18452,
-    "nickname": "ZywOo",
-    "slug": "zywoo",
-    "team": "Vitality",
-    "image": "https://img.bo3.gg/...",
-    "links": {
-      "player_image": "https://img.bo3.gg/...",
-      "team_logo": "https://img.bo3.gg/..."
-    }
-  },
-  "stats": { "rank": 1, "avg_player_rating": 6.96 }
-}`}
-</pre>
-        </div>
-
-        <div className="flex gap-4 mt-12">
-          <Link href="/docs/endpoints/rankings" className="text-sm text-zinc-500 hover:text-white">
-            ← Rankings
-          </Link>
-          <Link href="/docs/endpoints/props" className="text-sm text-emerald-400 hover:text-emerald-300">
-            Next: Props →
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+      <h2 className="text-xl font-semibold text-white mb-4">Gamelogs</h2>
+      <Route path="/v6/esports/{sport}/players/{player_slug}/gamelogs" />
+      <Params rows={[
+        { name: 'player_slug', type: 'path', required: true, note: 'Nickname or slug.' },
+        { name: 'limit', type: 'int', note: 'Max maps. Default 10.' },
+      ]} />
+      <Curl path="/v6/esports/cs2/players/zywoo/gamelogs?limit=1" />
+    </DocsShell>
+  )
 }

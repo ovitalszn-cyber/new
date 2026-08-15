@@ -1,138 +1,63 @@
-import Link from 'next/link';
+import { DocsShell } from '@/components/docs/DocsShell'
+import { Curl, JsonBlock, Params, Route } from '@/components/docs/Code'
 
-export default function MatchesEndpointPage() {
+const MATCH = {
+  source: 'kashrock',
+  kr_match_id: 'kr_cs2_imperial-vs-bestia-2026-08-15',
+  slug: 'imperial-vs-bestia-2026-08-15',
+  sport: 'esports_cs2',
+  status: 'not_started',
+  event_time: '2026-08-15T20:00:00Z',
+}
+
+const FIXTURE = {
+  fixture_id: 'fix_1634179',
+  kr_match_id: 'kr_cs2_wave-esports-vs-drama-esports-2026-08-14',
+  sport: 'esports_cs2',
+  discipline: 'cs2',
+  status: 'finished',
+  slug: 'wave-esports-vs-drama-esports-2026-08-14',
+}
+
+export default function MatchesPage() {
   return (
-    <div className="min-h-screen bg-[#08090A] text-[#E3E5E7] font-sans">
-      <header className="h-16 border-b border-white/5 bg-[#050505]/80 backdrop-blur-md sticky top-0 z-50 flex items-center px-6 justify-between">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2.5">
-            <img src="/kashrock-logo.svg" alt="KashRock" className="h-5 w-auto" />
-          </Link>
-          <nav className="hidden md:flex gap-6">
-            <Link href="/docs" className="text-sm font-medium text-white">Documentation</Link>
-          </nav>
-        </div>
-      </header>
+    <DocsShell active="matches">
+      <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Matches & fixtures</h1>
+      <p className="text-lg text-zinc-400 mb-8">
+        Upcoming, live, and finished games. Fixtures is the full schedule board. Matches is the filtered list for one status.
+      </p>
 
-      <div className="max-w-4xl mx-auto py-12 px-6">
-        <div className="mb-4">
-          <Link href="/docs" className="text-sm text-zinc-500 hover:text-white">&larr; Back to Docs</Link>
-        </div>
+      <h2 className="text-xl font-semibold text-white mb-4">Matches</h2>
+      <Route path="/v6/esports/{sport}/matches" />
+      <Params rows={[
+        { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock' },
+        { name: 'status', type: 'string', note: 'upcoming (default), live, finished' },
+        { name: 'start_date', type: 'date', note: 'YYYY-MM-DD' },
+        { name: 'end_date', type: 'date', note: 'YYYY-MM-DD' },
+        { name: 'limit', type: 'int', note: 'Page size. Default 50.' },
+        { name: 'offset', type: 'int', note: 'Skip N rows.' },
+      ]} />
+      <Curl path="/v6/esports/cs2/matches?status=upcoming&limit=1" />
+      <JsonBlock title="200 · live" data={MATCH} />
 
-        <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Matches</h1>
-        <p className="text-lg text-zinc-400 mb-8">
-          Retrieve live, upcoming, and finished matches across all supported esports disciplines.
-        </p>
+      <h2 className="text-xl font-semibold text-white mb-4">Fixtures</h2>
+      <Route path="/v6/esports/{sport}/fixtures" />
+      <Params rows={[
+        { name: 'sport', type: 'path', required: true, note: 'Same sport slugs as matches.' },
+        { name: 'status', type: 'string', note: 'upcoming, live, ended (also accepts not_started / running / finished)' },
+        { name: 'start_date', type: 'date', note: 'YYYY-MM-DD' },
+        { name: 'end_date', type: 'date', note: 'YYYY-MM-DD' },
+      ]} />
+      <Curl path="/v6/esports/cs2/fixtures" />
+      <JsonBlock title="200 · live" data={FIXTURE} />
 
-        <h2 className="text-xl font-semibold text-white mb-4">API Endpoint</h2>
-        <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4 font-mono text-sm mb-4">
-          <span className="text-emerald-400">GET</span>
-          <span className="text-zinc-300 ml-3">/v6/esports/{'{sport}'}/matches</span>
-        </div>
-        <p className="text-sm text-zinc-500 mb-8">
-          Also available: <code className="text-zinc-300">/{'{sport}'}/upcoming/matches</code>,{' '}
-          <code className="text-zinc-300">/{'{sport}'}/completed/matches</code>,{' '}
-          <code className="text-zinc-300">/{'{sport}'}/matches/live</code>, and{' '}
-          <code className="text-zinc-300">/v6/esports/matches?discipline=cs2</code>.
-        </p>
-
-        <h2 className="text-xl font-semibold text-white mb-4">Parameters</h2>
-        <div className="overflow-x-auto border border-white/5 rounded-lg bg-[#0C0D0F] mb-8">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-white/5 text-xs font-semibold uppercase tracking-wider text-zinc-500 border-b border-white/5">
-                <th className="py-4 px-6">Parameter</th>
-                <th className="py-4 px-6">Type</th>
-                <th className="py-4 px-6">Required</th>
-                <th className="py-4 px-6">Description</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm divide-y divide-white/5">
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">sport</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6"><span className="text-emerald-400">✓</span></td>
-                <td className="py-4 px-6 text-zinc-400">Path slug: <code className="text-white">cs2</code>, <code className="text-white">valorant</code>, <code className="text-white">lol</code>, <code className="text-white">dota2</code></td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">status</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter: <code className="text-white">live</code>, <code className="text-white">upcoming</code> (default), <code className="text-white">finished</code></td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">start_date</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter by start date (YYYY-MM-DD)</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">end_date</td>
-                <td className="py-4 px-6 text-zinc-400">string</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Filter by end date (YYYY-MM-DD)</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 font-mono text-white">limit</td>
-                <td className="py-4 px-6 text-zinc-400">integer</td>
-                <td className="py-4 px-6 text-zinc-600">—</td>
-                <td className="py-4 px-6 text-zinc-400">Max results to return (default: 50, max: 100)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2 className="text-xl font-semibold text-white mb-4">Example URLs</h2>
-        <div className="space-y-4 mb-8">
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">CS2 live matches:</p>
-            <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/cs2/matches?status=live
-            </code>
-          </div>
-          <div className="bg-[#0C0D0F] border border-white/10 rounded-md p-4">
-            <p className="text-zinc-500 text-xs mb-2">Valorant upcoming matches:</p>
-            <code className="text-zinc-300 text-sm font-mono">
-              /v6/esports/valorant/matches?status=upcoming
-            </code>
-          </div>
-        </div>
-
-        <h2 className="text-xl font-semibold text-white mb-4">Example Response</h2>
-        <div className="bg-[#0C0D0F] border border-white/10 rounded-md overflow-hidden font-mono text-xs mb-8">
-          <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-zinc-500">
-            Response
-          </div>
-          <pre className="p-4 overflow-x-auto text-zinc-300">
-{`{
-  "source": "kashrock",
-  "success": true,
-  "sport": "valorant",
-  "status": "upcoming",
-  "matches": [
-    {
-      "match_id": "fix_1447265",
-      "sport": "esports_valorant",
-      "status": "not_started",
-      "event_time": "2026-07-10T18:00:00Z",
-      "team1": "Twisted Minds Orchid",
-      "team2": "FOKUS Sakura",
-      "team1_logo": "https://...",
-      "team2_logo": "https://...",
-      "competition": "VCT Challengers"
-    }
-  ],
-  "total": 22
-}`}
-</pre>
-        </div>
-
-        <div className="flex gap-4 mt-12">
-          <Link href="/docs/endpoints/rankings" className="text-sm text-emerald-400 hover:text-emerald-300">
-            Next: Rankings →
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+      <p className="text-sm text-zinc-500">
+        Also: <code className="text-zinc-300">/{'{sport}'}/matches/live</code>,{' '}
+        <code className="text-zinc-300">/{'{sport}'}/upcoming/matches</code>,{' '}
+        <code className="text-zinc-300">/{'{sport}'}/completed/matches</code>,{' '}
+        <code className="text-zinc-300">/{'{sport}'}/schedule</code>,{' '}
+        <code className="text-zinc-300">/{'{sport}'}/streams</code>.
+      </p>
+    </DocsShell>
+  )
 }
