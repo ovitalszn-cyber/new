@@ -81,14 +81,11 @@ export default function LandingPage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
 
           <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-6 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span className="text-sm font-normal text-zinc-300">v6.0 Now Live: Enhanced Esports Analytics</span>
-            </div>
+            
             
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
-              The Enterprise Infrastructure<br />
-              <span className="gradient-text">for Esports Data.</span>
+              Serious Esports Data.<br />
+              <span className="gradient-text">Without Enterprise Pricing.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
@@ -104,14 +101,7 @@ export default function LandingPage() {
               </a>
             </div>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm">
-              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">CS2 · Valorant · LoL · Dota 2 · COD · R6 · MLBB · Deadlock</span>
-              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">Live + historical matches</span>
-              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">Player game logs</span>
-              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">Outcome verification</span>
-            </div>
-
-            <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+                        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/623879565cb7a05a017cdd85_CS.svg" alt="Counter-Strike 2" className="h-8 w-auto invert" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f3efe0b8b92ba9bc7c1_valolo-logo.svg" alt="Valorant" className="h-8 w-auto" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f489878375ae54ca703_lol-logo.svg" alt="League of Legends" className="h-8 w-auto" />
@@ -119,17 +109,15 @@ export default function LandingPage() {
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/62600f59610537ac7439134b_cod.svg" alt="Call of Duty" className="h-8 w-auto invert" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/6238791f789d166d9cc17921_R6.svg" alt="Rainbow Six Siege" className="h-8 w-auto invert" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/66791af9ccdceba394b3c4c2_Mobile-Legend-Bangbang.svg" alt="Mobile Legends" className="h-8 w-auto invert" />
-              <span className="px-2 py-1 text-xs font-medium text-zinc-500 border border-white/10 rounded">Deadlock</span>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Deadlock_logo.svg" alt="Deadlock" className="h-8 w-auto invert" />
             </div>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
               <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">
                 Need LoL or Dota 2 data? View coverage <i data-lucide="arrow-right" className="w-3 h-3 inline-block"></i>
               </a>
-              <a href="/esports-data-api" className="text-zinc-400 hover:text-white transition-colors">
-                Explore the Esports Data Analytics API <i data-lucide="arrow-right" className="w-3 h-3 inline-block"></i>
-              </a>
             </div>
+            
           </div>
         </section>
 
