@@ -92,7 +92,7 @@ export default function LandingPage() {
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-              High-performance, normalized event analytics and software licensing for developers and researchers. Stable IDs, media assets, and comprehensive coverage — no scraping required.
+              Pull normalized esports props, lines, match data, and player stats across CS2, League of Legends, Dota 2, and more — through one API, without maintaining scrapers.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -105,19 +105,29 @@ export default function LandingPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm">
-              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">CS2 • LoL • Dota 2</span>
+              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">CS2 · Valorant · LoL · Dota 2 · COD · R6 · MLBB · Deadlock</span>
               <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">Live + historical matches</span>
               <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">Player game logs</span>
               <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-300">Outcome verification</span>
             </div>
 
-            <div className="mt-16 text-sm text-zinc-500 font-normal">
-              Multiple primary data sources + event providers supported
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/623879565cb7a05a017cdd85_CS.svg" alt="Counter-Strike 2" className="h-8 w-auto invert" />
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f3efe0b8b92ba9bc7c1_valolo-logo.svg" alt="Valorant" className="h-8 w-auto" />
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f489878375ae54ca703_lol-logo.svg" alt="League of Legends" className="h-8 w-auto" />
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/6238794f497aeb653836f474_Dota.svg" alt="Dota 2" className="h-8 w-auto invert" />
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/62600f59610537ac7439134b_cod.svg" alt="Call of Duty" className="h-8 w-auto invert" />
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/6238791f789d166d9cc17921_R6.svg" alt="Rainbow Six Siege" className="h-8 w-auto invert" />
+              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/66791af9ccdceba394b3c4c2_Mobile-Legend-Bangbang.svg" alt="Mobile Legends" className="h-8 w-auto invert" />
+              <span className="px-2 py-1 text-xs font-medium text-zinc-500 border border-white/10 rounded">Deadlock</span>
             </div>
 
-            <div className="mt-8 text-center">
-              <a href="/esports-data-api" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
-                Explore the Esports Data Analytics API →
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+              <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">
+                Need LoL or Dota 2 data? View coverage <i data-lucide="arrow-right" className="w-3 h-3 inline-block"></i>
+              </a>
+              <a href="/esports-data-api" className="text-zinc-400 hover:text-white transition-colors">
+                Explore the Esports Data Analytics API <i data-lucide="arrow-right" className="w-3 h-3 inline-block"></i>
               </a>
             </div>
           </div>
@@ -137,7 +147,10 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-xl font-medium text-white mb-2 tracking-tight">Esports Data Coverage</h3>
                 <p className="text-base text-zinc-400 max-w-md leading-relaxed">
-                  Event schedules, market props, and player statistical metrics for esports — unified into one normalized schema.
+                  CS2, League of Legends, Dota 2, and expanding esports titles — normalized across event schedules, market props, player metrics, and verified outcomes.
+                </p>
+                <p className="text-sm text-zinc-500 mt-3 leading-relaxed">
+                  Exact market and historical availability varies by title and plan. <a href="/support" className="underline hover:text-white transition-colors">Need a specific feed? Request coverage.</a>
                 </p>
               </div>
             </div>
@@ -335,7 +348,7 @@ export default function LandingPage() {
         <section id="pricing" className="py-24 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Pricing</h2>
-            <p className="text-lg text-zinc-500">Transparent, flat-rate pricing. No sales calls. Start with a free sandbox and ship when you're ready.</p>
+            <p className="text-lg text-zinc-500">Start free with CS2 props. Upgrade when you need full esports coverage, including League of Legends, Dota 2, live/historical matches, and production-scale API usage.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/10 bg-[#0C0D0F]">
@@ -352,6 +365,7 @@ export default function LandingPage() {
                   <span className="text-zinc-500">/mo</span>
                 </div>
                 <p className="text-sm font-bold text-zinc-300 mt-2">2 requests / minute</p>
+                <p className="text-sm text-zinc-500 mt-3">Test the KashRock schema with CS2 player props — free forever.</p>
               </div>
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
@@ -383,6 +397,7 @@ export default function LandingPage() {
                   <span className="text-zinc-500">/mo</span>
                 </div>
                 <p className="text-sm font-bold text-zinc-300 mt-2">50 requests / minute</p>
+                <p className="text-sm text-zinc-500 mt-3">Unlock multi-title esports props and lines, including League of Legends and Dota 2.</p>
               </div>
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
@@ -419,6 +434,7 @@ export default function LandingPage() {
                   <span className="text-zinc-500">/mo</span>
                 </div>
                 <p className="text-sm font-bold text-zinc-300 mt-2">100 requests / minute</p>
+                <p className="text-sm text-zinc-500 mt-3">Add live and historical matches, game logs, box scores, and outcome verification.</p>
               </div>
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
@@ -456,6 +472,7 @@ export default function LandingPage() {
                   <span className="text-zinc-500">/mo</span>
                 </div>
                 <p className="text-sm font-bold text-zinc-300 mt-2">250 requests / minute</p>
+                <p className="text-sm text-zinc-500 mt-3">Run production workloads with the highest throughput and early expansion access.</p>
               </div>
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3">
