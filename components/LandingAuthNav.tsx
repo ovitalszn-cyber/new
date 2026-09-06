@@ -20,12 +20,6 @@ export default function LandingAuthNav() {
           {user?.email}
         </span>
         <a
-          href="/console"
-          className="text-sm font-normal text-zinc-400 hover:text-white transition-colors"
-        >
-          Console
-        </a>
-        <a
           href="#pricing"
           className="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors"
         >
@@ -38,6 +32,12 @@ export default function LandingAuthNav() {
         >
           Log out
         </button>
+        <a
+          href="/console"
+          className="border border-white/20 text-white px-4 py-2 text-sm font-medium rounded-sm hover:bg-white/10 transition-colors"
+        >
+          Console
+        </a>
       </div>
     )
   }
