@@ -81,7 +81,7 @@ export default function ConsolePage() {
             />
           </div>
 
-          <ApiKeyPanel keys={data.keys} onChanged={refresh} />
+          <ApiKeyPanel keys={data.keys} plan={user?.tier ?? ''} onChanged={refresh} />
 
           <section className="rounded border border-white/10 bg-[#0C0D0F] p-6">
             <h2 className="font-medium text-white">Recent requests</h2>

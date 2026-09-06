@@ -1,19 +1,25 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { api, type ApiKey } from '@/lib/api-client'
 
+const KEY_PLANS = ['sandbox', 'hobby', 'builder', 'pro', 'master', 'enterprise']
+
 interface ApiKeyPanelProps {
   keys: ApiKey[]
+  plan: string
   onChanged: () => Promise<void>
 }
 
-export default function ApiKeyPanel({ keys, onChanged }: ApiKeyPanelProps) {
+export default function ApiKeyPanel({ keys, plan, onChanged }: ApiKeyPanelProps) {
   const [plainKey, setPlainKey] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const hasPlan = KEY_PLANS.includes(plan.toLowerCase())
 
   const createKey = async () => {
     setBusy(true)
@@ -46,7 +52,7 @@ export default function ApiKeyPanel({ keys, onChanged }: ApiKeyPanelProps) {
               : 'No API key is available.'}
           </p>
         </div>
-        {!keys.length ? (
+        {hasPlan && !keys.length ? (
           <button
             type="button"
             disabled={busy}
@@ -56,7 +62,24 @@ export default function ApiKeyPanel({ keys, onChanged }: ApiKeyPanelProps) {
             {busy ? 'Creating…' : 'Create key'}
           </button>
         ) : null}
+        {!hasPlan ? (
+          <Link
+            href="/#pricing"
+            className="rounded bg-white px-3 py-2 text-sm font-medium text-black hover:bg-zinc-200 transition-colors"
+          >
+            Choose a plan
+          </Link>
+        ) : null}
       </div>
+
+      {!hasPlan ? (
+        <div className="mt-4 rounded border border-amber-500/30 bg-amber-500/5 p-4">
+          <p className="text-sm text-amber-200">
+            You need to choose a plan before creating API keys. Pick a tier — even
+            the free sandbox — and your key will be ready in a few clicks.
+          </p>
+        </div>
+      ) : null}
 
       {keys.map((key) => (
         <div key={key.id} className="mt-4 rounded bg-black/40 p-3 font-mono text-sm">
