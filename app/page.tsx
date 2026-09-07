@@ -1,20 +1,36 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SubscribeButton from '@/components/SubscribeButton';
 import LandingAuthNav from '@/components/LandingAuthNav';
 
 export default function LandingPage() {
+  const [form, setForm] = useState({ fullName: '', email: '', companyName: '', position: '', country: '', message: '' });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).lucide) {
       (window as any).lucide.createIcons({
-        attrs: {
-          'stroke-width': 1.5
-        }
+        attrs: { 'stroke-width': 1.5 }
       });
     }
   }, []);
+
+  const countries = ['United States','United Kingdom','Canada','Australia','Germany','France','Netherlands','Sweden','Denmark','Finland','Norway','Poland','Czech Republic','Spain','Italy','Brazil','Argentina','Mexico','Japan','South Korea','Singapore','Hong Kong','India','South Africa','UAE','Saudi Arabia','Israel','Nigeria','Kenya','Colombia','Chile','Philippines','Thailand','Indonesia','Vietnam','Malaysia','New Zealand','Ireland','Belgium','Austria','Switzerland','Portugal','Greece','Turkey','Russia','Ukraine','Romania','Hungary','Peru','Ecuador','Dominican Republic','Egypt','Morocco','Kenya','Ghana','Angola','Cameroon'];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(form) });
+      const data = await res.json();
+      if (res.ok) { setSent(true); setForm({ fullName:'', email:'', companyName:'', position:'', country:'', message:'' }); }
+      else { alert(data.error || 'Something went wrong.'); }
+    } catch { alert('Failed to send. Please try again.'); }
+    finally { setSending(false); }
+  };
 
   return (
     <>
@@ -89,7 +105,7 @@ export default function LandingPage() {
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-              Pull normalized esports props, lines, match data, and player stats across CS2, League of Legends, Dota 2, and more — through one API, without maintaining scrapers.
+              Pull normalized esports props, lines, match data, and player stats across CS2, League of Legends, Dota 2, and more — through one API.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -485,6 +501,55 @@ export default function LandingPage() {
               </div>
             </div>
 
+          </div>
+        </section>
+
+        {/* GET IN CONTACT */}
+        <section id="contact" className="py-24 max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">GET IN CONTACT</h2>
+            <p className="text-lg text-zinc-500 max-w-xl mx-auto">Tell us a bit about your business and how we can help so we can get back to you with the right information for your esports data and odds needs.</p>
+          </div>
+
+          <div className="max-w-2xl mx-auto bg-[#0C0D0F] border border-white/10 rounded-sm p-8 md:p-10">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-sm text-zinc-400 mb-1.5">Full Name</label>
+                  <input required className="w-full bg-[#08090A] border border-white/10 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-white/25 transition-colors" placeholder="John Doe" value={form.fullName} onChange={e => setForm({...form, fullName: e.target.value})} />
+                </div>
+                <div>
+                  <label className="block text-sm text-zinc-400 mb-1.5">Email</label>
+                  <input required type="email" className="w-full bg-[#08090A] border border-white/10 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-white/25 transition-colors" placeholder="johndoe@gmail.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-sm text-zinc-400 mb-1.5">Company Name</label>
+                  <input className="w-full bg-[#08090A] border border-white/10 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-white/25 transition-colors" placeholder="John Doe Enterprises" value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} />
+                </div>
+                <div>
+                  <label className="block text-sm text-zinc-400 mb-1.5">Position</label>
+                  <input className="w-full bg-[#08090A] border border-white/10 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-white/25 transition-colors" placeholder="CEO" value={form.position} onChange={e => setForm({...form, position: e.target.value})} />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm text-zinc-400 mb-1.5">Country</label>
+                <select className="w-full bg-[#08090A] border border-white/10 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-white/25 transition-colors" value={form.country} onChange={e => setForm({...form, country: e.target.value})}>
+                  <option value="">Choose your country</option>
+                  {countries.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm text-zinc-400 mb-1.5">Message</label>
+                <textarea required rows={5} className="w-full bg-[#08090A] border border-white/10 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-white/25 transition-colors resize-vertical" placeholder="Hi," value={form.message} onChange={e => setForm({...form, message: e.target.value})} />
+              </div>
+              <button type="submit" disabled={sending} className="w-full px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 disabled:opacity-50">
+                {sending ? 'Sending...' : 'Send Message'}
+              </button>
+              <p className="text-xs text-zinc-600 text-center">Please allow us 2 business days to reply.</p>
+              {sent && <p className="text-xs text-emerald-400 text-center">Message sent — we\'ll be in touch.</p>}
+            </form>
           </div>
         </section>
 
