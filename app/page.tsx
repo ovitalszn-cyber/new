@@ -151,9 +151,6 @@ export default function LandingPage() {
                 <p className="text-base text-zinc-400 max-w-md leading-relaxed">
                   CS2, League of Legends, Dota 2, and expanding esports titles — normalized across event schedules, market props, player metrics, and verified outcomes.
                 </p>
-                <p className="text-sm text-zinc-500 mt-3 leading-relaxed">
-                  Exact market and historical availability varies by title and plan. <a href="/support" className="underline hover:text-white transition-colors">Need a specific feed? Request coverage.</a>
-                </p>
               </div>
             </div>
 
