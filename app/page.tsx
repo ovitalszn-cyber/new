@@ -6,7 +6,6 @@ import SubscribeButton from '@/components/SubscribeButton';
 import LandingAuthNav from '@/components/LandingAuthNav';
 
 export default function LandingPage() {
-  const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ fullName: '', email: '', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -25,7 +24,7 @@ export default function LandingPage() {
     try {
       const res = await fetch('/api/contact', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(form) });
       const data = await res.json();
-      if (res.ok) { setSent(true); setForm({ fullName:'', email:'', message:'' }); setOpen(false); }
+      if (res.ok) { setSent(true); setForm({ fullName:'', email:'', message:'' }); }
       else { alert(data.error || 'Something went wrong.'); }
     } catch { alert('Failed to send. Please try again.'); }
     finally { setSending(false); }
@@ -505,17 +504,37 @@ export default function LandingPage() {
 
 
         <footer className="border-t border-white/5 bg-[#050505] pt-16 pb-12">
-          <div className="max-w-7xl mx-auto px-6 mb-16">
-            <div className="col-span-2">
-              <div className="flex items-center mb-6">
-                <img src="/kashrock-logo.svg" alt="KashRock" className="h-8 w-auto" />
+          <div className="max-w-7xl mx-auto px-6 mb-10">
+            <div className="flex flex-col lg:flex-row gap-12 items-start">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center mb-6">
+                  <img src="/kashrock-logo.svg" alt="KashRock" className="h-8 w-auto" />
+                </div>
+                <p className="text-base text-zinc-500 max-w-sm">
+                  The enterprise infrastructure layer for esports data analytics and software licensing.
+                </p>
+                <p className="text-xs text-zinc-600 max-w-sm mt-4 leading-relaxed">
+                  KashRock is a Data-as-a-Service (DaaS) provider. We provide research tools and data analytics for informational purposes. We are not a gambling operator and do not facilitate wagering.
+                </p>
               </div>
-              <p className="text-base text-zinc-500 max-w-sm">
-                The enterprise infrastructure layer for esports data analytics and software licensing.
-              </p>
-              <p className="text-xs text-zinc-600 max-w-sm mt-4 leading-relaxed">
-                KashRock is a Data-as-a-Service (DaaS) provider. We provide research tools and data analytics for informational purposes. We are not a gambling operator and do not facilitate wagering.
-              </p>
+              <div className="w-full lg:w-[460px] flex-shrink-0">
+                <div className="bg-[#0C0D0F] border border-white/10 rounded-sm p-6">
+                  <h3 className="text-base font-medium text-white">Contact us</h3>
+                  <p className="text-sm text-zinc-500 mt-1">Building with esports data? Tell us your game, feeds, and scale — we’ll point you to the right coverage.</p>
+                  <form onSubmit={handleSubmit} className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <input required className="bg-[#08090A] border border-white/10 rounded-sm px-3 py-2 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-white/20" placeholder="Full name" value={form.fullName} onChange={e => setForm({...form, fullName: e.target.value})} />
+                    <input required type="email" className="bg-[#08090A] border border-white/10 rounded-sm px-3 py-2 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-white/20" placeholder="Work email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+                    <textarea required rows={2} className="sm:col-span-2 bg-[#08090A] border border-white/10 rounded-sm px-3 py-2 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-white/20 resize-none" placeholder="What are you building?" value={form.message} onChange={e => setForm({...form, message: e.target.value})} />
+                    <div className="sm:col-span-2 flex items-center gap-3">
+                      <button type="submit" disabled={sending} className="px-5 py-2 bg-white text-black text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors disabled:opacity-50">
+                        {sending ? 'Sending...' : 'Send message'}
+                      </button>
+                      <span className="text-xs text-zinc-600">We reply within 2 business days.</span>
+                      {sent && <span className="text-xs text-emerald-400">Sent — check your inbox.</span>}
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
           <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -528,38 +547,6 @@ export default function LandingPage() {
             </div>
           </div>
         </footer>
-
-        {/* Fixed bottom contact bar */}
-        <div className="fixed bottom-0 left-0 right-0 z-40 transition-all duration-300" style={{ paddingBottom: open ? '220px' : '0' }}>
-          <div className="border-t border-white/10 bg-[#090A0B] px-6 py-3 flex items-center justify-between gap-4">
-            <p className="text-sm text-zinc-400 truncate">Specific feed we don't list? We'll build it.</p>
-            <button onClick={() => setOpen(!open)} className="shrink-0 px-4 py-1.5 bg-white text-black text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors">
-              Contact us
-            </button>
-          </div>
-          {open && (
-            <div className="bg-[#0C0D0F] border-t border-white/10 px-6 py-5">
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto flex gap-3 items-end">
-                <div className="flex-1">
-                  <label className="block text-xs text-zinc-500 mb-1">Full Name</label>
-                  <input required className="w-full bg-[#08090A] border border-white/10 rounded-sm px-3 py-2 text-white text-sm focus:outline-none focus:border-white/25" placeholder="Jane Doe" value={form.fullName} onChange={e => setForm({...form, fullName: e.target.value})} />
-                </div>
-                <div className="flex-1">
-                  <label className="block text-xs text-zinc-500 mb-1">Email</label>
-                  <input required type="email" className="w-full bg-[#08090A] border border-white/10 rounded-sm px-3 py-2 text-white text-sm focus:outline-none focus:border-white/25" placeholder="jane@co.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
-                </div>
-                <div className="flex-1">
-                  <label className="block text-xs text-zinc-500 mb-1">Message</label>
-                  <input required className="w-full bg-[#08090A] border border-white/10 rounded-sm px-3 py-2 text-white text-sm focus:outline-none focus:border-white/25" placeholder="What do you need?" value={form.message} onChange={e => setForm({...form, message: e.target.value})} />
-                </div>
-                <button type="submit" disabled={sending} className="shrink-0 px-4 py-2 bg-white text-black text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors disabled:opacity-50">
-                  {sending ? '...' : 'Send'}
-                </button>
-              </form>
-              {sent && <p className="text-xs text-emerald-400 text-center mt-2">Sent — we\'ll reply within 2 business days.</p>}
-            </div>
-          )}
-        </div>
       </div>
     </>
   );
