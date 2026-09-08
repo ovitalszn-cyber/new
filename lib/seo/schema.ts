@@ -48,3 +48,31 @@ export function dfsJsonLd() {
     faqPageLd(DFS_FAQS),
   ]
 }
+
+export function appFaqGraphLd(name: string, faqs: readonly Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name,
+        applicationCategory: "DeveloperApplication",
+        operatingSystem: "Web",
+        offers: PLAN_OFFERS.map((plan) => ({
+          "@type": "Offer",
+          name: plan.name,
+          price: plan.price,
+          priceCurrency: "USD",
+        })),
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      },
+    ],
+  }
+}

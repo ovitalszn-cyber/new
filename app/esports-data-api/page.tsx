@@ -85,10 +85,10 @@ export default function EsportsDataApiPage() {
           ))}
         </div>
         <p className="text-base text-zinc-400 mt-10">
-          Building a pick&apos;em or optimizer? Start on the{" "}
-          <a href="/dfs-esports-api" className="text-white underline">DFS Esports API</a>
-          {" "}for PrizePicks and Underdog CS2 and LoL props, then read the{" "}
-          <a href="/docs" className="text-white underline">docs</a>.
+          Working on a specific build? Jump to the{" "}
+          <a href="/cs2-props-api" className="text-white underline">CS2 player props API</a>, the{" "}
+          <a href="/esports-odds-api" className="text-white underline">esports odds API</a> for line shopping, or the{" "}
+          <a href="/dfs-esports-api" className="text-white underline">DFS Esports API</a> for PrizePicks and Underdog boards.
         </p>
       </section>
       <section className="py-24 max-w-7xl mx-auto px-6">
