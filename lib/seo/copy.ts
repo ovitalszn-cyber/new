@@ -1,11 +1,11 @@
 export const DFS_TITLE =
-  "DFS Esports API — PrizePicks & Underdog Props for CS2 & LoL | KashRock"
+  "DFS Esports API — PrizePicks & Underdog Props for CS2 & LoL"
 
 export const DFS_DESCRIPTION =
   "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, and Sleeper player props for CS2 and LoL — plus Dabble and ParlayPlay — from GET /v6/esports/{sport}/props."
 
 export const DATA_API_TITLE =
-  "Esports Data API — CS2, LoL & Dota Props, Lines & Stats | KashRock"
+  "Esports Data API — CS2, LoL & Dota Props, Lines & Stats"
 
 export const DATA_API_DESCRIPTION =
   "Esports data API for CS2, League of Legends, Dota 2, and Valorant. Normalized props, lines, matches, and player stats. Free sandbox, then $29+/mo — no enterprise quote."

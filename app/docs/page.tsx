@@ -5,7 +5,7 @@ import { Curl, JsonBlock } from '@/components/docs/Code'
 import { API_BASE, SPORTS } from '@/lib/docs'
 
 export const metadata: Metadata = {
-  title: 'API Documentation | KashRock',
+  title: 'API Documentation',
   description: 'KashRock esports DaaS: live props, fixtures, settlements, and player research.',
 }
 

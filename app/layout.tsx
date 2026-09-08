@@ -20,27 +20,32 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const HOME_TITLE =
+  "Esports Data API — CS2, LoL & Dota Props, Odds & Stats | KashRock"
+const HOME_DESCRIPTION =
+  "Affordable esports data API. Normalized CS2, LoL & Dota player props, lines, and stats from PrizePicks, Underdog & more. Instant API key, free tier — no enterprise pricing."
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.kashrock.com"),
-  title: "Enterprise Esports Data Analytics API | KashRock",
-  description:
-    "KashRock is an enterprise esports data analytics API — normalized event schedules, market props, player game logs, outcome verification, and media with stable IDs.",
+  title: {
+    default: HOME_TITLE,
+    template: "%s | KashRock",
+  },
+  description: HOME_DESCRIPTION,
   alternates: {
     canonical: "https://www.kashrock.com/",
   },
   openGraph: {
-    title: "Enterprise Esports Data Analytics API | KashRock",
-    description:
-      "Normalized esports analytics data: event schedules, market props, player logs, outcome verification, and media with stable IDs.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     url: "https://www.kashrock.com/",
     siteName: "KashRock",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Enterprise Esports Data Analytics API | KashRock",
-    description:
-      "Normalized esports analytics: event schedules, market props, player logs, outcome verification, and media.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
 };
 
