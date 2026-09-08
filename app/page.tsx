@@ -540,7 +540,6 @@ export default function LandingPage() {
               <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white transition-colors">Esports Data API</a>
               <a href="/legal" className="text-sm text-zinc-600 hover:text-white transition-colors">Privacy Policy</a>
               <a href="/legal?tab=terms" className="text-sm text-zinc-600 hover:text-white transition-colors">Terms of Service</a>
-              <a href="https://www.instagram.com/kashrockapi/" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
             </div>
           </div>
         </footer>
