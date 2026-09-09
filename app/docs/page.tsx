@@ -5,7 +5,7 @@ import { Curl, JsonBlock } from '@/components/docs/Code'
 import { API_BASE, SPORTS } from '@/lib/docs'
 
 export const metadata: Metadata = {
-  title: 'API Documentation',
+  title: 'API Documentation | KashRock',
   description: 'KashRock esports DaaS: live props, fixtures, settlements, and player research.',
 }
 
@@ -56,7 +56,7 @@ export default function DocsPage() {
       <section id="quick-start" className="mb-20 scroll-mt-24">
         <h2 className="text-2xl font-semibold text-white mb-6">Quick start</h2>
         <p className="text-zinc-400 mb-6">HTTPS only. Pass your key on every <code className="text-white">/v6</code> request.</p>
-        <Curl path="/v6/esports/props?game=cs2" />
+        <Curl path="/v6/esports/cs2/props" />
         <JsonBlock title="200 · live prop" data={PROP_SAMPLE} />
       </section>
 
@@ -74,7 +74,7 @@ export default function DocsPage() {
 
       <section className="mb-20">
         <h2 className="text-2xl font-semibold text-white mb-6">Sports</h2>
-        <p className="text-zinc-400 mb-4">Use the slug in the path as <code className="text-white">{'{sport}'}</code>, or <code className="text-white">game=</code> on props.</p>
+        <p className="text-zinc-400 mb-4">Use the slug in the path as <code className="text-white">{'{sport}'}</code>.</p>
         <div className="flex flex-wrap gap-2">
           {SPORTS.map((s) => (
             <code key={s.id} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-emerald-400">

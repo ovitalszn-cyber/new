@@ -20,7 +20,7 @@ export default function LandingAuthNav() {
           {user?.email}
         </span>
         <a
-          href="/#pricing"
+          href="#pricing"
           className="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors"
         >
           Upgrade
@@ -51,7 +51,7 @@ export default function LandingAuthNav() {
         Log in
       </a>
       <a
-        href="/#pricing"
+        href="#pricing"
         className="bg-white text-black px-4 py-2 text-sm font-medium rounded-sm hover:bg-zinc-200 transition-colors"
       >
         Get API Key

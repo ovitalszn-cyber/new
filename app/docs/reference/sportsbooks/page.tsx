@@ -36,7 +36,7 @@ export default function BooksPage() {
       </div>
       <Curl path="/v6/books" />
       <JsonBlock title="200 · live" data={SAMPLE} />
-      <Curl path="/v6/esports/props?game=cs2&book=prizepicks" />
+      <Curl path="/v6/esports/cs2/props?book=prizepicks" />
     </DocsShell>
   )
 }

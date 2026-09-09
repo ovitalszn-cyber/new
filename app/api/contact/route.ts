@@ -10,12 +10,9 @@ const RECIPIENT = process.env.NEO_SMTP_RECIPIENT || 'support@kashrock.com';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { fullName, email, companyName, position, country, message } = body as {
+    const { fullName, email, message } = body as {
       fullName?: string;
       email?: string;
-      companyName?: string;
-      position?: string;
-      country?: string;
       message?: string;
     };
 
@@ -36,15 +33,12 @@ export async function POST(request: Request) {
     const mailOptions = {
       from: `"${fullName}" <${email}>`,
       to: RECIPIENT,
-      subject: `Contact form: ${companyName || position || ''} — ${fullName}`,
+      subject: `Contact form: ${fullName}`,
       text: [
         `New contact form submission`,
         ``,
         `Full Name: ${fullName}`,
         `Email: ${email}`,
-        `Company: ${companyName || 'N/A'}`,
-        `Position: ${position || 'N/A'}`,
-        `Country: ${country || 'N/A'}`,
         ``,
         `Message:`,
         message,
@@ -54,9 +48,6 @@ export async function POST(request: Request) {
         `<table style="border-collapse:collapse; font-family:sans-serif;">`,
         `<tr><td style="padding:4px 12px 4px 0; font-weight:bold;">Full Name</td><td style="padding:4px 0;">${escapeHtml(fullName)}</td></tr>`,
         `<tr><td style="padding:4px 12px 4px 0; font-weight:bold;">Email</td><td style="padding:4px 0;">${escapeHtml(email)}</td></tr>`,
-        `<tr><td style="padding:4px 12px 4px 0; font-weight:bold;">Company</td><td style="padding:4px 0;">${escapeHtml(companyName || 'N/A')}</td></tr>`,
-        `<tr><td style="padding:4px 12px 4px 0; font-weight:bold;">Position</td><td style="padding:4px 0;">${escapeHtml(position || 'N/A')}</td></tr>`,
-        `<tr><td style="padding:4px 12px 4px 0; font-weight:bold;">Country</td><td style="padding:4px 0;">${escapeHtml(country || 'N/A')}</td></tr>`,
         `</table>`,
         `<h3 style="margin-top:16px;">Message</h3>`,
         `<p style="white-space:pre-wrap;">${escapeHtml(message)}</p>`,
