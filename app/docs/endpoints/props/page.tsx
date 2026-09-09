@@ -31,6 +31,10 @@ export default function PropsPage() {
         Live ingested board. Same market is one <code className="text-white">stat_type</code> across books. This is Redis cache — no upstream fetch on the request path.
       </p>
       <Route path="/v6/esports/{sport}/props" />
+      <p className="text-sm text-zinc-400 mb-8">
+        Call <code className="text-white">/v6/esports/cs2/props</code>. Do not call{' '}
+        <code className="text-zinc-500">/v6/esports/props?game=cs2</code> — that URL 308s to the path form.
+      </p>
       <Params rows={[
         { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock' },
         { name: 'book', type: 'string', note: 'prizepicks, underdog, parlayplay, dabble, sleeper, betr' },
