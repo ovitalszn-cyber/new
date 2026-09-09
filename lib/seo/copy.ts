@@ -50,3 +50,56 @@ export const PLAN_OFFERS = [
   { name: "Builder", price: "99" },
   { name: "Pro", price: "249" },
 ] as const
+
+export const MCP_TITLE =
+  "KashRock MCP — Use the Esports API from Cursor in 30 Seconds"
+
+export const MCP_DESCRIPTION =
+  "Add KashRock to Cursor or Claude. Paste one snippet, say log in, click Google. Live CS2, LoL, Dota, and Valorant props — no docs, no API key to copy."
+
+export const MCP_SNIPPET = `{
+  "mcpServers": {
+    "kashrock": {
+      "command": "uvx",
+      "args": ["kashrock-mcp"]
+    }
+  }
+}`
+
+export const MCP_STEPS = [
+  {
+    n: "1",
+    title: "Paste this in Cursor",
+    body: "Settings → MCP → add a new server. Paste the snippet. Save.",
+  },
+  {
+    n: "2",
+    title: "Say “log in to KashRock”",
+    body: "Cursor opens your browser. You click Continue with Google. That’s the only thing you do.",
+  },
+  {
+    n: "3",
+    title: "Ask for props",
+    body: "Try: “Show CS2 PrizePicks kills.” The agent calls KashRock. You never touch a key.",
+  },
+] as const
+
+export const MCP_FAQS = [
+  {
+    q: "Do I need to read the API docs?",
+    a: "No. Paste the snippet, log in with Google, then ask in plain English. The agent uses the tools.",
+  },
+  {
+    q: "Do I copy an API key?",
+    a: "No. Google login creates the key and stores it on your machine. You should never paste a key into chat.",
+  },
+  {
+    q: "Does this work in Claude too?",
+    a: "Yes. Same snippet in Claude Desktop MCP settings. Then ask Claude to log in to KashRock.",
+  },
+  {
+    q: "What if Cursor says uvx is missing?",
+    a: "Install uv from https://docs.astral.sh/uv/ — one command — then restart Cursor and try again.",
+  },
+] as const
+

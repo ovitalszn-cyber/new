@@ -18,7 +18,6 @@ const ROUTES: { path: string; note: string }[] = [
   { path: 'GET /v6/esports/{sport}/results', note: 'Settled props. Optional grade=.' },
   { path: 'GET /v6/esports/research/player', note: 'Player research slip. player, sport, market.' },
   { path: 'GET /v6/esports/history/contract', note: 'Quote tape. market_key or prop_id+book.' },
-  { path: 'GET /v6/esports/{sport}/stacks', note: 'CS2 and Valorant correlated slips.' },
   { path: 'GET /v6/esports/{sport}/boxscores', note: 'Box scores for a sport.' },
   { path: 'GET /v6/books', note: 'Canonical book registry.' },
 ]

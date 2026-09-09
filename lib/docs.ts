@@ -40,7 +40,6 @@ export const DOC_NAV: { title: string; items: NavItem[] }[] = [
       { href: '/docs/endpoints/results', label: 'Results', id: 'results' },
       { href: '/docs/endpoints/research', label: 'Research', id: 'research' },
       { href: '/docs/endpoints/history', label: 'History tape', id: 'history' },
-      { href: '/docs/endpoints/stacks', label: 'Stacks', id: 'stacks' },
     ],
   },
   {

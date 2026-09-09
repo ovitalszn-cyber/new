@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/esports-odds-api",
     "/abios-alternative",
     "/pandascore-alternative",
+    "/mcp",
     "/docs",
     "/console",
   ]

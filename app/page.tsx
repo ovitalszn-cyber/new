@@ -81,6 +81,7 @@ export default function LandingPage() {
               <a href="#features" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Features</a>
               <a href="#how-it-works" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">How it works</a>
               <a href="#pricing" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Pricing</a>
+              <a href="/mcp" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">MCP</a>
               <a href="https://www.kashrock.com/docs" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
             </div>
             <div className="flex items-center gap-4">
@@ -540,6 +541,7 @@ export default function LandingPage() {
               <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white transition-colors">Esports Data API</a>
               <a href="/legal" className="text-sm text-zinc-600 hover:text-white transition-colors">Privacy Policy</a>
               <a href="/legal?tab=terms" className="text-sm text-zinc-600 hover:text-white transition-colors">Terms of Service</a>
+              <a href="https://www.instagram.com/kashrockapi/" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
             </div>
           </div>
         </footer>

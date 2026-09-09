@@ -6,6 +6,7 @@ const NAV = [
   { href: "/#features", label: "Features" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#pricing", label: "Pricing" },
+  { href: "/mcp", label: "MCP" },
   { href: "/docs", label: "Docs" },
 ] as const
 
@@ -41,6 +42,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-6">
             <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white">Esports Data API</a>
             <a href="/dfs-esports-api" className="text-sm text-zinc-600 hover:text-white">DFS Esports API</a>
+            <a href="/mcp" className="text-sm text-zinc-600 hover:text-white">MCP</a>
             <a href="/docs" className="text-sm text-zinc-600 hover:text-white">Docs</a>
             <a href="/legal" className="text-sm text-zinc-600 hover:text-white">Privacy</a>
           </div>

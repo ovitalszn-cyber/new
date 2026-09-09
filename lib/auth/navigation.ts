@@ -1,4 +1,4 @@
-const ALLOWED_RETURN_PREFIXES = ['/console', '/settings', '/checkout']
+const ALLOWED_RETURN_PREFIXES = ['/console', '/settings', '/checkout', '/mcp']
 
 export function safeReturnTo(value: string | null | undefined) {
   if (!value || !value.startsWith('/') || value.startsWith('//')) {
