@@ -87,8 +87,13 @@ export default function EsportsDataApiPage() {
         <p className="text-base text-zinc-400 mt-10">
           Working on a specific build? Jump to the{" "}
           <a href="/cs2-props-api" className="text-white underline">CS2 player props API</a>, the{" "}
-          <a href="/esports-odds-api" className="text-white underline">esports odds API</a> for line shopping, or the{" "}
-          <a href="/dfs-esports-api" className="text-white underline">DFS Esports API</a> for PrizePicks and Underdog boards.
+          <a href="/prizepicks-api" className="text-white underline">PrizePicks API</a>,{" "}
+          <a href="/underdog-api" className="text-white underline">Underdog API</a>,{" "}
+          <a href="/sleeper-api" className="text-white underline">Sleeper API</a>, or{" "}
+          <a href="/betr-api" className="text-white underline">Betr API</a>. Line shopping lives on the{" "}
+          <a href="/esports-odds-api" className="text-white underline">esports odds API</a>. Full board:{" "}
+          <a href="/dfs-esports-api" className="text-white underline">DFS Esports API</a>. See{" "}
+          <a href="/coverage" className="text-white underline">coverage</a> for titles and books.
         </p>
       </section>
       <section className="py-24 max-w-7xl mx-auto px-6">
