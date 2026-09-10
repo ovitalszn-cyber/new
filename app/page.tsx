@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import SubscribeButton from '@/components/SubscribeButton';
 import LandingAuthNav from '@/components/LandingAuthNav';
+import BookMarquee from '@/components/BookMarquee';
 
 export default function LandingPage() {
   const [form, setForm] = useState({ fullName: '', email: '', message: '' });
@@ -91,7 +92,7 @@ export default function LandingPage() {
         </nav>
 
         {/* Hero Section */}
-        <section className="relative pt-24 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+        <section className="relative pt-24 pb-8 md:pt-40 md:pb-10 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -116,7 +117,9 @@ export default function LandingPage() {
               </a>
             </div>
 
-                        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            <BookMarquee />
+
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/623879565cb7a05a017cdd85_CS.svg" alt="Counter-Strike 2" className="h-8 w-auto invert" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f3efe0b8b92ba9bc7c1_valolo-logo.svg" alt="Valorant" className="h-8 w-auto" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f489878375ae54ca703_lol-logo.svg" alt="League of Legends" className="h-8 w-auto" />
@@ -125,12 +128,6 @@ export default function LandingPage() {
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/6238791f789d166d9cc17921_R6.svg" alt="Rainbow Six Siege" className="h-8 w-auto invert" />
               <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/66791af9ccdceba394b3c4c2_Mobile-Legend-Bangbang.svg" alt="Mobile Legends" className="h-8 w-auto invert" />
               <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Deadlock_logo.svg" alt="Deadlock" className="h-8 w-auto invert" />
-            </div>
-
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
-              <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">
-                Need LoL or Dota 2 data? View coverage <i data-lucide="arrow-right" className="w-3 h-3 inline-block"></i>
-              </a>
             </div>
             
           </div>
