@@ -49,3 +49,6 @@ export default function PlayersPage() {
       ]} />
       <Curl path="/v6/esports/cs2/players/zywoo/gamelogs?limit=1" />
       <p className="text-sm text-zinc-500 mt-6">Gamelogs require Builder plan.</p>
+    </DocsShell>
+  )
+}
