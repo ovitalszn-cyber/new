@@ -24,7 +24,7 @@ const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "Boom", "P
 
 const FEEDS: [string, string][] = [
   ["Player props & lines", "All titles above"],
-  ["Consensus main lines (match / map / totals / handicap)", "CS2, LoL, Dota 2, Valorant — Builder+"],
+  ["Consensus main lines (match / map / totals / handicap)", "CS2, LoL, Dota 2, Valorant — Hobby+"],
   ["Match schedules & fixtures", "All titles above"],
   ["Player stats / box scores / game logs", "CS2, LoL, Dota 2, Valorant"],
   ["Outcome verification (hit / miss / push)", "All prop titles"],

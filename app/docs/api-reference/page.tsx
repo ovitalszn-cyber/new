@@ -3,7 +3,7 @@ import { API_BASE } from '@/lib/docs'
 
 const ROUTES: { path: string; note: string }[] = [
   { path: 'GET /v6/esports/{sport}/props', note: 'Live ingested props. Query book, market, player_id.' },
-  { path: 'GET /v6/esports/{sport}/lines', note: 'Consensus main lines (match/map/totals/handicap). Builder+.' },
+  { path: 'GET /v6/esports/{sport}/lines', note: 'Consensus main lines (match/map/totals/handicap). Hobby+.' },
   { path: 'GET /v6/esports/{sport}/fixtures', note: 'Full schedule board.' },
   { path: 'GET /v6/esports/{sport}/matches', note: 'Filtered matches. status=upcoming|live|finished.' },
   { path: 'GET /v6/esports/{sport}/matches/live', note: 'Live matches only.' },

@@ -96,7 +96,7 @@ export default function LinesPage() {
       <Route path="/v6/esports/{sport}/lines" />
       <p className="text-sm text-zinc-400 mb-4">
         Auth: <code className="text-white">X-API-Key</code>. Base <code className="text-white">{API_BASE}</code>.
-        Builder or Pro plan required.
+        Hobby plan or higher.
       </p>
       <Params rows={[
         { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2' },
@@ -145,7 +145,7 @@ export default function LinesPage() {
       <h2 className="text-2xl font-semibold text-white mb-3">Errors</h2>
       <ul className="text-sm text-zinc-400 space-y-2 mb-8">
         <li><code className="text-white">401</code> — missing / invalid API key</li>
-        <li><code className="text-white">403</code> — plan below Builder</li>
+        <li><code className="text-white">403</code> — plan below Hobby</li>
         <li><code className="text-white">400</code> — invalid <code className="text-white">market</code></li>
       </ul>
       <p className="text-sm text-zinc-400">

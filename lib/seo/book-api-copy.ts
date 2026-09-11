@@ -157,7 +157,7 @@ export const THUNDERPICK_FAQS = [
   },
   {
     q: "Free tier?",
-    a: "Sandbox is $0/mo with an instant key. Consensus lines across Thunderpick, Kalshi, and Polymarket are on Builder+.",
+    a: "Sandbox is $0/mo with an instant key. Consensus lines across Thunderpick, Kalshi, and Polymarket are on Hobby+.",
   },
 ] as const
 
@@ -176,7 +176,7 @@ export const KALSHI_FAQS = [
   },
   {
     q: "Free tier?",
-    a: "Sandbox is $0/mo. Cross-venue consensus lines (Kalshi + Polymarket + Thunderpick) are on Builder+.",
+    a: "Sandbox is $0/mo. Cross-venue consensus lines (Kalshi + Polymarket + Thunderpick) are on Hobby+.",
   },
 ] as const
 
@@ -195,7 +195,7 @@ export const POLYMARKET_FAQS = [
   },
   {
     q: "Free tier?",
-    a: "Sandbox is $0/mo. Consensus lines across Polymarket, Kalshi, and Thunderpick are on Builder+.",
+    a: "Sandbox is $0/mo. Consensus lines across Polymarket, Kalshi, and Thunderpick are on Hobby+.",
   },
 ] as const
 

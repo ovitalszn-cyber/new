@@ -169,7 +169,7 @@ export default function EsportsConsensusApiPage() {
           Call consensus in one request
         </h2>
         <p className="text-base text-zinc-400 mb-6 leading-relaxed">
-          Builder or Pro key. Response includes full <code className="text-white">events</code> with
+          Hobby key or higher. Response includes full <code className="text-white">events</code> with
           quality flags plus a gated <code className="text-white">top_edges</code> feed.
         </p>
         <pre className="bg-[#0C0D0F] border border-white/10 rounded-sm p-5 font-mono text-xs text-zinc-300 overflow-x-auto mb-6">{`curl -H "X-API-Key: YOUR_KEY" \\

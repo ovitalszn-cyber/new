@@ -10,7 +10,7 @@ export const CONSENSUS_FAQS = [
   },
   {
     q: "Which endpoint returns consensus lines?",
-    a: "GET /v6/esports/{sport}/lines. Pass market=match_winner, map_winner, total_maps, or map_handicap. Builder or Pro plan required.",
+    a: "GET /v6/esports/{sport}/lines. Pass market=match_winner, map_winner, total_maps, or map_handicap. Hobby plan or higher.",
   },
   {
     q: "How is consensus calculated?",
@@ -26,6 +26,6 @@ export const CONSENSUS_FAQS = [
   },
   {
     q: "Is there a free tier for /lines?",
-    a: "Sandbox and Hobby cannot call /lines. Builder and Pro can. Start free on props, then upgrade when you need consensus.",
+    a: "Sandbox cannot call /lines. Hobby and up can. Start free on props, then upgrade to Hobby for consensus.",
   },
 ] as const

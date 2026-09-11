@@ -67,6 +67,10 @@ export default function PricingPlans() {
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
+            <span className="text-zinc-300">Consensus lines (Thunderpick + Kalshi + Polymarket)</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
             <span className="text-zinc-300">Email support</span>
           </li>
         </ul>
