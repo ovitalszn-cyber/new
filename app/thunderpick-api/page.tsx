@@ -39,7 +39,11 @@ export default function ThunderpickApiPage() {
       jsonLdName="KashRock — Thunderpick esports lines via API"
       related={
         <p>
-          Prediction markets:{" "}
+          Consensus product:{" "}
+          <a href="/esports-consensus-api" className="text-white underline">
+            esports consensus API
+          </a>
+          . Prediction markets:{" "}
           <a href="/kalshi-api" className="text-white underline">
             Kalshi API
           </a>

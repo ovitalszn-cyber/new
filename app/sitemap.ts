@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/dfs-esports-api",
     "/cs2-props-api",
     "/esports-odds-api",
+    "/esports-consensus-api",
     "/prizepicks-api",
     "/underdog-api",
     "/sleeper-api",

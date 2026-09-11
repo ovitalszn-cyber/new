@@ -93,6 +93,7 @@ export default function EsportsOddsApiPage() {
               <a href="/esports-data-api" className="text-white underline">esports data API</a> pillar.
             </p>
             <div className="flex flex-col gap-2 text-sm text-zinc-400">
+              <a href="/esports-consensus-api" className="hover:text-white">Esports consensus API →</a>
               <a href="/thunderpick-api" className="hover:text-white">Thunderpick API →</a>
               <a href="/kalshi-api" className="hover:text-white">Kalshi API →</a>
               <a href="/polymarket-api" className="hover:text-white">Polymarket API →</a>

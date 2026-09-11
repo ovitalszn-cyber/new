@@ -39,7 +39,11 @@ export default function PolymarketApiPage() {
       jsonLdName="KashRock — Polymarket esports markets via API"
       related={
         <p>
-          Pair with{" "}
+          Consensus product:{" "}
+          <a href="/esports-consensus-api" className="text-white underline">
+            esports consensus API
+          </a>
+          . Pair with{" "}
           <a href="/kalshi-api" className="text-white underline">
             Kalshi API
           </a>{" "}

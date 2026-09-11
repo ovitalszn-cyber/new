@@ -35,7 +35,11 @@ export default function KalshiApiPage() {
       jsonLdName="KashRock — Kalshi esports markets via API"
       related={
         <p>
-          Also on the consensus feed:{" "}
+          Consensus product:{" "}
+          <a href="/esports-consensus-api" className="text-white underline">
+            esports consensus API
+          </a>
+          . Also:{" "}
           <a href="/polymarket-api" className="text-white underline">
             Polymarket API
           </a>{" "}
