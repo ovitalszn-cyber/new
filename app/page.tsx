@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import LandingAuthNav from '@/components/LandingAuthNav';
 import BookMarquee from '@/components/BookMarquee';
 import PricingPlans from '@/components/PricingPlans';
+import { LiveCs2PropsPane } from '@/components/landing/LiveCs2PropsPane';
 
 export default function LandingPage() {
   const [form, setForm] = useState({ fullName: '', email: '', message: '' });
@@ -275,26 +276,7 @@ export default function LandingPage() {
                     <div className="ml-4 text-xs font-mono text-zinc-500">GET /v6/esports/cs2/props</div>
                   </div>
                   <div className="p-5">
-                    <pre className="font-mono text-xs leading-normal"><code><span className="text-white">{`{`}</span>{`
-`}  <span className="token-key">"source"</span>: <span className="token-string">"kashrock"</span>,{`
-`}  <span className="token-key">"sport"</span>: <span className="token-string">"cs2"</span>,{`
-`}  <span className="token-key">"props"</span>: <span className="text-white">[</span>{`
-`}    <span className="text-white">{`{`}</span>{`
-`}      <span className="token-key">"propId"</span>: <span className="token-string">"kr_prop_5992b0df9d7afc33"</span>,{`
-`}      <span className="token-key">"player_name"</span>: <span className="token-string">"fear"</span>,{`
-`}      <span className="token-key">"stat_type"</span>: <span className="token-string">"ESPORTS_KILLS_MAPS_1_2"</span>,{`
-`}      <span className="token-key">"line"</span>: <span className="token-number">25.5</span>,{`
-`}      <span className="token-key">"odds"</span>: <span className="token-number">-118</span>,{`
-`}      <span className="token-key">"direction"</span>: <span className="token-string">"over"</span>,{`
-`}      <span className="token-key">"team"</span>: <span className="token-string">"Fnatic"</span>,{`
-`}      <span className="token-key">"book_name"</span>: <span className="token-string">"PrizePicks"</span>,{`
-`}      <span className="token-key">"event_time"</span>: <span className="token-string">"2026-04-21T13:30:00Z"</span>,{`
-`}      <span className="token-key">"links"</span>: <span className="text-white">{`{`}</span>{`
-`}        <span className="token-key">"market"</span>: <span className="token-string">"https://app.prizepicks.com/"</span>{`
-`}      <span className="text-white">{`}`}</span>{`
-`}    <span className="text-white">{`}`}</span>{`
-`}  <span className="text-white">]</span>{`
-`}<span className="text-white">{`}`}</span></code></pre>
+                    <LiveCs2PropsPane />
                   </div>
                 </div>
               </div>
