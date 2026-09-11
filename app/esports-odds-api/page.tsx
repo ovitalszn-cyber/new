@@ -26,9 +26,11 @@ export default function EsportsOddsApiPage() {
             <span className="seo-grad">Normalized lines across every book.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-            Pull esports odds and lines for CS2, League of Legends, and Dota 2 with an instant key. Every book
-            prices the same canonical <code className="text-white">propId</code>, so you compare PrizePicks, Underdog, Betr, and
-            Sleeper from one call: <code className="text-white">GET /v6/esports/{"{sport}"}/props</code>.
+            Pull esports odds and lines for CS2, League of Legends, and Dota 2 with an instant key. Compare DFS
+            books plus Thunderpick sportsbook prices and Kalshi / Polymarket prediction-market mainlines on the
+            same canonical <code className="text-white">propId</code>:{" "}
+            <code className="text-white">GET /v6/esports/{"{sport}"}/props</code> and consensus{" "}
+            <code className="text-white">GET /v6/esports/{"{sport}"}/lines</code>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="/#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
@@ -85,11 +87,19 @@ export default function EsportsOddsApiPage() {
               breakage. KashRock hands you a de-duplicated, cross-book view on one propId, so a line-shopping
               tool or value model reads one feed instead of maintaining six scrapers.
             </p>
-            <p className="text-base text-zinc-400">
+            <p className="text-base text-zinc-400 mb-6">
               Want the DFS-book framing? See the <a href="/dfs-esports-api" className="text-white underline">DFS Esports API</a>. Focused on CS2?
               The <a href="/cs2-props-api" className="text-white underline">CS2 player props API</a>. Everything at once? The{" "}
               <a href="/esports-data-api" className="text-white underline">esports data API</a> pillar.
             </p>
+            <div className="flex flex-col gap-2 text-sm text-zinc-400">
+              <a href="/thunderpick-api" className="hover:text-white">Thunderpick API →</a>
+              <a href="/kalshi-api" className="hover:text-white">Kalshi API →</a>
+              <a href="/polymarket-api" className="hover:text-white">Polymarket API →</a>
+              <a href="/boom-api" className="hover:text-white">Boom API →</a>
+              <a href="/pick6-api" className="hover:text-white">Pick6 API →</a>
+              <a href="/prizepicks-api" className="hover:text-white">PrizePicks API →</a>
+            </div>
           </div>
           <div className="flex-1 w-full max-w-2xl">
             <PropCode />

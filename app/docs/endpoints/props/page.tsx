@@ -37,7 +37,7 @@ export default function PropsPage() {
       </p>
       <Params rows={[
         { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock' },
-        { name: 'book', type: 'string', note: 'prizepicks, underdog, parlayplay, dabble, sleeper, betr' },
+        { name: 'book', type: 'string', note: 'prizepicks, underdog, parlayplay, dabble, sleeper, betr, boom, pick6, thunderpick, kalshi, polymarket' },
         { name: 'market', type: 'string', note: 'Exact stat_type, e.g. CS2_KILLS_MAPS_1_2' },
         { name: 'market_contains', type: 'string', note: 'Substring on stat_type, e.g. KILLS' },
         { name: 'player_id', type: 'int', note: 'Filter to one player id' },

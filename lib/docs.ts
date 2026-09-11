@@ -18,6 +18,11 @@ export const BOOKS = [
   { id: 'dabble', name: 'Dabble' },
   { id: 'sleeper', name: 'Sleeper' },
   { id: 'betr', name: 'Betr' },
+  { id: 'boom', name: 'Boom' },
+  { id: 'pick6', name: 'Pick6' },
+  { id: 'thunderpick', name: 'Thunderpick' },
+  { id: 'kalshi', name: 'Kalshi' },
+  { id: 'polymarket', name: 'Polymarket' },
 ] as const
 
 export type NavItem = { href: string; label: string; id: string }
@@ -37,6 +42,7 @@ export const DOC_NAV: { title: string; items: NavItem[] }[] = [
       { href: '/docs/endpoints/rankings', label: 'Rankings', id: 'rankings' },
       { href: '/docs/endpoints/players', label: 'Players', id: 'players' },
       { href: '/docs/endpoints/props', label: 'Props', id: 'props' },
+      { href: '/docs/endpoints/lines', label: 'Lines', id: 'lines' },
       { href: '/docs/endpoints/results', label: 'Results', id: 'results' },
       { href: '/docs/endpoints/research', label: 'Research', id: 'research' },
       { href: '/docs/endpoints/history', label: 'History tape', id: 'history' },

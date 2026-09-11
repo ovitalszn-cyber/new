@@ -4,6 +4,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.kashrock.com"
   const routes = [
     "/",
+    "/build-esports-app",
+    "/quickstart",
     "/esports-data-api",
     "/dfs-esports-api",
     "/cs2-props-api",
@@ -12,20 +14,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/underdog-api",
     "/sleeper-api",
     "/betr-api",
+    "/boom-api",
+    "/pick6-api",
+    "/thunderpick-api",
+    "/kalshi-api",
+    "/polymarket-api",
     "/coverage",
     "/historical-esports-data-api",
     "/blog/how-to-get-prizepicks-props-api",
     "/blog/cs2-player-props-without-scraping",
+    "/blog/build-esports-props-app-in-a-weekend",
+    "/blog/how-to-build-an-esports-betting-app",
     "/abios-alternative",
     "/pandascore-alternative",
     "/mcp",
     "/docs",
+    "/docs/endpoints/lines",
     "/console",
   ]
   return routes.map((path) => ({
     url: path === "/" ? base : `${base}${path}`,
     lastModified: new Date(),
     changeFrequency: path === "/" ? "daily" : "weekly",
-    priority: path === "/" ? 1 : path === "/console" ? 0.7 : 0.8,
+    priority:
+      path === "/"
+        ? 1
+        : path === "/build-esports-app" || path === "/quickstart"
+          ? 0.9
+          : path === "/console"
+            ? 0.7
+            : 0.8,
   }))
 }

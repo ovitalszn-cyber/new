@@ -2,18 +2,18 @@ export const DFS_TITLE =
   "DFS Esports API — PrizePicks & Underdog Props for CS2 & LoL"
 
 export const DFS_DESCRIPTION =
-  "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, and Sleeper player props for CS2 and LoL — plus Dabble and ParlayPlay — from GET /v6/esports/{sport}/props."
+  "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6 player props for CS2 and LoL from GET /v6/esports/{sport}/props."
 
 export const DATA_API_TITLE =
   "Esports Data API — CS2, LoL & Dota Props, Lines & Stats"
 
 export const DATA_API_DESCRIPTION =
-  "Esports data API for CS2, League of Legends, Dota 2, and Valorant. Normalized props, lines, matches, and player stats. Free sandbox, then $29+/mo — no enterprise quote."
+  "Esports data API for CS2, League of Legends, Dota 2, and Valorant. Normalized DFS props, sportsbook lines, and Kalshi / Polymarket prediction-market mainlines for sharper models. Free sandbox, then $29+/mo."
 
 export const DFS_FAQS = [
   {
     q: "Does the API include PrizePicks and Underdog lines for CS2 and LoL?",
-    a: "Yes. KashRock ingests PrizePicks and Underdog esports props for CS2 and League of Legends, plus Betr, Sleeper, Dabble, and ParlayPlay. Same player and market share one ID across books.",
+    a: "Yes. KashRock ingests PrizePicks and Underdog esports props for CS2 and League of Legends, plus Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6. Same player and market share one ID across books.",
   },
   {
     q: "Is this a PrizePicks API or an Underdog API?",
@@ -41,6 +41,10 @@ export const DATA_API_FAQS = [
   {
     q: "Where do I get DFS books like PrizePicks and Underdog?",
     a: "Use the DFS Esports API page and GET /v6/esports/{sport}/props. That route is the PrizePicks / Underdog / LoL DFS board.",
+  },
+  {
+    q: "Do you pull prediction markets for modeling?",
+    a: "Yes. Kalshi and Polymarket esports mainlines (plus Thunderpick sportsbook prices) land on the same schema and power GET /v6/esports/{sport}/lines consensus — useful priors so models are not stuck on one venue.",
   },
 ] as const
 

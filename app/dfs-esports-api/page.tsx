@@ -42,7 +42,7 @@ export default function DfsEsportsApiPage() {
             <span className="seo-grad">PrizePicks & Underdog for CS2 & LoL.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-            Affordable player props API with an instant key. Pull PrizePicks, Underdog, Betr, and Sleeper lines for CS2 and League of Legends — plus Dabble and ParlayPlay — from one path: GET /v6/esports/{"{sport}"}/props.
+            Affordable player props API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6 lines for CS2 and League of Legends from one path: GET /v6/esports/{"{sport}"}/props.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="/#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
@@ -64,9 +64,9 @@ export default function DfsEsportsApiPage() {
           One DFS board. <span className="text-zinc-500">Every book you actually use.</span>
         </h2>
         <p className="text-lg text-zinc-400 max-w-3xl mb-10">
-          Filter by book on the path-style props route. PrizePicks and Underdog share the same player, market, and propId as Betr, Sleeper, Dabble, and ParlayPlay.
+          Filter by book on the path-style props route. PrizePicks and Underdog share the same player, market, and propId as Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-16">
           {BOOK_LOGOS.map((book) => (
             <div key={book.name} className="bg-[#0C0D0F] border border-white/10 rounded-sm px-4 py-4 flex flex-col items-center gap-2">
               <img src={book.src} alt={book.name} className="h-12 w-12 rounded-xl object-cover" />
@@ -83,11 +83,19 @@ export default function DfsEsportsApiPage() {
               Live PrizePicks CS2 prop from production. Same shape for Underdog and LoL DFS data.
             </p>
             <div className="flex flex-col gap-2 text-sm text-zinc-400 mb-6">
+              <a href="/build-esports-app" className="hover:text-white">Build an esports app →</a>
+              <a href="/quickstart" className="hover:text-white">Quickstart (first call in 5 min) →</a>
               <a href="/prizepicks-api" className="hover:text-white">PrizePicks API →</a>
               <a href="/underdog-api" className="hover:text-white">Underdog API →</a>
               <a href="/sleeper-api" className="hover:text-white">Sleeper API →</a>
               <a href="/betr-api" className="hover:text-white">Betr API →</a>
+              <a href="/boom-api" className="hover:text-white">Boom API →</a>
+              <a href="/pick6-api" className="hover:text-white">Pick6 API →</a>
+              <a href="/thunderpick-api" className="hover:text-white">Thunderpick API →</a>
+              <a href="/kalshi-api" className="hover:text-white">Kalshi API →</a>
+              <a href="/polymarket-api" className="hover:text-white">Polymarket API →</a>
               <a href="/blog/how-to-get-prizepicks-props-api" className="hover:text-white">How to get PrizePicks props without scraping →</a>
+              <a href="/blog/build-esports-props-app-in-a-weekend" className="hover:text-white">Build a CS2 props app in a weekend →</a>
               <a href="/coverage" className="hover:text-white">Full coverage matrix →</a>
             </div>
             <a href="/esports-data-api" className="text-sm text-zinc-400 hover:text-white">

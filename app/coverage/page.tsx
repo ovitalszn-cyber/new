@@ -20,10 +20,11 @@ const TITLES = [
   "Deadlock",
 ]
 
-const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "ParlayPlay"]
+const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "ParlayPlay", "Boom", "Pick6", "Thunderpick", "Kalshi", "Polymarket"]
 
 const FEEDS: [string, string][] = [
   ["Player props & lines", "All titles above"],
+  ["Consensus main lines (match / map / totals / handicap)", "CS2, LoL, Dota 2, Valorant — Builder+"],
   ["Match schedules & fixtures", "All titles above"],
   ["Player stats / box scores / game logs", "CS2, LoL, Dota 2, Valorant"],
   ["Outcome verification (hit / miss / push)", "All prop titles"],
@@ -69,15 +70,19 @@ export default function CoveragePage() {
               >
                 <a
                   href={
-                    b === "PrizePicks"
-                      ? "/prizepicks-api"
-                      : b === "Underdog"
-                        ? "/underdog-api"
-                        : b === "Betr"
-                          ? "/betr-api"
-                          : b === "Sleeper"
-                            ? "/sleeper-api"
-                            : "/dfs-esports-api"
+                    (
+                      {
+                        PrizePicks: "/prizepicks-api",
+                        Underdog: "/underdog-api",
+                        Betr: "/betr-api",
+                        Sleeper: "/sleeper-api",
+                        Boom: "/boom-api",
+                        Pick6: "/pick6-api",
+                        Thunderpick: "/thunderpick-api",
+                        Kalshi: "/kalshi-api",
+                        Polymarket: "/polymarket-api",
+                      } as Record<string, string>
+                    )[b] ?? "/dfs-esports-api"
                   }
                   className="hover:text-white"
                 >

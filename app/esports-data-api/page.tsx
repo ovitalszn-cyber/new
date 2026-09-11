@@ -85,12 +85,22 @@ export default function EsportsDataApiPage() {
           ))}
         </div>
         <p className="text-base text-zinc-400 mt-10">
-          Working on a specific build? Jump to the{" "}
+          Shipping this weekend? Start on{" "}
+          <a href="/build-esports-app" className="text-white underline">Build an esports app</a>
+          {" "}or the{" "}
+          <a href="/quickstart" className="text-white underline">quickstart</a>. Working on a specific
+          build? Jump to the{" "}
           <a href="/cs2-props-api" className="text-white underline">CS2 player props API</a>, the{" "}
           <a href="/prizepicks-api" className="text-white underline">PrizePicks API</a>,{" "}
           <a href="/underdog-api" className="text-white underline">Underdog API</a>,{" "}
-          <a href="/sleeper-api" className="text-white underline">Sleeper API</a>, or{" "}
-          <a href="/betr-api" className="text-white underline">Betr API</a>. Line shopping lives on the{" "}
+          <a href="/sleeper-api" className="text-white underline">Sleeper API</a>,{" "}
+          <a href="/betr-api" className="text-white underline">Betr API</a>,{" "}
+          <a href="/boom-api" className="text-white underline">Boom API</a>,{" "}
+          <a href="/pick6-api" className="text-white underline">Pick6 API</a>,{" "}
+          <a href="/thunderpick-api" className="text-white underline">Thunderpick API</a>,{" "}
+          <a href="/kalshi-api" className="text-white underline">Kalshi API</a>, or{" "}
+          <a href="/polymarket-api" className="text-white underline">Polymarket API</a>. Line shopping
+          lives on the{" "}
           <a href="/esports-odds-api" className="text-white underline">esports odds API</a>. Full board:{" "}
           <a href="/dfs-esports-api" className="text-white underline">DFS Esports API</a>. See{" "}
           <a href="/coverage" className="text-white underline">coverage</a> for titles and books.
