@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sleeper-api",
     "/betr-api",
     "/coverage",
+    "/historical-esports-data-api",
     "/blog/how-to-get-prizepicks-props-api",
     "/blog/cs2-player-props-without-scraping",
     "/abios-alternative",

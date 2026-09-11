@@ -113,8 +113,12 @@ export default function CoveragePage() {
           Start on the{" "}
           <a href="/esports-data-api" className="text-white underline">
             esports data API
-          </a>{" "}
-          or the{" "}
+          </a>
+          , the{" "}
+          <a href="/historical-esports-data-api" className="text-white underline">
+            historical esports data API
+          </a>
+          , or the{" "}
           <a href="/dfs-esports-api" className="text-white underline">
             DFS Esports API
           </a>
