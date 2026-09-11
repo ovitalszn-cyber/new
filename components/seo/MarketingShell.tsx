@@ -3,9 +3,9 @@ import type { ReactNode } from "react"
 import LandingAuthNav from "@/components/LandingAuthNav"
 
 const NAV = [
-  { href: "/#features", label: "Features" },
-  { href: "/#how-it-works", label: "How it works" },
-  { href: "/#pricing", label: "Pricing" },
+  { href: "/features", label: "Features" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/mcp", label: "MCP" },
   { href: "/docs", label: "Docs" },
 ] as const
@@ -39,7 +39,9 @@ export function MarketingShell({ children }: { children: ReactNode }) {
       <footer className="border-t border-white/5 bg-[#050505] pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-zinc-600">© 2026 KashRock Inc. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <a href="/build-esports-app" className="text-sm text-zinc-600 hover:text-white">Build an esports app</a>
+            <a href="/quickstart" className="text-sm text-zinc-600 hover:text-white">Quickstart</a>
             <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white">Esports Data API</a>
             <a href="/dfs-esports-api" className="text-sm text-zinc-600 hover:text-white">DFS Esports API</a>
             <a href="/mcp" className="text-sm text-zinc-600 hover:text-white">MCP</a>

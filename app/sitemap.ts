@@ -4,6 +4,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.kashrock.com"
   const routes = [
     "/",
+    "/pricing",
+    "/features",
+    "/how-it-works",
     "/build-esports-app",
     "/quickstart",
     "/esports-data-api",
@@ -40,7 +43,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       path === "/"
         ? 1
-        : path === "/build-esports-app" || path === "/quickstart"
+        : path === "/pricing" ||
+            path === "/build-esports-app" ||
+            path === "/quickstart"
           ? 0.9
           : path === "/console"
             ? 0.7

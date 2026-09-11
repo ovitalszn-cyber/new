@@ -20,7 +20,7 @@ const TITLES = [
   "Deadlock",
 ]
 
-const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "ParlayPlay", "Boom", "Pick6", "Thunderpick", "Kalshi", "Polymarket"]
+const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "Boom", "Pick6", "Thunderpick", "Kalshi", "Polymarket"]
 
 const FEEDS: [string, string][] = [
   ["Player props & lines", "All titles above"],
@@ -132,7 +132,7 @@ export default function CoveragePage() {
             Docs
           </a>{" "}
           ·{" "}
-          <a href="/#pricing" className="text-white underline">
+          <a href="/pricing" className="text-white underline">
             Pricing
           </a>
           .

@@ -64,7 +64,7 @@ export default function ApiKeyPanel({ keys, plan, onChanged }: ApiKeyPanelProps)
         ) : null}
         {!hasPlan ? (
           <Link
-            href="/#pricing"
+            href="/pricing"
             className="rounded bg-white px-3 py-2 text-sm font-medium text-black hover:bg-zinc-200 transition-colors"
           >
             Choose a plan

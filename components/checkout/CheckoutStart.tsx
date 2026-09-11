@@ -49,7 +49,7 @@ export default function CheckoutStart({ plan }: { plan: string | null }) {
                   Try again
                 </button>
               ) : null}
-              <Link href="/#pricing" className="rounded border border-white/20 px-4 py-2">
+              <Link href="/pricing" className="rounded border border-white/20 px-4 py-2">
                 View plans
               </Link>
             </div>

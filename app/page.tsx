@@ -2,9 +2,9 @@
 
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
-import SubscribeButton from '@/components/SubscribeButton';
 import LandingAuthNav from '@/components/LandingAuthNav';
 import BookMarquee from '@/components/BookMarquee';
+import PricingPlans from '@/components/PricingPlans';
 
 export default function LandingPage() {
   const [form, setForm] = useState({ fullName: '', email: '', message: '' });
@@ -79,9 +79,9 @@ export default function LandingPage() {
               <img src="/kashrock-logo.svg" alt="KashRock" className="h-10 w-auto" />
             </div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Features</a>
-              <a href="#how-it-works" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">How it works</a>
-              <a href="#pricing" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Pricing</a>
+              <a href="/features" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Features</a>
+              <a href="/how-it-works" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">How it works</a>
+              <a href="/pricing" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Pricing</a>
               <a href="/mcp" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">MCP</a>
               <a href="https://www.kashrock.com/docs" className="text-sm font-normal text-zinc-400 hover:text-white transition-colors">Docs</a>
             </div>
@@ -109,7 +109,7 @@ export default function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2">
+              <a href="/pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2">
                 Get API Key <i data-lucide="arrow-right" className="w-4 h-4"></i>
               </a>
               <a href="https://www.kashrock.com/docs" className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900 transition-all flex items-center justify-center gap-2">
@@ -341,160 +341,13 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Pricing Section */}
+        {/* Pricing Section — keep id for secondary in-page scroll; primary nav uses /pricing */}
         <section id="pricing" className="py-24 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Pricing</h2>
             <p className="text-lg text-zinc-500">Start free with CS2 props. Upgrade when you need full esports coverage, including League of Legends, Dota 2, live/historical matches, and production-scale API usage.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/10 bg-[#0C0D0F]">
-            
-            {/* Sandbox */}
-            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-zinc-700 text-zinc-200 text-xs font-medium rounded-full whitespace-nowrap">
-                Free Forever
-              </div>
-              <div className="mb-4 mt-2">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Sandbox</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium text-white">$0</span>
-                  <span className="text-zinc-500">/mo</span>
-                </div>
-                <p className="text-sm font-bold text-zinc-300 mt-2">2 requests / minute</p>
-                <p className="text-sm text-zinc-500 mt-3">Test the KashRock schema with CS2 player props — free forever.</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">CS2 player props only (no matches)</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Verify the schema before committing</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">No credit card required</span>
-                </li>
-              </ul>
-              <div className="mt-auto">
-                <SubscribeButton
-                  plan="sandbox"
-                  label="Get Sandbox Key"
-                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block disabled:opacity-50"
-                />
-              </div>
-            </div>
-            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
-              <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Hobby</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium text-white">$29</span>
-                  <span className="text-zinc-500">/mo</span>
-                </div>
-                <p className="text-sm font-bold text-zinc-300 mt-2">50 requests / minute</p>
-                <p className="text-sm text-zinc-500 mt-3">Unlock multi-title esports props and lines, including League of Legends and Dota 2.</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Esports analytics: multi-sport player props</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Player images + team logos included</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Email support</span>
-                </li>
-              </ul>
-              <div className="mt-auto">
-                <SubscribeButton
-                  plan="hobby"
-                  label="Subscribe"
-                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block disabled:opacity-50"
-                />
-              </div>
-            </div>
-            
-            {/* Builder - Most Popular */}
-            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-full">
-                Most Popular
-              </div>
-              <div className="mb-4 mt-2">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Builder</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium text-white">$99</span>
-                  <span className="text-zinc-500">/mo</span>
-                </div>
-                <p className="text-sm font-bold text-zinc-300 mt-2">100 requests / minute</p>
-                <p className="text-sm text-zinc-500 mt-3">Add live and historical matches, game logs, box scores, and outcome verification.</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Everything in Hobby</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Live + historical match access</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Player game logs + box scores</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Outcome verification (verified/unmatched/push)</span>
-                </li>
-              </ul>
-              <div className="mt-auto">
-                <SubscribeButton
-                  plan="builder"
-                  label="Subscribe"
-                  className="w-full px-6 py-3 bg-white text-black rounded-sm hover:bg-zinc-200 transition-colors text-center block disabled:opacity-50"
-                />
-              </div>
-            </div>
-
-            {/* Pro */}
-            <div className="p-8 md:p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors flex flex-col">
-              <div className="mb-4">
-                <h3 className="text-base font-medium text-white uppercase tracking-wider mb-2">Pro</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium text-white">$249</span>
-                  <span className="text-zinc-500">/mo</span>
-                </div>
-                <p className="text-sm font-bold text-zinc-300 mt-2">250 requests / minute</p>
-                <p className="text-sm text-zinc-500 mt-3">Run production workloads with the highest throughput and early expansion access.</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Everything in Builder</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Highest throughput for production apps</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <i data-lucide="check" className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0"></i>
-                  <span className="text-zinc-300">Early access to new esports expansions</span>
-                </li>
-              </ul>
-              <div className="mt-auto">
-                <SubscribeButton
-                  plan="pro"
-                  label="Subscribe"
-                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white rounded-sm hover:bg-white/10 transition-colors text-center block disabled:opacity-50"
-                />
-              </div>
-            </div>
-
-          </div>
+          <PricingPlans />
         </section>
 
 
@@ -534,7 +387,9 @@ export default function LandingPage() {
           </div>
           <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-zinc-600">© 2026 KashRock Inc. All rights reserved.</p>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <a href="/build-esports-app" className="text-sm text-zinc-600 hover:text-white transition-colors">Build an esports app</a>
+              <a href="/quickstart" className="text-sm text-zinc-600 hover:text-white transition-colors">Quickstart</a>
               <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white transition-colors">Esports Data API</a>
               <a href="/legal" className="text-sm text-zinc-600 hover:text-white transition-colors">Privacy Policy</a>
               <a href="/legal?tab=terms" className="text-sm text-zinc-600 hover:text-white transition-colors">Terms of Service</a>

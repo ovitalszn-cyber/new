@@ -106,7 +106,7 @@ export default function HistoricalEsportsDataApiPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="/#pricing"
+              href="/pricing"
               className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200"
             >
               Get API Key

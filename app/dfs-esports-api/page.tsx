@@ -42,10 +42,10 @@ export default function DfsEsportsApiPage() {
             <span className="seo-grad">PrizePicks & Underdog for CS2 & LoL.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-            Affordable player props API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6 lines for CS2 and League of Legends from one path: GET /v6/esports/{"{sport}"}/props.
+            Affordable player props API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6 lines for CS2 and League of Legends from one path: GET /v6/esports/{"{sport}"}/props.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
+            <a href="/pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
               Get API Key
             </a>
             <a href="/docs/endpoints/props" className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900">
@@ -64,7 +64,7 @@ export default function DfsEsportsApiPage() {
           One DFS board. <span className="text-zinc-500">Every book you actually use.</span>
         </h2>
         <p className="text-lg text-zinc-400 max-w-3xl mb-10">
-          Filter by book on the path-style props route. PrizePicks and Underdog share the same player, market, and propId as Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6.
+          Filter by book on the path-style props route. PrizePicks and Underdog share the same player, market, and propId as Betr, Sleeper, Dabble, Boom, and Pick6.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-16">
           {BOOK_LOGOS.map((book) => (

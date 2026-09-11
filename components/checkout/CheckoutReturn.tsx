@@ -69,7 +69,7 @@ export default function CheckoutReturn({ sessionId }: { sessionId: string }) {
 
         {state.phase === 'terminal' ? (
           <Link
-            href="/#pricing"
+            href="/pricing"
             className="mt-6 inline-block rounded bg-white px-4 py-2 font-medium text-black"
           >
             Return to pricing

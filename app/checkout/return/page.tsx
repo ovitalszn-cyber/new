@@ -19,7 +19,7 @@ export default async function CheckoutReturnPage({
         <p className="mt-2 text-zinc-400">
           Return to pricing and start checkout again.
         </p>
-        <Link href="/#pricing" className="mt-5 inline-block underline">
+        <Link href="/pricing" className="mt-5 inline-block underline">
           View plans
         </Link>
       </section>

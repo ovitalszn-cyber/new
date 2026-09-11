@@ -35,7 +35,7 @@ export default function PandaScoreAlternativePage() {
             CS2 and LoL, transparent pricing, and an instant key.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
+            <a href="/pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
               Get API Key
             </a>
             <a href="/docs" className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900">

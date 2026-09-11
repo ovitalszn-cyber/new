@@ -31,7 +31,7 @@ export default function Cs2PropsApiPage() {
             Betr, and Sleeper, from one path: <code className="text-white">GET /v6/esports/cs2/props</code>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/#pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
+            <a href="/pricing" className="w-full sm:w-auto px-8 py-3.5 bg-white text-black text-base font-medium rounded-sm hover:bg-zinc-200">
               Get API Key
             </a>
             <a href="/docs" className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-zinc-700 text-white text-base font-medium rounded-sm hover:bg-zinc-900">
@@ -60,7 +60,7 @@ export default function Cs2PropsApiPage() {
           </li>
           <li className="bg-[#0C0D0F] border border-white/10 rounded-sm p-8">
             <strong className="text-white">Every DFS book</strong>
-            <p className="text-zinc-400 mt-2">PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay on one schema.</p>
+            <p className="text-zinc-400 mt-2">PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6 on one schema.</p>
           </li>
           <li className="bg-[#0C0D0F] border border-white/10 rounded-sm p-8">
             <strong className="text-white">Canonical IDs</strong>

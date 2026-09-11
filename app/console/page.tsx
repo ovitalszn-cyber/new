@@ -43,7 +43,7 @@ export default function ConsolePage() {
         <p className="text-sm text-zinc-400">
           {user?.full_name || user?.email || 'Account'}
         </p>
-        <Link href="/#pricing" className="text-sm text-zinc-300 hover:text-white">
+        <Link href="/pricing" className="text-sm text-zinc-300 hover:text-white">
           Upgrade plan
         </Link>
       </header>
