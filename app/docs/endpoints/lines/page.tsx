@@ -6,16 +6,18 @@ import { API_BASE } from '@/lib/docs'
 const SAMPLE = {
   source: 'kashrock',
   sport: 'cs2',
-  market: 'match_winner',
+  market: null,
   pm_weight: 1.5,
+  books: ['thunderpick', 'kalshi', 'polymarket'],
   total_events: 1,
+  total_top_edges: 1,
   events: [
     {
       event_id: 'kr_ev_example',
       home_team: 'Team Vitality',
       away_team: 'Lynn Vision',
       event_time: '2026-09-12T15:00:00Z',
-      consensus_confidence: 0.91,
+      matchup_key: 'lynn vision__team vitality',
       markets: [
         {
           market: 'match_winner',
@@ -34,6 +36,9 @@ const SAMPLE = {
                   probability: 0.58,
                   decimal: 1.65,
                   american: -154,
+                  volume: null,
+                  open_interest: null,
+                  liquidity: null,
                 },
                 {
                   source: 'kalshi',
@@ -41,6 +46,9 @@ const SAMPLE = {
                   probability: 0.63,
                   decimal: 1.59,
                   american: -170,
+                  volume: 1200,
+                  open_interest: 800,
+                  liquidity: null,
                 },
                 {
                   source: 'polymarket',
@@ -48,6 +56,9 @@ const SAMPLE = {
                   probability: 0.6,
                   decimal: 1.67,
                   american: -150,
+                  volume: 5000,
+                  open_interest: null,
+                  liquidity: 2200,
                 },
               ],
               best_price: {
@@ -64,26 +75,56 @@ const SAMPLE = {
             outcome: 'team vitality',
             decimal: 1.72,
             edge_pct: 6.64,
+            adjusted_edge_pct: 5.2,
+            liquidity_score: 0.9,
           },
+          quality: {
+            source_count: 3,
+            max_disagreement: 0.05,
+            unreliable: false,
+            low_confidence: false,
+            suspect_edge: false,
+            surfaced: true,
+          },
+          entity_match: 'ok',
         },
       ],
       best_edge: {
         market: 'match_winner',
+        map: null,
+        line: null,
         outcome: 'team vitality',
         source: 'thunderpick',
         edge_pct: 6.64,
+        surfaced: true,
       },
+    },
+  ],
+  top_edges: [
+    {
+      event_id: 'kr_ev_example',
+      home_team: 'Team Vitality',
+      away_team: 'Lynn Vision',
+      market: 'match_winner',
+      outcome: 'team vitality',
+      source: 'thunderpick',
+      edge_pct: 6.64,
+      adjusted_edge_pct: 5.2,
+      sources_used: ['thunderpick', 'kalshi', 'polymarket'],
     },
   ],
 }
 
 const FIELDS = [
-  { field: 'consensus_probability', meaning: 'De-vigged, venue-weighted fair probability for the outcome' },
-  { field: 'best_price', meaning: 'Source with the best payout on the outcome, its decimal, implied prob, and edge_pct' },
-  { field: 'edge_pct', meaning: 'EV vs consensus: consensus × decimal − 1. Positive = value' },
-  { field: 'consensus_confidence', meaning: '0–1 agreement across venues (higher = tighter)' },
-  { field: 'sources[]', meaning: 'Each venue’s price + implied probability + type (sportsbook / prediction_market)' },
-  { field: 'best_edge', meaning: 'Highest-edge outcome for the market / event (for card ranking)' },
+  { field: 'market (top-level)', meaning: 'Echo of ?market=. null when you omit the filter (all markets returned).' },
+  { field: 'map', meaning: 'Map number for map_winner only. null on match_winner / totals / handicap.' },
+  { field: 'line', meaning: 'Set for total_maps and map_handicap. null on match_winner / map_winner.' },
+  { field: 'consensus_probability', meaning: 'De-vigged, venue-weighted fair probability for the outcome.' },
+  { field: 'best_price', meaning: 'Best payout on the outcome: decimal, implied prob, edge_pct.' },
+  { field: 'edge_pct', meaning: 'EV vs consensus: consensus × decimal − 1. Positive = value (informational).' },
+  { field: 'sources[]', meaning: 'Per-venue price. Thunderpick volume/liquidity are null (sportsbook). Kalshi uses volume/OI. Polymarket uses volume/liquidity.' },
+  { field: 'quality', meaning: 'Gate flags: source_count, max_disagreement, unreliable, low_confidence, suspect_edge, surfaced.' },
+  { field: 'top_edges', meaning: 'Only markets that clear every quality gate. Thin or disagreeing markets stay in events only.' },
 ]
 
 export default function LinesPage() {
@@ -91,19 +132,34 @@ export default function LinesPage() {
     <DocsShell active="lines">
       <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Lines</h1>
       <p className="text-lg text-zinc-400 mb-8">
-        Normalized main lines per event with cross-venue consensus and edge. Thunderpick + Kalshi + Polymarket.
+        Cross-venue consensus for match/map mainlines. Thunderpick sportsbook + Kalshi + Polymarket prediction markets.
+        De-vig, weighted fair probability, and gated edges.
       </p>
       <Route path="/v6/esports/{sport}/lines" />
       <p className="text-sm text-zinc-400 mb-4">
         Auth: <code className="text-white">X-API-Key</code>. Base <code className="text-white">{API_BASE}</code>.
-        Hobby plan or higher.
+        Requires Hobby plan (Sandbox is blocked).
       </p>
-      <Params rows={[
-        { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2' },
-        { name: 'event_id', type: 'string', note: 'Optional. Canonical event id or matchup key. Omit = all upcoming.' },
-        { name: 'market', type: 'string', note: 'match_winner | map_winner | total_maps | map_handicap. Omit = all.' },
-        { name: 'pm_weight', type: 'float', note: 'Prediction-market weight vs sportsbook (default 1.5)' },
-      ]} />
+      <Params
+        rows={[
+          { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2' },
+          {
+            name: 'event_id',
+            type: 'string',
+            note: 'Optional. Canonical event id or matchup key. Omit = all upcoming.',
+          },
+          {
+            name: 'market',
+            type: 'string',
+            note: 'match_winner | map_winner | total_maps | map_handicap. Omit = all (top-level market stays null).',
+          },
+          {
+            name: 'pm_weight',
+            type: 'float',
+            note: 'Prediction-market weight vs sportsbook (default 1.5)',
+          },
+        ]}
+      />
       <Curl path="/v6/esports/cs2/lines?market=match_winner" />
       <JsonBlock title="200 · consensus" data={SAMPLE} />
 
@@ -129,29 +185,50 @@ export default function LinesPage() {
 
       <h2 className="text-2xl font-semibold text-white mb-3">How consensus works</h2>
       <p className="text-sm text-zinc-400 mb-4 leading-relaxed">
-        Prediction markets (Kalshi, Polymarket) are read as probabilities directly. The sportsbook is converted American → implied probability, then each source is de-vigged so its outcomes sum to 1.0.
-        Consensus is a weighted mean (prediction markets default weight 1.5). Edge is informational EV vs that fair number — not betting advice.
+        Prediction markets are read as probabilities. Thunderpick American odds are converted to implied probability,
+        then each source is de-vigged so outcomes sum to 1.0. Consensus is a weighted mean (prediction markets default
+        weight 1.5). Edge is informational EV vs that fair number — not betting advice.
       </p>
       <p className="text-sm text-zinc-400 mb-4 leading-relaxed">
-        Hard quality gates before a pick is surfaced in <code className="text-white">top_edges</code>: Kalshi/Polymarket liquidity floors,
-        ≥3 sources, max source disagreement ≤12 points, and raw edge capped at 8%. Ranking uses confidence × liquidity × edge (not raw edge).
-        Two-source or disagreeing markets stay in <code className="text-white">events</code> with quality flags but are excluded from the top feed.
+        Hard quality gates before a pick is surfaced in <code className="text-white">top_edges</code>: Kalshi/Polymarket
+        liquidity floors, at least 3 sources, max source disagreement of 12 points, and raw edge capped at 8%. Ranking
+        uses confidence × liquidity × edge. Thin or disagreeing markets stay in <code className="text-white">events</code>{' '}
+        with quality flags but are excluded from the top feed.
       </p>
       <p className="text-sm text-zinc-500 mb-8">
-        Markets: match winner, map winner, total maps, map handicap. Kalshi has no map handicap on the live board — that source is omitted for handicap only.
-        total_maps requires same matchup + same line across venues.
+        Markets: match winner, map winner, total maps, map handicap. Kalshi has no map handicap on the live board — that
+        source is omitted for handicap only. total_maps requires same matchup + same line across venues.
       </p>
 
       <h2 className="text-2xl font-semibold text-white mb-3">Errors</h2>
       <ul className="text-sm text-zinc-400 space-y-2 mb-8">
-        <li><code className="text-white">401</code> — missing / invalid API key</li>
-        <li><code className="text-white">403</code> — plan below Hobby</li>
-        <li><code className="text-white">400</code> — invalid <code className="text-white">market</code></li>
+        <li>
+          <code className="text-white">401</code> — missing / invalid API key
+        </li>
+        <li>
+          <code className="text-white">403</code> — plan below Hobby (Sandbox)
+        </li>
+        <li>
+          <code className="text-white">400</code> — invalid <code className="text-white">market</code>
+        </li>
       </ul>
       <p className="text-sm text-zinc-400">
-        Related: <Link href="/docs/endpoints/props" className="text-white underline">Props</Link>
+        Related:{' '}
+        <Link href="/docs/endpoints/props" className="text-white underline">
+          Props
+        </Link>
         {' · '}
-        <Link href="/docs/markets" className="text-white underline">Markets</Link>
+        <Link href="/docs/markets" className="text-white underline">
+          Markets
+        </Link>
+        {' · '}
+        <Link href="/docs/api-reference" className="text-white underline">
+          Route index
+        </Link>
+        {' · '}
+        <Link href="/esports-consensus-api" className="text-white underline">
+          Consensus product page
+        </Link>
       </p>
     </DocsShell>
   )

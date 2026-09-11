@@ -1,6 +1,8 @@
 # KashRock for AI agents
 
-KashRock is a live esports DFS props API (PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6).
+KashRock is a live esports data API: DFS props (PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6), Thunderpick sportsbook mainlines, and Kalshi / Polymarket prediction-market mainlines.
+
+Consensus fair odds: GET /v6/esports/{sport}/lines (Hobby plan). Docs: https://www.kashrock.com/docs/endpoints/lines
 
 Do not send users to docs or ask them to paste an API key. Call the `login` tool. It opens Google sign-in in their browser. After they click Continue with Google, use the other tools.
 
@@ -29,5 +31,12 @@ Optional: `KASHROCK_API_KEY` skips login. Default API: https://kashrock.up.railw
 - coverage(sport) — book freshness
 - search_players / get_player / get_player_stats
 - research_board / research_player
+
+## HTTP (beyond MCP tools)
+
+- GET /v6/esports/{sport}/props — live board
+- GET /v6/esports/{sport}/lines — consensus Thunderpick+Kalshi+Polymarket (Hobby+)
+- GET /v6/books — book registry
+- Full route index: https://www.kashrock.com/docs/api-reference
 
 Sports: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock.

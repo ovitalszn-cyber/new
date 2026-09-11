@@ -34,6 +34,13 @@ export default function PlayersPage() {
       </p>
       <Curl path="/v6/esports/cs2/players/zywoo" />
 
+      <h2 className="text-xl font-semibold text-white mb-4">Stats</h2>
+      <Route path="/v6/esports/{sport}/players/{player_id}/stats" />
+      <p className="text-sm text-zinc-500 mb-4">
+        Canonical KPR and related foundation stats for the player.
+      </p>
+      <Curl path="/v6/esports/cs2/players/zywoo/stats" />
+
       <h2 className="text-xl font-semibold text-white mb-4">Gamelogs</h2>
       <Route path="/v6/esports/{sport}/players/{player_slug}/gamelogs" />
       <Params rows={[
@@ -41,6 +48,4 @@ export default function PlayersPage() {
         { name: 'limit', type: 'int', note: 'Max maps. Default 10.' },
       ]} />
       <Curl path="/v6/esports/cs2/players/zywoo/gamelogs?limit=1" />
-    </DocsShell>
-  )
-}
+      <p className="text-sm text-zinc-500 mt-6">Gamelogs require Builder plan.</p>

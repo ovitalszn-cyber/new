@@ -39,7 +39,18 @@ export default function ResearchPage() {
       ]} />
       <Curl path="/v6/esports/research/player?player=chelo&sport=cs2&market=kills_maps_1_2" />
       <JsonBlock title="200" data={SAMPLE} />
-      <p className="text-sm text-zinc-500">
+
+      <h2 className="text-2xl font-semibold text-white mt-12 mb-4">Board research</h2>
+      <p className="text-sm text-zinc-400 mb-4">
+        Research slips for every player currently on the live board for a sport.
+      </p>
+      <Route path="/v6/esports/research/board" />
+      <Params rows={[
+        { name: 'sport', type: 'string', note: 'Default cs2.' },
+      ]} />
+      <Curl path="/v6/esports/research/board?sport=cs2" />
+
+      <p className="text-sm text-zinc-500 mt-8">
         Market slugs: <code className="text-zinc-300">kills_maps_1_2</code>,{' '}
         <code className="text-zinc-300">headshots_maps_1_2</code>,{' '}
         <code className="text-zinc-300">kills_map_4</code>,{' '}

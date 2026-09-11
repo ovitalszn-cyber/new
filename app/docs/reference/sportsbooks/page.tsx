@@ -1,42 +1,100 @@
+import Link from 'next/link'
 import { DocsShell } from '@/components/docs/DocsShell'
 import { Curl, JsonBlock } from '@/components/docs/Code'
 import { BOOKS } from '@/lib/docs'
 
 const SAMPLE = {
-  book_id: 1,
-  key: 'prizepicks',
-  display_name: 'PrizePicks',
-  status: 'active',
+  source: 'kashrock',
+  total_books: 3,
+  books: [
+    { book_id: 1, key: 'prizepicks', display_name: 'PrizePicks' },
+    { book_id: 9, key: 'thunderpick', display_name: 'Thunderpick' },
+    { book_id: 10, key: 'kalshi', display_name: 'Kalshi' },
+  ],
 }
 
+const GROUPS: { title: string; blurb: string; ids: string[] }[] = [
+  {
+    title: 'DFS apps',
+    blurb: 'Player props on the same propId schema.',
+    ids: ['prizepicks', 'underdog', 'dabble', 'sleeper', 'betr', 'boom', 'pick6'],
+  },
+  {
+    title: 'Sportsbook',
+    blurb: 'Match/map mainlines and player props where listed.',
+    ids: ['thunderpick'],
+  },
+  {
+    title: 'Prediction markets',
+    blurb: 'Probability-priced match/map markets. Feed GET /{sport}/lines consensus.',
+    ids: ['kalshi', 'polymarket'],
+  },
+]
+
 export default function BooksPage() {
+  const byId = Object.fromEntries(BOOKS.map((b) => [b.id, b]))
   return (
     <DocsShell active="books">
       <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Books</h1>
       <p className="text-lg text-zinc-400 mb-8">
-        Filter props with <code className="text-white">book=</code>. Registry: <code className="text-white">GET /v6/books</code>.
+        Filter props with <code className="text-white">book=</code>. Registry:{' '}
+        <code className="text-white">GET /v6/books</code>. Consensus across Thunderpick + Kalshi + Polymarket:{' '}
+        <Link href="/docs/endpoints/lines" className="text-white underline">
+          /lines
+        </Link>
+        .
       </p>
-      <div className="overflow-x-auto border border-white/5 rounded-lg bg-[#0C0D0F] mb-8">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-white/5 text-zinc-500">
-            <tr>
-              <th className="py-3 px-4">ID</th>
-              <th className="py-3 px-4">Name</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5">
-            {BOOKS.map((b) => (
-              <tr key={b.id}>
-                <td className="py-3 px-4 font-mono text-emerald-400">{b.id}</td>
-                <td className="py-3 px-4 text-white">{b.name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+
+      {GROUPS.map((group) => (
+        <div key={group.title} className="mb-10">
+          <h2 className="text-xl font-semibold text-white mb-2">{group.title}</h2>
+          <p className="text-sm text-zinc-500 mb-4">{group.blurb}</p>
+          <div className="overflow-x-auto border border-white/5 rounded-lg bg-[#0C0D0F]">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-white/5 text-zinc-500">
+                <tr>
+                  <th className="py-3 px-4">Key</th>
+                  <th className="py-3 px-4">Name</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {group.ids.map((id) => {
+                  const b = byId[id]
+                  if (!b) return null
+                  return (
+                    <tr key={b.id}>
+                      <td className="py-3 px-4 font-mono text-emerald-400">{b.id}</td>
+                      <td className="py-3 px-4 text-white">{b.name}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+
       <Curl path="/v6/books" />
       <JsonBlock title="200 · live" data={SAMPLE} />
-      <Curl path="/v6/esports/cs2/props?book=prizepicks" />
+      <Curl path="/v6/esports/cs2/props?book=kalshi" />
+      <p className="text-sm text-zinc-400 mt-6">
+        Product pages:{' '}
+        <Link href="/thunderpick-api" className="text-white underline">
+          Thunderpick
+        </Link>
+        {' · '}
+        <Link href="/kalshi-api" className="text-white underline">
+          Kalshi
+        </Link>
+        {' · '}
+        <Link href="/polymarket-api" className="text-white underline">
+          Polymarket
+        </Link>
+        {' · '}
+        <Link href="/esports-consensus-api" className="text-white underline">
+          Consensus
+        </Link>
+      </p>
     </DocsShell>
   )
 }

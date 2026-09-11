@@ -6,7 +6,7 @@ import { API_BASE, SPORTS } from '@/lib/docs'
 
 export const metadata: Metadata = {
   title: 'API Documentation | KashRock',
-  description: 'KashRock esports DaaS: live props, fixtures, settlements, and player research.',
+  description: 'KashRock esports DaaS: live props, consensus lines (Thunderpick + Kalshi + Polymarket), fixtures, settlements, and player research.',
 }
 
 const PROP_SAMPLE = {
@@ -35,7 +35,19 @@ export default function DocsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div>
           <h3 className="text-white font-semibold mb-2">Live board</h3>
-          <p className="text-sm text-zinc-400">Normalized props from PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, and Pick6.</p>
+          <p className="text-sm text-zinc-400">
+            Normalized props from PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6, plus Thunderpick,
+            Kalshi, and Polymarket mainlines.
+          </p>
+        </div>
+        <div>
+          <h3 className="text-white font-semibold mb-2">Consensus lines</h3>
+          <p className="text-sm text-zinc-400">
+            <Link href="/docs/endpoints/lines" className="text-white underline">
+              GET /{'{sport}'}/lines
+            </Link>{' '}
+            de-vigs Thunderpick + Kalshi + Polymarket into one fair probability and gated edges. Hobby plan.
+          </p>
         </div>
         <div>
           <h3 className="text-white font-semibold mb-2">Schedule</h3>

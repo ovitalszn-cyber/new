@@ -33,7 +33,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/pandascore-alternative",
     "/mcp",
     "/docs",
+    "/docs/api-reference",
+    "/docs/markets",
+    "/docs/reference/sportsbooks",
+    "/docs/endpoints/props",
     "/docs/endpoints/lines",
+    "/docs/endpoints/matches",
+    "/docs/endpoints/players",
+    "/docs/endpoints/rankings",
+    "/docs/endpoints/results",
+    "/docs/endpoints/research",
+    "/docs/endpoints/history",
     "/console",
   ]
   return routes.map((path) => ({

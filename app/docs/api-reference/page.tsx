@@ -1,25 +1,32 @@
 import { DocsShell } from '@/components/docs/DocsShell'
 import { API_BASE } from '@/lib/docs'
 
+/** Public DaaS surface only — stacks / internal admin omitted on purpose. */
 const ROUTES: { path: string; note: string }[] = [
   { path: 'GET /v6/esports/{sport}/props', note: 'Live ingested props. Query book, market, player_id.' },
-  { path: 'GET /v6/esports/{sport}/lines', note: 'Consensus main lines (match/map/totals/handicap). Hobby+.' },
-  { path: 'GET /v6/esports/{sport}/fixtures', note: 'Full schedule board.' },
-  { path: 'GET /v6/esports/{sport}/matches', note: 'Filtered matches. status=upcoming|live|finished.' },
-  { path: 'GET /v6/esports/{sport}/matches/live', note: 'Live matches only.' },
-  { path: 'GET /v6/esports/{sport}/upcoming/matches', note: 'Upcoming matches.' },
-  { path: 'GET /v6/esports/{sport}/completed/matches', note: 'Finished matches.' },
-  { path: 'GET /v6/esports/{sport}/schedule', note: 'Schedule view.' },
+  {
+    path: 'GET /v6/esports/{sport}/lines',
+    note: 'Consensus main lines (match / map / totals / handicap) across Thunderpick, Kalshi, Polymarket. Requires Hobby plan.',
+  },
+  { path: 'GET /v6/esports/{sport}/fixtures', note: 'Full schedule board. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/matches', note: 'Filtered matches. status=upcoming|live|finished. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/matches/live', note: 'Live matches only. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/upcoming/matches', note: 'Upcoming matches. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/completed/matches', note: 'Finished matches. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/schedule', note: 'Schedule view. Builder plan.' },
   { path: 'GET /v6/esports/{sport}/streams', note: 'Stream links for a sport.' },
   { path: 'GET /v6/esports/{sport}/rankings', note: 'Player leaderboard. filter=lifetime|last_3_months.' },
   { path: 'GET /v6/esports/{sport}/players/search', note: 'Search by nickname. q= required.' },
   { path: 'GET /v6/esports/{sport}/players/{id}', note: 'Profile by numeric id or slug.' },
-  { path: 'GET /v6/esports/{sport}/players/{slug}/gamelogs', note: 'Recent map stats.' },
-  { path: 'GET /v6/esports/{sport}/results', note: 'Settled props. Optional grade=.' },
+  { path: 'GET /v6/esports/{sport}/players/{id}/stats', note: 'Canonical player stats (KPR and related).' },
+  { path: 'GET /v6/esports/{sport}/players/{slug}/gamelogs', note: 'Recent map stats. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/teams/h2h', note: 'Head-to-head team comparison.' },
+  { path: 'GET /v6/esports/{sport}/results', note: 'Settled props. Optional grade=. Builder plan.' },
+  { path: 'GET /v6/esports/{sport}/boxscores', note: 'Box scores for a sport. Builder plan.' },
   { path: 'GET /v6/esports/research/player', note: 'Player research slip. player, sport, market.' },
-  { path: 'GET /v6/esports/history/contract', note: 'Quote tape. market_key or prop_id+book.' },
-  { path: 'GET /v6/esports/{sport}/boxscores', note: 'Box scores for a sport.' },
-  { path: 'GET /v6/books', note: 'Canonical book registry.' },
+  { path: 'GET /v6/esports/research/board', note: 'Research slips for the current board.' },
+  { path: 'GET /v6/esports/history/contract', note: 'Quote tape. market_key or prop_id+book. Builder plan.' },
+  { path: 'GET /v6/books', note: 'Canonical book registry (DFS, Thunderpick, Kalshi, Polymarket).' },
 ]
 
 export default function ApiReferencePage() {
@@ -27,7 +34,8 @@ export default function ApiReferencePage() {
     <DocsShell active="index">
       <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Route index</h1>
       <p className="text-lg text-zinc-400 mb-8">
-        Public DaaS surface. Base <code className="text-white">{API_BASE}</code>. Auth on every <code className="text-white">/v6</code> call.
+        Public DaaS surface. Base <code className="text-white">{API_BASE}</code>. Auth on every{' '}
+        <code className="text-white">/v6</code> call.
       </p>
       <div className="overflow-x-auto border border-white/5 rounded-lg bg-[#0C0D0F]">
         <table className="w-full text-left text-sm">
@@ -47,6 +55,13 @@ export default function ApiReferencePage() {
           </tbody>
         </table>
       </div>
+      <p className="text-sm text-zinc-500 mt-6">
+        Consensus lines deep dive:{' '}
+        <a href="/docs/endpoints/lines" className="text-white underline">
+          /docs/endpoints/lines
+        </a>
+        .
+      </p>
     </DocsShell>
   )
 }
