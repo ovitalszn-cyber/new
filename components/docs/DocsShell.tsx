@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+
+import { DocsMobileNav } from '@/components/docs/DocsMobileNav'
 import { DOC_NAV } from '@/lib/docs'
 
 export function DocsShell({
@@ -25,6 +27,7 @@ export function DocsShell({
           Get a key
         </Link>
       </header>
+      <DocsMobileNav active={active} />
       <div className="max-w-7xl mx-auto flex">
         <aside className="w-64 hidden lg:block border-r border-white/5 h-[calc(100vh-64px)] sticky top-16 p-6 overflow-y-auto">
           <div className="space-y-8">
