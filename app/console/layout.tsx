@@ -116,6 +116,10 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
               <i data-lucide="layout-grid" className={iconClass('/console')}></i>
               Overview
             </Link>
+            <Link href="/console/billing" className={navLinkClass('/console/billing')}>
+              <i data-lucide="credit-card" className={iconClass('/console/billing')}></i>
+              Billing
+            </Link>
             <Link href="/docs" className="flex items-center gap-3 px-3 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.02] text-sm font-medium rounded-sm transition-all group">
               <i data-lucide="book" className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 transition-colors"></i>
               Documentation

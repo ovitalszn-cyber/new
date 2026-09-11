@@ -1,13 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server"
 
-import { ACCESS_COOKIE, REFRESH_COOKIE } from '@/lib/auth/cookies'
-import { MAINTENANCE_MODE } from '@/lib/maintenance'
+import {
+  ACCESS_COOKIE,
+  REFRESH_COOKIE,
+  clearSessionCookies,
+} from "@/lib/auth/cookies"
+import { hasUsableSessionCookies } from "@/lib/auth/jwt"
+import { MAINTENANCE_MODE } from "@/lib/maintenance"
 
 function isStaticPath(pathname: string) {
   return (
-    pathname.startsWith('/_next') ||
-    pathname === '/favicon.ico' ||
-    pathname.startsWith('/icon') ||
+    pathname.startsWith("/_next") ||
+    pathname === "/favicon.ico" ||
+    pathname.startsWith("/icon") ||
     /\.[a-zA-Z0-9]+$/.test(pathname)
   )
 }
@@ -15,21 +20,21 @@ function isStaticPath(pathname: string) {
 function maintenanceResponse(request: NextRequest) {
   const { pathname } = request.nextUrl
   if (isStaticPath(pathname)) return NextResponse.next()
-  if (pathname.startsWith('/api/')) {
-    if (pathname === '/api/waitlist' && request.method === 'POST') {
+  if (pathname.startsWith("/api/")) {
+    if (pathname === "/api/waitlist" && request.method === "POST") {
       return NextResponse.next()
     }
     return NextResponse.json(
-      { detail: 'Site is under maintenance. Please try again later.' },
+      { detail: "Site is under maintenance. Please try again later." },
       { status: 503 },
     )
   }
-  if (pathname === '/') return NextResponse.next()
-  return NextResponse.redirect(new URL('/', request.url))
+  if (pathname === "/") return NextResponse.next()
+  return NextResponse.redirect(new URL("/", request.url))
 }
 
 function isProtected(pathname: string) {
-  return ['/console', '/settings', '/checkout'].some(
+  return ["/console", "/settings", "/checkout"].some(
     (path) => pathname === path || pathname.startsWith(`${path}/`),
   )
 }
@@ -37,15 +42,26 @@ function isProtected(pathname: string) {
 function checkoutReturn(request: NextRequest) {
   const { searchParams } = request.nextUrl
   if (
-    request.nextUrl.pathname !== '/console' ||
-    searchParams.get('checkout') !== 'success' ||
-    !searchParams.get('session_id')
+    request.nextUrl.pathname !== "/console" ||
+    searchParams.get("checkout") !== "success" ||
+    !searchParams.get("session_id")
   ) {
     return null
   }
-  const url = new URL('/checkout/return', request.url)
-  url.searchParams.set('session_id', searchParams.get('session_id')!)
+  const url = new URL("/checkout/return", request.url)
+  url.searchParams.set("session_id", searchParams.get("session_id")!)
   return NextResponse.redirect(url)
+}
+
+function loginRedirect(request: NextRequest) {
+  const loginUrl = new URL("/login", request.url)
+  loginUrl.searchParams.set(
+    "returnTo",
+    `${request.nextUrl.pathname}${request.nextUrl.search}`,
+  )
+  const response = NextResponse.redirect(loginUrl)
+  clearSessionCookies(response)
+  return response
 }
 
 export function proxy(request: NextRequest) {
@@ -54,20 +70,16 @@ export function proxy(request: NextRequest) {
   if (returnRedirect) return returnRedirect
 
   if (isProtected(request.nextUrl.pathname)) {
-    const hasSession =
-      request.cookies.has(ACCESS_COOKIE) || request.cookies.has(REFRESH_COOKIE)
-    if (!hasSession) {
-      const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set(
-        'returnTo',
-        `${request.nextUrl.pathname}${request.nextUrl.search}`,
-      )
-      return NextResponse.redirect(loginUrl)
+    const access = request.cookies.get(ACCESS_COOKIE)?.value
+    const refresh = request.cookies.get(REFRESH_COOKIE)?.value
+    const hasAny = Boolean(access || refresh)
+    if (!hasAny || !hasUsableSessionCookies({ access, refresh })) {
+      return loginRedirect(request)
     }
   }
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image).*)'],
+  matcher: ["/((?!_next/static|_next/image).*)"],
 }

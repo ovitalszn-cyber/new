@@ -2,7 +2,7 @@ export const DFS_TITLE =
   "DFS Esports API — PrizePicks & Underdog Props for CS2 & LoL"
 
 export const DFS_DESCRIPTION =
-  "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6 player props for CS2 and LoL from GET /v6/esports/{sport}/props."
+  "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6 player props for CS2 and LoL from GET /v6/esports/{sport}/props."
 
 export const DATA_API_TITLE =
   "Esports Data API — CS2, LoL & Dota Props, Lines & Stats"
@@ -13,7 +13,7 @@ export const DATA_API_DESCRIPTION =
 export const DFS_FAQS = [
   {
     q: "Does the API include PrizePicks and Underdog lines for CS2 and LoL?",
-    a: "Yes. KashRock ingests PrizePicks and Underdog esports props for CS2 and League of Legends, plus Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6. Same player and market share one ID across books.",
+    a: "Yes. KashRock ingests PrizePicks and Underdog esports props for CS2 and League of Legends, plus Betr, Sleeper, Dabble, Boom, and Pick6. Same player and market share one ID across books.",
   },
   {
     q: "Is this a PrizePicks API or an Underdog API?",

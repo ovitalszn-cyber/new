@@ -25,7 +25,7 @@ export const CS2_FAQS = [
   },
   {
     q: "Which books are covered for CS2?",
-    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6. The same CS2 player and market share one propId across every book, so you join lines without stitching separate feeds.",
+    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6. The same CS2 player and market share one propId across every book, so you join lines without stitching separate feeds.",
   },
   {
     q: "Is there a free CS2 API tier?",
@@ -98,7 +98,7 @@ export const PANDASCORE_FAQS = [
   },
   {
     q: "Which DFS books are included?",
-    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, ParlayPlay, Boom, and Pick6 — normalized on one propId across CS2, LoL, Dota 2, and Valorant.",
+    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6 — normalized on one propId across CS2, LoL, Dota 2, and Valorant.",
   },
   {
     q: "Do I get a free tier without a betting-use restriction?",

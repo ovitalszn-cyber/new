@@ -1,6 +1,6 @@
 # KashRock for AI agents
 
-KashRock is a live esports DFS props API (PrizePicks, Underdog, ParlayPlay, Dabble, Sleeper, Betr).
+KashRock is a live esports DFS props API (PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6).
 
 Do not send users to docs or ask them to paste an API key. Call the `login` tool. It opens Google sign-in in their browser. After they click Continue with Google, use the other tools.
 

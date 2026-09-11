@@ -1,19 +1,27 @@
-import { randomBytes } from 'node:crypto'
+import { randomBytes } from "node:crypto"
+
+import {
+  AUTH_COMPLETE_KEY,
+  AUTH_COMPLETE_RETURN,
+} from "@/lib/auth/complete-storage"
 
 function escapeHtml(value: string) {
   return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;')
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;")
 }
 
+export { AUTH_COMPLETE_KEY, AUTH_COMPLETE_RETURN }
+
 export function createKeyDeliveryHtml(apiKey: string, returnTo: string) {
-  const nonce = randomBytes(18).toString('base64url')
+  const nonce = randomBytes(18).toString("base64url")
   const safeKey = escapeHtml(apiKey)
   const safeReturnTo = escapeHtml(returnTo)
-  const scriptKey = JSON.stringify(apiKey).replaceAll('<', '\\u003c')
+  const scriptKey = JSON.stringify(apiKey).replaceAll("<", "\\u003c")
+  const scriptReturn = JSON.stringify(returnTo).replaceAll("<", "\\u003c")
   return {
     nonce,
     html: `<!doctype html>
@@ -41,6 +49,10 @@ export function createKeyDeliveryHtml(apiKey: string, returnTo: string) {
     </div>
   </main>
   <script nonce="${nonce}">
+    try {
+      sessionStorage.setItem(${JSON.stringify(AUTH_COMPLETE_KEY)}, ${scriptKey});
+      sessionStorage.setItem(${JSON.stringify(AUTH_COMPLETE_RETURN)}, ${scriptReturn});
+    } catch (_) {}
     history.replaceState({}, '', '/auth/complete');
     const key = ${scriptKey};
     document.getElementById('copy').addEventListener('click', async (event) => {

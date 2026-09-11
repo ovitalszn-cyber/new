@@ -35,7 +35,7 @@ export default function DocsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div>
           <h3 className="text-white font-semibold mb-2">Live board</h3>
-          <p className="text-sm text-zinc-400">Normalized props from PrizePicks, Underdog, ParlayPlay, Dabble, Sleeper, and Betr.</p>
+          <p className="text-sm text-zinc-400">Normalized props from PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, and Pick6.</p>
         </div>
         <div>
           <h3 className="text-white font-semibold mb-2">Schedule</h3>

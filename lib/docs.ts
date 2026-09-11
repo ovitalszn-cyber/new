@@ -14,7 +14,6 @@ export const SPORTS = [
 export const BOOKS = [
   { id: 'prizepicks', name: 'PrizePicks' },
   { id: 'underdog', name: 'Underdog' },
-  { id: 'parlayplay', name: 'ParlayPlay' },
   { id: 'dabble', name: 'Dabble' },
   { id: 'sleeper', name: 'Sleeper' },
   { id: 'betr', name: 'Betr' },

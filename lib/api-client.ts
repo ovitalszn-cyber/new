@@ -2,14 +2,17 @@ import type {
   ApiKey,
   ApiKeyCreate,
   BillingInfo,
+  CancelSubscriptionResult,
   CheckoutSessionStatus,
   LogEntry,
   Profile,
   Usage,
   UsageSummary,
-} from './api-types'
+} from "./api-types"
 
-const API_BASE_URL = '/api/proxy'
+const API_BASE_URL = "/api/proxy"
+
+let loginRedirectStarted = false
 
 export class ApiError extends Error {
   constructor(
@@ -17,7 +20,7 @@ export class ApiError extends Error {
     public readonly status: number,
   ) {
     super(message)
-    this.name = 'ApiError'
+    this.name = "ApiError"
   }
 }
 
@@ -28,22 +31,32 @@ async function errorMessage(response: Response) {
   return body?.detail ?? `Request failed: ${response.status}`
 }
 
+function redirectOnceToLogin() {
+  if (typeof window === "undefined") return
+  if (loginRedirectStarted) return
+  if (window.location.pathname.startsWith("/login")) return
+  loginRedirectStarted = true
+  window.location.assign(
+    `/login?returnTo=${encodeURIComponent(
+      window.location.pathname + window.location.search,
+    )}`,
+  )
+}
+
 async function apiRequest<T>(endpoint: string, options: RequestInit = {}) {
   const headers = new Headers(options.headers)
-  if (options.body && !headers.has('Content-Type')) {
-    headers.set('Content-Type', 'application/json')
+  if (options.body && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json")
   }
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
     headers,
-    credentials: 'include',
-    cache: 'no-store',
+    credentials: "include",
+    cache: "no-store",
   })
   if (response.status === 401) {
-    window.location.assign(
-      `/login?returnTo=${encodeURIComponent(window.location.pathname + window.location.search)}`,
-    )
-    throw new Error('Your session expired. Please sign in again.')
+    redirectOnceToLogin()
+    throw new Error("Your session expired. Please sign in again.")
   }
   if (!response.ok) {
     throw new ApiError(await errorMessage(response), response.status)
@@ -52,28 +65,30 @@ async function apiRequest<T>(endpoint: string, options: RequestInit = {}) {
 }
 
 export const api = {
-  getProfile: () => apiRequest<Profile>('/profile'),
-  getUsage: () => apiRequest<Usage>('/usage'),
-  getUsageSummary: (range: '24h' | '7d' | '30d' = '7d') =>
+  getProfile: () => apiRequest<Profile>("/profile"),
+  getUsage: () => apiRequest<Usage>("/usage"),
+  getUsageSummary: (range: "24h" | "7d" | "30d" = "7d") =>
     apiRequest<UsageSummary>(`/usage/summary?range=${range}`),
-  listApiKeys: () => apiRequest<{ keys: ApiKey[] }>('/api-keys'),
+  listApiKeys: () => apiRequest<{ keys: ApiKey[] }>("/api-keys"),
   createApiKey: (name?: string) =>
-    apiRequest<ApiKeyCreate>('/api-keys', {
-      method: 'POST',
+    apiRequest<ApiKeyCreate>("/api-keys", {
+      method: "POST",
       body: JSON.stringify({ name }),
     }),
   revokeApiKey: (keyId: string) =>
     apiRequest<{ id: string; status: string; message: string }>(
       `/api-keys/${keyId}/revoke`,
-      { method: 'POST' },
+      { method: "POST" },
     ),
   getLogs: (limit = 3) =>
     apiRequest<{ logs: LogEntry[]; total: number }>(`/logs?limit=${limit}`),
-  getBilling: () => apiRequest<BillingInfo>('/billing'),
+  getBilling: () => apiRequest<BillingInfo>("/billing"),
+  cancelSubscription: () =>
+    apiRequest<CancelSubscriptionResult>("/billing/cancel", { method: "POST" }),
   createCheckoutSession: (plan: string) =>
     apiRequest<{ url: string; session_id: string }>(
-      '/billing/create-checkout-session',
-      { method: 'POST', body: JSON.stringify({ plan }) },
+      "/billing/create-checkout-session",
+      { method: "POST", body: JSON.stringify({ plan }) },
     ),
   getCheckoutSessionStatus: (sessionId: string) =>
     apiRequest<CheckoutSessionStatus>(
@@ -85,9 +100,10 @@ export type {
   ApiKey,
   ApiKeyCreate,
   BillingInfo,
+  CancelSubscriptionResult,
   CheckoutSessionStatus,
   LogEntry,
   Profile,
   Usage,
   UsageSummary,
-} from './api-types'
+} from "./api-types"

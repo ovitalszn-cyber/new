@@ -50,6 +50,17 @@ export interface BillingInfo {
   current_usage: number
   billing_cycle_end?: string | null
   payment_method?: { type?: string; last4?: string } | null
+  subscription_status?: string | null
+  cancel_at_period_end?: boolean
+  can_cancel?: boolean
+}
+
+export interface CancelSubscriptionResult {
+  plan: string
+  status: string
+  cancel_at_period_end: boolean
+  current_period_end?: string | null
+  already_scheduled?: boolean
 }
 
 export interface CheckoutSessionStatus {

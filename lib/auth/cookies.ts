@@ -33,7 +33,8 @@ export function setOAuthCookie(
 ) {
   response.cookies.set(OAUTH_COOKIE, encode(transaction), {
     ...baseOptions,
-    maxAge: 10 * 60,
+    // 20m covers slow Google account pickers without leaving a long-lived state cookie.
+    maxAge: 20 * 60,
   })
 }
 
