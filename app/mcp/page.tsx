@@ -7,7 +7,6 @@ import { MarketingShell } from "@/components/seo/MarketingShell"
 import { SportLogoRow } from "@/components/seo/SportLogoRow"
 import {
   MCP_GROUP_LABEL,
-  MCP_SPORTS,
   MCP_TIER_LABEL,
   MCP_TOOLS,
   type McpTool,
@@ -63,7 +62,7 @@ const TIERS = [
   },
   {
     plan: "Builder+",
-    gets: "Matches, live in-game KDA (get_live_boxscore), gamelogs, finished boxscores, results, history tape",
+    gets: "Matches, live player kills/deaths/assists under 2s, get_live_boxscore, gamelogs, finished boxscores, results, history tape",
   },
 ]
 
@@ -105,9 +104,6 @@ export default function McpPage() {
 
       <section className="pb-8 max-w-7xl mx-auto px-6">
         <SportLogoRow className="mb-4" />
-        <p className="text-center text-sm text-zinc-500 mb-16">
-          {MCP_SPORTS.join(" · ")}
-        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
           {MCP_STEPS.map((step) => (

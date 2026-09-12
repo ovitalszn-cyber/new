@@ -37,12 +37,6 @@ export const GAME_LOGOS = [
     invert: true,
   },
   {
-    id: "mlbb",
-    src: "https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/66791af9ccdceba394b3c4c2_Mobile-Legend-Bangbang.svg",
-    alt: "Mobile Legends",
-    invert: true,
-  },
-  {
     id: "deadlock",
     src: "https://upload.wikimedia.org/wikipedia/commons/3/32/Deadlock_logo.svg",
     alt: "Deadlock",

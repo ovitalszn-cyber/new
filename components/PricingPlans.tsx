@@ -18,17 +18,17 @@ export default function PricingPlans() {
           </div>
           <p className="text-sm font-bold text-zinc-300 mt-2">2 requests / minute</p>
           <p className="text-sm text-zinc-500 mt-3">
-            Test the KashRock schema with CS2 player props — free forever.
+            Try the API for free with CS2 player props — see the data shape before you pay.
           </p>
         </div>
         <ul className="space-y-3 mb-8 flex-1">
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">CS2 player props only (no matches)</span>
+            <span className="text-zinc-300">CS2 player props only (no schedules or live games)</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Verify the schema before committing</span>
+            <span className="text-zinc-300">Same response format as paid plans</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
@@ -53,21 +53,21 @@ export default function PricingPlans() {
           </div>
           <p className="text-sm font-bold text-zinc-300 mt-2">50 requests / minute</p>
           <p className="text-sm text-zinc-500 mt-3">
-            Unlock multi-title esports props and lines, including League of Legends and Dota 2.
+            Player props and match odds across every title we cover — CS2, League, Dota 2, and more.
           </p>
         </div>
         <ul className="space-y-3 mb-8 flex-1">
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Esports analytics: multi-sport player props</span>
+            <span className="text-zinc-300">Player props for every sport we support</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Player images + team logos included</span>
+            <span className="text-zinc-300">Player photos and team logos in every response</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Consensus lines (Thunderpick + Kalshi + Polymarket)</span>
+            <span className="text-zinc-300">Match odds from sportsbooks and prediction markets</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
@@ -95,7 +95,7 @@ export default function PricingPlans() {
           </div>
           <p className="text-sm font-bold text-zinc-300 mt-2">100 requests / minute</p>
           <p className="text-sm text-zinc-500 mt-3">
-            Add live and historical matches, game logs, box scores, and outcome verification.
+            Live scoreboards, past matches, and prop results so you can build and check apps end to end.
           </p>
         </div>
         <ul className="space-y-3 mb-8 flex-1">
@@ -105,15 +105,19 @@ export default function PricingPlans() {
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Live + historical match access</span>
+            <span className="text-zinc-300">Live player kills, deaths, and assists in under 2 seconds</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Player game logs + box scores</span>
+            <span className="text-zinc-300">Upcoming, live, and finished match schedules</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Outcome verification (verified/unmatched/push)</span>
+            <span className="text-zinc-300">Per-player map history and full match box scores</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
+            <span className="text-zinc-300">See if a prop hit, missed, or pushed after the game</span>
           </li>
         </ul>
         <div className="mt-auto">
@@ -134,7 +138,7 @@ export default function PricingPlans() {
           </div>
           <p className="text-sm font-bold text-zinc-300 mt-2">250 requests / minute</p>
           <p className="text-sm text-zinc-500 mt-3">
-            Run production workloads with the highest throughput and early expansion access.
+            More requests per minute for live products, plus first look at new sports we add.
           </p>
         </div>
         <ul className="space-y-3 mb-8 flex-1">
@@ -144,11 +148,11 @@ export default function PricingPlans() {
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Highest throughput for production apps</span>
+            <span className="text-zinc-300">2.5× more requests per minute than Builder</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-            <span className="text-zinc-300">Early access to new esports expansions</span>
+            <span className="text-zinc-300">First access when we add new sports</span>
           </li>
         </ul>
         <div className="mt-auto">

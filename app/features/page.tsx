@@ -5,18 +5,18 @@ import { MarketingShell } from "@/components/seo/MarketingShell"
 export const metadata: Metadata = {
   title: { absolute: "Esports Data API Features — Normalized Props & Stats | KashRock" },
   description:
-    "KashRock features: multi-title esports coverage, near-real-time + historical data, canonical IDs, map-depth stats, model-ready feeds, and outcome verification.",
+    "KashRock features: multi-title esports coverage, live player scoreboard updates under 2s, historical data, canonical IDs, map-depth stats, and outcome verification.",
   alternates: { canonical: "/features" },
 }
 
 const FEATURES: { title: string; body: string }[] = [
   {
     title: "Esports Data Coverage",
-    body: "CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock — normalized across schedules, market props, player metrics, and verified outcomes.",
+    body: "CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, and Deadlock — normalized across schedules, market props, player metrics, and verified outcomes.",
   },
   {
-    title: "Near-Real-Time + Historical",
-    body: "Sub-5-second refresh on live match data. Pull upcoming, live, and completed matches — including box scores and game logs for any date.",
+    title: "Live scoreboard + Historical",
+    body: "Live player kills, deaths, and assists updated in under 2 seconds. Pull upcoming, live, and completed matches — including box scores and game logs for any date.",
   },
   {
     title: "Canonical IDs",

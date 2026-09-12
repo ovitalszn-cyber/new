@@ -107,7 +107,7 @@ export const MCP_FAQS = [
   },
   {
     q: "What does each plan unlock in MCP?",
-    a: "Sandbox: session tools + CS2 props/coverage. Hobby: all eight sports, moneylines, lines, research, streams, H2H. Builder+: schedule, gamelogs, boxscores, results, history tape. Call list_capabilities after login.",
+    a: "Sandbox: session tools + CS2 props/coverage. Hobby: all eight sports, moneylines, lines, research, streams, H2H. Builder+: schedule, live player kills/deaths/assists under 2s, gamelogs, boxscores, results, history tape. Call list_capabilities after login.",
   },
   {
     q: "Which sports and books?",

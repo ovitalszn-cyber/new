@@ -107,7 +107,7 @@ export default function LandingPage() {
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-              Pull normalized esports props, lines, match data, and player stats across CS2, League of Legends, Dota 2, and more — through one API.
+              Pull normalized esports props, lines, match data, and player stats across CS2, League of Legends, Dota 2, and more — through one API. Builder unlocks live player scoreboard updates in under 2 seconds.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -140,7 +140,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-xl font-medium text-white mb-2 tracking-tight">Esports Data Coverage</h3>
                 <p className="text-base text-zinc-400 max-w-md leading-relaxed">
-                  CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock — normalized across event schedules, market props, player metrics, and verified outcomes.
+                  CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, and Deadlock — normalized across event schedules, market props, player metrics, and verified outcomes.
                 </p>
               </div>
             </div>
@@ -149,9 +149,9 @@ export default function LandingPage() {
               <div className="w-10 h-10 bg-white/5 rounded-sm flex items-center justify-center mb-6 border border-white/10">
                 <i data-lucide="zap" className="w-5 h-5 text-white"></i>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2 tracking-tight">Near-Real-Time + Historical</h3>
+              <h3 className="text-xl font-medium text-white mb-2 tracking-tight">Live scoreboard + Historical</h3>
               <p className="text-base text-zinc-400 leading-relaxed">
-                Sub-5-second refresh cycles on live match data. Pull upcoming, live, and completed matches — including box scores and game logs for any date.
+                Live player kills, deaths, and assists updated in under 2 seconds. Plus upcoming, live, and completed matches — box scores and game logs for any date.
               </p>
             </div>
 
