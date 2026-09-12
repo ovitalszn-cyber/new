@@ -142,7 +142,7 @@ export default function LinesPage() {
       </p>
       <Params
         rows={[
-          { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2' },
+          { name: 'sport', type: 'path', required: true, note: 'cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock' },
           {
             name: 'event_id',
             type: 'string',

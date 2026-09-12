@@ -17,7 +17,7 @@ const GROUPS: { title: string; blurb: string; ids: string[] }[] = [
   {
     title: 'DFS apps',
     blurb: 'Player props on the same propId schema.',
-    ids: ['prizepicks', 'underdog', 'dabble', 'sleeper', 'betr', 'boom', 'pick6'],
+    ids: ['prizepicks', 'underdog', 'dabble', 'sleeper', 'betr', 'boom', 'pick6', 'parlayplay'],
   },
   {
     title: 'Sportsbook',

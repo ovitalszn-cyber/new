@@ -29,7 +29,7 @@ export default function SleeperApiPage() {
       }
       bullets={[
         "Player, stat type, line, direction, team, canonical propId.",
-        "CS2, LoL, Dota 2, Valorant on one schema.",
+        "CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, Deadlock on one schema.",
         "Same propId across Sleeper, PrizePicks, Underdog & Betr.",
       ]}
       endpointLabel="GET /v6/esports/cs2/props?book=sleeper"

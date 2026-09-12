@@ -29,7 +29,7 @@ export default function PrizePicksApiPage() {
       }
       bullets={[
         "Player, stat type, line, direction, team, and canonical propId per prop.",
-        "CS2, LoL, Dota 2, Valorant — one schema across every title.",
+        "CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, Deadlock — one schema across every title.",
         "Same propId across PrizePicks, Underdog, Betr & Sleeper for line comparison.",
       ]}
       endpointLabel="GET /v6/esports/cs2/props?book=prizepicks"

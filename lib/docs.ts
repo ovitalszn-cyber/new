@@ -19,6 +19,7 @@ export const BOOKS = [
   { id: 'betr', name: 'Betr' },
   { id: 'boom', name: 'Boom' },
   { id: 'pick6', name: 'Pick6' },
+  { id: 'parlayplay', name: 'ParlayPlay' },
   { id: 'thunderpick', name: 'Thunderpick' },
   { id: 'kalshi', name: 'Kalshi' },
   { id: 'polymarket', name: 'Polymarket' },
@@ -31,6 +32,7 @@ export const DOC_NAV: { title: string; items: NavItem[] }[] = [
     title: 'Start',
     items: [
       { href: '/docs', label: 'Overview', id: 'overview' },
+      { href: '/docs/mcp', label: 'MCP', id: 'mcp' },
       { href: '/docs#authentication', label: 'Authentication', id: 'authentication' },
     ],
   },

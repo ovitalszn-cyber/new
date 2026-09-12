@@ -26,7 +26,7 @@ export default function EsportsOddsApiPage() {
             <span className="seo-grad">Normalized lines across every book.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-            Pull esports odds and lines for CS2, League of Legends, and Dota 2 with an instant key. Compare DFS
+            Pull esports odds and lines for CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock with an instant key. Compare DFS
             books plus Thunderpick sportsbook prices and Kalshi / Polymarket prediction-market mainlines on the
             same canonical <code className="text-white">propId</code>:{" "}
             <code className="text-white">GET /v6/esports/{"{sport}"}/props</code> and consensus{" "}
@@ -66,7 +66,7 @@ export default function EsportsOddsApiPage() {
           </li>
           <li className="bg-[#0C0D0F] border border-white/10 rounded-sm p-8">
             <strong className="text-white">Multi-title</strong>
-            <p className="text-zinc-400 mt-2">CS2, LoL, Dota 2, and Valorant on one key.</p>
+            <p className="text-zinc-400 mt-2">CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock on one key.</p>
           </li>
           <li className="bg-[#0C0D0F] border border-white/10 rounded-sm p-8">
             <strong className="text-white">Historical lines</strong>

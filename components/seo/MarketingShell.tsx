@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 
 import LandingAuthNav from "@/components/LandingAuthNav"
+import { SportLogoRow } from "@/components/seo/SportLogoRow"
 
 const NAV = [
   { href: "/features", label: "Features" },
@@ -37,16 +38,19 @@ export function MarketingShell({ children }: { children: ReactNode }) {
       </nav>
       {children}
       <footer className="border-t border-white/5 bg-[#050505] pt-16 pb-12">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-zinc-600">© 2026 KashRock Inc. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <a href="/build-esports-app" className="text-sm text-zinc-600 hover:text-white">Build an esports app</a>
-            <a href="/quickstart" className="text-sm text-zinc-600 hover:text-white">Quickstart</a>
-            <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white">Esports Data API</a>
-            <a href="/dfs-esports-api" className="text-sm text-zinc-600 hover:text-white">DFS Esports API</a>
-            <a href="/mcp" className="text-sm text-zinc-600 hover:text-white">MCP</a>
-            <a href="/docs" className="text-sm text-zinc-600 hover:text-white">Docs</a>
-            <a href="/legal" className="text-sm text-zinc-600 hover:text-white">Privacy</a>
+        <div className="max-w-7xl mx-auto px-6">
+          <SportLogoRow className="mb-10 opacity-80" />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-zinc-600">© 2026 KashRock Inc. All rights reserved.</p>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <a href="/build-esports-app" className="text-sm text-zinc-600 hover:text-white">Build an esports app</a>
+              <a href="/quickstart" className="text-sm text-zinc-600 hover:text-white">Quickstart</a>
+              <a href="/esports-data-api" className="text-sm text-zinc-600 hover:text-white">Esports Data API</a>
+              <a href="/dfs-esports-api" className="text-sm text-zinc-600 hover:text-white">DFS Esports API</a>
+              <a href="/mcp" className="text-sm text-zinc-600 hover:text-white">MCP</a>
+              <a href="/docs" className="text-sm text-zinc-600 hover:text-white">Docs</a>
+              <a href="/legal" className="text-sm text-zinc-600 hover:text-white">Privacy</a>
+            </div>
           </div>
         </div>
       </footer>

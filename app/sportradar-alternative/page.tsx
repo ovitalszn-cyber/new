@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "What does KashRock cover?",
-    a: "CS2, LoL, Dota 2, and Valorant props/markets, schedules, history, and Hobby+ consensus lines — with canonical IDs across books.",
+    a: "CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock props/markets, schedules, history, and Hobby+ consensus lines — with canonical IDs across books.",
   },
 ] as const
 

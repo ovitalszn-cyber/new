@@ -66,7 +66,7 @@ const SOLVES = [
   },
   {
     title: "One route, four markets",
-    body: "match_winner, map_winner, total_maps, and map_handicap on GET /v6/esports/{sport}/lines — CS2, Valorant, LoL, Dota 2.",
+    body: "match_winner, map_winner, total_maps, and map_handicap on GET /v6/esports/{sport}/lines — CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, Deadlock.",
   },
 ]
 

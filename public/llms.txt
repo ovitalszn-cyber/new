@@ -33,9 +33,13 @@ Do not call stacks, grade-run, or admin.
 
 Sports: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock.
 
+Books: prizepicks, underdog, dabble, sleeper, betr, boom, pick6, parlayplay, thunderpick, kalshi, polymarket.
+
 ## Product pages
 
 - https://www.kashrock.com/mcp
+- https://www.kashrock.com/docs/mcp
 - https://www.kashrock.com/cs2-api
 - https://www.kashrock.com/prediction-market-api
 - https://www.kashrock.com/esports-api-pricing
+- https://www.kashrock.com/coverage

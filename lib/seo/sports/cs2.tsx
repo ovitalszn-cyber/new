@@ -110,7 +110,7 @@ export const CS2_REF: SportRefContent = {
   faqs: [
     {
       q: "What does the KashRock CS2 API cover?",
-      a: "Live player props (kills, headshots, map-scoped lines), matches, player gamelogs, history/contract quote tape, and Hobby+ consensus lines — one schema across PrizePicks, Underdog, Betr, Sleeper, Boom, Pick6, Thunderpick, Kalshi, and Polymarket.",
+      a: "Live player props (kills, headshots, map-scoped lines), matches, player gamelogs, history/contract quote tape, and Hobby+ consensus lines — one schema across PrizePicks, Underdog, Betr, Sleeper, Boom, Pick6, ParlayPlay, Thunderpick, Kalshi, and Polymarket.",
     },
     {
       q: "Is there a free CS2 API tier?",

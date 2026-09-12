@@ -1,19 +1,19 @@
 export const DFS_TITLE =
-  "DFS Esports API — PrizePicks & Underdog Props for CS2 & LoL"
+  "DFS Esports API — PrizePicks, Underdog & ParlayPlay Props"
 
 export const DFS_DESCRIPTION =
-  "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6 player props for CS2 and LoL from GET /v6/esports/{sport}/props."
+  "Affordable DFS esports API with an instant key. Pull PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, Pick6, and ParlayPlay player props across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock from GET /v6/esports/{sport}/props."
 
 export const DATA_API_TITLE =
-  "Esports Data API — CS2, LoL & Dota Props, Lines & Stats"
+  "Esports Data API — All 8 Titles: Props, Lines & Stats"
 
 export const DATA_API_DESCRIPTION =
-  "Esports data API for CS2, League of Legends, Dota 2, and Valorant. Normalized DFS props, sportsbook lines, and Kalshi / Polymarket prediction-market mainlines for sharper models. Free sandbox, then $29+/mo."
+  "Esports data API for CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock. Normalized DFS props, sportsbook lines, and Kalshi / Polymarket prediction-market mainlines. Free sandbox, then $29+/mo."
 
 export const DFS_FAQS = [
   {
     q: "Does the API include PrizePicks and Underdog lines for CS2 and LoL?",
-    a: "Yes. KashRock ingests PrizePicks and Underdog esports props for CS2 and League of Legends, plus Betr, Sleeper, Dabble, Boom, and Pick6. Same player and market share one ID across books.",
+    a: "Yes. KashRock ingests PrizePicks and Underdog esports props across the full title set, plus Betr, Sleeper, Dabble, Boom, Pick6, and ParlayPlay. Same player and market share one ID across books.",
   },
   {
     q: "Is this a PrizePicks API or an Underdog API?",
@@ -21,18 +21,18 @@ export const DFS_FAQS = [
   },
   {
     q: "Can I pull LoL DFS data and CS2 player props from one key?",
-    a: "Yes. One key covers CS2, LoL, Dota 2, and Valorant props. Sandbox is CS2-only; Hobby and up unlock LoL DFS data and the rest of the board.",
+    a: "Yes. One key covers all eight titles: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock. Sandbox is CS2-only; Hobby and up unlock the rest of the board.",
   },
   {
     q: "What does GET /v6/esports/{sport}/props return?",
-    a: "A live ingested board: player, stat, line, book (PrizePicks, Underdog, and the others), direction, and canonical propId. No upstream scrape on that request.",
+    a: "A live ingested board: player, stat, line, book (PrizePicks, Underdog, ParlayPlay, and the others), direction, and canonical propId. No upstream scrape on that request.",
   },
 ] as const
 
 export const DATA_API_FAQS = [
   {
     q: "What does an esports data API include?",
-    a: "KashRock covers event schedules, player props and lines, match data, player stats, and outcome verification across CS2, LoL, Dota 2, and Valorant.",
+    a: "KashRock covers event schedules, player props and lines, match data, player stats, and outcome verification across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock.",
   },
   {
     q: "Is there a free esports API tier?",
@@ -40,7 +40,7 @@ export const DATA_API_FAQS = [
   },
   {
     q: "Where do I get DFS books like PrizePicks and Underdog?",
-    a: "Use the DFS Esports API page and GET /v6/esports/{sport}/props. That route is the PrizePicks / Underdog / LoL DFS board.",
+    a: "Use the DFS Esports API page and GET /v6/esports/{sport}/props. That route is the PrizePicks / Underdog / ParlayPlay / LoL DFS board.",
   },
   {
     q: "Do you pull prediction markets for modeling?",
@@ -59,7 +59,7 @@ export const MCP_TITLE =
   "KashRock MCP — Use the Esports API from Cursor in 30 Seconds"
 
 export const MCP_DESCRIPTION =
-  "Add KashRock to Cursor or Claude in 30 seconds. Google login, then your agent gets props, moneylines, consensus lines, research, and Builder history — no endpoint hunting."
+  "Add KashRock to Cursor or Claude in 30 seconds (uvx kashrock-mcp). Google login, then your agent gets the full tier-scoped tool catalog — props, moneylines, consensus lines, research, and Builder history."
 
 export const MCP_SNIPPET = `{
   "mcpServers": {
@@ -91,7 +91,7 @@ export const MCP_STEPS = [
 export const MCP_FAQS = [
   {
     q: "Do I need to read the API docs?",
-    a: "No. Paste the snippet, log in with Google, then ask in plain English. Prefer MCP over hunting HTTP paths.",
+    a: "No. Paste the snippet, log in with Google, then ask in plain English. Prefer MCP over hunting HTTP paths. Full tool list lives on /mcp and /docs/mcp.",
   },
   {
     q: "Do I copy an API key?",
@@ -107,7 +107,10 @@ export const MCP_FAQS = [
   },
   {
     q: "What does each plan unlock in MCP?",
-    a: "Sandbox: CS2 props. Hobby: all-sport props, lines, research, streams, H2H. Builder+: schedule, gamelogs, boxscores, results, history tape.",
+    a: "Sandbox: session tools + CS2 props/coverage. Hobby: all eight sports, moneylines, lines, research, streams, H2H. Builder+: schedule, gamelogs, boxscores, results, history tape. Call list_capabilities after login.",
+  },
+  {
+    q: "Which sports and books?",
+    a: "Sports: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock. Books include PrizePicks, Underdog, ParlayPlay, Betr, Sleeper, Dabble, Boom, Pick6, Thunderpick, Kalshi, and Polymarket. list_books returns the live registry.",
   },
 ] as const
-

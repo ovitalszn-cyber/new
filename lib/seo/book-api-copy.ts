@@ -1,7 +1,7 @@
 export const PRIZEPICKS_TITLE =
   "PrizePicks API — Pull Normalized Player Props Programmatically | KashRock"
 export const PRIZEPICKS_DESCRIPTION =
-  "Access PrizePicks player props through one API. Normalized CS2, LoL & Dota lines with player, stat, line, and canonical IDs. Instant key, free tier — no scraping."
+  "Access PrizePicks player props through one API. Normalized CS2, Valorant, LoL, Dota & more lines with player, stat, line, and canonical IDs. Instant key, free tier — no scraping."
 export const PRIZEPICKS_FAQS = [
   {
     q: "Is there a PrizePicks API?",
@@ -9,7 +9,7 @@ export const PRIZEPICKS_FAQS = [
   },
   {
     q: "Which PrizePicks props are covered?",
-    a: "Esports player props for CS2, League of Legends, Dota 2, and Valorant — player, stat type, line, direction, team, and a canonical propId shared across books.",
+    a: "Esports player props for CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock — player, stat type, line, direction, team, and a canonical propId shared across books.",
   },
   {
     q: "Is it free?",
@@ -20,7 +20,7 @@ export const PRIZEPICKS_FAQS = [
 export const UNDERDOG_TITLE =
   "Underdog API — Pull Underdog Fantasy Props via One Endpoint | KashRock"
 export const UNDERDOG_DESCRIPTION =
-  "Access Underdog Fantasy player props through one API. Normalized CS2, LoL & Dota lines with player, stat, and canonical IDs. Instant key, free tier — no scraping."
+  "Access Underdog Fantasy player props through one API. Normalized CS2, Valorant, LoL, Dota & more lines with player, stat, and canonical IDs. Instant key, free tier — no scraping."
 export const UNDERDOG_FAQS = [
   {
     q: "Is there an Underdog Fantasy API?",
@@ -28,7 +28,7 @@ export const UNDERDOG_FAQS = [
   },
   {
     q: "Which Underdog props are covered?",
-    a: "Esports player props across CS2, LoL, Dota 2, and Valorant — player, stat type, line, direction, team, and a canonical propId.",
+    a: "Esports player props across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock — player, stat type, line, direction, team, and a canonical propId.",
   },
   {
     q: "Can I compare Underdog vs PrizePicks lines?",
@@ -39,7 +39,7 @@ export const UNDERDOG_FAQS = [
 export const SLEEPER_TITLE =
   "Sleeper API — Pull Sleeper Picks Props Programmatically | KashRock"
 export const SLEEPER_DESCRIPTION =
-  "Access Sleeper Picks player props through one API. Normalized CS2, LoL & Dota lines with player, stat, and canonical IDs. Instant key, free tier — no scraping."
+  "Access Sleeper Picks player props through one API. Normalized CS2, Valorant, LoL, Dota & more lines with player, stat, and canonical IDs. Instant key, free tier — no scraping."
 export const SLEEPER_FAQS = [
   {
     q: "Is there a Sleeper Picks API for props?",
@@ -47,7 +47,7 @@ export const SLEEPER_FAQS = [
   },
   {
     q: "Which Sleeper props are covered?",
-    a: "Esports player props for CS2, LoL, Dota 2, and Valorant — player, stat type, line, direction, team, and canonical propId.",
+    a: "Esports player props for CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock — player, stat type, line, direction, team, and canonical propId.",
   },
   {
     q: "Free tier?",
@@ -58,7 +58,7 @@ export const SLEEPER_FAQS = [
 export const BETR_TITLE =
   "Betr API — Pull Betr Picks Player Props via API | KashRock"
 export const BETR_DESCRIPTION =
-  "Access Betr Picks player props through one API. Normalized CS2, LoL & Dota lines with player, stat, and canonical IDs. Instant key, free tier — no scraping."
+  "Access Betr Picks player props through one API. Normalized CS2, Valorant, LoL, Dota & more lines with player, stat, and canonical IDs. Instant key, free tier — no scraping."
 export const BETR_FAQS = [
   {
     q: "Is there a Betr Picks API?",
@@ -66,7 +66,7 @@ export const BETR_FAQS = [
   },
   {
     q: "Which Betr props are covered?",
-    a: "Esports player props for CS2, LoL, Dota 2, and Valorant — player, stat type, line, direction, team, and canonical propId.",
+    a: "Esports player props for CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock — player, stat type, line, direction, team, and canonical propId.",
   },
   {
     q: "Free tier?",
@@ -96,7 +96,7 @@ export const GUIDE_CS2_DESCRIPTION =
 export const GUIDE_CS2_FAQS = [
   {
     q: "Where do CS2 player props come from?",
-    a: "DFS books like PrizePicks, Underdog, Betr, Sleeper, Boom, and Pick6 post them. KashRock ingests all of them and normalizes to one schema so you don't integrate each source separately.",
+    a: "DFS books like PrizePicks, Underdog, Betr, Sleeper, Boom, Pick6, and ParlayPlay post them. KashRock ingests all of them and normalizes to one schema so you don't integrate each source separately.",
   },
   {
     q: "What CS2 stats can I pull?",
@@ -115,7 +115,7 @@ export const BOOM_FAQS = [
   },
   {
     q: "Which Boom props are covered?",
-    a: "Esports player props for CS2, LoL, Valorant, and more — player, stat type, line, direction, team, and canonical propId.",
+    a: "Esports player props across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock — player, stat type, line, direction, team, and canonical propId.",
   },
   {
     q: "Free tier?",
@@ -201,4 +201,4 @@ export const POLYMARKET_FAQS = [
 
 export const COVERAGE_TITLE = "Coverage — Esports Titles, Books & Markets | KashRock"
 export const COVERAGE_DESCRIPTION =
-  "KashRock coverage: CS2, LoL, Dota 2, Valorant and more — DFS books plus Thunderpick, Kalshi & Polymarket mainlines for modeling — props, matches, stats, and outcome verification."
+  "KashRock coverage: CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, Deadlock and more — DFS books plus Thunderpick, Kalshi & Polymarket mainlines for modeling — props, matches, stats, and outcome verification."

@@ -1,7 +1,7 @@
 export const CONSENSUS_TITLE =
   "Esports Consensus Odds API — Fair Lines from Thunderpick, Kalshi & Polymarket | KashRock"
 export const CONSENSUS_DESCRIPTION =
-  "Esports consensus odds API for CS2, LoL, Valorant & Dota. De-vig Thunderpick, Kalshi, and Polymarket into one fair probability, then surface gated edges via GET /v6/esports/{sport}/lines."
+  "Esports consensus odds API for CS2, Valorant, LoL, Dota & more. De-vig Thunderpick, Kalshi, and Polymarket into one fair probability, then surface gated edges via GET /v6/esports/{sport}/lines."
 
 export const CONSENSUS_FAQS = [
   {

@@ -5,7 +5,7 @@ import { MarketingShell } from "@/components/seo/MarketingShell"
 export const metadata: Metadata = {
   title: { absolute: "How KashRock Works — One Esports Data Schema | KashRock" },
   description:
-    "How KashRock works: standardized JSON across providers, canonical player/team/match IDs, and a single props schema for CS2, LoL, Dota, and more.",
+    "How KashRock works: standardized JSON across providers, canonical player/team/match IDs, and a single props schema across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock.",
   alternates: { canonical: "/how-it-works" },
 }
 

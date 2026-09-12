@@ -20,13 +20,13 @@ const TITLES = [
   "Deadlock",
 ]
 
-const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "Boom", "Pick6", "Thunderpick", "Kalshi", "Polymarket"]
+const BOOKS = ["PrizePicks", "Underdog", "Betr", "Sleeper", "Dabble", "Boom", "Pick6", "ParlayPlay", "Thunderpick", "Kalshi", "Polymarket"]
 
 const FEEDS: [string, string][] = [
   ["Player props & lines", "All titles above"],
-  ["Consensus main lines (match / map / totals / handicap)", "CS2, LoL, Dota 2, Valorant — Hobby+"],
+  ["Consensus main lines (match / map / totals / handicap)", "CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, Deadlock — Hobby+"],
   ["Match schedules & fixtures", "All titles above"],
-  ["Player stats / box scores / game logs", "CS2, LoL, Dota 2, Valorant"],
+  ["Player stats / box scores / game logs", "CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, Deadlock"],
   ["Outcome verification (hit / miss / push)", "All prop titles"],
   ["Historical prop tape", "Indexed to player game logs"],
 ]

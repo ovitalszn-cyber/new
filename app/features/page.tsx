@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const FEATURES: { title: string; body: string }[] = [
   {
     title: "Esports Data Coverage",
-    body: "CS2, League of Legends, Dota 2, and expanding titles — normalized across schedules, market props, player metrics, and verified outcomes.",
+    body: "CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock — normalized across schedules, market props, player metrics, and verified outcomes.",
   },
   {
     title: "Near-Real-Time + Historical",

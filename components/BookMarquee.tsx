@@ -3,7 +3,7 @@ import { BOOK_LOGOS } from "@/lib/seo/book-logos"
 export default function BookMarquee() {
   return (
     <div
-      aria-label="Books on KashRock: PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, Pick6, Thunderpick, Kalshi, Polymarket"
+      aria-label="Books on KashRock: PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, Pick6, ParlayPlay, Thunderpick, Kalshi, Polymarket"
       className="mt-14 mb-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
     >
       {BOOK_LOGOS.map((book) => (

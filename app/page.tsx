@@ -6,6 +6,7 @@ import LandingAuthNav from '@/components/LandingAuthNav';
 import BookMarquee from '@/components/BookMarquee';
 import PricingPlans from '@/components/PricingPlans';
 import { LiveCs2PropsPane } from '@/components/landing/LiveCs2PropsPane';
+import { SportLogoRow } from '@/components/seo/SportLogoRow';
 
 export default function LandingPage() {
   const [form, setForm] = useState({ fullName: '', email: '', message: '' });
@@ -120,16 +121,7 @@ export default function LandingPage() {
 
             <BookMarquee />
 
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/623879565cb7a05a017cdd85_CS.svg" alt="Counter-Strike 2" className="h-8 w-auto invert" />
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f3efe0b8b92ba9bc7c1_valolo-logo.svg" alt="Valorant" className="h-8 w-auto" />
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/624d8f489878375ae54ca703_lol-logo.svg" alt="League of Legends" className="h-8 w-auto" />
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/6238794f497aeb653836f474_Dota.svg" alt="Dota 2" className="h-8 w-auto invert" />
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/62600f59610537ac7439134b_cod.svg" alt="Call of Duty" className="h-8 w-auto invert" />
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/6238791f789d166d9cc17921_R6.svg" alt="Rainbow Six Siege" className="h-8 w-auto invert" />
-              <img src="https://cdn.prod.website-files.com/622606ef3eafab51dbfa178d/66791af9ccdceba394b3c4c2_Mobile-Legend-Bangbang.svg" alt="Mobile Legends" className="h-8 w-auto invert" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Deadlock_logo.svg" alt="Deadlock" className="h-8 w-auto invert" />
-            </div>
+            <SportLogoRow />
             
           </div>
         </section>
@@ -148,7 +140,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-xl font-medium text-white mb-2 tracking-tight">Esports Data Coverage</h3>
                 <p className="text-base text-zinc-400 max-w-md leading-relaxed">
-                  CS2, League of Legends, Dota 2, and expanding esports titles — normalized across event schedules, market props, player metrics, and verified outcomes.
+                  CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock — normalized across event schedules, market props, player metrics, and verified outcomes.
                 </p>
               </div>
             </div>

@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "What can I build with it?",
-    a: "Props and pick'em tools, DFS optimizers, stats dashboards, Discord alert bots, betting models, and esports data sites — all off one normalized API across CS2, LoL, Dota 2, and Valorant.",
+    a: "Props and pick'em tools, DFS optimizers, stats dashboards, Discord alert bots, betting models, and esports data sites — all off one normalized API across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock.",
   },
   {
     q: "Do you have SDKs and starter templates?",

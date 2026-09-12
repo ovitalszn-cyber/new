@@ -4,19 +4,19 @@ export const CS2_DESCRIPTION =
   "Affordable CS2 player props API. Live kills, headshots, and map-1/map-2 lines for Counter-Strike 2, normalized across PrizePicks, Underdog, Betr & Sleeper. Instant key, free tier, no enterprise quote."
 
 export const ODDS_TITLE =
-  "Esports Odds API — Normalized Lines Across Books for CS2, LoL & Dota | KashRock"
+  "Esports Odds API — Normalized Lines Across Books for CS2, Valorant, LoL, Dota & more | KashRock"
 export const ODDS_DESCRIPTION =
   "Affordable esports odds API. Compare DFS books, Thunderpick sportsbook prices, and Kalshi / Polymarket prediction-market mainlines on one propId — sharper models, instant key."
 
 export const ABIOS_TITLE =
   "The Abios Alternative — Esports Data Without Enterprise Pricing | KashRock"
 export const ABIOS_DESCRIPTION =
-  "Looking for an Abios alternative? KashRock gives you CS2, LoL & Dota props, lines, and stats with transparent pricing and an instant key — no sales call, no enterprise quote."
+  "Looking for an Abios alternative? KashRock gives you CS2, Valorant, LoL, Dota & more props, lines, and stats with transparent pricing and an instant key — no sales call, no enterprise quote."
 
 export const PANDASCORE_TITLE =
   "PandaScore Alternative — Props & Stats With No Betting-Use Block | KashRock"
 export const PANDASCORE_DESCRIPTION =
-  "A PandaScore alternative for developers building betting, DFS, and pick'em tools. CS2, LoL & Dota props and stats, transparent pricing, instant key — no betting-use restriction."
+  "A PandaScore alternative for developers building betting, DFS, and pick'em tools. CS2, Valorant, LoL, Dota & more props and stats, transparent pricing, instant key — no betting-use restriction."
 
 export const CS2_FAQS = [
   {
@@ -25,7 +25,7 @@ export const CS2_FAQS = [
   },
   {
     q: "Which books are covered for CS2?",
-    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6. The same CS2 player and market share one propId across every book, so you join lines without stitching separate feeds.",
+    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, Pick6, and ParlayPlay. The same CS2 player and market share one propId across every book, so you join lines without stitching separate feeds.",
   },
   {
     q: "Is there a free CS2 API tier?",
@@ -48,7 +48,7 @@ export const ODDS_FAQS = [
   },
   {
     q: "Can I compare lines across books?",
-    a: "Yes. Every venue prices the same propId, so you read one prop and see PrizePicks, Underdog, Betr, Sleeper, Boom, Pick6, Thunderpick, Kalshi, and Polymarket side by side — the core of line shopping and model calibration.",
+    a: "Yes. Every venue prices the same propId, so you read one prop and see PrizePicks, Underdog, Betr, Sleeper, Boom, Pick6, ParlayPlay, Thunderpick, Kalshi, and Polymarket side by side — the core of line shopping and model calibration.",
   },
   {
     q: "Why include Kalshi and Polymarket?",
@@ -56,7 +56,7 @@ export const ODDS_FAQS = [
   },
   {
     q: "Which esports titles have odds?",
-    a: "CS2, League of Legends, Dota 2, and Valorant, with more titles expanding. One key covers all of them.",
+    a: "CS2, Valorant, League of Legends, Dota 2, Call of Duty, Rainbow Six, Mobile Legends, and Deadlock, with more titles expanding. One key covers all of them.",
   },
   {
     q: "Is there a free tier for the odds API?",
@@ -98,7 +98,7 @@ export const PANDASCORE_FAQS = [
   },
   {
     q: "Which DFS books are included?",
-    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, and Pick6 — normalized on one propId across CS2, LoL, Dota 2, and Valorant.",
+    a: "PrizePicks, Underdog, Betr, Sleeper, Dabble, Boom, Pick6, and ParlayPlay — normalized on one propId across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock.",
   },
   {
     q: "Do I get a free tier without a betting-use restriction?",

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 }
 
 const PILLARS = [
-  { title: "Props and lines", body: "Live ingested player props across CS2, LoL, Dota 2, and Valorant. One schema, many books." },
+  { title: "Props and lines", body: "Live ingested player props across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock. One schema, many books." },
   { title: "Matches and stats", body: "Schedules, box scores, game logs, and map-level stats — not just who won." },
   { title: "Stable IDs", body: "Players, teams, matches, and props keep the same ID when a book spells the name differently." },
 ]
@@ -52,7 +52,7 @@ export default function EsportsDataApiPage() {
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
             Esports Data API.<br />
-            <span className="seo-grad">CS2, LoL, Dota props, lines & stats.</span>
+            <span className="seo-grad">All 8 titles — props, lines &amp; stats.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
             One affordable esports data API: normalized props, lines, matches, and player stats. Instant key. No enterprise quote.

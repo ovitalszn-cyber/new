@@ -43,7 +43,7 @@ export function dfsJsonLd() {
       name: "KashRock DFS Esports API",
       url,
       description:
-        "PrizePicks and Underdog player props for CS2 and LoL, plus Betr, Sleeper, Dabble, Boom, and Pick6.",
+        "PrizePicks, Underdog, ParlayPlay and other DFS player props across CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock.",
     }),
     faqPageLd(DFS_FAQS),
   ]

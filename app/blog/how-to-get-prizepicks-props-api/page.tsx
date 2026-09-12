@@ -60,7 +60,7 @@ export default function HowToGetPrizePicksPropsApiPage() {
   "https://kashrock.up.railway.app/v6/esports/cs2/props?book=prizepicks"`}</pre>
           <p className="text-base text-zinc-400 mb-4 leading-relaxed">
             You get back a clean row per prop — player, stat type, line, direction, team, and a canonical{" "}
-            <code className="text-white">propId</code> — for CS2, LoL, Dota 2, and Valorant. Grab a free
+            <code className="text-white">propId</code> — for CS2, Valorant, LoL, Dota 2, COD, R6, MLBB, and Deadlock. Grab a free
             key on the{" "}
             <a href="/prizepicks-api" className="text-white underline">
               PrizePicks API page

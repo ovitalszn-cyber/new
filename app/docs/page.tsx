@@ -41,7 +41,7 @@ export default function DocsPage() {
         <div>
           <h3 className="text-white font-semibold mb-2">Live board</h3>
           <p className="text-sm text-zinc-400">
-            Normalized props from PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6, plus Thunderpick,
+            Normalized props from PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6, ParlayPlay, plus Thunderpick,
             Kalshi, and Polymarket mainlines.
           </p>
         </div>
