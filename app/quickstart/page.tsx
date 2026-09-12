@@ -7,15 +7,15 @@ import { faqPageLd } from "@/lib/seo/schema"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Esports Data API Quickstart — First Call in Under 5 Minutes | KashRock",
+    absolute: "Esports Data API Quickstart — First Call in Under 30 Seconds | KashRock",
   },
   description:
-    "Get an instant API key and pull normalized esports props, matches, and stats in under 5 minutes. curl, Python, and JavaScript examples. Free tier, no sales call.",
+    "Get an instant API key and pull normalized esports props, matches, and stats in under 30 seconds. curl, Python, and JavaScript examples. Free tier, no sales call.",
   alternates: { canonical: "https://www.kashrock.com/quickstart" },
   openGraph: {
-    title: "Esports Data API Quickstart — First Call in Under 5 Minutes | KashRock",
+    title: "Esports Data API Quickstart — First Call in Under 30 Seconds | KashRock",
     description:
-      "Instant API key and normalized esports props in under 5 minutes. curl, Python, and JavaScript examples.",
+      "Instant API key and normalized esports props in under 30 seconds. curl, Python, and JavaScript examples.",
     url: "https://www.kashrock.com/quickstart",
     siteName: "KashRock",
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Esports Data API Quickstart | KashRock",
     description:
-      "Instant API key and normalized esports props in under 5 minutes. Free tier, no sales call.",
+      "Instant API key and normalized esports props in under 30 seconds. Free tier, no sales call.",
   },
 }
 
@@ -79,7 +79,7 @@ export default function QuickstartPage() {
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
             Quickstart.
             <br />
-            <span className="seo-grad">First call in under 5 minutes.</span>
+            <span className="seo-grad">First call in under 30 seconds.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 mb-12 font-light leading-relaxed">
             Three steps from zero to normalized esports data. Free key, no sales call.

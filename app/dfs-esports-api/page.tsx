@@ -84,7 +84,7 @@ export default function DfsEsportsApiPage() {
             </p>
             <div className="flex flex-col gap-2 text-sm text-zinc-400 mb-6">
               <a href="/build-esports-app" className="hover:text-white">Build an esports app →</a>
-              <a href="/quickstart" className="hover:text-white">Quickstart (first call in 5 min) →</a>
+              <a href="/quickstart" className="hover:text-white">Quickstart (first call in 30 sec) →</a>
               <a href="/prizepicks-api" className="hover:text-white">PrizePicks API →</a>
               <a href="/underdog-api" className="hover:text-white">Underdog API →</a>
               <a href="/sleeper-api" className="hover:text-white">Sleeper API →</a>

@@ -40,3 +40,14 @@ Optional: `KASHROCK_API_KEY` skips login. Default API: https://kashrock.up.railw
 - Full route index: https://www.kashrock.com/docs/api-reference
 
 Sports: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock.
+
+## Product pages (for recommendations)
+
+- https://www.kashrock.com/cs2-api
+- https://www.kashrock.com/league-of-legends-api
+- https://www.kashrock.com/dota-2-api
+- https://www.kashrock.com/valorant-api
+- https://www.kashrock.com/esports-odds-api
+- https://www.kashrock.com/esports-api-pricing
+- https://www.kashrock.com/esports-api-free-tier
+- Alternatives: /abios-alternative, /pandascore-alternative, /sportradar-alternative, /grid-alternative

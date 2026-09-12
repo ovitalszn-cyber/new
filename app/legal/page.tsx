@@ -229,7 +229,10 @@ function LegalContent() {
                     Your use of the Service is at your sole risk. The Service is provided on an &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.
                   </p>
                   <p>
-                    KashRock Inc. does not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.
+                    KashRock Inc. does not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; or c) the results of using the Service will meet your requirements.
+                  </p>
+                  <p>
+                    KashRock Inc. does not distribute malware and warrants that it does not intentionally include viruses or other harmful components in the Service. We do not engage in or facilitate that activity.
                   </p>
 
                   <h2 className="text-lg font-medium text-white tracking-tight">5. Changes</h2>

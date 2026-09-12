@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "How fast can I get started?",
-    a: "Instant. Create a free key, make your first call in under 5 minutes, and ship a working product in a weekend — no sales call, no procurement, no scraping to maintain.",
+    a: "Instant. Create a free key, make your first call in under 30 seconds, and ship a working product in a weekend — no sales call, no procurement, no scraping to maintain.",
   },
   {
     q: "What can I build with it?",
