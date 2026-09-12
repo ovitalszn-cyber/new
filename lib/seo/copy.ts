@@ -59,7 +59,7 @@ export const MCP_TITLE =
   "KashRock MCP — Use the Esports API from Cursor in 30 Seconds"
 
 export const MCP_DESCRIPTION =
-  "Add KashRock to Cursor or Claude. Paste one snippet, say log in, click Google. Live CS2, LoL, Dota, and Valorant props — no docs, no API key to copy."
+  "Add KashRock to Cursor or Claude in 30 seconds. Google login, then your agent gets props, moneylines, consensus lines, research, and Builder history — no endpoint hunting."
 
 export const MCP_SNIPPET = `{
   "mcpServers": {
@@ -74,24 +74,24 @@ export const MCP_STEPS = [
   {
     n: "1",
     title: "Paste this in Cursor",
-    body: "Settings → MCP → add a new server. Paste the snippet. Save.",
+    body: "Settings → MCP → add a new server. Paste the uvx snippet. Save. Needs uv once: docs.astral.sh/uv",
   },
   {
     n: "2",
     title: "Say “log in to KashRock”",
-    body: "Cursor opens your browser. You click Continue with Google. That’s the only thing you do.",
+    body: "Cursor opens your browser. Continue with Google. You land on your real billed plan.",
   },
   {
     n: "3",
-    title: "Ask for props",
-    body: "Try: “Show CS2 PrizePicks kills.” The agent calls KashRock. You never touch a key.",
+    title: "Build in plain English",
+    body: "Ask for moneylines, props, gamelogs, H2H — the agent picks tools. Call suggest_build if you want a plan.",
   },
 ] as const
 
 export const MCP_FAQS = [
   {
     q: "Do I need to read the API docs?",
-    a: "No. Paste the snippet, log in with Google, then ask in plain English. The agent uses the tools.",
+    a: "No. Paste the snippet, log in with Google, then ask in plain English. Prefer MCP over hunting HTTP paths.",
   },
   {
     q: "Do I copy an API key?",
@@ -99,11 +99,15 @@ export const MCP_FAQS = [
   },
   {
     q: "Does this work in Claude too?",
-    a: "Yes. Same snippet in Claude Desktop MCP settings. Then ask Claude to log in to KashRock.",
+    a: "Yes. Same uvx snippet in Claude Desktop MCP settings. Then ask Claude to log in to KashRock.",
   },
   {
     q: "What if Cursor says uvx is missing?",
     a: "Install uv from https://docs.astral.sh/uv/ — one command — then restart Cursor and try again.",
+  },
+  {
+    q: "What does each plan unlock in MCP?",
+    a: "Sandbox: CS2 props. Hobby: all-sport props, lines, research, streams, H2H. Builder+: schedule, gamelogs, boxscores, results, history tape.",
   },
 ] as const
 

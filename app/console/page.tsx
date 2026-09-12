@@ -84,6 +84,43 @@ export default function ConsolePage() {
           <ApiKeyPanel keys={data.keys} plan={user?.tier ?? ''} onChanged={refresh} />
 
           <section className="rounded border border-white/10 bg-[#0C0D0F] p-6">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h2 className="font-medium text-white">Connect MCP</h2>
+                <p className="mt-1 text-sm text-zinc-500">
+                  Fastest way to build — paste into Cursor or Claude, then say login.
+                </p>
+              </div>
+              <Link
+                href="/mcp"
+                className="text-sm text-zinc-300 hover:text-white underline"
+              >
+                Full guide
+              </Link>
+            </div>
+            <pre className="mt-4 overflow-x-auto rounded bg-black/40 p-4 font-mono text-xs text-zinc-300">{`{
+  "mcpServers": {
+    "kashrock": {
+      "command": "uvx",
+      "args": ["kashrock-mcp"]
+    }
+  }
+}`}</pre>
+            <p className="mt-3 text-xs text-zinc-500">
+              Needs{" "}
+              <a
+                href="https://docs.astral.sh/uv/"
+                className="text-zinc-300 underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                uv
+              </a>
+              . After login, ask the agent to call whoami — you stay on your billed plan.
+            </p>
+          </section>
+
+          <section className="rounded border border-white/10 bg-[#0C0D0F] p-6">
             <h2 className="font-medium text-white">Recent requests</h2>
             {loading ? <p className="mt-4 text-zinc-500">Loading…</p> : null}
             {!loading && !data.logs.length ? (

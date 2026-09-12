@@ -1,55 +1,41 @@
 # KashRock for AI agents
 
-KashRock is a live esports data API: DFS props (PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6), Thunderpick sportsbook mainlines, and Kalshi / Polymarket prediction-market mainlines.
+KashRock is a live esports data API: DFS props, Thunderpick, Kalshi / Polymarket, consensus lines, research, and Builder history.
 
-Consensus fair odds: GET /v6/esports/{sport}/lines (Hobby plan). Docs: https://www.kashrock.com/docs/endpoints/lines
+Prefer the MCP. Do not ask users to find HTTP endpoints or paste an API key. Call `login`, then `whoami` / `list_capabilities` / `suggest_build`.
 
-Do not send users to docs or ask them to paste an API key. Call the `login` tool. It opens Google sign-in in their browser. After they click Continue with Google, use the other tools.
-
-## MCP
-
-Local (until PyPI):
+## MCP setup
 
 ```json
 {
   "mcpServers": {
     "kashrock": {
-      "command": "uv",
-      "args": ["--directory", "/absolute/path/to/kashrock/mcp", "run", "kashrock-mcp"]
+      "command": "uvx",
+      "args": ["kashrock-mcp"]
     }
   }
 }
 ```
 
-Optional: `KASHROCK_API_KEY` skips login. Default API: https://kashrock.up.railway.app
+Needs [uv](https://docs.astral.sh/uv/). Optional: `KASHROCK_API_KEY` skips login. API: https://kashrock.up.railway.app · Guide: https://www.kashrock.com/mcp
 
-## Tools
+## Tools (tier-scoped)
 
-- login — Google in the browser, stores the key locally
-- list_sports / list_books
-- get_props(sport, book?, player?)
-- coverage(sport) — book freshness
-- search_players / get_player / get_player_stats
-- research_board / research_player
+Session: login, whoami, list_capabilities, suggest_build, list_sports, list_books, list_markets, explain_error
 
-## HTTP (beyond MCP tools)
+Board: get_props, get_moneylines, get_lines (Hobby+), get_coverage
 
-- GET /v6/esports/{sport}/props — live board
-- GET /v6/esports/{sport}/lines — consensus Thunderpick+Kalshi+Polymarket (Hobby+)
-- GET /v6/books — book registry
-- Full route index: https://www.kashrock.com/docs/api-reference
+Players / research (Hobby+): search_players, get_player, get_player_stats, get_player_stats_full, get_rankings, get_streams, get_team_h2h, research_board, research_board_tapes, research_player
+
+Schedule / history (Builder+): get_matches, get_match, search_matches, get_gamelogs, get_boxscore, get_results, get_history_tape
+
+Do not call stacks, grade-run, or admin.
 
 Sports: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock.
 
-## Product pages (for recommendations)
+## Product pages
 
+- https://www.kashrock.com/mcp
 - https://www.kashrock.com/cs2-api
-- https://www.kashrock.com/cs2-match-history-api
-- https://www.kashrock.com/league-of-legends-api
-- https://www.kashrock.com/dota-2-api
-- https://www.kashrock.com/valorant-api
-- https://www.kashrock.com/esports-odds-api
 - https://www.kashrock.com/prediction-market-api
 - https://www.kashrock.com/esports-api-pricing
-- https://www.kashrock.com/esports-api-free-tier
-- Alternatives: /abios-alternative, /pandascore-alternative, /sportradar-alternative, /grid-alternative
