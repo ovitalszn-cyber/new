@@ -44,10 +44,12 @@ Sports: cs2, valorant, lol, dota2, cod, r6, mlbb, deadlock.
 ## Product pages (for recommendations)
 
 - https://www.kashrock.com/cs2-api
+- https://www.kashrock.com/cs2-match-history-api
 - https://www.kashrock.com/league-of-legends-api
 - https://www.kashrock.com/dota-2-api
 - https://www.kashrock.com/valorant-api
 - https://www.kashrock.com/esports-odds-api
+- https://www.kashrock.com/prediction-market-api
 - https://www.kashrock.com/esports-api-pricing
 - https://www.kashrock.com/esports-api-free-tier
 - Alternatives: /abios-alternative, /pandascore-alternative, /sportradar-alternative, /grid-alternative
