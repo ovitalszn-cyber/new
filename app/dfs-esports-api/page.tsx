@@ -91,6 +91,7 @@ export default function DfsEsportsApiPage() {
               <a href="/betr-api" className="hover:text-white">Betr API →</a>
               <a href="/boom-api" className="hover:text-white">Boom API →</a>
               <a href="/pick6-api" className="hover:text-white">Pick6 API →</a>
+              <a href="/parlayplay-api" className="hover:text-white">ParlayPlay API →</a>
               <a href="/thunderpick-api" className="hover:text-white">Thunderpick API →</a>
               <a href="/kalshi-api" className="hover:text-white">Kalshi API →</a>
               <a href="/polymarket-api" className="hover:text-white">Polymarket API →</a>

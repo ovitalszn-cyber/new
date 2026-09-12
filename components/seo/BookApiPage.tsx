@@ -4,6 +4,7 @@ import { FaqGrid } from "@/components/seo/FaqGrid"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { MarketingShell } from "@/components/seo/MarketingShell"
 import { PropCode } from "@/components/seo/PropCode"
+import { BOOK_LOGOS } from "@/lib/seo/book-logos"
 import { appFaqGraphLd } from "@/lib/seo/schema"
 
 type Faq = { q: string; a: string }
@@ -35,6 +36,7 @@ export function BookApiPage({
   related,
   jsonLdName,
 }: BookApiPageProps) {
+  const logo = BOOK_LOGOS.find((b) => b.name === brand)?.src
   return (
     <MarketingShell>
       <JsonLd data={appFaqGraphLd(jsonLdName, faqs)} />
@@ -42,6 +44,13 @@ export function BookApiPage({
         <div className="absolute inset-0 seo-grid opacity-30 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none" />
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
+          {logo ? (
+            <img
+              src={logo}
+              alt={brand}
+              className="mx-auto mb-8 h-16 w-16 rounded-sm border border-white/10 object-cover"
+            />
+          ) : null}
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
             {brand} API.
             <br />

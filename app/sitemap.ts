@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/betr-api",
     "/boom-api",
     "/pick6-api",
+    "/parlayplay-api",
     "/thunderpick-api",
     "/kalshi-api",
     "/polymarket-api",

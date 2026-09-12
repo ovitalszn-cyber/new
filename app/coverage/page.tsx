@@ -78,6 +78,7 @@ export default function CoveragePage() {
                         Sleeper: "/sleeper-api",
                         Boom: "/boom-api",
                         Pick6: "/pick6-api",
+                        ParlayPlay: "/parlayplay-api",
                         Thunderpick: "/thunderpick-api",
                         Kalshi: "/kalshi-api",
                         Polymarket: "/polymarket-api",

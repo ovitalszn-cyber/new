@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { DocsShell } from '@/components/docs/DocsShell'
 import { Curl, JsonBlock } from '@/components/docs/Code'
 import { BOOKS } from '@/lib/docs'
+import { BOOK_LOGOS } from '@/lib/seo/book-logos'
 
 const SAMPLE = {
   source: 'kashrock',
@@ -12,6 +13,8 @@ const SAMPLE = {
     { book_id: 10, key: 'kalshi', display_name: 'Kalshi' },
   ],
 }
+
+const LOGO_BY_NAME = Object.fromEntries(BOOK_LOGOS.map((b) => [b.name, b.src]))
 
 const GROUPS: { title: string; blurb: string; ids: string[] }[] = [
   {
@@ -53,6 +56,7 @@ export default function BooksPage() {
             <table className="w-full text-left text-sm">
               <thead className="bg-white/5 text-zinc-500">
                 <tr>
+                  <th className="py-3 px-4">Logo</th>
                   <th className="py-3 px-4">Key</th>
                   <th className="py-3 px-4">Name</th>
                 </tr>
@@ -61,8 +65,18 @@ export default function BooksPage() {
                 {group.ids.map((id) => {
                   const b = byId[id]
                   if (!b) return null
+                  const logo = LOGO_BY_NAME[b.name]
                   return (
                     <tr key={b.id}>
+                      <td className="py-3 px-4">
+                        {logo ? (
+                          <img
+                            src={logo}
+                            alt={b.name}
+                            className="h-8 w-8 rounded-sm border border-white/10 object-cover"
+                          />
+                        ) : null}
+                      </td>
                       <td className="py-3 px-4 font-mono text-emerald-400">{b.id}</td>
                       <td className="py-3 px-4 text-white">{b.name}</td>
                     </tr>
@@ -76,9 +90,13 @@ export default function BooksPage() {
 
       <Curl path="/v6/books" />
       <JsonBlock title="200 · live" data={SAMPLE} />
-      <Curl path="/v6/esports/cs2/props?book=kalshi" />
+      <Curl path="/v6/esports/cs2/props?book=parlayplay" />
       <p className="text-sm text-zinc-400 mt-6">
         Product pages:{' '}
+        <Link href="/parlayplay-api" className="text-white underline">
+          ParlayPlay
+        </Link>
+        {' · '}
         <Link href="/thunderpick-api" className="text-white underline">
           Thunderpick
         </Link>

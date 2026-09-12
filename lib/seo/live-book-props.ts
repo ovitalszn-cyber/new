@@ -95,6 +95,18 @@ export const LIVE_PICK6 = wrap("/v6/esports/lol/props?book=pick6", "lol", {
   event_time: "2026-09-12T15:00:00.0000000+00:00",
 })
 
+export const LIVE_PARLAYPLAY = wrap("/v6/esports/cs2/props?book=parlayplay", "cs2", {
+  propId: "pp_1970997_es_csgoKills_2644354_over",
+  player_name: "device",
+  stat_type: "CS2_KILLS",
+  line: 31.5,
+  odds: -130,
+  direction: "over",
+  team: "100 Thieves",
+  book_name: "ParlayPlay",
+  event_time: "2026-09-12T14:00:00.000Z",
+})
+
 export const LIVE_THUNDERPICK = wrap("/v6/esports/cs2/props?book=thunderpick", "cs2", {
   propId: "prop_da111f08efb414ec",
   player_name: "SINQU Esports",

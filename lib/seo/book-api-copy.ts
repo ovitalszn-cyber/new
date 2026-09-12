@@ -142,6 +142,25 @@ export const PICK6_FAQS = [
   },
 ] as const
 
+export const PARLAYPLAY_TITLE =
+  "ParlayPlay API — Pull Normalized Esports Props Programmatically | KashRock"
+export const PARLAYPLAY_DESCRIPTION =
+  "Access ParlayPlay player props through one API. Normalized CS2, Valorant, LoL, Dota & more lines with player, stat, line, and canonical IDs. Instant key — no scraping."
+export const PARLAYPLAY_FAQS = [
+  {
+    q: "Is there a ParlayPlay API?",
+    a: "ParlayPlay has no official public developer API. KashRock ingests ParlayPlay esports lines and serves them normalized via GET /v6/esports/{sport}/props?book=parlayplay.",
+  },
+  {
+    q: "Which ParlayPlay props are covered?",
+    a: "Esports player props for CS2, Valorant, League of Legends, and Dota 2 — player, stat type, line, direction, team, and a canonical propId shared across books.",
+  },
+  {
+    q: "Free tier?",
+    a: "Yes — $0/mo Sandbox with an instant key for CS2; multi-title from $29/mo.",
+  },
+] as const
+
 export const THUNDERPICK_TITLE =
   "Thunderpick API — Esports Main Lines & Props | KashRock"
 export const THUNDERPICK_DESCRIPTION =
