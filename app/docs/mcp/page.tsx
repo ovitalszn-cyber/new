@@ -75,8 +75,9 @@ export default function DocsMcpPage() {
             streams, H2H
           </li>
           <li>
-            <span className="text-white">Builder+</span> — matches, gamelogs, boxscores, results,
-            history tape
+            <span className="text-white">Builder+</span> — matches, live in-game KDA (
+            <code className="text-zinc-300">get_live_boxscore</code>), gamelogs, finished
+            boxscores, results, history tape
           </li>
         </ul>
         <p className="text-sm text-zinc-500">

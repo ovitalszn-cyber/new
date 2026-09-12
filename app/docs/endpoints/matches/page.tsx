@@ -56,7 +56,11 @@ export default function MatchesPage() {
         <code className="text-zinc-300">/{'{sport}'}/upcoming/matches</code>,{' '}
         <code className="text-zinc-300">/{'{sport}'}/completed/matches</code>,{' '}
         <code className="text-zinc-300">/{'{sport}'}/schedule</code>,{' '}
-        <code className="text-zinc-300">/{'{sport}'}/streams</code>.
+        <code className="text-zinc-300">/{'{sport}'}/streams</code>. Live in-game KDA:{' '}
+        <a href="/docs/endpoints/live" className="text-white underline">
+          /docs/endpoints/live
+        </a>
+        .
       </p>
     </DocsShell>
   )

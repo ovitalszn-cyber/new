@@ -46,6 +46,7 @@ const PROMPTS = [
   "Log in to KashRock, then whoami.",
   "Show CS2 Kalshi and Polymarket moneylines for tonight.",
   "Pull PrizePicks and ParlayPlay CS2 kills for Vitality.",
+  "Live in-game KDA for a CS2 match right now.",
   "ZywOo last 10 maps and grade an Underdog kills prop.",
   "suggest_build: DFS board + live streams for LoL",
   "Head-to-head: Vitality vs MOUZ — then live streams.",
@@ -62,7 +63,7 @@ const TIERS = [
   },
   {
     plan: "Builder+",
-    gets: "Matches, search, gamelogs, boxscores, results, history tape",
+    gets: "Matches, live in-game KDA (get_live_boxscore), gamelogs, finished boxscores, results, history tape",
   },
 ]
 

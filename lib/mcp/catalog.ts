@@ -49,8 +49,22 @@ export const MCP_TOOLS: McpTool[] = [
   { id: "get_matches", when: "Upcoming / live / finished match lists.", tier: "builder", group: "schedule" },
   { id: "get_match", when: "One match by kr_match_id or slug.", tier: "builder", group: "schedule" },
   { id: "search_matches", when: "Find a match by team names + date.", tier: "builder", group: "schedule" },
+  { id: "get_live_games", when: "Games with live in-game telemetry (list game_ids).", tier: "builder", group: "schedule" },
+  {
+    id: "get_live_boxscore",
+    when: "Live in-game K/D/A scoreboard. Omit game_id to list games.",
+    tier: "builder",
+    group: "schedule",
+  },
+  { id: "get_live_frame", when: "Raw live NormalizedFrame + metadata for one game_id.", tier: "builder", group: "schedule" },
+  { id: "get_live_events", when: "Derived live events (kills, etc.) for one game_id.", tier: "builder", group: "schedule" },
   { id: "get_gamelogs", when: "Per-map player history for grading.", tier: "builder", group: "schedule" },
-  { id: "get_boxscore", when: "Match boxscore or recent boxscores.", tier: "builder", group: "schedule" },
+  {
+    id: "get_boxscore",
+    when: "Finished-match boxscore / lineup — not live KDA (use get_live_boxscore).",
+    tier: "builder",
+    group: "schedule",
+  },
   { id: "get_results", when: "Settled prop grades (hit/miss/push).", tier: "builder", group: "schedule" },
   { id: "get_history_tape", when: "Quote tape for a prop/book over time.", tier: "builder", group: "schedule" },
 ]
