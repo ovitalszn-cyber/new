@@ -40,12 +40,19 @@ export default function BooksPage() {
     <DocsShell active="books">
       <h1 className="text-4xl font-semibold text-white mb-4 tracking-tight">Books</h1>
       <p className="text-lg text-zinc-400 mb-8">
-        Filter props with <code className="text-white">book=</code>. Registry:{' '}
-        <code className="text-white">GET /v6/books</code>. Consensus across Thunderpick + Kalshi + Polymarket:{' '}
+        DFS apps:{' '}
+        <Link href="/docs/endpoints/props" className="text-white underline">
+          /props
+        </Link>
+        . DFS + Thunderpick named-player props:{' '}
+        <Link href="/docs/endpoints/player-props" className="text-white underline">
+          /player-props
+        </Link>
+        . Team mainlines (sportsbooks + Kalshi/Polymarket as themselves):{' '}
         <Link href="/docs/endpoints/lines" className="text-white underline">
           /lines
         </Link>
-        .
+        . Registry: <code className="text-white">GET /v6/books</code>.
       </p>
 
       {GROUPS.map((group) => (

@@ -3,10 +3,22 @@ import { API_BASE } from '@/lib/docs'
 
 /** Public DaaS surface only — stacks / internal admin omitted on purpose. */
 const ROUTES: { path: string; note: string }[] = [
-  { path: 'GET /v6/esports/{sport}/props', note: 'Live ingested props. Query book, market, player_id.' },
+  { path: 'GET /v6/esports/{sport}/props', note: 'DFS player props only. Each prop has links.player_image / team_logo / opponent_logo.' },
+  {
+    path: 'GET /v6/esports/{sport}/player-props',
+    note: 'DFS + sportsbook named-player props. board=dfs|main|all. Forward by player; backward by market/event.',
+  },
+  {
+    path: 'GET /v6/esports/{sport}/media',
+    note: 'Resolve player faces + team logos by name/id. Same links shape as props.',
+  },
+  {
+    path: 'GET /v6/esports/{sport}/gaps',
+    note: 'DFS book-vs-book line spreads (line_gap = max − min). Hobby plan.',
+  },
   {
     path: 'GET /v6/esports/{sport}/lines',
-    note: 'Consensus main lines (match / map / totals / handicap) across Thunderpick, Kalshi, Polymarket. Requires Hobby plan.',
+    note: 'Consensus team main lines (match / map / totals / handicap) across sportsbooks + prediction markets. Hobby+.',
   },
   { path: 'GET /v6/esports/{sport}/fixtures', note: 'Full schedule board. Builder plan.' },
   { path: 'GET /v6/esports/{sport}/matches', note: 'Filtered matches. status=upcoming|live|finished. Builder plan.' },

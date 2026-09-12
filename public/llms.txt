@@ -23,7 +23,7 @@ Needs [uv](https://docs.astral.sh/uv/). Optional: `KASHROCK_API_KEY` skips login
 
 Session: login, whoami, list_capabilities, suggest_build, list_sports, list_books, list_markets, explain_error
 
-Board: get_props, get_moneylines, get_lines (Hobby+), get_coverage
+Board: get_props (DFS), get_player_props (DFS + sportsbook player props), get_media (faces/logos), get_moneylines, get_lines (Hobby+), get_gaps (Hobby+), get_coverage
 
 Players / research (Hobby+): search_players, get_player, get_player_stats, get_player_stats_full, get_rankings, get_streams, get_team_h2h, research_board, research_board_tapes, research_player
 
@@ -39,6 +39,7 @@ Books: prizepicks, underdog, dabble, sleeper, betr, boom, pick6, parlayplay, thu
 
 - https://www.kashrock.com/mcp
 - https://www.kashrock.com/docs/mcp
+- https://www.kashrock.com/esports-line-gaps-api
 - https://www.kashrock.com/cs2-api
 - https://www.kashrock.com/prediction-market-api
 - https://www.kashrock.com/esports-api-pricing

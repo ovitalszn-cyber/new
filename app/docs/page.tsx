@@ -41,8 +41,32 @@ export default function DocsPage() {
         <div>
           <h3 className="text-white font-semibold mb-2">Live board</h3>
           <p className="text-sm text-zinc-400">
-            Normalized props from PrizePicks, Underdog, Dabble, Sleeper, Betr, Boom, Pick6, ParlayPlay, plus Thunderpick,
-            Kalshi, and Polymarket mainlines.
+            DFS player props on{' '}
+            <Link href="/docs/endpoints/props" className="text-white underline">
+              /props
+            </Link>{' '}
+            (includes <code className="text-white">links.player_image</code> + team logos). Resolve media by name on{' '}
+            <Link href="/docs/endpoints/media" className="text-white underline">
+              /media
+            </Link>
+            . DFS + sportsbook named-player props on{' '}
+            <Link href="/docs/endpoints/player-props" className="text-white underline">
+              /player-props
+            </Link>
+            . Team mainlines on{' '}
+            <Link href="/docs/endpoints/lines" className="text-white underline">
+              /lines
+            </Link>
+            .
+          </p>
+        </div>
+        <div>
+          <h3 className="text-white font-semibold mb-2">DFS line gaps</h3>
+          <p className="text-sm text-zinc-400">
+            <Link href="/docs/endpoints/gaps" className="text-white underline">
+              GET /{'{sport}'}/gaps
+            </Link>{' '}
+            finds the same prop at different DFS lines (<code className="text-white">line_gap</code>). Hobby plan.
           </p>
         </div>
         <div>
