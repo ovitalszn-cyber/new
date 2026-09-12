@@ -31,6 +31,7 @@ const ROUTES: { path: string; note: string }[] = [
   { path: 'GET /v6/esports/{sport}/live/{game_id}/boxscore', note: 'Live K/D/A scoreboard (round, alive, money). Builder plan.' },
   { path: 'GET /v6/esports/{sport}/live/{game_id}/frames', note: 'Raw live NormalizedFrame + metadata. Builder plan.' },
   { path: 'GET /v6/esports/{sport}/live/{game_id}/events', note: 'Derived live events (kills, etc.). Builder plan.' },
+  { path: 'WS /v6/esports/live/ws', note: 'Push live boxscore/frame/events. Builder+. ?api_key= or Bearer.' },
   { path: 'GET /v6/esports/{sport}/rankings', note: 'Player leaderboard. filter=lifetime|last_3_months.' },
   { path: 'GET /v6/esports/{sport}/players/search', note: 'Search by nickname. q= required.' },
   { path: 'GET /v6/esports/{sport}/players/{id}', note: 'Profile by numeric id or slug.' },

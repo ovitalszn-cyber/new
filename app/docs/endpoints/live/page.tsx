@@ -67,6 +67,21 @@ export default function LiveInGamePage() {
         <code className="text-zinc-300">/{'{sport}'}/matches/{'{slug}'}/boxscore</code> (MCP{' '}
         <code className="text-zinc-300">get_boxscore</code>).
       </p>
+
+      <h2 className="text-xl font-semibold text-white mb-4 mt-12">WebSocket wire</h2>
+      <p className="text-sm text-zinc-400 mb-4">
+        Push updates under 2s after Redis write. Builder+. Auth via{' '}
+        <code className="text-zinc-300">?api_key=</code> or Bearer on handshake.
+      </p>
+      <Route path="WS /v6/esports/live/ws" />
+      <pre className="p-4 font-mono text-xs text-zinc-300 bg-[#0C0D0F] border border-white/10 rounded-lg overflow-x-auto mb-4">{`{"op":"subscribe","sport":"cs2","game_id":"2397756"}
+{"op":"subscribe","sport":"cs2","game_id":"*"}
+{"op":"ping"}`}</pre>
+      <p className="text-sm text-zinc-500">
+        Server sends <code className="text-zinc-300">snapshot</code>, then{' '}
+        <code className="text-zinc-300">update</code> / <code className="text-zinc-300">event</code> /
+        <code className="text-zinc-300">games_list</code> ticks.
+      </p>
     </DocsShell>
   )
 }
